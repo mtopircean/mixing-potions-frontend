@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 function App() {
   return (
     <Container>
-      <Navbar expand="md" fixed="top" className="navbar-container">
+      <Navbar fixed="top" className="navbar-container">
         <Navbar.Brand>
           <NavLink to="/">
           <div className="logo-container">
@@ -16,7 +16,6 @@ function App() {
           </div>
           </NavLink>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <NavDropdown
