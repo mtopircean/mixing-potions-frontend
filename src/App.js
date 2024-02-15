@@ -15,6 +15,7 @@ function App() {
           <Route exact path="/contact" render={() => <h1></h1>} />
           <Route exact path="/team" render={() => <h1></h1>} />
           <Route exact path="/join-login" render={() => <h1></h1>} />
+          <Route exact path="/gdpr" render={() => <h1></h1>} />
         </Switch>
       </Container>
       <Footer />
