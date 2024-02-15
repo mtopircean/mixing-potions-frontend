@@ -3,6 +3,7 @@ import NavBar from "../src/components/NavBar";
 import Footer from "../src/components/Footer";
 import Container from "react-bootstrap/Container";
 import './api/axiosDefaults';
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   return (
