@@ -6,6 +6,15 @@
   font-weight: 400;
 }
 
+.nav-link-menu {
+  text-decoration: none !important;
+  color: #54547c !important;
+}
+
+.nav-link-menu:hover {
+  color: #ffff !important;
+}
+
 #basic-nav-dropdown {
   position: fixed;
   left: 50%;
@@ -18,6 +27,7 @@
   transform: translateX(-50%);
   text-align: center;
   border: none;
+  text-decoration: none;
 }
 
 .dropdown-item:hover {
