@@ -191,4 +191,8 @@ button.login-button.btn.btn-primary:hover {
   .login-card {
     margin-top: 0px;
   }
+
+  #register-login {
+    margin-top: 40px;
+  }
 }

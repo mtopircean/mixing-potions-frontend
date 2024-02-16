@@ -37,7 +37,7 @@ function App() {
                   </NavDropdown.Item>
               </div>
             </NavDropdown>
-            <NavLink to="/join-login" className="nav-link">
+            <NavLink to="/login" className="nav-link">
               Join/Login <FontAwesomeIcon icon={faUser} />
             </NavLink>
           </Nav>

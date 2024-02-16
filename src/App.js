@@ -4,7 +4,8 @@ import Footer from "../src/components/Footer";
 import Container from "react-bootstrap/Container";
 import './api/axiosDefaults';
 import { Route, Switch } from 'react-router-dom';
-import LoginSignUpForm from "../src/components/pages/auth/LoginSignUpForm"
+import LoginForm from "./components/pages/auth/LoginForm"
+import RegisterForm from "./components/pages/auth/RegisterForm"
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Route exact path="/about" render={() => <h1></h1>} />
           <Route exact path="/contact" render={() => <h1></h1>} />
           <Route exact path="/team" render={() => <h1></h1>} />
-          <Route exact path="/join-login" render={() => <LoginSignUpForm />} />
+          <Route exact path="/login" render={() => <LoginForm />} />
+          <Route exact path="/register" render={() => <RegisterForm />} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
         </Switch>
       </Container>
