@@ -116,7 +116,7 @@
 }
 
 /*Register/Login*/
-.login-register{
+.login-register {
   margin-top: 13rem;
 }
 
@@ -153,24 +153,42 @@ button.login-button.btn.btn-primary:hover {
   border-radius: 10px;
   box-shadow: 0px 0px 5px 0px rgb(227 203 232);
   border: none;
-  width: 80%;
+  width: 100%;
+}
+
+.login-card input {
+  border: 1px solid #8375ac;
+}
+
+.d-flex {
+  display: -ms-flexbox !important;
+  display: flex !important;
+  align-items: center;
+}
+
+.register-card {
+  background-color: #5999612b;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(171, 227, 184, 0.934);
+  border: none;
+  width: 100%;
+}
+
+.register-card input {
+  border: 1px solid #599960;
+}
+
+.register-card textarea {
+  border: 1px solid #599960;
+}
+
+@media (max-width: 767px) {
+  .register-card {
+    margin-top: 40px;
+    margin-bottom: 80px;
   }
 
-  .register-card {
-    background-color: #5999612b;
-    border-radius: 10px;
-    box-shadow: 0px 0px 5px 0px rgba(171, 227, 184, 0.934);
-    border: none;
-    width: 80%;
-    }
-
-    @media (max-width: 767px) {
-      .register-card {
-        margin-top: 40px;
-        margin-bottom: 80px;
-      }
-
-      .login-card {
-        margin-top: 0px;
-      }
-    }
+  .login-card {
+    margin-top: 0px;
+  }
+}

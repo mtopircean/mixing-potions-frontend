@@ -7,7 +7,7 @@ const LoginSignUpForm = () => {
       <Row>
         <Col
           md={6}
-          className="d-flex justify-content-center align-items-center flex-column"
+          className="d-flex flex-column"
         >
           <Card className="login-card">
             <Card.Body>
@@ -16,18 +16,13 @@ const LoginSignUpForm = () => {
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control type="email" placeholder="Enter email" />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check type="checkbox" label="Save my details" />
-                </Form.Group>
+              
                 <Button
                   variant="primary"
                   type="submit"
@@ -47,21 +42,75 @@ const LoginSignUpForm = () => {
             <Card.Body>
               <Card.Title className="text-center">Register:</Card.Title>
               <Form>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group controlId="formUsername">
+                  <Form.Label>Username</Form.Label>
+                  <Form.Control type="text" placeholder="Enter your username" />
+                </Form.Group>
+
+                <Form.Group controlId="formFirstName">
+                  <Form.Label>First Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your first name"
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formLastName">
+                  <Form.Label>Last Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your last name"
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formNickname">
+                  <Form.Label>Nickname</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Will be displayed on your posts"
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formAge">
+                  <Form.Label>Age</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter your age(numeric only)"
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formEmail">
                   <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
+                  <Form.Control type="email" placeholder="Enter your email" />
+                </Form.Group>
+
+                <Form.Group controlId="formConfirmEmail">
+                  <Form.Label>Confirm Email address</Form.Label>
+                  <Form.Control type="email" placeholder="Confirm your email" />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Control type="password" placeholder="Set a password" />
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
-                  <Form.Check type="checkbox" label="Save my details" />
+
+                <Form.Group controlId="formConfirmPassword">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Confirm your Password"
+                  />
                 </Form.Group>
+
+                <Form.Group controlId="formAbout">
+                  <Form.Label>About</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={5}
+                    placeholder="Tell us more about yourself. Let everyone know how awesome you are!"
+                  />
+                </Form.Group>
+
                 <Button
                   variant="primary"
                   type="submit"
