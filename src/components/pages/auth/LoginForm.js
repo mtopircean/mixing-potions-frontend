@@ -5,11 +5,11 @@ import axios from "axios";
 
 const LoginForm = () => {
   const [loginData, setLoginData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
-  const { email, password } = loginData;
+  const { username, password } = loginData;
   const [errors, setErrors] = useState({});
   const history = useHistory();
 
@@ -24,7 +24,7 @@ const LoginForm = () => {
     event.preventDefault();
     try {
       const data = {
-        email,
+        username,
         password,
       };
 
@@ -43,13 +43,13 @@ const LoginForm = () => {
             <Card.Body>
               <Card.Title className="text-center">Login:</Card.Title>
               <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Email address</Form.Label>
+                <Form.Group controlId="formBasicusername">
+                  <Form.Label>Username</Form.Label>
                   <Form.Control
-                    type="email"
-                    placeholder="Enter email"
-                    name="email"
-                    value={email}
+                    type="username"
+                    placeholder="Enter username"
+                    name="username"
+                    value={username}
                     onChange={handleChange}
                   />
                 </Form.Group>
