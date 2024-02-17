@@ -1,0 +1,65 @@
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.profile-header {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.profile-button {
+    background-color: #ffff;
+    border: none;
+    font-size: 1.5rem;
+}
+
+.header-ranking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.name-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 60px;
+    align-items: flex-start;
+}
+
+@media (max-width: 767px) {
+    .name-header {
+        margin-top: 20px;
+    }
+  }
+
+.profile-detail {
+    display: flex;
+    margin-bottom: 8px;
+    justify-content: space-between;
+}
+
+.delete-button {
+    background-color: #ffff;
+    border: none;
+    color: #A60E37;
+}
+
+.edit-button {
+    background-color: #ffff;
+    border: none;
+    color: #023e85;
+}
+
+.user-ranking {
+    text-transform: uppercase;
+    color: #023e85;
+}
