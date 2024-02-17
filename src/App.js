@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <Container>
+      <Container className="content-container">
         <Switch>
           <Route exact path="/" render={() => <h1></h1>} />
           <Route exact path="/about" render={() => <h1></h1>} />

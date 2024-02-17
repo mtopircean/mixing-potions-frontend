@@ -42,7 +42,6 @@ const RegisterForm = () => {
   return(
     <Row>
       <Col
-        md={6}
         className="d-flex justify-content-center align-items-center flex-column"
       >
         <Card className="register-card">

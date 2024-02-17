@@ -12,9 +12,6 @@ function App() {
   return (
     <Container>
       <footer className="footer">
-        <Col xs={12}>
-          <hr></hr>
-        </Col>
         <Row>
           <Col xs={4} className="text-left">
             <div className="gdpr">

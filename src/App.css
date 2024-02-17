@@ -1,4 +1,22 @@
+/*App general css*/
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 130px;
+}
+
 /* Navbar */
+
+.navbar-container {
+  background-color: #ffff;
+}
+
 .nav-link {
   text-align: right;
   font-size: large;
@@ -68,18 +86,20 @@
   bottom: 0;
   left: 0;
   right: 0;
-  margin-left: 40px;
-  margin-right: 40px;
-  margin-bottom: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
   font-size: larger;
   color: #54547c;
   width: auto;
+  background-color: #ffff;
+  border-top: #8375ac 1px solid;
 }
 
 @media (min-width: 768px) {
   .footer {
-    margin-left: 40px;
-    margin-right: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 }
 
@@ -96,21 +116,10 @@
   margin-left: 10px;
 }
 
-.footer hr {
-  position: absolute;
-  left: 0;
-  right: 0;
-  font-size: larger;
-  color: #54547c;
-  width: auto;
-  position: center;
-  bottom: 0;
-}
-
 @media (max-width: 768px) {
   .footer {
-    margin-left: 20px;
-    margin-right: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     font-size: 1rem;
   }
 }
@@ -169,6 +178,8 @@ button.login-button.btn.btn-primary:hover {
 .register-card {
   background-color: #5999612b;
   border-radius: 10px;
+  margin-bottom: 80px;
+  margin-top: 30px;
   box-shadow: 0px 0px 5px 0px rgba(171, 227, 184, 0.934);
   border: none;
   width: 100%;
@@ -184,8 +195,8 @@ button.login-button.btn.btn-primary:hover {
 
 @media (max-width: 767px) {
   .register-card {
-    margin-top: 40px;
-    margin-bottom: 80px;
+    margin-top: 20px;
+    margin-bottom: 60px;
   }
 
   .login-card {
