@@ -1,17 +1,49 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Container, NavDropdown } from "react-bootstrap";
 import { Navbar, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { useCurrentUser } from "../contexts/CurrentUserContext";
+import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
+import axios from "axios";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
+  const setCurrentUser = useSetCurrentUser();
+
+  const handleLogout = async () => {
+    try {
+      await axios.post("/dj-rest-auth/logout/");
+      setCurrentUser(null);
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
+
   const loggedInIcons = (
     <>
-    {currentUser?.username}
+      <NavDropdown
+        title={currentUser?.username || <FontAwesomeIcon icon={faUser} />}
+        id="user-dropdown"
+      >
+        <NavDropdown.Item>
+          <div>
+            <NavLink
+              to="/"
+              className="user-link-menu"
+              onClick={handleLogout}
+            >
+              Logout
+            </NavLink>
+          </div>
+          <div>
+            <NavLink to="/profile" className="user-link-menu">
+              Profile
+            </NavLink>
+          </div>
+        </NavDropdown.Item>
+      </NavDropdown>
     </>
   );
 
@@ -22,6 +54,7 @@ const NavBar = () => {
       </NavLink>
     </>
   );
+
   return (
     <Container>
       <Navbar fixed="top" className="navbar-container">
