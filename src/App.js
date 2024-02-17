@@ -4,8 +4,8 @@ import Footer from "../src/components/Footer";
 import Container from "react-bootstrap/Container";
 import './api/axiosDefaults';
 import { Route, Switch } from 'react-router-dom';
-import LoginForm from "./components/pages/auth/LoginForm"
-import RegisterForm from "./components/pages/auth/RegisterForm"
+import LoginForm from "./pages/auth/LoginForm"
+import RegisterForm from "./pages/auth/RegisterForm"
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 

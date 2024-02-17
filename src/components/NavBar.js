@@ -5,11 +5,20 @@ import logo from "../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { CurrentUserContext} from "../../src/App";
+import { CurrentUserContext } from "../../src/App";
 
 const NavBar = () => {
   const currentUser = useContext(CurrentUserContext);
-  const loggedInIcons = <>{currentUser?.username}</>;
+  const loggedInIcons = (
+    <>
+      {currentUser?.username}
+    {currentUser?.profile?.image ? (
+      <img src={currentUser.profile.image} alt="Profile" onError={(e) => { e.target.src = ''; }} />
+    ) : (
+      <img src="https://res.cloudinary.com/dgcwnjoh4/image/upload/v1704397319/default_profile_duvxwt.jpg" alt="Profile" width={40}/>
+    )}
+    </>
+  );
   const loggedOutIcons = (
     <>
       <NavLink to="/login" className="nav-link">
@@ -29,7 +38,7 @@ const NavBar = () => {
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-          {currentUser ? loggedInIcons : loggedOutIcons}
+            {currentUser ? loggedInIcons : loggedOutIcons}
             <NavDropdown
               title={<FontAwesomeIcon icon={faBars} />}
               id="basic-nav-dropdown"

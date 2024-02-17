@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import axios from "axios";
-import { SetCurrentUserContext } from "../../../App";
+import { SetCurrentUserContext } from "../../App";
 
 function LoginForm() {
   const setCurrentUser = useContext(SetCurrentUserContext);
@@ -26,7 +26,8 @@ function LoginForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const {data} = await axios.post("/dj-rest-auth/login/", data);
+      const response = await axios.post("/dj-rest-auth/login/", loginData);
+      const { data } = response.data;
       setCurrentUser(data.user)
       history.push("/");
     } catch (err) {
