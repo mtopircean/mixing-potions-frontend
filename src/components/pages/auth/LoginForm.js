@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Form, Button, Row, Col, Card, NavLink, Alert } from "react-bootstrap";
+import { NavLink, useHistory } from "react-router-dom";
+import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import axios from "axios";
 
 const LoginForm = () => {
@@ -32,6 +32,7 @@ const LoginForm = () => {
       history.push("/");
     } catch (err) {
       setErrors(err.response?.data);
+      console.log(err.response)
     }
   };
 
