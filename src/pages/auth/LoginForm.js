@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import axios from "axios";
-import { SetCurrentUserContext } from "../../App";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 function LoginForm() {
-  const setCurrentUser = useContext(SetCurrentUserContext);
+  const setCurrentUser = useSetCurrentUser();
 
   const [loginData, setLoginData] = useState({
     username: "",
@@ -26,13 +26,11 @@ function LoginForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("/dj-rest-auth/login/", loginData);
-      const { data } = response.data;
+      const { data } = await axios.post("/dj-rest-auth/login/", loginData);
       setCurrentUser(data.user)
       history.push("/");
     } catch (err) {
       setErrors(err.response?.data);
-      console.log(err.response)
     }
   };
 
