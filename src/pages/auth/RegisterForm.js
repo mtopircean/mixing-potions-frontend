@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { Form, Button, Row, Col, Card } from "react-bootstrap";
+import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import axios from "axios";
 
 const RegisterForm = () => {
@@ -11,6 +11,8 @@ const RegisterForm = () => {
     password1: "",
     password2: "",
   });
+  const { username, email, password1, password2} = formData;
+
   const [errors, setErrors] = useState({});
 
   const handleChange = (event) => {
@@ -26,7 +28,7 @@ const RegisterForm = () => {
       await axios.post("/dj-rest-auth/registration/", formData);
       history.push("/");
     } catch (err) {
-      setErrors(err.response?.data);
+      setErrors(err.response?.data)
     }
   };
 
@@ -43,10 +45,13 @@ const RegisterForm = () => {
                   type="text"
                   placeholder="Enter your username"
                   name="username"
-                  value={formData.username}
+                  value={username}
                   onChange={handleChange}
                 />
               </Form.Group>
+              {errors.username?.map((message, idx) =>
+              <Alert variant="warning" key={idx}>{message}</Alert>
+              )}
 
               <Form.Group controlId="formEmail">
                 <Form.Label>Email address</Form.Label>
@@ -54,10 +59,13 @@ const RegisterForm = () => {
                   type="email"
                   placeholder="Enter your email"
                   name="email"
-                  value={formData.email}
+                  value={email}
                   onChange={handleChange}
                 />
               </Form.Group>
+              {errors.password1?.map((message, idx) =>
+              <Alert variant="warning" key={idx}>{message}</Alert>
+              )}
 
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
@@ -65,10 +73,13 @@ const RegisterForm = () => {
                   type="password"
                   placeholder="Set a password"
                   name="password1"
-                  value={formData.password1}
+                  value={password1}
                   onChange={handleChange}
                 />
               </Form.Group>
+              {errors.password2?.map((message, idx) =>
+              <Alert variant="warning" key={idx}>{message}</Alert>
+              )}
 
               <Form.Group controlId="formConfirmPassword">
                 <Form.Label>Confirm Password</Form.Label>
@@ -76,7 +87,7 @@ const RegisterForm = () => {
                   type="password"
                   placeholder="Confirm your Password"
                   name="password2"
-                  value={formData.password2}
+                  value={password2}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -88,6 +99,11 @@ const RegisterForm = () => {
               >
                 Register
               </Button>
+              {errors.non_field_errors?.map((message, idx) => (
+              <Alert key={idx} variant="warning" style={{ marginTop: '10px' }}>
+                {message}
+              </Alert>
+            ))}
             </Form>
           </Card.Body>
         </Card>

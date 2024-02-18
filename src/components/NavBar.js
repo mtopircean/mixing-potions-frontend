@@ -15,11 +15,10 @@ const NavBar = () => {
 
   const handleLogout = async () => {
     try {
-      await axios.post("dj-rest-auth/logout/");
-      localStorage.removeItem("token");
+      await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.error("Logout error:", error);
     }
   };
 

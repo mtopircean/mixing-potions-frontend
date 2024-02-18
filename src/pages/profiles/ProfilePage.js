@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import styles from "../../styles/ProfilePage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { NavLink, useParams } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
 
