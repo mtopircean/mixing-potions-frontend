@@ -63,7 +63,7 @@ const ProfilePage = () => {
           <Col md={6} className={styles["name-header"]}>
             <div>
               <h2>
-                {profile.first_name} {profile.last_name}
+                {profile.username}
               </h2>
               <div className={styles["edit-delete-buttons"]}>
                 <NavLink
@@ -92,20 +92,7 @@ const ProfilePage = () => {
           {expanded && (
             <Col xs={12}>
               <div className={styles["profile-detail"]}>
-                <h5>Age:</h5>
-                <p>{profile.age}</p>
-              </div>
-              <div className={styles["profile-detail"]}>
-                <h5>About:</h5> <p>{profile.about}</p>
-              </div>
-              <div className={styles["profile-detail"]}>
-                <h5>Nickname:</h5> <p>{profile.nickname}</p>
-              </div>
-              <div className={styles["profile-detail"]}>
                 <h5>Email:</h5> <p>{profile.email}</p>
-              </div>
-              <div className={styles["profile-detail"]}>
-                <h5>Phone Number:</h5> <p>{profile.phone_number}</p>
               </div>
             </Col>
           )}
