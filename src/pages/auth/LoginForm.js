@@ -2,36 +2,32 @@ import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import axios from "axios";
-import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 function LoginForm() {
-  const setCurrentUser = useSetCurrentUser();
-
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
-
   const { username, password } = loginData;
+
   const [errors, setErrors] = useState({});
+
   const history = useHistory();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.post("/dj-rest-auth/login/", loginData);
+      history.push("/");
+    } catch (err) {
+      setErrors(err.response?.data);
+    }
+  };
 
   const handleChange = (event) => {
     setLoginData({
       ...loginData,
       [event.target.name]: event.target.value,
     });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const { data } = await axios.post("/dj-rest-auth/login/", loginData);
-      setCurrentUser(data.user)
-      history.push("/");
-    } catch (err) {
-      setErrors(err.response?.data);
-    }
   };
 
   return (
@@ -52,6 +48,11 @@ function LoginForm() {
                     onChange={handleChange}
                   />
                 </Form.Group>
+                {errors.username?.map((message, idx) => (
+                  <Alert key={idx} variant="warning">
+                    {message}
+                  </Alert>
+                ))}
 
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
@@ -63,6 +64,11 @@ function LoginForm() {
                     onChange={handleChange}
                   />
                 </Form.Group>
+                {errors.password?.map((message, idx) => (
+                  <Alert key={idx} variant="warning">
+                    {message}
+                  </Alert>
+                ))}
 
                 <Button
                   variant="primary"
@@ -71,7 +77,7 @@ function LoginForm() {
                 >
                   Login
                 </Button>
-                {errors?.non_field_errors?.map((message, idx) => (
+                {errors.non_field_errors?.map((message, idx) => (
                   <Alert key={idx} variant="warning" className="mt-3">
                     {message}
                   </Alert>
@@ -90,6 +96,6 @@ function LoginForm() {
       </Row>
     </div>
   );
-};
+}
 
 export default LoginForm;
