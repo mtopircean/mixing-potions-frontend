@@ -24,7 +24,7 @@ const RegisterForm = () => {
     event.preventDefault();
     try {
       await axios.post("/dj-rest-auth/registration/", formData);
-      history.push("/profile");
+      history.push("/profile-personals");
     } catch (err) {
       setErrors(err.response?.data);
     }
