@@ -4,9 +4,14 @@ import styles from "../../styles/ProfilePage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { axiosReq } from "../../api/axiosDefaults";
 
 const ProfilePage = () => {
+  const currentUser = useCurrentUser();
+  const { id } = currentUser;
+
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
@@ -14,18 +19,17 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await axios.get(`/profiles/`);
-        console.log("Profile data:", response.data);
-        setProfile(response.data.results[0]);
+        const { data: pageProfile } = await axiosReq.get(`/profiles/${id}/`);
+        setProfile(pageProfile);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching profile:", error);
         setLoading(false);
       }
     };
-
+  
     fetchProfile();
-  }, []);
+  }, [id]);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -62,9 +66,7 @@ const ProfilePage = () => {
           </Col>
           <Col md={6} className={styles["name-header"]}>
             <div>
-              <h2>
-                {profile.username}
-              </h2>
+              <h2>{profile.username}</h2>
               <div className={styles["edit-delete-buttons"]}>
                 <NavLink
                   to="/edit-profile"

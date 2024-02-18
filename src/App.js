@@ -7,7 +7,6 @@ import { Route, Switch } from 'react-router-dom';
 import LoginForm from "./pages/auth/LoginForm"
 import RegisterForm from "./pages/auth/RegisterForm"
 import ProfilePage from "./pages/profiles/ProfilePage"
-import ProfilePersonals from "./pages/profiles/ProfilePersonals"
 
 function App() {
 
@@ -23,7 +22,6 @@ function App() {
           <Route exact path="/login" render={() => <LoginForm />} />
           <Route exact path="/register" render={() => <RegisterForm />} />
           <Route exact path="/profile" render={() => <ProfilePage />} />
-          <Route exact path="/profile-personals" render={() => <ProfilePersonals />} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
         </Switch>
       </Container>
