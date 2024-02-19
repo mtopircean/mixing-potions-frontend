@@ -9,7 +9,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 
 const ProfilePage = () => {
   const currentUser = useCurrentUser();
-  const { id } = currentUser;
+  const { pk } = currentUser;
 
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -18,17 +18,16 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const { data: pageProfile } = await axiosReq.get(`/profiles/${id}/`);
+        const { data: pageProfile } = await axiosReq.get(`/profiles/${pk}/`);
         setProfile(pageProfile);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching profile:", error);
         setLoading(false);
       }
     };
   
     fetchProfile();
-  }, [id]);
+  }, [pk]);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
