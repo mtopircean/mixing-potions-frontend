@@ -13,6 +13,8 @@ const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
 
+  
+
   const handleLogout = async () => {
     try {
       await axios.post("/dj-rest-auth/logout/");

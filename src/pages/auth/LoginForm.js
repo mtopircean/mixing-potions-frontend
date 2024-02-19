@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
+import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 
 function LoginForm() {
+  const setCurrentUser = useSetCurrentUser();
+
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -16,7 +19,8 @@ function LoginForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("/dj-rest-auth/login/", loginData);
+      const { data } = await axios.post("/dj-rest-auth/login/", loginData);
+      setCurrentUser(data.user);
       history.push("/");
     } catch (err) {
       setErrors(err.response?.data);
