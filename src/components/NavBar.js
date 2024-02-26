@@ -5,15 +5,16 @@ import logo from "../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
-import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
+import {
+  useCurrentUser,
+  useSetCurrentUser,
+} from "../contexts/CurrentUserContext";
 import axios from "axios";
 import Avatar from "./Avatar";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
-
-  
 
   const handleLogout = async () => {
     try {
@@ -27,22 +28,26 @@ const NavBar = () => {
   const loggedInIcons = (
     <>
       <NavDropdown
-        title={currentUser?.profile_image ? (
-          <>
-            <Avatar src={currentUser.profile_image} text="Profile" height={80} width={80} className="avatar-image"/>
-            {currentUser.username}
-          </>
-        ) : (
-          currentUser?.username
-        )}
+        title={
+          currentUser?.profile_image ? (
+            <>
+              <Avatar
+                src={currentUser.profile_image}
+                text="Profile"
+                height={80}
+                width={80}
+                className="avatar-image"
+              />
+              {currentUser.username}
+            </>
+          ) : (
+            currentUser?.username
+          )
+        }
       >
         <NavDropdown.Item>
           <div>
-            <NavLink
-              to="/"
-              className="user-link-menu"
-              onClick={handleLogout}
-            >
+            <NavLink to="/" className="user-link-menu" onClick={handleLogout}>
               Logout
             </NavLink>
           </div>
