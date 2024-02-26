@@ -25,6 +25,7 @@ function App() {
           <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
           <Route exact path="/posts/craete" render={() => <PostCreateForm />} />
+          <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
       <Footer />
