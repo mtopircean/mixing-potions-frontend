@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/BodySystemPanel.module.css";
 import { Container } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
 
 const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
   const [products, setProducts] = useState([]);
