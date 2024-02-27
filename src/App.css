@@ -8,13 +8,15 @@
 .content-container {
   flex: 1;
   overflow-y: auto;
-  padding-top: 130px;
+  margin-top: 150px;
+  margin-bottom: 50px;
 }
 
 /* Navbar */
 
 .navbar-container {
   background-color: #ffff;
+  padding-bottom: 0px;
 }
 
 .nav-link {
