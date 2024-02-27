@@ -3,7 +3,7 @@ import axios from "axios";
 import styles from "../styles/ProductPanel.module.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
-const ProductsPanel = () => {
+const ProductsPanel = ({ selectedBodySystems }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -19,11 +19,19 @@ const ProductsPanel = () => {
     fetchProducts();
   }, []);
 
+  const filteredProducts = selectedBodySystems && selectedBodySystems.length
+    ? products.filter((product) =>
+        product.body_systems.some((system) =>
+          selectedBodySystems.includes(system)
+        )
+    )
+    : products;
+
   return (
     <Container className={styles["products-panel"]}>
       <h3 className="text-center">Add product</h3>
       <Row>
-      {products.slice(0, 4).map((product) => (
+      {filteredProducts.slice(0, 4).map((product) => (
         <Col key={product.id} sm={6}>
           <div key={product.id} className={styles["product-card"]}>
             <img
