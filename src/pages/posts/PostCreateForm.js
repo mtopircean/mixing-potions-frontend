@@ -1,12 +1,18 @@
-import React from 'react'
-import ProductsPanel from '../../components/ProductsPanel';
+import React from "react";
+import ProductsPanel from "../../components/ProductsPanel";
+import { Container, Row, Col } from "react-bootstrap";
 
 function PostCreateForm() {
-    return (
-        <div>
-        <ProductsPanel />
-        </div>
-    );
+  return (
+    <Container>
+      <Row>
+      <Col></Col>
+        <Col sm={6}>
+          <ProductsPanel />
+        </Col>
+      </Row>
+    </Container>
+  );
 }
 
 export default PostCreateForm;

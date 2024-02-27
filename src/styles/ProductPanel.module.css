@@ -10,6 +10,12 @@
 .products-panel h3 {
     color: #ffff;
     padding: 10px;
+    font-size: medium;
+    text-transform: uppercase;
+}
+
+.products-panel p {
+    font-size: small;
 }
 
 .product-card {
@@ -26,6 +32,7 @@
 
 .product-span {
     font-weight: bold;
+    font-size: small;
 }
 
 .product-image {
@@ -33,4 +40,17 @@
     height: 100px;
     object-fit: cover;
     margin-bottom: 10px;
+}
+
+.add-post-button {
+    background-color: #54547c;
+    border: #54547c 1px solid;
+    color: #ffff;
+}
+
+.add-post-button:hover,
+.add-post-button:active {
+    background-color: #ffff;
+    border: #54547c 1px solid;
+    color: #54547c;
 }
