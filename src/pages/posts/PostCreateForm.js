@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProductsPanel from "../../components/ProductsPanel";
 import { Container, Row, Col } from "react-bootstrap";
 import BodySytemPanel from "../../components/BodySystemPanel";
+import Asset from "../../components/Asset";
 
 function PostCreateForm() {
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
@@ -19,11 +20,12 @@ function PostCreateForm() {
   return (
     <Container>
       <Row>
+      <Asset spinner={true} src="/path/to/image.png" message="Loading..." />
         <Col></Col>
         <Col sm={6}>
-          <BodySytemPanel 
-          selectedBodySystems={selectedBodySystems}
-          toggleBodySystem={toggleBodySystem}
+          <BodySytemPanel
+            selectedBodySystems={selectedBodySystems}
+            toggleBodySystem={toggleBodySystem}
           />
           <ProductsPanel selectedBodySystems={selectedBodySystems} />
         </Col>

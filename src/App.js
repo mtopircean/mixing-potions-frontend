@@ -2,16 +2,15 @@ import "./App.css";
 import NavBar from "../src/components/NavBar";
 import Footer from "../src/components/Footer";
 import Container from "react-bootstrap/Container";
-import './api/axiosDefaults';
-import { Route, Switch } from 'react-router-dom';
-import LoginForm from "./pages/auth/LoginForm"
-import RegisterForm from "./pages/auth/RegisterForm"
-import ProfilePage from "./pages/profiles/ProfilePage"
-import PostCreateForm from "./pages/posts/PostCreateForm"
-import PostCreator from "./components/PostCreator"
+import "./api/axiosDefaults";
+import { Route, Switch } from "react-router-dom";
+import LoginForm from "./pages/auth/LoginForm";
+import RegisterForm from "./pages/auth/RegisterForm";
+import ProfilePage from "./pages/profiles/ProfilePage";
+import PostCreateForm from "./pages/posts/PostCreateForm";
+import PostCreator from "./components/PostCreator";
 
 function App() {
-
   return (
     <div className="App">
       <NavBar />

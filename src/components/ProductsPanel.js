@@ -19,35 +19,36 @@ const ProductsPanel = ({ selectedBodySystems }) => {
     fetchProducts();
   }, []);
 
-  const filteredProducts = selectedBodySystems && selectedBodySystems.length
-    ? products.filter((product) =>
-        product.body_systems.some((system) =>
-          selectedBodySystems.includes(system)
+  const filteredProducts =
+    selectedBodySystems && selectedBodySystems.length
+      ? products.filter((product) =>
+          product.body_systems.some((system) =>
+            selectedBodySystems.includes(system)
+          )
         )
-    )
-    : products;
+      : products;
 
   return (
     <Container className={styles["products-panel"]}>
       <h3 className="text-center">Add product</h3>
       <Row>
-      {filteredProducts.slice(0, 4).map((product) => (
-        <Col key={product.id} sm={6}>
-          <div key={product.id} className={styles["product-card"]}>
-            <img
-              src={product.image}
-              alt={product.name}
-              className={styles["product-image"]}
-            />
-            <h5 className={styles["product-span"]}>{product.name}</h5>
-            <p>
-              <span className={styles["product-span"]}>Condition:</span>{" "}
-              {product.condition}
-            </p>
-            <Button className={styles["add-post-button"]}>Add to post</Button>
-          </div>
-        </Col>
-      ))}
+        {filteredProducts.slice(0, 4).map((product) => (
+          <Col key={product.id} sm={6}>
+            <div key={product.id} className={styles["product-card"]}>
+              <img
+                src={product.image}
+                alt={product.name}
+                className={styles["product-image"]}
+              />
+              <h5 className={styles["product-span"]}>{product.name}</h5>
+              <p>
+                <span className={styles["product-span"]}>Condition:</span>{" "}
+                {product.condition}
+              </p>
+              <Button className={styles["add-post-button"]}>Add to post</Button>
+            </div>
+          </Col>
+        ))}
       </Row>
     </Container>
   );

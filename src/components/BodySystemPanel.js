@@ -25,16 +25,20 @@ const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
 
   return (
     <Container className={styles["system-panel"]}>
-      <h3 className="text-center">Available Body Systems</h3>
+      <h5 className="text-center">Available Body Systems</h5>
       <div className={styles["systems-button-container"]}>
         {uniqueSystems.map((system, index) => (
           <div key={index}>
-            <Button className={styles["systems-button"]} variant="primary" onClick={() => toggleBodySystem(system)}>
+            <Button
+              className={styles["systems-button"]}
+              variant="primary"
+              onClick={() => toggleBodySystem(system)}
+            >
               {system}
             </Button>
           </div>
         ))}
-        </div>
+      </div>
     </Container>
   );
 };
