@@ -44,10 +44,6 @@ const ProductsPanel = ({ selectedBodySystems }) => {
               <span className={styles["product-span"]}>Condition:</span>{" "}
               {product.condition}
             </p>
-            <p>
-              <span className={styles["product-span"]}>Body Systems:</span>{" "}
-              {product.body_systems}
-            </p>
             <Button className={styles["add-post-button"]}>Add to post</Button>
           </div>
         </Col>
