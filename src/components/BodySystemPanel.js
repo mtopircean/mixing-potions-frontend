@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/BodySystemPanel.module.css";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 
 const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
   const [products, setProducts] = useState([]);
@@ -26,13 +26,15 @@ const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
   return (
     <Container className={styles["system-panel"]}>
       <h3 className="text-center">Available Body Systems</h3>
-      <ul>
+      <div className={styles["systems-button-container"]}>
         {uniqueSystems.map((system, index) => (
-          <li key={index}>
-            <span onClick={() => toggleBodySystem(system)}>{system}</span>
-          </li>
+          <div key={index}>
+            <Button className={styles["systems-button"]} variant="primary" onClick={() => toggleBodySystem(system)}>
+              {system}
+            </Button>
+          </div>
         ))}
-      </ul>
+        </div>
     </Container>
   );
 };
