@@ -22,7 +22,10 @@ function PostCreateForm() {
   };
 
   const handleAddProduct = (product) => {
-    setSelectedProducts((prevProducts) => [...prevProducts, product]);
+    const isProductExists = selectedProducts.some((p) => p.id === product.id);
+    if (!isProductExists) {
+      setSelectedProducts((prevProducts) => [...prevProducts, product]);
+    }
   };
 
   const handleRemoveProduct = (productId) => {
