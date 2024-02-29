@@ -1,0 +1,24 @@
+.post-create-button {
+    background-color: #629d77;
+    color: #ffff;
+    border: 2px solid #629d77;
+  }
+  
+  .post-create-button:hover {
+    background-color: #ffff;
+    color: #629d77;
+    border: 2px solid #629d77;
+  }
+  
+.input-border {
+    border-color: #b1cebb;
+  }
+  
+  .input-border:focus {
+    border-color: #b1cebb;
+    box-shadow: 0 0 0 0.2rem rgba(177, 206, 187, 0.5);
+  }
+
+  .input-border::placeholder {
+    color: #295d3b;
+  }

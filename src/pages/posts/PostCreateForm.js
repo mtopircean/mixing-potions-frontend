@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import ProductsPanel from "../../components/ProductsPanel";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import BodySytemPanel from "../../components/BodySystemPanel";
-import Asset from "../../components/Asset";
+import styles from "../../styles/PostCreatForm.module.css"
 
 function PostCreateForm() {
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
@@ -20,8 +20,20 @@ function PostCreateForm() {
   return (
     <Container>
       <Row>
-      <Asset spinner={true} src="/path/to/image.png" message="Loading..." />
-        <Col></Col>
+        <Col sm={6}>
+          <Form>
+            <Form.Control type="text" placeholder="Add a title for your post" className="mb-3 input-border"/>
+            <Form.Control
+              as="textarea"
+              rows={6}
+              className="mb-3 input-border"
+              placeholder="Write a description on what this miracle combination of products has done for you."
+            />
+            <Button variant="primary" type="submit" className={styles["post-create-button"]}>
+              Create Post
+            </Button>
+          </Form>
+        </Col>
         <Col sm={6}>
           <BodySytemPanel
             selectedBodySystems={selectedBodySystems}
