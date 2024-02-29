@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import ProductsPanel from "../../components/ProductsPanel";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import BodySytemPanel from "../../components/BodySystemPanel";
 import styles from "../../styles/PostCreatForm.module.css"
 
 function PostCreateForm() {
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const toggleBodySystem = (system) => {
     if (selectedBodySystems.includes(system)) {
@@ -17,11 +18,26 @@ function PostCreateForm() {
     }
   };
 
+  const handleAddProduct = (product) => {
+    setSelectedProduct(product);
+  }
+
+  const handleRemoveProduct = () => {
+    setSelectedProduct(null);
+  }
+
   return (
     <Container>
       <Row>
         <Col sm={6}>
           <Form>
+            {selectedProduct && (
+              <div>
+                <Image src={selectedProduct.image} alt={selectedProduct.name} fluid />
+                <h5>{selectedProduct.name}</h5>
+                <Button variant="danger" onClick={handleRemoveProduct}>Remove</Button>
+              </div>
+              )}
             <Form.Control type="text" placeholder="Add a title for your post" className="mb-3 input-border"/>
             <Form.Control
               as="textarea"
@@ -39,7 +55,7 @@ function PostCreateForm() {
             selectedBodySystems={selectedBodySystems}
             toggleBodySystem={toggleBodySystem}
           />
-          <ProductsPanel selectedBodySystems={selectedBodySystems} />
+          <ProductsPanel selectedBodySystems={selectedBodySystems} onAddProduct={handleAddProduct} />
         </Col>
       </Row>
     </Container>
