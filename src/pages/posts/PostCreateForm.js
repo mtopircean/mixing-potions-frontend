@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import ProductsPanel from "../../components/ProductsPanel";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
+import { BsX } from "react-icons/bs"
 import BodySytemPanel from "../../components/BodySystemPanel";
-import styles from "../../styles/PostCreatForm.module.css"
+import styles from "../../styles/PostCreatForm.module.css";
 
 function PostCreateForm() {
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
@@ -32,10 +33,10 @@ function PostCreateForm() {
         <Col sm={6}>
           <Form>
             {selectedProduct && (
-              <div>
+              <div className={styles["product-post-card"]}>
                 <Image src={selectedProduct.image} alt={selectedProduct.name} fluid />
                 <h5>{selectedProduct.name}</h5>
-                <Button variant="danger" onClick={handleRemoveProduct}>Remove</Button>
+                <Button variant="danger" onClick={handleRemoveProduct} className={styles["remove-button"]}><BsX /></Button>
               </div>
               )}
             <Form.Control type="text" placeholder="Add a title for your post" className="mb-3 input-border"/>
