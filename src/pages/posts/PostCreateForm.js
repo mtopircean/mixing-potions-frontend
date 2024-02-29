@@ -7,7 +7,7 @@ import styles from "../../styles/PostCreatForm.module.css";
 
 function PostCreateForm() {
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   const toggleBodySystem = (system) => {
     if (selectedBodySystems.includes(system)) {
@@ -20,25 +20,32 @@ function PostCreateForm() {
   };
 
   const handleAddProduct = (product) => {
-    setSelectedProduct(product);
+    setSelectedProducts((prevProducts) => [...prevProducts, product]);
   }
 
-  const handleRemoveProduct = () => {
-    setSelectedProduct(null);
-  }
+  const handleRemoveProduct = (productId) => {
+    setSelectedProducts((prevProducts) =>
+      prevProducts.filter((product) => product.id !== productId)
+    );
+  };
 
   return (
     <Container>
       <Row>
         <Col sm={6}>
           <Form>
-            {selectedProduct && (
-              <div className={styles["product-post-card"]}>
-                <Image src={selectedProduct.image} alt={selectedProduct.name} fluid />
-                <h5>{selectedProduct.name}</h5>
-                <Button variant="danger" onClick={handleRemoveProduct} className={styles["remove-button"]}><BsX /></Button>
+          {selectedProducts.map((product) => (
+              <div key={product.id} className={styles["product-post-card"]}>
+                <Image src={product.image} alt={product.name} fluid />
+                <h5>{product.name}</h5>
+                <Button 
+                variant="danger"
+                onClick={() => handleRemoveProduct(product.id)}
+                className={styles["remove-button"]}
+                >
+                  <BsX /></Button>
               </div>
-              )}
+              ))}
             <Form.Control type="text" placeholder="Add a title for your post" className="mb-3 input-border"/>
             <Form.Control
               as="textarea"

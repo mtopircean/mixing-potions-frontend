@@ -29,7 +29,6 @@ const ProductsPanel = ({ selectedBodySystems, onAddProduct }) => {
       : products;
 
   const handleAddToPost = (product) => {
-    console.log("Product added to post:", product);
     onAddProduct(product);
   }
 
