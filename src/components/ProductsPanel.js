@@ -3,7 +3,7 @@ import axios from "axios";
 import styles from "../styles/ProductPanel.module.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
 
-const ProductsPanel = ({ selectedBodySystems }) => {
+const ProductsPanel = ({ selectedBodySystems, onAddProduct }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -28,6 +28,11 @@ const ProductsPanel = ({ selectedBodySystems }) => {
         )
       : products;
 
+  const handleAddToPost = (product) => {
+    console.log("Product added to post:", product);
+    onAddProduct(product);
+  }
+
   return (
     <Container className={styles["products-panel"]}>
       <h3 className="text-center">Add product</h3>
@@ -45,7 +50,10 @@ const ProductsPanel = ({ selectedBodySystems }) => {
                 <span className={styles["product-span"]}>Condition:</span>{" "}
                 {product.condition}
               </p>
-              <Button className={styles["add-post-button"]}>Add to post</Button>
+              <Button 
+              className={styles["add-post-button"]}
+              onClick={() => handleAddToPost(product)}
+              >Add to post</Button>
             </div>
           </Col>
         ))}
