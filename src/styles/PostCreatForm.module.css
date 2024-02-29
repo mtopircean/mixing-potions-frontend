@@ -32,10 +32,22 @@
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 20px;
-    border: 2px solid #b1cebb;
+    border: 1px solid #b1cebb;
 }
 
 .remove-button {
   padding: 2.5px 5px;
   font-size: 14px;
+}
+
+.arrow-button {
+  border: none;
+  background-color: transparent;
+  color: #b1cebb;
+  font-weight: bold;
+}
+
+.arrow-button:hover {
+  background-color: #b1cebb;
+  color: white;
 }

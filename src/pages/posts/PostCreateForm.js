@@ -47,8 +47,11 @@ function PostCreateForm() {
         <Col sm={6}>
           <Form>
             <Row className="align-items-center justify-content-center">
-              {selectedProducts.length > 2 && (
-                <Button onClick={handlePrevClick} disabled={currentIndex === 0}>
+              {selectedProducts.length > 2 && currentIndex > 0 && (
+                <Button
+                  onClick={handlePrevClick}
+                  className={styles["arrow-button"]}
+                >
                   <FaChevronLeft />
                 </Button>
               )}
@@ -75,7 +78,12 @@ function PostCreateForm() {
 
               {selectedProducts.length > 2 &&
                 currentIndex + 2 < selectedProducts.length && (
-                  <Button onClick={handleNextClick}><FaChevronRight /></Button>
+                  <Button
+                    onClick={handleNextClick}
+                    className={styles["arrow-button"]}
+                  >
+                    <FaChevronRight />
+                  </Button>
                 )}
             </Row>
 
