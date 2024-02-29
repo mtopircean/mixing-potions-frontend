@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import ProductsPanel from "../../components/ProductsPanel";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
-import { BsX } from "react-icons/bs"
+import { BsX } from "react-icons/bs";
 import BodySytemPanel from "../../components/BodySystemPanel";
 import styles from "../../styles/PostCreatForm.module.css";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 function PostCreateForm() {
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const toggleBodySystem = (system) => {
     if (selectedBodySystems.includes(system)) {
@@ -21,11 +23,21 @@ function PostCreateForm() {
 
   const handleAddProduct = (product) => {
     setSelectedProducts((prevProducts) => [...prevProducts, product]);
-  }
+  };
 
   const handleRemoveProduct = (productId) => {
     setSelectedProducts((prevProducts) =>
       prevProducts.filter((product) => product.id !== productId)
+    );
+  };
+
+  const handlePrevClick = () => {
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) =>
+      Math.min(prevIndex + 1, selectedProducts.length - 2)
     );
   };
 
@@ -34,26 +46,55 @@ function PostCreateForm() {
       <Row>
         <Col sm={6}>
           <Form>
-          {selectedProducts.map((product) => (
-              <div key={product.id} className={styles["product-post-card"]}>
-                <Image src={product.image} alt={product.name} fluid />
-                <h5>{product.name}</h5>
-                <Button 
-                variant="danger"
-                onClick={() => handleRemoveProduct(product.id)}
-                className={styles["remove-button"]}
-                >
-                  <BsX /></Button>
-              </div>
-              ))}
-            <Form.Control type="text" placeholder="Add a title for your post" className="mb-3 input-border"/>
+            <Row className="align-items-center justify-content-center">
+              {selectedProducts.length > 2 && (
+                <Button onClick={handlePrevClick} disabled={currentIndex === 0}>
+                  <FaChevronLeft />
+                </Button>
+              )}
+              {selectedProducts
+                .slice(currentIndex, currentIndex + 2)
+                .map((product) => (
+                  <Col key={product.id} sm={4}>
+                    <div
+                      key={product.id}
+                      className={styles["product-post-card"]}
+                    >
+                      <Image src={product.image} alt={product.name} fluid />
+                      <h5>{product.name}</h5>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleRemoveProduct(product.id)}
+                        className={styles["remove-button"]}
+                      >
+                        <BsX />
+                      </Button>
+                    </div>
+                  </Col>
+                ))}
+
+              {selectedProducts.length > 2 &&
+                currentIndex + 2 < selectedProducts.length && (
+                  <Button onClick={handleNextClick}><FaChevronRight /></Button>
+                )}
+            </Row>
+
+            <Form.Control
+              type="text"
+              placeholder="Add a title for your post"
+              className="mb-3 input-border"
+            />
             <Form.Control
               as="textarea"
               rows={6}
               className="mb-3 input-border"
               placeholder="Write a description on what this miracle combination of products has done for you."
             />
-            <Button variant="primary" type="submit" className={styles["post-create-button"]}>
+            <Button
+              variant="primary"
+              type="submit"
+              className={styles["post-create-button"]}
+            >
               Create Post
             </Button>
           </Form>
@@ -63,7 +104,10 @@ function PostCreateForm() {
             selectedBodySystems={selectedBodySystems}
             toggleBodySystem={toggleBodySystem}
           />
-          <ProductsPanel selectedBodySystems={selectedBodySystems} onAddProduct={handleAddProduct} />
+          <ProductsPanel
+            selectedBodySystems={selectedBodySystems}
+            onAddProduct={handleAddProduct}
+          />
         </Col>
       </Row>
     </Container>

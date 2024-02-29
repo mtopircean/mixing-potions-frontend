@@ -25,7 +25,7 @@
 
   .product-post-card {
     display: flex;
-    width: 40%;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     background-color: #ffff;
