@@ -46,15 +46,26 @@ function PostCreateForm() {
   };
 
   const handleCheckboxChange = (product) => {
-    setSelectedImage(product.image);
-  }
+    if (selectedImage === product.image) {
+      setSelectedImage(null);
+    } else {
+      setSelectedImage(product.image);
+    }
+  };
 
   return (
     <Container>
       <Row>
         <Col sm={6}>
           <div className={styles["center-div"]}>
-          {selectedImage && <Image src={selectedImage} alt="Selected product image" className="mb-3" fluid />}
+            {selectedImage && (
+              <Image
+                src={selectedImage}
+                alt="Selected product image"
+                className="mb-3"
+                fluid
+              />
+            )}
             <Form>
               <Row className="align-items-center justify-content-center">
                 {selectedProducts.length > 2 && currentIndex > 0 && (
@@ -83,10 +94,10 @@ function PostCreateForm() {
                           <BsX />
                         </Button>
                         <Form.Check
-                        type="checkbox"
-                        className={styles["form-check-label"]}
-                        label="Post image"
-                        onChange={() => handleCheckboxChange(product)}
+                          type="checkbox"
+                          className={styles["form-check-label"]}
+                          label="Post image"
+                          onChange={() => handleCheckboxChange(product)}
                         />
                       </div>
                     </Col>
