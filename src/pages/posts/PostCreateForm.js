@@ -5,12 +5,15 @@ import { BsX } from "react-icons/bs";
 import BodySytemPanel from "../../components/BodySystemPanel";
 import styles from "../../styles/PostCreatForm.module.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
 function PostCreateForm() {
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [customImage, setCustomImage] = useState(null);
 
   const toggleBodySystem = (system) => {
     if (selectedBodySystems.includes(system)) {
@@ -53,14 +56,22 @@ function PostCreateForm() {
     }
   };
 
+  const handleCustomImageChange = (event) => {
+    if (event.target.files.length) {
+      URL.revokeObjectURL(selectedImage);
+      setSelectedImage(null);
+      setCustomImage(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+
   return (
     <Container>
       <Row>
         <Col sm={6}>
           <div className={styles["center-div"]}>
-            {selectedImage && (
+            {(selectedImage || customImage) && (
               <Image
-                src={selectedImage}
+                src={customImage || selectedImage}
                 alt="Selected product image"
                 className="mb-3"
                 fluid
@@ -113,6 +124,22 @@ function PostCreateForm() {
                     </Button>
                   )}
               </Row>
+
+              <Form.Group controlId="customImage" className="text-center d-flex flex-column align-items-center">
+                <Form.Label></Form.Label>
+                <Form.File
+                  accept="image/*"
+                  onChange={handleCustomImageChange}
+                  custom
+                  style={{ display: "none" }} // Hide the default file input button
+                />
+                <label
+                  htmlFor="customImage"
+                  className={styles["upload-button"]}
+                >
+                  <FontAwesomeIcon icon={faUpload} /> Upload Image or select a product and use it`s image
+                </label>
+              </Form.Group>
 
               <Form.Control
                 type="text"

@@ -57,3 +57,17 @@
   font-size: small;
   margin-top: 5px;
 }
+
+.upload-button {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  color:#295d3b;
+  text-align: center;
+  width: 100%;
+}
+
+.upload-button:hover {
+ color: #b1cebb;
+}
