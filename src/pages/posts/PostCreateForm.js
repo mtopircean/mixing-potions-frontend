@@ -84,7 +84,8 @@ function PostCreateForm() {
                         </Button>
                         <Form.Check
                         type="checkbox"
-                        label="Select"
+                        className={styles["form-check-label"]}
+                        label="Post image"
                         onChange={() => handleCheckboxChange(product)}
                         />
                       </div>

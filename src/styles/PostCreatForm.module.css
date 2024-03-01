@@ -51,3 +51,9 @@
   background-color: #b1cebb;
   color: white;
 }
+
+.form-check-label {
+  margin-bottom: 0;
+  font-size: small;
+  margin-top: 5px;
+}
