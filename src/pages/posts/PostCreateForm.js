@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductsPanel from "../../components/ProductsPanel";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import { BsX } from "react-icons/bs";
-import BodySytemPanel from "../../components/BodySystemPanel";
+import BodySystemPanel from "../../components/BodySystemPanel";
 import styles from "../../styles/PostCreatForm.module.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import axios from "axios";
 
 function PostCreateForm() {
+  const currentUser = useCurrentUser();
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
   const [customImage, setCustomImage] = useState(null);
+  const [image, setImage] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  const history = useHistory();
 
   const toggleBodySystem = (system) => {
     if (selectedBodySystems.includes(system)) {
@@ -58,26 +68,63 @@ function PostCreateForm() {
 
   const handleCustomImageChange = (event) => {
     if (event.target.files.length) {
+      const selectedFile = event.target.files[0];
       URL.revokeObjectURL(selectedImage);
       setSelectedImage(null);
       setCustomImage(URL.createObjectURL(event.target.files[0]));
+      setImage(selectedFile);
     }
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("image", image);
+    selectedProducts.forEach((product) => {
+      formData.append("products[]", product.id);
+    });
+
+    try {
+      const response = await axios.post("/posts/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      history.push(`/posts/${response.data.id}`);
+    } catch (err) {
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
+    }
+  };
+  useEffect(() => {
+    if (!currentUser) {
+      history.push("/signin");
+    }
+  }, [currentUser, history]);
 
   return (
     <Container>
       <Row>
         <Col sm={6}>
           <div className={styles["center-div"]}>
-            {(selectedImage || customImage) && (
-              <Image
-                src={customImage || selectedImage}
-                alt="Selected product image"
-                className="mb-3"
-                fluid
-              />
-            )}
-            <Form>
+            <Form
+              onSubmit={handleSubmit}
+              action="/posts/"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              {(selectedImage || customImage) && (
+                <Image
+                  src={customImage || selectedImage}
+                  alt="Selected product image"
+                  className="mb-3"
+                  fluid
+                />
+              )}
+
               <Row className="align-items-center justify-content-center">
                 {selectedProducts.length > 2 && currentIndex > 0 && (
                   <Button
@@ -125,19 +172,20 @@ function PostCreateForm() {
                   )}
               </Row>
 
-              <Form.Group controlId="customImage" className="text-center d-flex flex-column align-items-center">
+              <Form.Group controlId="customImage">
                 <Form.Label></Form.Label>
                 <Form.File
                   accept="image/*"
                   onChange={handleCustomImageChange}
                   custom
-                  style={{ display: "none" }} // Hide the default file input button
+                  style={{ display: "none" }}
                 />
                 <label
                   htmlFor="customImage"
                   className={styles["upload-button"]}
                 >
-                  <FontAwesomeIcon icon={faUpload} /> Upload Image or select a product and use it`s image
+                  <FontAwesomeIcon icon={faUpload} /> Upload Image or select a
+                  product and use it`s image
                 </label>
               </Form.Group>
 
@@ -145,12 +193,16 @@ function PostCreateForm() {
                 type="text"
                 placeholder="Add a title for your post"
                 className="mb-3 input-border"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
               <Form.Control
                 as="textarea"
                 rows={6}
                 className="mb-3 input-border"
                 placeholder="Write a description on what this miracle combination of products has done for you."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
               <Button
                 variant="primary"
@@ -164,7 +216,7 @@ function PostCreateForm() {
         </Col>
         <Col sm={6}>
           <div className={styles["center-div"]}>
-            <BodySytemPanel
+            <BodySystemPanel
               selectedBodySystems={selectedBodySystems}
               toggleBodySystem={toggleBodySystem}
             />
