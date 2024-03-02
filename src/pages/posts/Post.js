@@ -1,14 +1,17 @@
-import React from "react";
-import { Card, Media } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import Avatar from '../../components/Avatar';
-import styles from '../../styles/Post.module.css';
-import logo from '../../assets/logo.png';
-import { FaThumbsUp, FaComment  } from "react-icons/fa";
+import React, { useState } from "react";
+import { Card, Media } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Avatar from "../../components/Avatar";
+import styles from "../../styles/Post.module.css";
+import logo from "../../assets/logo.png";
+import {
+  FaThumbsUp,
+  FaComment,
+  FaChevronDown,
+  FaChevronUp,
+} from "react-icons/fa";
 
 const Post = (props) => {
-  console.log('like_count:', props.like_count);
-  console.log('comment_count:', props.comment_count);
   const {
     id,
     owner,
@@ -19,7 +22,13 @@ const Post = (props) => {
     created_at,
     like_count,
     comment_count,
+    comments,
   } = props;
+
+  const [isExpanded, setIsExpanded] = useState(false);
+  const toggleComments = () => {
+    setIsExpanded(!isExpanded);
+  };
 
   return (
     <Card className={`${styles.Post} mb-3`}>
@@ -42,13 +51,25 @@ const Post = (props) => {
         {content && <Card.Text>{content}</Card.Text>}
       </Card.Body>
       <Card.Footer className={styles.PostFooter}>
-      <div className={styles.LikesSection}>
+        <div className={styles.LikesSection}>
           <FaThumbsUp />
           <span>{like_count}</span>
         </div>
         <div className={styles.CommentsSection}>
-        <span>{comment_count}</span>
-        <FaComment />
+          <span>{comment_count}</span>
+          <FaComment />
+          <button onClick={toggleComments}>
+            {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
+            </button>
+          {isExpanded && (
+            <div className={styles.ExpandedComments}>
+              {comments.map((comment, index) => (
+                <div key={index}>
+                  <p>{comment.text}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </Card.Footer>
     </Card>

@@ -42,3 +42,21 @@
 .Post {
   border-color: #b1cebb;
 }
+
+.CommentsSection {
+  display: flex;
+  align-items: center;
+}
+
+.CommentsSection button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+  color: #629d77;
+  font-weight: 200;
+}
+
+.ExpandedComments {
+  margin-top: 10px;
+}
