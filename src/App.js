@@ -11,8 +11,12 @@ import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage";
 import PostCreator from "./components/PostCreator";
+import { useCurrentUser } from "./contexts/CurrentUserContext";
 
 function App() {
+const currentUser = useCurrentUser();
+const profile_id = currentUser?.profile_id || "";
+
   return (
     <div className="App">
       <NavBar />
@@ -22,10 +26,9 @@ function App() {
             exact
             path="/"
             render={() => (
-              <PostsPage/>
+              <PostsPage message="No results found. Try another search keyword"/>
             )}
           />
-          <Route exact path="/" render={() => <h1></h1>} />
           <Route exact path="/about" render={() => <h1></h1>} />
           <Route exact path="/contact" render={() => <h1></h1>} />
           <Route exact path="/team" render={() => <h1></h1>} />
