@@ -62,18 +62,20 @@ const Post = (props) => {
           <FaComment />
           <button onClick={toggleComments}>
             {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
-            </button>
-          {isExpanded && (
-            <div className={styles.ExpandedComments}>
-              {comments.map((comment, index) => (
-                <div key={index}>
-                  <p key={index}>{comment.comment_text}</p>
-                </div>
-              ))}
-            </div>
-          )}
+          </button>
         </div>
       </Card.Footer>
+      {isExpanded && (
+        <div className={styles.ExpandedComments}>
+          {comments.map((comment, index) => (
+            <div key={index} className={styles.CommentsArea}>
+            <h6><strong>{comment.owner}</strong>:</h6>
+            <p>{comment.comment_text}</p>
+            <hr></hr>
+            </div>
+          ))}
+        </div>
+      )}
     </Card>
   );
 };

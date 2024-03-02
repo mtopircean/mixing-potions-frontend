@@ -60,3 +60,7 @@
 .ExpandedComments {
   margin-top: 10px;
 }
+
+.CommentsArea {
+  padding: 0.75rem 1.25rem;
+}
