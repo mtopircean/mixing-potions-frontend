@@ -7,3 +7,24 @@
     margin-bottom: 20px;
     border: 1px solid #b1cebb;
   }
+
+  .PostFooter {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .LikesSection {
+    color:#1877F2;
+  }
+
+  .CommentsSection {
+    color: #629d77;
+  }
+
+  .PostFooter {
+    background-color: #b1cebb1e;
+  }
+
+  .Post {
+    border-color: #b1cebb;
+  }

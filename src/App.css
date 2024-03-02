@@ -1,4 +1,9 @@
 /*App general css*/
+
+body {
+  background-color: #629d770b;
+}
+
 .App {
   display: flex;
   flex-direction: column;
