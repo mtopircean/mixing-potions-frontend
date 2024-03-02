@@ -4,6 +4,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useLocation } from "react-router";
 import { axiosReq } from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
+import BodySystemPanel from "../../components/BodySystemPanel";
+
 
 function PostsPage({ message, filter = "" }) {
     const [posts, setPosts] = useState({ results: [] });
@@ -27,7 +29,10 @@ function PostsPage({ message, filter = "" }) {
 
   return (
     <Row className="h-100">
-      <Col className="py-2 p-0 p-lg-2" lg={8}>
+        <Col className="py-2 p-0 p-lg-2" lg={3}>
+            <BodySystemPanel />
+        </Col>
+      <Col className="py-2 p-0 p-lg-2" lg={6}>
         {hasLoaded ? (
           <>
             {posts.results.length ? (
@@ -45,6 +50,9 @@ function PostsPage({ message, filter = "" }) {
             <Asset spinner />
           </Container>
         )}
+      </Col>
+      <Col className="py-2 p-0 p-lg-2" lg={3}>
+        Popular profiles will sit here
       </Col>
     </Row>
   );
