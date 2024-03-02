@@ -6,7 +6,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 import BodySystemPanel from "../../components/BodySystemPanel";
 import { FaThumbsUp } from "react-icons/fa";
-import styles from "../../styles/PostsPage.module.css"
+import styles from "../../styles/PostsPage.module.css";
 
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
@@ -17,6 +17,7 @@ function PostsPage({ message, filter = "" }) {
     const fetchPosts = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/?${filter}`);
+        console.log("Posts data:", data);
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
@@ -31,20 +32,22 @@ function PostsPage({ message, filter = "" }) {
   const sortByLikes = (posts) => {
     const userLikesCount = {};
     posts.forEach((post) => {
-      const {owner, likes_count } = post;
+      const { owner, like_count } = post;
       if (!userLikesCount[owner]) {
         userLikesCount[owner] = 0;
       }
-      userLikesCount[post.owner] += likes_count || 0;
+      userLikesCount[owner] += like_count || 0;
     });
-  
+
     const sortedUsers = Object.keys(userLikesCount)
       .filter((user) => userLikesCount[user] > 0)
       .sort((a, b) => userLikesCount[b] - userLikesCount[a]);
-  
-    return sortedUsers.map((user) => ({
+      console.log("Sorted users:", sortedUsers);
+
+    return sortedUsers.map((user, index) => ({
+      id: index,
       owner: user,
-      likes_count: userLikesCount[user],
+      like_count: userLikesCount[user],
     }));
   };
 
@@ -75,13 +78,18 @@ function PostsPage({ message, filter = "" }) {
       <Col className="py-2 p-0 p-lg-2" lg={3}>
         {hasLoaded && posts.results.length > 0 && (
           <Container>
-            <div  style={{ textAlign: 'center' }}>
-            <h5 className={styles['liked-header']}><FaThumbsUp className={styles['like-user-icon']} /> Most liked users:</h5>
-            <hr></hr>
+            <div style={{ textAlign: "center" }}>
+              <h5 className={styles["liked-header"]}>
+                <FaThumbsUp className={styles["like-user-icon"]} /> Most liked
+                users:
+              </h5>
+              <hr></hr>
             </div>
-            {sortByLikes(posts.results).map((post) => (
-              <div key={post.id}>
-                <p>{post.owner} liked {post.likes_count} times</p>
+            {sortByLikes(posts.results).map((user) => (
+              <div key={user.owner}>
+                <p>
+                  <strong>{user.owner}</strong> has {user.like_count} likes
+                </p>
               </div>
             ))}
           </Container>
