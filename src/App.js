@@ -8,7 +8,7 @@ import LoginForm from "./pages/auth/LoginForm";
 import RegisterForm from "./pages/auth/RegisterForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import PostCreateForm from "./pages/posts/PostCreateForm";
-import PostCreateForm from "./pages/posts/Post";
+import PostPage from "./pages/posts/PostPage";
 import PostCreator from "./components/PostCreator";
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
           <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
+          <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
         <PostCreator />
