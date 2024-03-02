@@ -23,6 +23,8 @@ body {
 .navbar-container {
   background-color: #ffff;
   padding-bottom: 0px;
+  border-top: #8375ac 5px solid;
+  border-bottom: #8375ac1e 0.5px solid;
 }
 
 .nav-link {
@@ -93,9 +95,9 @@ body {
   padding-right: 40px;
   padding-bottom: 10px;
   font-size: larger;
-  color: #54547c;
+  color: #ffffff;
   width: auto;
-  background-color: #ffff;
+  background-color: #301c3b;
   border-top: #8375ac 1px solid;
 }
 

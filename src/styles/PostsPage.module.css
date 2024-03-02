@@ -1,0 +1,10 @@
+h5.liked-header {
+    display: flex;
+    align-items: center;
+    color: #54547c;
+    justify-content: center;
+}
+
+.like-user-icon {
+    margin-right: 5px;
+}

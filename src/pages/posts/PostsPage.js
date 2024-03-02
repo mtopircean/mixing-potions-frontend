@@ -6,7 +6,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 import BodySystemPanel from "../../components/BodySystemPanel";
 import { FaThumbsUp } from "react-icons/fa";
-import userEvent from "@testing-library/user-event";
+import styles from "../../styles/PostsPage.module.css"
 
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
@@ -75,7 +75,10 @@ function PostsPage({ message, filter = "" }) {
       <Col className="py-2 p-0 p-lg-2" lg={3}>
         {hasLoaded && posts.results.length > 0 && (
           <Container>
-            <h5><FaThumbsUp /> Most liked users:</h5>
+            <div  style={{ textAlign: 'center' }}>
+            <h5 className={styles['liked-header']}><FaThumbsUp className={styles['like-user-icon']} /> Most liked users:</h5>
+            <hr></hr>
+            </div>
             {sortByLikes(posts.results).map((post) => (
               <div key={post.id}>
                 <p>{post.owner} liked {post.likes_count} times</p>
