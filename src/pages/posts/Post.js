@@ -30,6 +30,8 @@ const Post = (props) => {
     setIsExpanded(!isExpanded);
   };
 
+  console.log("Comments:", comments);
+
   return (
     <Card className={`${styles.Post} mb-3`}>
       <Card.Body>
@@ -65,7 +67,7 @@ const Post = (props) => {
             <div className={styles.ExpandedComments}>
               {comments.map((comment, index) => (
                 <div key={index}>
-                  <p>{comment.text}</p>
+                  <p key={index}>{comment.comment_text}</p>
                 </div>
               ))}
             </div>
