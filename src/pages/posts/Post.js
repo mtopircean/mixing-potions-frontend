@@ -7,18 +7,18 @@ import logo from '../../assets/logo.png';
 import { FaThumbsUp, FaComment  } from "react-icons/fa";
 
 const Post = (props) => {
+  console.log('like_count:', props.like_count);
+  console.log('comment_count:', props.comment_count);
   const {
     id,
     owner,
     profile_id,
-    profile_image,
     title,
     content,
     image,
     created_at,
-    likes_count,
-    comments,
-    comments_count,
+    like_count,
+    comment_count,
   } = props;
 
   return (
@@ -26,7 +26,7 @@ const Post = (props) => {
       <Card.Body>
         <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${profile_id}`}>
-            <Avatar src={profile_image || logo} height={55} />
+            <Avatar />
             {owner}
           </Link>
           <div className="d-flex align-items-center">
@@ -44,11 +44,11 @@ const Post = (props) => {
       <Card.Footer className={styles.PostFooter}>
       <div className={styles.LikesSection}>
           <FaThumbsUp />
-          <span>{likes_count}</span>
+          <span>{like_count}</span>
         </div>
         <div className={styles.CommentsSection}>
+        <span>{comment_count}</span>
         <FaComment />
-          <span>{comments_count}</span>
         </div>
       </Card.Footer>
     </Card>

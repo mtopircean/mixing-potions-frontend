@@ -31,10 +31,11 @@ function PostsPage({ message, filter = "" }) {
   const sortByLikes = (posts) => {
     const userLikesCount = {};
     posts.forEach((post) => {
-      if (!userLikesCount[post.owner]) {
-        userLikesCount[post.owner] = 0;
+      const {owner, likes_count } = post;
+      if (!userLikesCount[owner]) {
+        userLikesCount[owner] = 0;
       }
-      userLikesCount[post.owner] += post.likes_count || 0;
+      userLikesCount[post.owner] += likes_count || 0;
     });
   
     const sortedUsers = Object.keys(userLikesCount)
