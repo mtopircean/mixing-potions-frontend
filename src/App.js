@@ -37,7 +37,7 @@ const profile_id = currentUser?.profile_id || "";
           <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
-          <Route exact path="/posts" render={() => <PostPage />} />
+          <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
         <PostCreator />

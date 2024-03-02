@@ -17,7 +17,6 @@ function PostsPage({ message, filter = "" }) {
     const fetchPosts = async () => {
       try {
         const { data } = await axiosReq.get(`/posts/?${filter}`);
-        console.log("Posts data:", data);
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
@@ -42,7 +41,6 @@ function PostsPage({ message, filter = "" }) {
     const sortedUsers = Object.keys(userLikesCount)
       .filter((user) => userLikesCount[user] > 0)
       .sort((a, b) => userLikesCount[b] - userLikesCount[a]);
-      console.log("Sorted users:", sortedUsers);
 
     return sortedUsers.map((user, index) => ({
       id: index,

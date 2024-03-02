@@ -3,7 +3,7 @@ import { Card, Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Post.module.css";
-import logo from "../../assets/logo.png";
+
 import {
   FaThumbsUp,
   FaComment,
@@ -15,7 +15,7 @@ const Post = (props) => {
   const {
     id,
     owner,
-    profile_id,
+    pk,
     title,
     content,
     image,
@@ -24,6 +24,7 @@ const Post = (props) => {
     comment_count,
     comments,
   } = props;
+
 
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleComments = () => {
@@ -36,8 +37,8 @@ const Post = (props) => {
     <Card className={`${styles.Post} mb-3`}>
       <Card.Body>
         <Media className="align-items-center justify-content-between">
-          <Link to={`/profiles/${profile_id}`}>
-            <Avatar />
+          <Link to={`/profiles/${pk}/`}>
+          <Avatar  />
             {owner}
           </Link>
           <div className="d-flex align-items-center">
