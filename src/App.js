@@ -9,6 +9,7 @@ import RegisterForm from "./pages/auth/RegisterForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import PostCreateForm from "./pages/posts/PostCreateForm";
 import PostPage from "./pages/posts/PostPage";
+import PostsPage from "./pages/posts/PostsPage";
 import PostCreator from "./components/PostCreator";
 
 function App() {
@@ -17,6 +18,13 @@ function App() {
       <NavBar />
       <Container className="content-container">
         <Switch>
+        <Route
+            exact
+            path="/"
+            render={() => (
+              <PostsPage/>
+            )}
+          />
           <Route exact path="/" render={() => <h1></h1>} />
           <Route exact path="/about" render={() => <h1></h1>} />
           <Route exact path="/contact" render={() => <h1></h1>} />
@@ -26,7 +34,7 @@ function App() {
           <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
-          <Route exact path="/posts/:id" render={() => <PostPage />} />
+          <Route exact path="/posts" render={() => <PostPage />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
         <PostCreator />
