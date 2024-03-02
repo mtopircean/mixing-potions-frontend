@@ -8,6 +8,7 @@ import LoginForm from "./pages/auth/LoginForm";
 import RegisterForm from "./pages/auth/RegisterForm";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import PostCreateForm from "./pages/posts/PostCreateForm";
+import PostCreateForm from "./pages/posts/Post";
 import PostCreator from "./components/PostCreator";
 
 function App() {
