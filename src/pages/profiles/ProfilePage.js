@@ -6,6 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
+import Post from "../../pages/posts/Post";
 
 const ProfilePage = () => {
   const currentUser = useCurrentUser();
@@ -23,9 +24,11 @@ const ProfilePage = () => {
         setProfile(pageProfile);
         setLoading(false);
 
-        const { data: userPosts } = await axiosReq.get(`/posts?owner=${pk}`);
-        setUserPosts(userPosts);
-
+        const { data: postData } = await axiosReq.get(`/posts`);
+        const userPostsData = postData.results.filter(
+          (post) => post.owner === currentUser.username
+        );
+        setUserPosts(userPostsData);
       } catch (error) {
         setLoading(false);
         console.error("Error fetching profile and posts:", error);
@@ -105,6 +108,17 @@ const ProfilePage = () => {
         </Row>
       ) : (
         <div>Error: Profile not found</div>
+      )}
+      <hr></hr>
+      <h4>My Posts:</h4>
+      {userPosts && userPosts.length > 0 && (
+        <Row xs={12} md={3} className="justify-content-between">
+            {userPosts.map((post) => (
+              <Col key={post.id} className="post-size mb-3">
+              <Post {...post} />
+              </Col>
+            ))}
+        </Row>
       )}
     </Container>
   );
