@@ -14,19 +14,25 @@ const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
+  const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
-    const fetchProfile = async () => {
+    const fetchProfileAndPosts = async () => {
       try {
         const { data: pageProfile } = await axiosReq.get(`/profiles/${pk}/`);
         setProfile(pageProfile);
         setLoading(false);
+
+        const { data: userPosts } = await axiosReq.get(`/posts?owner=${pk}`);
+        setUserPosts(userPosts);
+
       } catch (error) {
         setLoading(false);
+        console.error("Error fetching profile and posts:", error);
       }
     };
-  
-    fetchProfile();
+
+    fetchProfileAndPosts();
   }, [pk]);
 
   const toggleExpanded = () => {
