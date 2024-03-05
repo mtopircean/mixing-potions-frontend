@@ -6,6 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
+import axios from "axios";
 import Post from "../../pages/posts/Post";
 
 const ProfilePage = () => {
@@ -16,6 +17,7 @@ const ProfilePage = () => {
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
+  const [followedUsers, setFollowedUsers] = useState([]);
 
   useEffect(() => {
     const fetchProfileAndPosts = async () => {
@@ -29,14 +31,22 @@ const ProfilePage = () => {
           (post) => post.owner === currentUser.username
         );
         setUserPosts(userPostsData);
+
+        const response = await axios.get(`/followers`);
+            if (response.status === 200) {
+                setFollowedUsers(response.data.results);
+            } else {
+                throw new Error("Failed to fetch followed users");
+            }
       } catch (error) {
         setLoading(false);
-        console.error("Error fetching profile and posts:", error);
+        console.error("Error fetching profile, posts, and followed users:", error);
+        return <div>Error: Failed to load data. Please try again later.</div>;
       }
     };
 
     fetchProfileAndPosts();
-  }, [pk]);
+  }, [pk, currentUser.username]);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -110,14 +120,29 @@ const ProfilePage = () => {
         <div>Error: Profile not found</div>
       )}
       <hr></hr>
-      <h4>My Posts:</h4>
+
       {userPosts && userPosts.length > 0 && (
-        <Row xs={12} md={3} className="justify-content-between">
-            {userPosts.map((post) => (
-              <Col key={post.id} className="post-size mb-3">
-              <Post {...post} />
-              </Col>
-            ))}
+        <Row>
+          <Col xs={12} md={6} className="justify-content-center">
+            <h4>My Posts:</h4>
+            <Row>
+              {userPosts.map((post) => (
+                <Col xs={12} md={6} key={post.id} className="post-size mb-3">
+                  <Post {...post} />
+                </Col>
+              ))}
+            </Row>
+          </Col>
+          <Col xs={12} md={6}>
+                <div className={`${styles["followed-users"]} d-flex flex-column justify-content-center`}>
+                    <h4 className="text-center">Followed Users:</h4>
+                    <div>
+                        {followedUsers.map((user) => (
+                            <p key={user.id}>{user.followed_name}</p>
+                        ))}
+                    </div>
+                </div>
+            </Col>
         </Row>
       )}
     </Container>
