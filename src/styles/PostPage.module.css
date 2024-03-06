@@ -9,3 +9,21 @@
     border: none;
     color: #023e85;
 }
+
+.post-title-detail {
+    font-weight: 600;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.post-description-detail {
+    margin-top: 5px;
+}
+
+.product-used-detail {
+    margin-top: 5px;
+}
+
+.comments-detail {
+    margin-top: 5px;
+}

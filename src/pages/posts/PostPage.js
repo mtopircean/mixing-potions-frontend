@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Post from "./Post";
 import styles from "../../styles/PostPage.module.css";
 import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -51,20 +50,22 @@ const PostPage = () => {
             </Button>
           </div>
           <div>
+            <h4 className={styles["post-title-detail"]}>{post.title}</h4>
             {post.image && (
               <img
                 src={post.image}
                 alt="Post Image"
                 className="img-fluid"
-                style={{ maxWidth: "400px", maxHeight: "400px" }}
+                style={{ width: "100%", maxHeight: "100%" }}
               />
             )}
           </div>
         </Col>
         <Col md={6}>
-          <h4>Description</h4>
-          <p>{post.title}</p>
+          <h5 className={styles["post-description-detail"]}>Description</h5>
+          <p>{post.description}</p>
           <div>
+            <h5 className={styles["comments-detail"]}>Comments</h5>
             {post.comments &&
               post.comments.map((comment, index) => (
                 <div key={index}>
@@ -73,9 +74,32 @@ const PostPage = () => {
                 </div>
               ))}
           </div>
-
-          <p>{post.description}</p>
-          <h4>Products Used</h4>
+        </Col>
+      </Row>
+      <hr></hr>
+      <Row>
+        <Col md={12}>
+          <div>
+            <h5 className={styles["products-used-detail"]}>Products Used</h5>
+            {post && post.products && post.products.length > 0 ? (
+              <div className="row">
+                {post.products.map((product, index) => (
+                  <div key={index} className="col-md-4 mb-4">
+                    <div className="card">
+                      <img src={product.image} className="card-img-top" alt={product.name} />
+                      <div className="card-body">
+                        <h5 className="card-title">{product.name}</h5>
+                        <p className="card-text">Condition: {product.condition.join(", ")}</p>
+                        <p className="card-text">Body Systems: {product.body_systems.join(", ")}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p>No products used for this post.</p>
+            )}
+          </div>
         </Col>
       </Row>
     </div>
