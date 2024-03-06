@@ -27,3 +27,15 @@
 .comments-detail {
     margin-top: 5px;
 }
+
+.arrow-button {
+    border: #b1cebb 1px solid;
+    background-color: transparent;
+    color: #b1cebb;
+    font-weight: bold;
+  }
+
+  .arrow-button:hover {
+    background-color: #b1cebb;
+    color: white;
+  }

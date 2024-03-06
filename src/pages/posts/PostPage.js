@@ -5,11 +5,12 @@ import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const PostPage = () => {
   const [post, setPost] = useState([null]);
   const { id } = useParams();
-  console.log("postId:", id);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -34,11 +35,21 @@ const PostPage = () => {
     console.log("Delete button clicked");
   };
 
+  const handlePrevClick = () => {
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) =>
+      Math.min(prevIndex + 1, post.products.length - 1)
+    );
+  };
+
   return (
     <div>
       <Row>
         <Col md={6}>
-          <div>
+          <div className="arrow-button">
             <Button onClick={handleEdit} className={styles["post-edit-button"]}>
               Edit <FontAwesomeIcon icon={faPenSquare} />
             </Button>
@@ -78,7 +89,27 @@ const PostPage = () => {
       </Row>
       <hr></hr>
       <Row>
-        <Col md={12}>
+        <Col md={12} >
+          <Col className="d-flex justify-content-between mb-3">
+            {post && post.products.length > 2 && (
+              <Button
+                onClick={handlePrevClick}
+                className={`${styles["arrow-button"]} ${styles["left-arrow"]}`}
+              >
+                <FaChevronLeft />
+              </Button>
+            )}
+            {post &&
+              post.products.length > 2 &&
+              currentIndex + 2 < post.products.length && (
+                <Button
+                  onClick={handleNextClick}
+                  className={`${styles["arrow-button"]} ${styles["right-arrow"]}`}
+                >
+                  <FaChevronRight />
+                </Button>
+              )}
+          </Col>
           <div>
             <h5 className={styles["products-used-detail"]}>Products Used</h5>
             {post && post.products && post.products.length > 0 ? (
@@ -86,11 +117,19 @@ const PostPage = () => {
                 {post.products.map((product, index) => (
                   <div key={index} className="col-md-4 mb-4">
                     <div className="card">
-                      <img src={product.image} className="card-img-top" alt={product.name} />
+                      <img
+                        src={product.image}
+                        className="card-img-top"
+                        alt={product.name}
+                      />
                       <div className="card-body">
                         <h5 className="card-title">{product.name}</h5>
-                        <p className="card-text">Condition: {product.condition.join(", ")}</p>
-                        <p className="card-text">Body Systems: {product.body_systems.join(", ")}</p>
+                        <p className="card-text">
+                          Condition: {product.condition.join(", ")}
+                        </p>
+                        <p className="card-text">
+                          Body Systems: {product.body_systems.join(", ")}
+                        </p>
                       </div>
                     </div>
                   </div>
