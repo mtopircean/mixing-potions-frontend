@@ -8,14 +8,12 @@ import { FaThumbsUp } from "react-icons/fa";
 import styles from "../../styles/PostsPage.module.css";
 import { MdClear } from "react-icons/md";
 
-function PostsPage({ message, filter = "" }) {
-  const [posts, setPosts] = useState({ results: [] });
+function PostsPage() {
+  const [posts, setPosts] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [filterState, setFilter] = useState("");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
-  const [selectedBodySystemsFilter, setSelectedBodySystemsFilter] =
-    useState("");
   const [showClearButton, setShowClearButton] = useState(false);
 
   useEffect(() => {
@@ -28,7 +26,7 @@ function PostsPage({ message, filter = "" }) {
         }
 
         const { data } = await axiosReq.get(query);
-        setPosts(data);
+        setPosts(data.results);
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
@@ -37,50 +35,16 @@ function PostsPage({ message, filter = "" }) {
 
     setHasLoaded(false);
     fetchPosts();
-    console.log("Selected Body Systems:", selectedBodySystems);
-  }, [filterState, selectedBodySystems]);
+  }, [selectedBodySystems]);
 
-  const sortByLikes = (posts) => {
-    const userLikesCount = {};
-    posts.forEach((post) => {
-      const { owner, like_count } = post;
-      if (!userLikesCount[owner]) {
-        userLikesCount[owner] = 0;
-      }
-      userLikesCount[owner] += like_count || 0;
-    });
-
-    const sortedUsers = Object.keys(userLikesCount)
-      .filter((user) => userLikesCount[user] > 0)
-      .sort((a, b) => userLikesCount[b] - userLikesCount[a]);
-
-    return sortedUsers.map((user, index) => ({
-      id: index,
-      owner: user,
-      like_count: userLikesCount[user],
-    }));
-  };
-
-  const clearFilter = (filterType, system = null) => {
-    if (filterType === "user") {
-      setSelectedUser(null);
-    } else if (filterType === "bodySystem") {
-      setSelectedBodySystems((prevSystems) =>
-        prevSystems.filter((s) => s !== system)
-      );
-      setSelectedBodySystemsFilter((prev) =>
-        prev
-          .split(", ")
-          .filter((s) => s !== system)
-          .join(", ")
-      );
-    }
+  const clearFilter = () => {
+    setSelectedUser(null);
+    setSelectedBodySystems([]);
+    setFilter("");
   };
 
   const handleUserClick = (username) => {
     setSelectedUser(username);
-    const userFilter = `owner=${username}`;
-    setFilter(userFilter);
   };
 
   const toggleBodySystem = (system) => {
@@ -89,17 +53,24 @@ function PostsPage({ message, filter = "" }) {
         ? prevSystems.filter((s) => s !== system)
         : [...prevSystems, system]
     );
-    setSelectedBodySystemsFilter((prev) =>
-      prev.includes(system)
-        ? prev
-            .split(", ")
-            .filter((s) => s !== system)
-            .join(", ")
-        : prev
-        ? `${prev}, ${system}`
-        : system
-    );
     setShowClearButton(true);
+  };
+
+  const sortByLikes = () => {
+    const userLikesCount = posts.reduce((acc, post) => {
+      const { owner, like_count } = post;
+      acc[owner] = (acc[owner] || 0) + (like_count || 0);
+      return acc;
+    }, {});
+
+    return Object.keys(userLikesCount)
+      .filter((user) => userLikesCount[user] > 0)
+      .sort((a, b) => userLikesCount[b] - userLikesCount[a])
+      .map((user, index) => ({
+        id: index,
+        owner: user,
+        like_count: userLikesCount[user],
+      }));
   };
 
   return (
@@ -113,8 +84,8 @@ function PostsPage({ message, filter = "" }) {
       <Col className="py-2 p-0 p-lg-2" lg={6}>
         {hasLoaded ? (
           <>
-            {posts.results.length ? (
-              posts.results
+            {posts.length ? (
+              posts
                 .filter((post) => {
                   const userMatch = selectedUser
                     ? post.owner === selectedUser
@@ -140,13 +111,13 @@ function PostsPage({ message, filter = "" }) {
             )}
           </>
         ) : (
-          <Container>
+          <Container className="text-center">
             <Asset spinner />
           </Container>
         )}
       </Col>
       <Col className="py-2 p-0 p-lg-2" lg={3}>
-        {hasLoaded && posts.results.length > 0 && (
+        {hasLoaded && posts.length > 0 && (
           <Container>
             <div style={{ textAlign: "center" }}>
               {selectedUser && (
@@ -161,9 +132,9 @@ function PostsPage({ message, filter = "" }) {
                 <FaThumbsUp className={styles["like-user-icon"]} /> Most liked
                 users:
               </h5>
-              <hr></hr>
+              <hr />
             </div>
-            {sortByLikes(posts.results).map((user) => (
+            {sortByLikes().map((user) => (
               <div key={user.owner}>
                 <p
                   className={
