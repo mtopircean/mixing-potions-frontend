@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
-import { Container, Row, Col } from "react-bootstrap";
-import { useLocation } from "react-router";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 import BodySystemPanel from "../../components/BodySystemPanel";
 import { FaThumbsUp } from "react-icons/fa";
 import styles from "../../styles/PostsPage.module.css";
+import { MdClear } from "react-icons/md";
 
 function PostsPage({ message, filter = "" }) {
   const [posts, setPosts] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
-  const { pathname } = useLocation();
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [filterState, setFilter] = useState("");
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await axiosReq.get(`/posts/?${filter}`);
+        const { data } = await axiosReq.get(`/posts/?${filterState}`);
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
@@ -26,7 +27,7 @@ function PostsPage({ message, filter = "" }) {
 
     setHasLoaded(false);
     fetchPosts();
-  }, [filter, pathname]);
+  }, [filterState]);
 
   const sortByLikes = (posts) => {
     const userLikesCount = {};
@@ -48,7 +49,18 @@ function PostsPage({ message, filter = "" }) {
       like_count: userLikesCount[user],
     }));
   };
-  
+
+  const clearFilter = () => {
+    setSelectedUser(null);
+    setFilter("");
+  };
+
+  const handleUserClick = (username) => {
+    setSelectedUser(username);
+    const userFilter = `owner=${username}`;
+    setFilter(userFilter);
+  };
+
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={3}>
@@ -58,9 +70,17 @@ function PostsPage({ message, filter = "" }) {
         {hasLoaded ? (
           <>
             {posts.results.length ? (
-              posts.results.map((post) => (
-                <Post key={post.id} {...post} setPosts={setPosts} />
-              ))
+              selectedUser ? (
+                posts.results
+                  .filter((post) => post.owner === selectedUser)
+                  .map((post) => (
+                    <Post key={post.id} {...post} setPosts={setPosts} />
+                  ))
+              ) : (
+                posts.results.map((post) => (
+                  <Post key={post.id} {...post} setPosts={setPosts} />
+                ))
+              )
             ) : (
               <Container>
                 <h5>No result</h5>
@@ -77,6 +97,14 @@ function PostsPage({ message, filter = "" }) {
         {hasLoaded && posts.results.length > 0 && (
           <Container>
             <div style={{ textAlign: "center" }}>
+              {selectedUser && (
+                <div className={styles.selectedFilter}>
+                  <span>{selectedUser}</span>
+                  <Button variant="light" onClick={clearFilter}>
+                    <MdClear color="red" />
+                  </Button>
+                </div>
+              )}
               <h5 className={styles["liked-header"]}>
                 <FaThumbsUp className={styles["like-user-icon"]} /> Most liked
                 users:
@@ -85,8 +113,15 @@ function PostsPage({ message, filter = "" }) {
             </div>
             {sortByLikes(posts.results).map((user) => (
               <div key={user.owner}>
-                <p>
-                  <strong>{user.owner}</strong> has {user.like_count} likes
+                <p
+                  className={
+                    selectedUser === user.owner ? styles.selectedUser : ""
+                  }
+                >
+                  <a href="#" onClick={() => handleUserClick(user.owner)}>
+                    <strong>{user.owner} </strong>
+                  </a>
+                  has {user.like_count} likes
                 </p>
               </div>
             ))}
