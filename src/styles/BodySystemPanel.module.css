@@ -34,9 +34,12 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
-.systems-button:active,
-.systems-button:focus {
-  background-color: #54547c;
-  color: #d9d2e9;
-  border: 2px solid #54547c;
+.selected-filter {
+  border: none;
+  color: #54547c;
+}
+
+.selected-filter:hover {
+  background-color: transparent;
+  color: #54547c;
 }
