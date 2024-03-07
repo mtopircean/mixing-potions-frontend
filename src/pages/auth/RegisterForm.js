@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import axios from "axios";
+import joinUsImage from "../../assets/join-us.jpg"
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -33,8 +34,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <Row>
-      <Col className="d-flex justify-content-center align-items-center flex-column">
+    <Row className="align-items-center">
+      <Col sm={6} className="d-flex justify-content-center">
         <Card className="register-card">
           <Card.Body>
             <Card.Title className="text-center">Register:</Card.Title>
@@ -107,6 +108,9 @@ const RegisterForm = () => {
             </Form>
           </Card.Body>
         </Card>
+      </Col>
+      <Col sm={6} className="d-flex justify-content-center">
+        <img src={joinUsImage} alt="Join Us" style={{ width: "500px" }} />
       </Col>
     </Row>
   );

@@ -3,6 +3,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
+import registerImage from '../../assets/register.jpg';
 
 function LoginForm() {
   const setCurrentUser = useSetCurrentUser();
@@ -94,8 +95,9 @@ function LoginForm() {
           md={6}
           className="d-flex justify-content-center align-items-center flex-column"
         >
+          <img src={registerImage} alt="Register" style={{ maxWidth: '70%', marginTop: '5px', marginBottom: '20px'  }} />
           <h5 id="register-login">Don`t have an account yet.</h5>
-          <NavLink to="/register">REGISTER</NavLink>
+          <NavLink to="/register" className="register-link">REGISTER</NavLink>
         </Col>
       </Row>
     </div>
