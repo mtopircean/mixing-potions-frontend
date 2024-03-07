@@ -13,11 +13,18 @@ function PostsPage({ message, filter = "" }) {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const [filterState, setFilter] = useState("");
+  const [selectedBodySystems, setSelectedBodySystems] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await axiosReq.get(`/posts/?${filterState}`);
+        let query = "/posts";
+        if (selectedBodySystems.length > 0) {
+          const systemsQuery = selectedBodySystems.join(",");
+          query += `?body_systems=${systemsQuery}`;
+        }
+
+        const { data } = await axiosReq.get(query);
         setPosts(data);
         setHasLoaded(true);
       } catch (err) {
@@ -27,7 +34,8 @@ function PostsPage({ message, filter = "" }) {
 
     setHasLoaded(false);
     fetchPosts();
-  }, [filterState]);
+    console.log("Selected Body Systems:", selectedBodySystems);
+  }, [filterState, selectedBodySystems]);
 
   const sortByLikes = (posts) => {
     const userLikesCount = {};
@@ -52,7 +60,7 @@ function PostsPage({ message, filter = "" }) {
 
   const clearFilter = () => {
     setSelectedUser(null);
-    setFilter("");
+    setSelectedBodySystems([]);
   };
 
   const handleUserClick = (username) => {
@@ -61,26 +69,46 @@ function PostsPage({ message, filter = "" }) {
     setFilter(userFilter);
   };
 
+  const toggleBodySystem = (system) => {
+    setSelectedBodySystems((prevSystems) =>
+      prevSystems.includes(system)
+        ? prevSystems.filter((s) => s !== system)
+        : [...prevSystems, system]
+    );
+    console.log("Selected Body Systems:", selectedBodySystems);
+  };
+
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={3}>
-        <BodySystemPanel />
+        <BodySystemPanel
+          selectedBodySystems={selectedBodySystems}
+          toggleBodySystem={toggleBodySystem}
+        />
       </Col>
       <Col className="py-2 p-0 p-lg-2" lg={6}>
         {hasLoaded ? (
           <>
             {posts.results.length ? (
-              selectedUser ? (
-                posts.results
-                  .filter((post) => post.owner === selectedUser)
-                  .map((post) => (
-                    <Post key={post.id} {...post} setPosts={setPosts} />
-                  ))
-              ) : (
-                posts.results.map((post) => (
+              posts.results
+                .filter((post) => {
+                  const userMatch = selectedUser
+                    ? post.owner === selectedUser
+                    : true;
+                  const bodySystemMatch =
+                    selectedBodySystems.length > 0
+                      ? post.products.some((product) =>
+                          product.body_systems.some((system) =>
+                            selectedBodySystems.includes(system)
+                          )
+                        )
+                      : true;
+
+                  return userMatch && bodySystemMatch;
+                })
+                .map((post) => (
                   <Post key={post.id} {...post} setPosts={setPosts} />
                 ))
-              )
             ) : (
               <Container>
                 <h5>No result</h5>
