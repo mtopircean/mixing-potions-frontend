@@ -14,7 +14,8 @@ function PostsPage({ message, filter = "" }) {
   const [selectedUser, setSelectedUser] = useState(null);
   const [filterState, setFilter] = useState("");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
-  const [selectedBodySystemsFilter, setSelectedBodySystemsFilter] = useState("");
+  const [selectedBodySystemsFilter, setSelectedBodySystemsFilter] =
+    useState("");
   const [showClearButton, setShowClearButton] = useState(false);
 
   useEffect(() => {
@@ -60,10 +61,20 @@ function PostsPage({ message, filter = "" }) {
     }));
   };
 
-  const clearFilter = () => {
-    setSelectedUser(null);
-    setSelectedBodySystems([]);
-    setSelectedBodySystemsFilter("");
+  const clearFilter = (filterType, system = null) => {
+    if (filterType === "user") {
+      setSelectedUser(null);
+    } else if (filterType === "bodySystem") {
+      setSelectedBodySystems((prevSystems) =>
+        prevSystems.filter((s) => s !== system)
+      );
+      setSelectedBodySystemsFilter((prev) =>
+        prev
+          .split(", ")
+          .filter((s) => s !== system)
+          .join(", ")
+      );
+    }
   };
 
   const handleUserClick = (username) => {
@@ -78,23 +89,35 @@ function PostsPage({ message, filter = "" }) {
         ? prevSystems.filter((s) => s !== system)
         : [...prevSystems, system]
     );
-    setSelectedBodySystemsFilter(prev => prev.includes(system) ? prev.filter(s => s !== system) : [...prev, system]);
-  setShowClearButton(true);
+    setSelectedBodySystemsFilter((prev) =>
+      prev.includes(system)
+        ? prev
+            .split(", ")
+            .filter((s) => s !== system)
+            .join(", ")
+        : prev
+        ? `${prev}, ${system}`
+        : system
+    );
+    setShowClearButton(true);
   };
 
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={3}>
-      <div className={styles.selectedFilter}>
-      {(selectedUser || selectedBodySystemsFilter) && (
-            <>
-              <span>{selectedUser && `User: ${selectedUser}`}</span>
-              <span>{selectedBodySystemsFilter}</span>
-              <Button variant="light" onClick={clearFilter}>
-                <MdClear color="red" />
-              </Button>
-            </>
-          )}
+        <div className={styles.selectedFilter}>
+          {selectedBodySystemsFilter &&
+            selectedBodySystemsFilter.split(", ").map((system) => (
+              <span key={system}>
+                {system}
+                <Button
+                  variant="light"
+                  onClick={() => clearFilter("bodySystem", system)}
+                >
+                  <MdClear color="red" />
+                </Button>
+              </span>
+            ))}
         </div>
         <BodySystemPanel
           selectedBodySystems={selectedBodySystems}
@@ -143,7 +166,7 @@ function PostsPage({ message, filter = "" }) {
               {selectedUser && (
                 <div className={styles.selectedFilter}>
                   <span>{selectedUser}</span>
-                  <Button variant="light" onClick={clearFilter}>
+                  <Button variant="light" onClick={() => clearFilter("user")}>
                     <MdClear color="red" />
                   </Button>
                 </div>
