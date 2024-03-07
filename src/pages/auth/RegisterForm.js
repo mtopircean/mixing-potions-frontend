@@ -34,7 +34,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <Row className="align-items-center">
+    <Row className="align-items-center register-container">
       <Col sm={6} className="d-flex justify-content-center">
         <Card className="register-card">
           <Card.Body>
@@ -110,7 +110,7 @@ const RegisterForm = () => {
         </Card>
       </Col>
       <Col sm={6} className="d-flex justify-content-center">
-        <img src={joinUsImage} alt="Join Us" style={{ width: "500px" }} />
+        <img src={joinUsImage} alt="Join Us" style={{ height: "350px", width: "600px" }} />
       </Col>
     </Row>
   );

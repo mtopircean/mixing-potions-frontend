@@ -14,8 +14,13 @@ body {
 .content-container {
   flex: 1;
   overflow-y: auto;
-  margin-top: 150px;
   margin-bottom: 50px;
+}
+
+.register-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 150px;
 }
 
 /* Navbar */
