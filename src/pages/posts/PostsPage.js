@@ -105,20 +105,6 @@ function PostsPage({ message, filter = "" }) {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={3}>
-        <div className={styles.selectedFilter}>
-          {selectedBodySystemsFilter &&
-            selectedBodySystemsFilter.split(", ").map((system) => (
-              <span key={system}>
-                {system}
-                <Button
-                  variant="light"
-                  onClick={() => clearFilter("bodySystem", system)}
-                >
-                  <MdClear color="red" />
-                </Button>
-              </span>
-            ))}
-        </div>
         <BodySystemPanel
           selectedBodySystems={selectedBodySystems}
           toggleBodySystem={toggleBodySystem}
