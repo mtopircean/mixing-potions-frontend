@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import axios from "axios";
-import joinUsImage from "../../assets/join-us.jpg"
+import joinUsImage from "../../assets/join-us.jpg";
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -12,7 +12,7 @@ const RegisterForm = () => {
     password1: "",
     password2: "",
   });
-  const { username, email, password1, password2} = formData;
+  const { username, email, password1, password2 } = formData;
 
   const [errors, setErrors] = useState({});
 
@@ -29,7 +29,7 @@ const RegisterForm = () => {
       await axios.post("/dj-rest-auth/registration/", formData);
       history.push("/");
     } catch (err) {
-      setErrors(err.response?.data)
+      setErrors(err.response?.data);
     }
   };
 
@@ -50,9 +50,11 @@ const RegisterForm = () => {
                   onChange={handleChange}
                 />
               </Form.Group>
-              {errors.username?.map((message, idx) =>
-              <Alert variant="warning" key={idx}>{message}</Alert>
-              )}
+              {errors.username?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
 
               <Form.Group controlId="formEmail">
                 <Form.Label>Email address</Form.Label>
@@ -64,9 +66,11 @@ const RegisterForm = () => {
                   onChange={handleChange}
                 />
               </Form.Group>
-              {errors.password1?.map((message, idx) =>
-              <Alert variant="warning" key={idx}>{message}</Alert>
-              )}
+              {errors.password1?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
 
               <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
@@ -78,9 +82,11 @@ const RegisterForm = () => {
                   onChange={handleChange}
                 />
               </Form.Group>
-              {errors.password2?.map((message, idx) =>
-              <Alert variant="warning" key={idx}>{message}</Alert>
-              )}
+              {errors.password2?.map((message, idx) => (
+                <Alert variant="warning" key={idx}>
+                  {message}
+                </Alert>
+              ))}
 
               <Form.Group controlId="formConfirmPassword">
                 <Form.Label>Confirm Password</Form.Label>
@@ -101,16 +107,26 @@ const RegisterForm = () => {
                 Register
               </Button>
               {errors.non_field_errors?.map((message, idx) => (
-              <Alert key={idx} variant="warning" style={{ marginTop: '10px' }}>
-                {message}
-              </Alert>
-            ))}
+                <Alert
+                  key={idx}
+                  variant="warning"
+                  style={{ marginTop: "10px" }}
+                >
+                  {message}
+                </Alert>
+              ))}
             </Form>
           </Card.Body>
         </Card>
       </Col>
       <Col sm={6} className="d-flex justify-content-center">
-        <img src={joinUsImage} alt="Join Us" style={{ height: "350px", width: "600px" }} />
+        <div className="d-none d-md-block text-center">
+          <img
+            src={joinUsImage}
+            alt="Join Us"
+            style={{ height: "400px", width: "550px" }}
+          />
+        </div>
       </Col>
     </Row>
   );

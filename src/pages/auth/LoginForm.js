@@ -36,7 +36,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="login-register">
+    <div className="login-register login-container">
       <Row>
         <Col md={6} className="d-flex flex-column">
           <Card className="login-card">
@@ -95,7 +95,9 @@ function LoginForm() {
           md={6}
           className="d-flex justify-content-center align-items-center flex-column"
         >
-          <img src={registerImage} alt="Register" style={{ maxWidth: '70%', marginTop: '5px', marginBottom: '20px'  }} />
+          <div className="d-none d-md-block text-center">
+            <img src={registerImage} alt="Register" style={{ maxWidth: '70%', marginTop: '5px', marginBottom: '20px'  }} />
+          </div>
           <h5 id="register-login">Don`t have an account yet.</h5>
           <NavLink to="/register" className="register-link">REGISTER</NavLink>
         </Col>
