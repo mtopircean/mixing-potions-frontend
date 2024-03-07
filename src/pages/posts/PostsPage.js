@@ -14,6 +14,8 @@ function PostsPage({ message, filter = "" }) {
   const [selectedUser, setSelectedUser] = useState(null);
   const [filterState, setFilter] = useState("");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
+  const [selectedBodySystemsFilter, setSelectedBodySystemsFilter] = useState("");
+  const [showClearButton, setShowClearButton] = useState(false);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -61,6 +63,7 @@ function PostsPage({ message, filter = "" }) {
   const clearFilter = () => {
     setSelectedUser(null);
     setSelectedBodySystems([]);
+    setSelectedBodySystemsFilter("");
   };
 
   const handleUserClick = (username) => {
@@ -75,12 +78,24 @@ function PostsPage({ message, filter = "" }) {
         ? prevSystems.filter((s) => s !== system)
         : [...prevSystems, system]
     );
-    console.log("Selected Body Systems:", selectedBodySystems);
+    setSelectedBodySystemsFilter(prev => prev.includes(system) ? prev.filter(s => s !== system) : [...prev, system]);
+  setShowClearButton(true);
   };
 
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={3}>
+      <div className={styles.selectedFilter}>
+      {(selectedUser || selectedBodySystemsFilter) && (
+            <>
+              <span>{selectedUser && `User: ${selectedUser}`}</span>
+              <span>{selectedBodySystemsFilter}</span>
+              <Button variant="light" onClick={clearFilter}>
+                <MdClear color="red" />
+              </Button>
+            </>
+          )}
+        </div>
         <BodySystemPanel
           selectedBodySystems={selectedBodySystems}
           toggleBodySystem={toggleBodySystem}
