@@ -3,7 +3,7 @@ import ProductsPanel from "../../components/ProductsPanel";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import { BsX } from "react-icons/bs";
 import BodySystemPanel from "../../components/BodySystemPanel";
-import styles from "../../styles/PostCreatForm.module.css";
+import styles from "../../styles/PostCreateForm.module.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
