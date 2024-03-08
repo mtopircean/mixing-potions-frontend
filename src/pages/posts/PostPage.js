@@ -16,7 +16,7 @@ const PostPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentUser = useCurrentUser();
   const history = useHistory();
-  const isCurrentUserOwner = post && post.owner === currentUser.username;
+  const isCurrentUserOwner = currentUser && post && post.owner === currentUser.username;
 
   useEffect(() => {
     const fetchPost = async () => {
