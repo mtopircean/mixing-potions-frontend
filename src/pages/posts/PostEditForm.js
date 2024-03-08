@@ -12,6 +12,7 @@ import BodySystemPanel from "../../components/BodySystemPanel";
 import styles from "../../styles/PostCreateForm.module.css";
 
 function PostEditForm({ post }) {
+  console.log("Post prop:", post);
   const currentUser = useCurrentUser();
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);

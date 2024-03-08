@@ -3,14 +3,15 @@ import axios from "axios";
 import styles from "../../styles/PostPage.module.css";
 import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const PostPage = () => {
-  const [post, setPost] = useState([null]);
+  const [post, setPost] = useState(null);
   const { id } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const history = useHistory();
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -23,12 +24,12 @@ const PostPage = () => {
         console.error("Error fetching post:", error);
       }
     };
-
+    console.log("ID:", id); 
     fetchPost();
   }, [id]);
 
   const handleEdit = () => {
-    console.log("Edit button clicked");
+    history.push(`/edit/${id}`);
   };
 
   const handleDelete = () => {
@@ -40,11 +41,17 @@ const PostPage = () => {
   };
 
   const handleNextClick = () => {
+    if (post && post.products) {
     setCurrentIndex((prevIndex) =>
       Math.min(prevIndex + 1, post.products.length - 1)
     );
+    }
   };
 
+  if (!post) {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <div>
       <Row>
