@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
@@ -22,13 +22,18 @@ const Post = (props) => {
     created_at,
     like_count,
     comment_count,
-    comments,
+    comments: initialComments,
   } = props;
 
-
   const [isExpanded, setIsExpanded] = useState(false);
+  const [comments, setComments] = useState(initialComments);
+
   const toggleComments = () => {
     setIsExpanded(!isExpanded);
+  };
+
+  const handleCommentSubmitted = (newComment) => {
+    setComments([...comments, newComment]);
   };
 
   return (
@@ -36,7 +41,7 @@ const Post = (props) => {
       <Card.Body>
         <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${pk}/`}>
-          <Avatar  />
+            <Avatar />
             {owner}
           </Link>
           <div className="d-flex align-items-center">
@@ -66,12 +71,18 @@ const Post = (props) => {
       </Card.Footer>
       {isExpanded && (
         <div className={styles.ExpandedComments}>
-          <CreateComment />
+          <CreateComment
+  postId={id}
+  comments={comments}
+  onCommentSubmitted={handleCommentSubmitted}
+/>
           {comments.map((comment, index) => (
             <div key={index} className={styles.CommentsArea}>
-            <h6><strong>{comment.owner}</strong>:</h6>
-            <p>{comment.comment_text}</p>
-            <hr></hr>
+              <h6>
+                <strong>{comment.owner}</strong>:
+              </h6>
+              <p>{comment.comment_text}</p>
+              <hr></hr>
             </div>
           ))}
         </div>
