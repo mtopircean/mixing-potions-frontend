@@ -13,6 +13,8 @@ import PostsPage from "./pages/posts/PostsPage";
 import PostCreator from "./components/PostCreator";
 import PostEditForm from "./pages/posts/PostEditForm";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 const currentUser = useCurrentUser();
@@ -45,6 +47,7 @@ const profile_id = currentUser?.profile_id || "";
         <PostCreator />
       </Container>
       <Footer />
+      <ToastContainer />
     </div>
   );
 }

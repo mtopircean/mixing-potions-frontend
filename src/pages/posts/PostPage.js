@@ -7,6 +7,8 @@ import { useParams, useHistory } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PostPage = () => {
   const [post, setPost] = useState(null);
@@ -38,6 +40,7 @@ const PostPage = () => {
   const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${id}/`);
+      toast.success("Post deleted successfully!");
       history.push("/")
     } catch (error) {
       console.error("Error deleting post:", error);
