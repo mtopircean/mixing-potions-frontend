@@ -35,9 +35,22 @@ const PostPage = () => {
     history.push(`/edit/${id}`);
   };
 
-  const handleDelete = () => {
-    console.log("Delete button clicked");
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/posts/${id}/`);
+      history.push("/")
+    } catch (error) {
+      console.error("Error deleting post:", error);
+    }
   };
+
+  const confirmDelete = () => {
+    if (window.confirm("Are you sure you want to delete?")) {
+      handleDelete();
+    }
+  };
+
+
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -70,7 +83,7 @@ const PostPage = () => {
             )}
             {isCurrentUserOwner && (
               <Button
-                onClick={handleDelete}
+                onClick={confirmDelete}
                 className={styles["post-delete-button"]}
               >
                 Delete <FontAwesomeIcon icon={faTrashAlt} />
