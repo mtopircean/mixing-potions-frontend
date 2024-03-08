@@ -3,7 +3,7 @@ import { Card, Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Post.module.css";
-
+import CreateComment from "../../components/CreateComment";
 import {
   FaThumbsUp,
   FaComment,
@@ -66,6 +66,7 @@ const Post = (props) => {
       </Card.Footer>
       {isExpanded && (
         <div className={styles.ExpandedComments}>
+          <CreateComment />
           {comments.map((comment, index) => (
             <div key={index} className={styles.CommentsArea}>
             <h6><strong>{comment.owner}</strong>:</h6>
