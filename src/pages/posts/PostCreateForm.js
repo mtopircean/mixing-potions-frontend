@@ -69,7 +69,6 @@ function PostCreateForm() {
   const handleCustomImageChange = (event) => {
     if (event.target.files.length) {
       const selectedFile = event.target.files[0];
-      console.log("Selected file:", selectedFile);
       URL.revokeObjectURL(selectedImage);
       setSelectedImage(null);
       setCustomImage(URL.createObjectURL(selectedFile));

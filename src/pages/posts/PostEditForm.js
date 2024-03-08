@@ -24,52 +24,101 @@ function PostEditForm({ post }) {
   const [description, setDescription] = useState("");
   const history = useHistory();
 
-useEffect(() => {
-    if(!currentUser) {
-        history.pushState("/")
+  useEffect(() => {
+    if (!currentUser) {
+      history.pushState("/");
     }
-    if(post) {
-        setTitle(post.title);
-        setDescription(post.description);
-        setSelectedProducts(post.products)
+    if (post) {
+      setTitle(post.title);
+      setDescription(post.description);
+      setSelectedProducts(post.products);
     }
-}, [currentUser, history, post]);
+  }, [currentUser, history, post]);
 
-const toggleBodySystem = (system) => {
+  const toggleBodySystem = (system) => {
+    if (selectedBodySystems.includes(system)) {
+      setSelectedBodySystems((prevSystems) =>
+        prevSystems.filter((item) => item !== system)
+      );
+    } else {
+      setSelectedBodySystems((prevSystems) => [...prevSystems, system]);
+    }
+  };
 
-};
+  const handleAddProduct = (product) => {
+    const isProductExists = selectedProducts.some((p) => p.id === product.id);
+    if (!isProductExists) {
+      setSelectedProducts((prevProducts) => [...prevProducts, product]);
+    }
+  };
 
-const handleAddProduct = (product) => {
+  const handleRemoveProduct = (productId) => {
+    setSelectedProducts((prevProducts) =>
+      prevProducts.filter((product) => product.id !== productId)
+    );
+  };
 
-};
+  const handlePrevClick = () => {
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
 
-const handleRemoveProduct = (productId) => {
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) =>
+      Math.min(prevIndex + 1, selectedProducts.length - 2)
+    );
+  };
 
-};
+  const handleCheckboxChange = (product) => {
+    if (selectedImage === product.image) {
+      setSelectedImage(null);
+    } else {
+      setSelectedImage(product.image);
+    }
+  };
 
-const handlePrevClick = () => {
+  const handleCustomImageChange = (event) => {
+    if (event.target.files.length) {
+      const selectedFile = event.target.files[0];
+      URL.revokeObjectURL(selectedImage);
+      setSelectedImage(null);
+      setCustomImage(URL.createObjectURL(selectedFile));
+      setImage(selectedFile);
+    }
+  };
 
-};
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("image", image);
+    selectedProducts.forEach((product) => {
+      formData.append("products[]", product.id);
+    });
 
-const handleNextClick = () => {
+    try {
+      const response = await axios.put(`/posts/${post.id}/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      history.push(`/posts/${response.data.id}`);
+    } catch (err) {
+      if (err.response?.status !== 401) {
+        setErrors(err.response?.data);
+      }
+    }
+  };
 
-};
+  useEffect(() => {
+    if (!currentUser) {
+      history.push("/");
+    }
+  }, [currentUser, history]);
 
-const handleCheckboxChange = (product) => {
-
-};
-
-const handleCustomImageChange = (event) => {
-
-};
-
-const handleSubmit = async (event) => {
-
-};
-
-    return (
+  return (
     <Container>
-         <Row>
+      <Row>
         <Col sm={6}>
           <div className={styles["center-div"]}>
             <Form
@@ -190,8 +239,7 @@ const handleSubmit = async (event) => {
         </Col>
       </Row>
     </Container>
-
-    );
-    }
+  );
+}
 
 export default PostEditForm;
