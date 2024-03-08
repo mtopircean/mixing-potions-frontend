@@ -6,12 +6,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
 const PostPage = () => {
   const [post, setPost] = useState(null);
   const { id } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const currentUser = useCurrentUser();
   const history = useHistory();
+  const isCurrentUserOwner = post && post.owner === currentUser.username;
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -24,7 +27,7 @@ const PostPage = () => {
         console.error("Error fetching post:", error);
       }
     };
-    console.log("ID:", id); 
+    console.log("ID:", id);
     fetchPost();
   }, [id]);
 
@@ -42,30 +45,47 @@ const PostPage = () => {
 
   const handleNextClick = () => {
     if (post && post.products) {
-    setCurrentIndex((prevIndex) =>
-      Math.min(prevIndex + 1, post.products.length - 1)
-    );
+      setCurrentIndex((prevIndex) =>
+        Math.min(prevIndex + 1, post.products.length - 1)
+      );
     }
   };
 
   if (!post) {
     return <div>Loading...</div>;
   }
-  
+
+  console.log("Post owner:", post.owner.pk);
+  console.log("Current user:", currentUser);
+  console.log(
+    "Is post owner matching current user:",
+    post.owner === currentUser.id
+  );
+  console.log("Type of post owner pk:", typeof post.owner.pk);
+  console.log("Type of current user pk:", typeof currentUser.pk);
+  console.log("Post:", post);
+
   return (
     <div>
       <Row>
         <Col md={6}>
           <div className="arrow-button">
-            <Button onClick={handleEdit} className={styles["post-edit-button"]}>
-              Edit <FontAwesomeIcon icon={faPenSquare} />
-            </Button>
-            <Button
-              onClick={handleDelete}
-              className={styles["post-delete-button"]}
-            >
-              Delete <FontAwesomeIcon icon={faTrashAlt} />
-            </Button>
+          {isCurrentUserOwner && (
+              <Button
+                onClick={handleEdit}
+                className={styles["post-edit-button"]}
+              >
+                Edit <FontAwesomeIcon icon={faPenSquare} />
+              </Button>
+            )}
+            {isCurrentUserOwner && (
+              <Button
+                onClick={handleDelete}
+                className={styles["post-delete-button"]}
+              >
+                Delete <FontAwesomeIcon icon={faTrashAlt} />
+              </Button>
+            )}
           </div>
           <div>
             <h4 className={styles["post-title-detail"]}>{post.title}</h4>
@@ -96,7 +116,7 @@ const PostPage = () => {
       </Row>
       <hr></hr>
       <Row>
-        <Col md={12} >
+        <Col md={12}>
           <Col className="d-flex justify-content-between mb-3">
             {post && post.products.length > 2 && (
               <Button

@@ -10,9 +10,9 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import ProductsPanel from "../../components/ProductsPanel";
 import BodySystemPanel from "../../components/BodySystemPanel";
 import styles from "../../styles/PostCreateForm.module.css";
+import { useParams } from "react-router-dom";
 
 function PostEditForm({ post }) {
-  console.log("Post prop:", post);
   const currentUser = useCurrentUser();
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -24,10 +24,28 @@ function PostEditForm({ post }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const history = useHistory();
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get(`/posts/${id}`);
+        const postData = response.data;
+        setTitle(postData.title);
+        setDescription(postData.description);
+        setSelectedProducts(postData.products);
+        setSelectedImage(postData.image);
+      } catch (error) {
+        console.error("Error fetching post:", error);
+      }
+    };
+
+    fetchPost();
+  }, [id]);
 
   useEffect(() => {
     if (!currentUser) {
-      history.pushState("/");
+      history.push("/");
     }
     if (post) {
       setTitle(post.title);
@@ -89,20 +107,24 @@ function PostEditForm({ post }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("image", image);
-    selectedProducts.forEach((product) => {
-      formData.append("products[]", product.id);
-    });
-
     try {
-      const response = await axios.put(`/posts/${post.id}/`, formData, {
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("description", description);
+
+      if (image) {
+        formData.append("image", image);
+      }
+      selectedProducts.forEach((product) => {
+        formData.append("products[]", product.id);
+      });
+
+      const response = await axios.put(`/posts/${id}/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+
       history.push(`/posts/${response.data.id}`);
     } catch (err) {
       if (err.response?.status !== 401) {
@@ -124,7 +146,7 @@ function PostEditForm({ post }) {
           <div className={styles["center-div"]}>
             <Form
               onSubmit={handleSubmit}
-              action={`/posts/${post.id}/`}
+              action={`/posts/${id}/`}
               method="put"
               enctype="multipart/form-data"
             >
