@@ -11,6 +11,7 @@ import ProductsPanel from "../../components/ProductsPanel";
 import BodySystemPanel from "../../components/BodySystemPanel";
 import styles from "../../styles/PostCreateForm.module.css";
 import { useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 function PostEditForm({ post }) {
   const currentUser = useCurrentUser();
@@ -124,6 +125,8 @@ function PostEditForm({ post }) {
           "Content-Type": "multipart/form-data",
         },
       });
+
+      toast.success("Post updated successfully!");
 
       history.push(`/posts/${response.data.id}`);
     } catch (err) {
