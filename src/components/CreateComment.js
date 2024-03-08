@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import style from "../styles/CreateComment.module.css"
 
 function CreateComment(props) {
   const [commentText, setCommentText] = useState("");
@@ -10,18 +11,17 @@ function CreateComment(props) {
 
   return (
     <div>
-      <h5>Add a Comment</h5>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} className={style.commentForm}>
         <Form.Group controlId="commentTextArea">
           <Form.Control
             as="textarea"
             value={commentText}
             onChange={(event) => setCommentText(event.target.value)}
             placeholder="Add your comment..."
-            rows="4"
+            rows="3"
           />
         </Form.Group>
-        <Button type="submit">Add comment</Button>
+        <Button type="submit" className={style.commentButton}>Add comment</Button>
       </Form>
     </div>
   );

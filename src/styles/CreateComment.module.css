@@ -1,0 +1,18 @@
+.commentForm {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.commentButton {
+    background-color: #ffff;
+    color: #629d77;
+    border: none;
+    align-self: flex-end;
+    margin-top: -5px;
+}
+
+.commentButton:hover {
+    background-color: #629d77;
+    color: #ffff;
+}
