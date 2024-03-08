@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext  } from "react";
 import { Button, Form } from "react-bootstrap";
 import style from "../styles/CreateComment.module.css"
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+
 
 function CreateComment(props) {
   const [commentText, setCommentText] = useState("");
+  const currentUser = useContext(CurrentUserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -11,6 +14,7 @@ function CreateComment(props) {
 
   return (
     <div>
+        {currentUser && (
       <Form onSubmit={handleSubmit} className={style.commentForm}>
         <Form.Group controlId="commentTextArea">
           <Form.Control
@@ -23,6 +27,7 @@ function CreateComment(props) {
         </Form.Group>
         <Button type="submit" className={style.commentButton}>Add comment</Button>
       </Form>
+        )}
     </div>
   );
 }
