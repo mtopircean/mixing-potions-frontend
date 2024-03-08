@@ -33,7 +33,8 @@ const Post = (props) => {
   };
 
   const handleCommentSubmitted = (newComment) => {
-    setComments([...comments, newComment]);
+    console.log("New comment:", newComment);
+    setComments([newComment, ...comments]);
   };
 
   return (
@@ -72,19 +73,23 @@ const Post = (props) => {
       {isExpanded && (
         <div className={styles.ExpandedComments}>
           <CreateComment
-  postId={id}
-  comments={comments}
-  onCommentSubmitted={handleCommentSubmitted}
-/>
-          {comments.map((comment, index) => (
-            <div key={index} className={styles.CommentsArea}>
-              <h6>
-                <strong>{comment.owner}</strong>:
-              </h6>
-              <p>{comment.comment_text}</p>
-              <hr></hr>
-            </div>
-          ))}
+            key={comments.length}
+            postId={id}
+            comments={comments}
+            onCommentSubmitted={handleCommentSubmitted}
+          />
+          {comments
+            .slice()
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+            .map((comment, index) => (
+              <div key={index} className={styles.CommentsArea}>
+                <h6>
+                  <strong>{comment.owner}</strong>:
+                </h6>
+                <p>{comment.comment_text}</p>
+                <hr></hr>
+              </div>
+            ))}
         </div>
       )}
     </Card>
