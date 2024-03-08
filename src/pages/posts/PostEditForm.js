@@ -116,7 +116,7 @@ function PostEditForm({ post }) {
         formData.append("image", image);
       }
       selectedProducts.forEach((product) => {
-        formData.append("products[]", product.id);
+        formData.append("products", product.id);
       });
 
       const response = await axios.put(`/posts/${id}/`, formData, {
