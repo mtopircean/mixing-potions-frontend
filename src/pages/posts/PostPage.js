@@ -55,16 +55,6 @@ const PostPage = () => {
     return <div>Loading...</div>;
   }
 
-  console.log("Post owner:", post.owner.pk);
-  console.log("Current user:", currentUser);
-  console.log(
-    "Is post owner matching current user:",
-    post.owner === currentUser.id
-  );
-  console.log("Type of post owner pk:", typeof post.owner.pk);
-  console.log("Type of current user pk:", typeof currentUser.pk);
-  console.log("Post:", post);
-
   return (
     <div>
       <Row>
