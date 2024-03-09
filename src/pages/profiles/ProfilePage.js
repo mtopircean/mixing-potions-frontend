@@ -12,6 +12,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
 import Post from "../../pages/posts/Post";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const currentUser = useCurrentUser();
@@ -75,6 +76,7 @@ const ProfilePage = () => {
       setFollowedUsers((prevFollowerdUsers) =>
         prevFollowerdUsers.filter((user) => user.id !== followedUserId)
       );
+      toast.success("User unfollowed successfully!");
     } catch (error) {
       console.error("Error unfollowing user:", error);
     }
