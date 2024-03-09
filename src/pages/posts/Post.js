@@ -34,6 +34,8 @@ const Post = (props) => {
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [comments, setComments] = useState(initialComments);
+  const [editMode, setEditMode] = useState(false);
+  const [editComment, setEditComment] = useState(null);
   const currentUser = useCurrentUser();
 
   const toggleComments = () => {
@@ -43,7 +45,15 @@ const Post = (props) => {
   const handleCommentSubmitted = (newComment) => {
     console.log("New comment:", newComment);
     setComments([newComment, ...comments]);
+    setEditMode(false);
+    setEditComment(null);
   };
+
+  const handleEditComment = (comment) => {
+    console.log("Editing comment:", comment);
+    setEditMode(true);
+    setEditComment(comment);
+  }
 
   const handleCommentDelete = async (commentId) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this comment?");
@@ -99,6 +109,8 @@ const Post = (props) => {
             key={comments.length}
             postId={id}
             comments={comments}
+            editMode = {editMode}
+            editComment = {editComment}
             onCommentSubmitted={handleCommentSubmitted}
           />
           <div className={styles.CommentsAreaWrapper}>
@@ -113,6 +125,7 @@ const Post = (props) => {
                       <span className={styles.CommentBubble}>
                         <Button
                           className={styles["edit-button"]}
+                          onClick={() => handleEditComment(comment)}
                           activeClassName={styles["active"]}
                         >
                           Edit <FontAwesomeIcon icon={faPenSquare} />
