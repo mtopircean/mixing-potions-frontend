@@ -7,6 +7,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import CreateComment from "../../components/CreateComment";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -66,6 +67,13 @@ const PostPage = () => {
     }
   };
 
+  const handleCommentSubmitted = (newComment) => {
+    setPost((prevPost) => ({
+      ...prevPost,
+      comments: [newComment, ...prevPost.comments],
+    }));
+  };
+
   if (!post) {
     return <div>Loading...</div>;
   }
@@ -119,6 +127,9 @@ const PostPage = () => {
                     <p>{comment.comment_text}</p>
                   </div>
                 ))}
+            </div>
+            <div className={styles.AddComment}>
+            <CreateComment postId={id} onCommentSubmitted={handleCommentSubmitted} />
             </div>
           </div>
         </Col>
