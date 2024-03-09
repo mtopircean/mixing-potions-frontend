@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Card, Media } from "react-bootstrap";
+import { Button, Card, Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Post.module.css";
 import CreateComment from "../../components/CreateComment";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   FaThumbsUp,
   FaComment,
@@ -39,6 +43,21 @@ const Post = (props) => {
   const handleCommentSubmitted = (newComment) => {
     console.log("New comment:", newComment);
     setComments([newComment, ...comments]);
+  };
+
+  const handleCommentDelete = async (commentId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this comment?");
+    if (!confirmDelete){
+      return;
+    }
+    try {
+      await axios.delete(`/comments/${commentId}/`);
+      toast.success("Comment deleted successfully!");
+      const updatedComments = comments.filter((comment) => comment.id !== commentId);
+      setComments(updatedComments);
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
   };
 
   return (
@@ -92,7 +111,15 @@ const Post = (props) => {
                     <strong>{comment.owner}</strong>
                     {currentUser && currentUser.username === comment.owner && (
                       <span className={styles.CommentBubble}>
-                        <FontAwesomeIcon icon={faEllipsisH} />
+                        <Button
+                          className={styles["edit-button"]}
+                          activeClassName={styles["active"]}
+                        >
+                          Edit <FontAwesomeIcon icon={faPenSquare} />
+                        </Button>
+                        <Button className={styles["delete-button"]} onClick={() => handleCommentDelete(comment.id)}>
+                          Delete <FontAwesomeIcon icon={faTrashAlt} />
+                        </Button>
                       </span>
                     )}
                   </h6>

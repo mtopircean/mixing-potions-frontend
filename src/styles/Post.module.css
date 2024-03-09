@@ -98,3 +98,25 @@
 .CommentBubble:hover {
   color: #629d77;
 }
+
+.delete-button {
+  background-color: #ffff;
+  border: none;
+  color: #A60E37;
+}
+
+.edit-button {
+  background-color: #ffff;
+  border: none;
+  color: #023e85;
+}
+
+.delete-button:hover {
+  background-color: #A60E37;
+  color: #ffff;
+}
+
+.edit-button:hover {
+  background-color: #023e85;
+  color: #ffff;
+}

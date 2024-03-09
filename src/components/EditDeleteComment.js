@@ -10,6 +10,9 @@ const EditDeleteComment = ({ onEditClick, onDeleteClick }) => {
       <Button onClick={onDeleteClick} variant="danger">
         Delete
       </Button>
+      <Button onClick={onCancel} variant="secondary">
+        Delete
+      </Button>
     </ButtonGroup>
   );
 };
