@@ -69,7 +69,7 @@ function CreateComment(props) {
             />
           </Form.Group>
           <Button type="submit" className={style.commentButton}>
-            Add comment
+            {editMode ? "Update comment" : "Add comment"}
           </Button>
           
         </Form>
