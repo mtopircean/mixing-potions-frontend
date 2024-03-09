@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import Avatar from "../../components/Avatar";
 import styles from "../../styles/Post.module.css";
 import CreateComment from "../../components/CreateComment";
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import {
   FaThumbsUp,
   FaComment,
@@ -27,6 +30,7 @@ const Post = (props) => {
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [comments, setComments] = useState(initialComments);
+  const currentUser = useCurrentUser();
 
   const toggleComments = () => {
     setIsExpanded(!isExpanded);
@@ -84,8 +88,13 @@ const Post = (props) => {
               .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
               .map((comment, index) => (
                 <div key={index} className={styles.CommentsArea}>
-                  <h6>
-                    <strong>{comment.owner}</strong>:
+                  <h6 className={styles.CommentOwner}>
+                    <strong>{comment.owner}</strong>
+                    {currentUser && currentUser.username === comment.owner && (
+                      <span className={styles.CommentBubble}>
+                        <FontAwesomeIcon icon={faEllipsisH} />
+                      </span>
+                    )}
                   </h6>
                   <p>{comment.comment_text}</p>
                   <hr />
