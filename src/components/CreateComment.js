@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import style from "../styles/CreateComment.module.css";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { axiosRes } from "../api/axiosDefaults";
+import { toast } from 'react-toastify';
 
 function CreateComment(props) {
   const [commentText, setCommentText] = useState("");
@@ -16,6 +17,7 @@ function CreateComment(props) {
         post: props.postId,
         comment_text: commentText,
       });
+      toast.success("Comment added successfully!");
       props.onCommentSubmitted(data);
       setCommentText("");
     } catch (error) {
@@ -39,6 +41,7 @@ function CreateComment(props) {
           <Button type="submit" className={style.commentButton}>
             Add comment
           </Button>
+          
         </Form>
       )}
     </div>
