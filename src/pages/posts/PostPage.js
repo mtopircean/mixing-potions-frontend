@@ -15,6 +15,8 @@ const PostPage = () => {
   const [post, setPost] = useState(null);
   const { id } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [editMode, setEditMode] = useState(false);
+  const [editComment, setEditComment] = useState(null);
   const currentUser = useCurrentUser();
   const history = useHistory();
   const isCurrentUserOwner =
@@ -74,6 +76,34 @@ const PostPage = () => {
     }));
   };
 
+  const handleEditComment = (comment) => {
+    console.log("Editing comment:", comment);
+    setEditMode(true);
+    setEditComment(comment);
+  };
+
+  const handleCommentDelete = async (commentId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this comment?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
+    try {
+      await axios.delete(`/comments/${commentId}/`);
+      toast.success("Comment deleted successfully!");
+      const updatedComments = post.comments.filter(
+        (comment) => comment.id !== commentId
+      );
+      setPost((prevPost) => ({
+        ...prevPost,
+        comments: updatedComments,
+      }));
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+    }
+  };
+
   if (!post) {
     return <div>Loading...</div>;
   }
@@ -119,17 +149,47 @@ const PostPage = () => {
           </div>
           <div>
             <div className={styles.CommentsAreaWrapper}>
-              <h5 className={styles["comments-detail"]}>Comments</h5>
+              <h5
+                className={`${styles["comments-detail"]} ${styles["CommentOwner"]}`}
+              >
+                Comments
+              </h5>
               {post.comments &&
                 post.comments.map((comment, index) => (
-                  <div key={index}>
-                    <p> {comment.owner}</p>
+                  <div key={index} className={styles.Comment}>
+                    <div className={styles.CommentOwner}>
+                      <p> {comment.owner}</p>
+                      {currentUser &&
+                        currentUser.username === comment.owner && (
+                          <span className={styles.CommentBubble}>
+                            <Button
+                              className={styles["edit-button"]}
+                              onClick={() => handleEditComment(comment)}
+                            >
+                              Edit <FontAwesomeIcon icon={faPenSquare} />
+                            </Button>
+                            <Button
+                              className={styles["delete-button"]}
+                              onClick={() => handleCommentDelete(comment.id)}
+                            >
+                              Delete <FontAwesomeIcon icon={faTrashAlt} />
+                            </Button>
+                          </span>
+                        )}
+                    </div>
                     <p>{comment.comment_text}</p>
+                    <hr />
                   </div>
                 ))}
             </div>
+            <hr />
             <div className={styles.AddComment}>
-            <CreateComment postId={id} onCommentSubmitted={handleCommentSubmitted} />
+              <CreateComment
+                postId={id}
+                onCommentSubmitted={handleCommentSubmitted}
+                editMode={editMode}
+                editComment={editComment}
+              />
             </div>
           </div>
         </Col>

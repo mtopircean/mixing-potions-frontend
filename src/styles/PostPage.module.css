@@ -63,3 +63,46 @@
   .AddComment {
     padding-right: 10px;
   }
+
+  .CommentOwner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .CommentBubble {
+    flex-shrink: 0;
+  }
+  
+  .CommentBubble:hover {
+    color: #629d77;
+  }
+  
+  .delete-button {
+    background-color:  rgba(0, 0, 0, 0);
+    border: none;
+    color: #A60E37;
+  }
+  
+  .edit-button {
+    background-color:  rgba(0, 0, 0, 0);
+    border: none;
+    color: #023e85;
+  }
+  
+  .delete-button:hover {
+    background-color: #A60E37;
+    color: #ffff;
+  }
+  
+  .edit-button:hover {
+    background-color: #023e85;
+    color: #ffff;
+  }
+
+  .CommentOwner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
