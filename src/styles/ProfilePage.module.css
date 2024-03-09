@@ -13,7 +13,7 @@
 }
 
 .profile-button {
-    background-color: #ffff;
+    background-color: rgba(0, 0, 0, 0);
     border: none;
     font-size: 1.5rem;
 }
@@ -48,13 +48,13 @@
 }
 
 .delete-button {
-    background-color: #ffff;
+    background-color: rgba(0, 0, 0, 0);
     border: none;
     color: #A60E37;
 }
 
 .edit-button {
-    background-color: #ffff;
+    background-color: rgba(0, 0, 0, 0);
     border: none;
     color: #023e85;
 }
@@ -63,3 +63,22 @@
     text-transform: uppercase;
     color: #023e85;
 }
+
+.unfollowUser {
+    margin-left: 5px;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color:#e33720;
+    display: flex;
+  align-items: center;
+}
+
+.unfollowUser:hover {
+    background-color:#e33720 ;
+    color:#ffff;
+}
+
+.unfollowUser span {
+    margin-right: 0.5rem;
+    line-height: 1;
+  }

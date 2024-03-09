@@ -37,6 +37,20 @@ const Post = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [editComment, setEditComment] = useState(null);
   const currentUser = useCurrentUser();
+  const[ownerProfileImage, setOwnerProfileImage] = useState(null);
+
+  useEffect (() => {
+    const fetchOwnerProfileImage = async () => {
+      try {
+        const response = await axios.get('/profile/${pk}/');
+        setOwnerProfileImage(response.data.profile_image);
+      } catch (error) {
+        console.error('Error fetching owner image:', error)
+      }
+    }
+
+    fetchOwnerProfileImage();
+  }, [pk])
 
   const toggleComments = () => {
     setIsExpanded(!isExpanded);
@@ -75,7 +89,7 @@ const Post = (props) => {
       <Card.Body>
         <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${pk}/`}>
-            <Avatar />
+            <Avatar src={ownerProfileImage} />
             {owner}
           </Link>
           <div className="d-flex align-items-center">

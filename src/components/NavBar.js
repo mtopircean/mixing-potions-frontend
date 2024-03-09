@@ -93,19 +93,14 @@ const NavBar = () => {
                   </NavLink>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
-                  <NavLink to="/about" className="nav-link-menu">
-                    About
-                  </NavLink>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <NavLink to="/team" className="nav-link-menu">
+                  <a href="https://beta-doterra.myvoffice.com/cosminatopircean/#/joinTeam" className="nav-link-menu" target="_blank">
                     Join our team
-                  </NavLink>
+                  </a>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
-                  <NavLink to="/contact" className="nav-link-menu">
+                  <a href="https://beta-doterra.myvoffice.com/cosminatopircean/#/contactUs" className="nav-link-menu" target="_blank">
                     Contact
-                  </NavLink>
+                  </a>
                 </NavDropdown.Item>
               </div>
             </NavDropdown>

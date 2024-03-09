@@ -32,12 +32,9 @@ const profile_id = currentUser?.profile_id || "";
               <PostsPage message="No results found. Try another search keyword"/>
             )}
           />
-          <Route exact path="/about" render={() => <h1></h1>} />
-          <Route exact path="/contact" render={() => <h1></h1>} />
-          <Route exact path="/team" render={() => <h1></h1>} />
           <Route exact path="/login" render={() => <LoginForm />} />
           <Route exact path="/register" render={() => <RegisterForm />} />
-          <Route exact path="/profile" render={() => <ProfilePage />} />
+          <Route exact path="/profile" render={() => <ProfilePage profile_id={profile_id} />} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />

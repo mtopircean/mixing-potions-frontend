@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/ProfilePage.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { Container, Row, Col } from "react-bootstrap";
+import {
+  faPenToSquare,
+  faTrashCan,
+  faCircleMinus,
+} from "@fortawesome/free-solid-svg-icons";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
@@ -33,14 +37,17 @@ const ProfilePage = () => {
         setUserPosts(userPostsData);
 
         const response = await axios.get(`/followers`);
-            if (response.status === 200) {
-                setFollowedUsers(response.data.results);
-            } else {
-                throw new Error("Failed to fetch followed users");
-            }
+        if (response.status === 200) {
+          setFollowedUsers(response.data.results);
+        } else {
+          throw new Error("Failed to fetch followed users");
+        }
       } catch (error) {
         setLoading(false);
-        console.error("Error fetching profile, posts, and followed users:", error);
+        console.error(
+          "Error fetching profile, posts, and followed users:",
+          error
+        );
         return <div>Error: Failed to load data. Please try again later.</div>;
       }
     };
@@ -59,6 +66,17 @@ const ProfilePage = () => {
   const handleDelete = () => {
     if (window.confirm("Please confirm deletion of your profile!")) {
       console.log("Deleting profile");
+    }
+  };
+
+  const unfollowUser = async (followedUserId) => {
+    try {
+      await axios.delete(`/followers/${followedUserId}`);
+      setFollowedUsers((prevFollowerdUsers) =>
+        prevFollowerdUsers.filter((user) => user.id !== followedUserId)
+      );
+    } catch (error) {
+      console.error("Error unfollowing user:", error);
     }
   };
 
@@ -134,15 +152,29 @@ const ProfilePage = () => {
             </Row>
           </Col>
           <Col xs={12} md={6}>
-                <div className={`${styles["followed-users"]} d-flex flex-column justify-content-center`}>
-                    <h4 className="text-center">Followed Users:</h4>
-                    <div>
-                        {followedUsers.map((user) => (
-                            <p key={user.id}>{user.followed_name}</p>
-                        ))}
-                    </div>
-                </div>
-            </Col>
+            <div
+              className={`${styles["followed-users"]} d-flex flex-column justify-content-center`}
+            >
+              <h4 className="text-center">Followed Users:</h4>
+              <div>
+                {followedUsers.map((user) => (
+                  <Row key={user.id} className="align-items-center">
+                    <Col xs={8}>
+                      <p key={user.id}>{user.followed_name}</p>
+                    </Col>
+                    <Col xs={4}>
+                      <Button
+                        onClick={() => unfollowUser(user.id)}
+                        className={styles.unfollowUser}
+                      >
+                        <span>Unfollow</span> <FontAwesomeIcon icon={faCircleMinus} />
+                      </Button>
+                    </Col>
+                  </Row>
+                ))}
+              </div>
+            </div>
+          </Col>
         </Row>
       )}
     </Container>
