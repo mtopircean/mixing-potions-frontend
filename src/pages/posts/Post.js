@@ -78,18 +78,20 @@ const Post = (props) => {
             comments={comments}
             onCommentSubmitted={handleCommentSubmitted}
           />
-          {comments
-            .slice()
-            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-            .map((comment, index) => (
-              <div key={index} className={styles.CommentsArea}>
-                <h6>
-                  <strong>{comment.owner}</strong>:
-                </h6>
-                <p>{comment.comment_text}</p>
-                <hr></hr>
-              </div>
-            ))}
+          <div className={styles.CommentsAreaWrapper}>
+            {comments
+              .slice()
+              .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+              .map((comment, index) => (
+                <div key={index} className={styles.CommentsArea}>
+                  <h6>
+                    <strong>{comment.owner}</strong>:
+                  </h6>
+                  <p>{comment.comment_text}</p>
+                  <hr />
+                </div>
+              ))}
+          </div>
         </div>
       )}
     </Card>

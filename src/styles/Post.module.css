@@ -64,3 +64,23 @@
 .CommentsArea {
   padding: 0.75rem 1.25rem;
 }
+
+.CommentsAreaWrapper {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+
+.CommentsAreaWrapper::-webkit-scrollbar {
+  width: 10px;
+}
+
+.CommentsAreaWrapper::-webkit-scrollbar-thumb {
+  background-color: #629d778b;
+  border-radius: 0px;
+}
+
+.CommentsAreaWrapper::-webkit-scrollbar-track {
+  background-color: #629d772c;
+}

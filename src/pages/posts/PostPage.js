@@ -7,8 +7,8 @@ import { useParams, useHistory } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PostPage = () => {
   const [post, setPost] = useState(null);
@@ -16,7 +16,8 @@ const PostPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentUser = useCurrentUser();
   const history = useHistory();
-  const isCurrentUserOwner = currentUser && post && post.owner === currentUser.username;
+  const isCurrentUserOwner =
+    currentUser && post && post.owner === currentUser.username;
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -41,7 +42,7 @@ const PostPage = () => {
     try {
       await axios.delete(`/posts/${id}/`);
       toast.success("Post deleted successfully!");
-      history.push("/")
+      history.push("/");
     } catch (error) {
       console.error("Error deleting post:", error);
     }
@@ -52,8 +53,6 @@ const PostPage = () => {
       handleDelete();
     }
   };
-
-
 
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -76,7 +75,7 @@ const PostPage = () => {
       <Row>
         <Col md={6}>
           <div className="arrow-button">
-          {isCurrentUserOwner && (
+            {isCurrentUserOwner && (
               <Button
                 onClick={handleEdit}
                 className={styles["post-edit-button"]}
@@ -106,17 +105,21 @@ const PostPage = () => {
           </div>
         </Col>
         <Col md={6}>
-          <h5 className={styles["post-description-detail"]}>Description</h5>
-          <p>{post.description}</p>
+          <div className={styles.CommentsAreaWrapper}>
+            <h5 className={styles["post-description-detail"]}>Description</h5>
+            <p>{post.description}</p>
+          </div>
           <div>
-            <h5 className={styles["comments-detail"]}>Comments</h5>
-            {post.comments &&
-              post.comments.map((comment, index) => (
-                <div key={index}>
-                  <p> {comment.owner}</p>
-                  <p>{comment.comment_text}</p>
-                </div>
-              ))}
+            <div className={styles.CommentsAreaWrapper}>
+              <h5 className={styles["comments-detail"]}>Comments</h5>
+              {post.comments &&
+                post.comments.map((comment, index) => (
+                  <div key={index}>
+                    <p> {comment.owner}</p>
+                    <p>{comment.comment_text}</p>
+                  </div>
+                ))}
+            </div>
           </div>
         </Col>
       </Row>
