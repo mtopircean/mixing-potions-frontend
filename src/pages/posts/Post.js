@@ -110,7 +110,7 @@ const Post = (props) => {
       <Card.Body>
         <Media className="align-items-center justify-content-between">
           <div>
-            <Avatar src={ownerProfileImage} className={styles.avatarImage}/>
+            <Avatar src={ownerProfileImage} className={styles.avatarImage} />
             {owner}
           </div>
 
@@ -132,9 +132,20 @@ const Post = (props) => {
           <span>{like_count}</span>
         </div>
         {currentUser && currentUser.username !== owner && (
-          <Button onClick={handleFollowUser} className={styles.followButton}>
-            Follow <FontAwesomeIcon icon={faCirclePlus} />
-          </Button>
+          <>
+            {isFollowing ? (
+              <Link to="/profile" className={styles.following}>
+              Following...
+            </Link>
+            ) : (
+              <Button
+                onClick={handleFollowUser}
+                className={styles.followButton}
+              >
+                Follow <FontAwesomeIcon icon={faCirclePlus} />
+              </Button>
+            )}
+          </>
         )}
         <div className={styles.CommentsSection}>
           <span>{comment_count}</span>
