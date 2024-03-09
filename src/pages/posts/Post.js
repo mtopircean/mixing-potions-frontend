@@ -5,7 +5,11 @@ import Avatar from "../../components/Avatar";
 import styles from "../../styles/Post.module.css";
 import CreateComment from "../../components/CreateComment";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPenSquare,
+  faTrashAlt,
+  faCirclePlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -22,7 +26,8 @@ const Post = (props) => {
   const {
     id,
     owner,
-    pk,
+    owner_id,
+    owner_image,
     title,
     content,
     image,
@@ -37,20 +42,22 @@ const Post = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [editComment, setEditComment] = useState(null);
   const currentUser = useCurrentUser();
-  const[ownerProfileImage, setOwnerProfileImage] = useState(null);
+  const [ownerProfileImage, setOwnerProfileImage] = useState(null);
+  const [isFollowing, setIsFollowing] = useState(false);
 
-  useEffect (() => {
+  useEffect(() => {
     const fetchOwnerProfileImage = async () => {
       try {
-        const response = await axios.get('/profile/${pk}/');
-        setOwnerProfileImage(response.data.profile_image);
+        const response = await axios.get(`/posts/${owner_id}/`);
+        console.log("Response from profile API:", response.data);
+        setOwnerProfileImage(response.data.owner_image);
       } catch (error) {
-        console.error('Error fetching owner image:', error)
+        console.error("Error fetching owner image:", error);
       }
-    }
+    };
 
     fetchOwnerProfileImage();
-  }, [pk])
+  }, [owner_id]);
 
   const toggleComments = () => {
     setIsExpanded(!isExpanded);
@@ -67,20 +74,34 @@ const Post = (props) => {
     console.log("Editing comment:", comment);
     setEditMode(true);
     setEditComment(comment);
-  }
+  };
 
   const handleCommentDelete = async (commentId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this comment?");
-    if (!confirmDelete){
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this comment?"
+    );
+    if (!confirmDelete) {
       return;
     }
     try {
       await axios.delete(`/comments/${commentId}/`);
       toast.success("Comment deleted successfully!");
-      const updatedComments = comments.filter((comment) => comment.id !== commentId);
+      const updatedComments = comments.filter(
+        (comment) => comment.id !== commentId
+      );
       setComments(updatedComments);
     } catch (error) {
       console.error("Error deleting comment:", error);
+    }
+  };
+
+  const handleFollowUser = async () => {
+    try {
+      const response = await axios.post("/followers/", { followed: owner_id });
+      setIsFollowing(true);
+      toast.success(`You are now following ${owner}`);
+    } catch (error) {
+      console.error("Error following user:", error);
     }
   };
 
@@ -88,10 +109,11 @@ const Post = (props) => {
     <Card className={`${styles.Post} mb-3`}>
       <Card.Body>
         <Media className="align-items-center justify-content-between">
-          <Link to={`/profiles/${pk}/`}>
-            <Avatar src={ownerProfileImage} />
+          <div>
+            <Avatar src={ownerProfileImage} className={styles.avatarImage}/>
             {owner}
-          </Link>
+          </div>
+
           <div className="d-flex align-items-center">
             <span>{created_at}</span>
           </div>
@@ -109,6 +131,11 @@ const Post = (props) => {
           <FaThumbsUp />
           <span>{like_count}</span>
         </div>
+        {currentUser && currentUser.username !== owner && (
+          <Button onClick={handleFollowUser} className={styles.followButton}>
+            Follow <FontAwesomeIcon icon={faCirclePlus} />
+          </Button>
+        )}
         <div className={styles.CommentsSection}>
           <span>{comment_count}</span>
           <FaComment />
@@ -123,8 +150,8 @@ const Post = (props) => {
             key={comments.length}
             postId={id}
             comments={comments}
-            editMode = {editMode}
-            editComment = {editComment}
+            editMode={editMode}
+            editComment={editComment}
             onCommentSubmitted={handleCommentSubmitted}
           />
           <div className={styles.CommentsAreaWrapper}>
@@ -144,7 +171,10 @@ const Post = (props) => {
                         >
                           Edit <FontAwesomeIcon icon={faPenSquare} />
                         </Button>
-                        <Button className={styles["delete-button"]} onClick={() => handleCommentDelete(comment.id)}>
+                        <Button
+                          className={styles["delete-button"]}
+                          onClick={() => handleCommentDelete(comment.id)}
+                        >
                           Delete <FontAwesomeIcon icon={faTrashAlt} />
                         </Button>
                       </span>
