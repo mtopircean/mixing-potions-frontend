@@ -1,9 +1,8 @@
 import React from "react";
 import { Col, Form, Row, Button } from "react-bootstrap";
-import styles from "../../styles/ProfileEditForm.module.css";
 
 const ProfilePasswordChange = () => {
-  
+ 
 
 
   return (
@@ -32,11 +31,11 @@ const ProfilePasswordChange = () => {
         </Col>
       </Row>
       <Row className="justify-content-center">
-        <Col md={8} className={styles.profileFormButtons}>
-          <Button variant="primary" type="submit" className={styles.profileSave}>
+        <Col md={8}>
+          <Button variant="primary" type="submit">
             Change Password
           </Button>
-          <Button variant="secondary" className={styles.profileCancel}>Cancel</Button>
+          <Button variant="secondary">Cancel</Button>
         </Col>
       </Row>
     </>

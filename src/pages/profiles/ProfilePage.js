@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/ProfilePage.module.css";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenToSquare,
   faTrashCan,
   faCircleMinus,
+  faKey,
 } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
@@ -118,7 +120,13 @@ const ProfilePage = () => {
                 >
                   Delete <FontAwesomeIcon icon={faTrashCan} />
                 </button>
-              </div>
+                
+              </div><Link
+                  to={`/profiles/:id/password-change`}
+                  className={`${styles["password-button"]} mt-3`}
+                >
+                  Change password <FontAwesomeIcon icon={faKey} />
+                </Link>
             </div>
             <button
               onClick={toggleExpanded}
@@ -133,31 +141,31 @@ const ProfilePage = () => {
               <div className={styles["profile-detail"]}>
                 <h5>Email:</h5>
                 <p>{profile.email}</p>
-                </div>
-                <div className={styles["profile-detail"]}>
-                  <h5>Nickname:</h5>
-                  <p>{profile.nickname}</p>
-                </div>
-                <div className={styles["profile-detail"]}>
-                  <h5>First name:</h5>
-                  <p>{profile.first_name}</p>
-                </div>
-                <div className={styles["profile-detail"]}>
-                  <h5>Last name:</h5>
-                  <p>{profile.last_name}</p>
-                </div>
-                <div className={styles["profile-detail"]}>
+              </div>
+              <div className={styles["profile-detail"]}>
+                <h5>Nickname:</h5>
+                <p>{profile.nickname}</p>
+              </div>
+              <div className={styles["profile-detail"]}>
+                <h5>First name:</h5>
+                <p>{profile.first_name}</p>
+              </div>
+              <div className={styles["profile-detail"]}>
+                <h5>Last name:</h5>
+                <p>{profile.last_name}</p>
+              </div>
+              <div className={styles["profile-detail"]}>
                 <h5>Age:</h5>
                 <p>{profile.age}</p>
-                </div>
-                <div className={styles["profile-detail"]}>
+              </div>
+              <div className={styles["profile-detail"]}>
                 <h5>Phone Number:</h5>
                 <p>{profile.phone_number}</p>
-                </div>
-                <div className={styles["text-center"]}>
+              </div>
+              <div className={styles["text-center"]}>
                 <h5>About:</h5>
                 <p>{profile.about}</p>
-                </div>
+              </div>
             </Col>
           )}
         </Row>
