@@ -109,10 +109,10 @@ const Post = (props) => {
     <Card className={`${styles.Post} mb-3`}>
       <Card.Body>
         <Media className="align-items-center justify-content-between">
-          <div>
+        <Link to={`/profile/${owner_id}`} className={styles.usernameLink}>
             <Avatar src={ownerProfileImage} className={styles.avatarImage} />
             {owner}
-          </div>
+            </Link>
 
           <div className="d-flex align-items-center">
             <span>{created_at}</span>

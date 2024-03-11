@@ -20,7 +20,6 @@ import ProfilePasswordChange from "./pages/profiles/ProfilePasswordChange";
 
 function App() {
 const currentUser = useCurrentUser();
-const profile_id = currentUser?.profile_id || "";
 
   return (
     <div className="App">
@@ -36,7 +35,7 @@ const profile_id = currentUser?.profile_id || "";
           />
           <Route exact path="/login" render={() => <LoginForm />} />
           <Route exact path="/register" render={() => <RegisterForm />} />
-          <Route exact path="/profile" render={() => <ProfilePage profile_id={profile_id} />} />
+          <Route exact path="/profile" render={() => <ProfilePage />} />
           <Route path="/profiles/:id/edit" component={ProfileEditForm} />
           <Route path="/profiles/:id/password-change" component={ProfilePasswordChange} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
