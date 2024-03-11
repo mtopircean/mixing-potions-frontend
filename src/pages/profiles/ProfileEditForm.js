@@ -57,6 +57,9 @@ const handleInputChange = (event) => {
   setFormData({ ...formData, [name]: value });
 };
 
+const handleCancel = () => {
+  history.push("/profile");
+}
 
   return (
     <>
@@ -138,7 +141,7 @@ const handleInputChange = (event) => {
           <Button variant="primary" type="submit" className={styles.profileSave}>
             Save
           </Button>
-          <Button variant="secondary" className={styles.profileCancel}>Cancel</Button>
+          <Button variant="secondary" className={styles.profileCancel} onClick={handleCancel}>Cancel</Button>
         </Col>
           </Form>
         </Col>
