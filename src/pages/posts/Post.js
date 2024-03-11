@@ -27,13 +27,13 @@ const Post = (props) => {
     id,
     owner,
     owner_id,
-    owner_image,
     title,
     content,
     image,
     created_at,
     like_count,
     comment_count,
+    profile_id,
     comments: initialComments,
   } = props;
 
@@ -109,7 +109,7 @@ const Post = (props) => {
     <Card className={`${styles.Post} mb-3`}>
       <Card.Body>
         <Media className="align-items-center justify-content-between">
-        <Link to={`/profile/${owner_id}`} className={styles.usernameLink}>
+        <Link to={`/profile/${profile_id}`} className={styles.usernameLink}>
             <Avatar src={ownerProfileImage} className={styles.avatarImage} />
             {owner}
             </Link>
