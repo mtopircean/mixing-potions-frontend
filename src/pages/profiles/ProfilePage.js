@@ -106,7 +106,7 @@ const ProfilePage = () => {
               <h2>{profile.username}</h2>
               <div className={styles["edit-delete-buttons"]}>
                 <NavLink
-                  to={`/profile/${profile.id}/edit`}
+                  to={`/profiles/${profile.id}/edit`}
                   className={styles["edit-button"]}
                   activeClassName={styles["active"]}
                 >

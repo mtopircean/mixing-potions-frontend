@@ -16,6 +16,7 @@ import { useCurrentUser } from "./contexts/CurrentUserContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
+import ProfilePasswordChange from "./pages/profiles/ProfilePasswordChange";
 
 function App() {
 const currentUser = useCurrentUser();
@@ -36,7 +37,8 @@ const profile_id = currentUser?.profile_id || "";
           <Route exact path="/login" render={() => <LoginForm />} />
           <Route exact path="/register" render={() => <RegisterForm />} />
           <Route exact path="/profile" render={() => <ProfilePage profile_id={profile_id} />} />
-          <Route exact path="/profile/:id/edit" render={() => <ProfileEditForm profile_id={profile_id} />} />
+          <Route path="/profiles/:id/edit" component={ProfileEditForm} />
+          <Route path="/profiles/:id/password-change" component={ProfilePasswordChange} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
