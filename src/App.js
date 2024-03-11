@@ -15,6 +15,7 @@ import PostEditForm from "./pages/posts/PostEditForm";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 
 function App() {
 const currentUser = useCurrentUser();
@@ -35,6 +36,7 @@ const profile_id = currentUser?.profile_id || "";
           <Route exact path="/login" render={() => <LoginForm />} />
           <Route exact path="/register" render={() => <RegisterForm />} />
           <Route exact path="/profile" render={() => <ProfilePage profile_id={profile_id} />} />
+          <Route exact path="/profiles/:id/edit" render={() => <ProfilePage profile_id={profile_id} />} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
