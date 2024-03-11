@@ -4,10 +4,13 @@ import styles from "../../styles/ProfileEditForm.module.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 const ProfileEditForm = () => {
   const { id } = useParams();
   const currentUser = useCurrentUser();
+  const history = useHistory();
   const [formData, setFormData] = useState(
     {
       username: "",
@@ -35,18 +38,39 @@ fetchProfileData();
 
   }, [id]);
 
+const handleFormSubmit = async (event) => {
+  event.preventDefault();
+
+  const { image, ...formDataWithoutImage } = formData;
+
+  try {
+    await axios.put(`/profiles/${id}/`, formDataWithoutImage);
+    toast.success("Profile data was updated");
+    history.push("/profile");
+  } catch (error) {
+    console.error("Error updating profile data:", error);
+  }
+};
+
+const handleInputChange = (event) => {
+  const {name, value } = event.target;
+  setFormData({ ...formData, [name]: value });
+};
+
 
   return (
     <>
       <Row className="justify-content-center">
         <h4 className="mb-4 mt-4">Modify my account details/password:</h4>
         <Col md={8}>
-          <Form>
+          <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="username">
               <Form.Label>Username: {formData.username || "Data was not submitted. Populate your profile."}</Form.Label>
               <Form.Control
                 type="text"
                 name="username"
+                value={formData.username}
+                onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
             </Form.Group>
@@ -55,6 +79,7 @@ fetchProfileData();
               <Form.Control
                 type="text"
                 name="nickname"
+                onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
             </Form.Group>
@@ -63,6 +88,8 @@ fetchProfileData();
               <Form.Control
                 type="text"
                 name="first_name"
+                value={formData.first_name}
+                onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
             </Form.Group>
@@ -71,6 +98,8 @@ fetchProfileData();
               <Form.Control
                 type="text"
                 name="last_name"
+                value={formData.last_name}
+                onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
             </Form.Group>
@@ -79,6 +108,8 @@ fetchProfileData();
               <Form.Control
                 type="number"
                 name="age"
+                value={formData.age}
+                onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
             </Form.Group>
@@ -87,6 +118,8 @@ fetchProfileData();
               <Form.Control
                 type="text"
                 name="phone_number"
+                value={formData.phone_number}
+                onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
             </Form.Group>
@@ -95,21 +128,22 @@ fetchProfileData();
               <Form.Control
                 as="textarea"
                 name="about"
+                value={formData.about}
+                onChange={handleInputChange}
                 rows={6}
                 placeholder={formData.about || "Data was not submitted. Populate your profile."}
               />
             </Form.Group>
-          </Form>
-        </Col>
-      </Row>
-      <Row className="justify-content-center">
-        <Col md={8} className={styles.profileFormButtons}>
+            <Col md={12} className={styles.profileFormButtons}>
           <Button variant="primary" type="submit" className={styles.profileSave}>
             Save
           </Button>
           <Button variant="secondary" className={styles.profileCancel}>Cancel</Button>
         </Col>
+          </Form>
+        </Col>
       </Row>
+        
     </>
   );
 };
