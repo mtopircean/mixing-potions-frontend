@@ -131,8 +131,33 @@ const ProfilePage = () => {
           {expanded && (
             <Col xs={12}>
               <div className={styles["profile-detail"]}>
-                <h5>Email:</h5> <p>{profile.email}</p>
-              </div>
+                <h5>Email:</h5>
+                <p>{profile.email}</p>
+                </div>
+                <div className={styles["profile-detail"]}>
+                  <h5>Nickname:</h5>
+                  <p>{profile.nickname}</p>
+                </div>
+                <div className={styles["profile-detail"]}>
+                  <h5>First name:</h5>
+                  <p>{profile.first_name}</p>
+                </div>
+                <div className={styles["profile-detail"]}>
+                  <h5>Last name:</h5>
+                  <p>{profile.last_name}</p>
+                </div>
+                <div className={styles["profile-detail"]}>
+                <h5>Age:</h5>
+                <p>{profile.age}</p>
+                </div>
+                <div className={styles["profile-detail"]}>
+                <h5>Phone Number:</h5>
+                <p>{profile.phone_number}</p>
+                </div>
+                <div className={styles["text-center"]}>
+                <h5>About:</h5>
+                <p>{profile.about}</p>
+                </div>
             </Col>
           )}
         </Row>
@@ -169,7 +194,8 @@ const ProfilePage = () => {
                         onClick={() => unfollowUser(user.id)}
                         className={styles.unfollowUser}
                       >
-                        <span>Unfollow</span> <FontAwesomeIcon icon={faCircleMinus} />
+                        <span>Unfollow</span>{" "}
+                        <FontAwesomeIcon icon={faCircleMinus} />
                       </Button>
                     </Col>
                   </Row>
