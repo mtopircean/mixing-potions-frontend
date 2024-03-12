@@ -195,6 +195,7 @@ function PostCreateForm() {
                 className="mb-3 input-border"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                required
               />
               <Form.Control
                 as="textarea"
