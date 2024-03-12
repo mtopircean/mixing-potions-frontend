@@ -9,3 +9,14 @@ h5.liked-header {
     margin-right: 5px;
 }
 
+.followedButtons {
+    background-color: rgba(255, 255, 255, 0);
+    color: #54547c;
+    width: 100%;
+    border: none;
+}
+
+.followedButtons:hover {
+    background-color:#54547c;
+    color: #ffff;
+}

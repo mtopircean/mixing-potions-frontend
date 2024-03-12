@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 import Asset from "../../components/Asset";
 import BodySystemPanel from "../../components/BodySystemPanel";
@@ -76,6 +76,15 @@ function PostsPage() {
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={3}>
+        <div className="mb-3">
+          <Form.Control
+            className="search-bar"
+            type="text"
+            placeholder="Search posts..."
+            value={filterState}
+            onChange={(e) => setFilter(e.target.value)}
+          />
+        </div>
         <BodySystemPanel
           selectedBodySystems={selectedBodySystems}
           toggleBodySystem={toggleBodySystem}
@@ -119,6 +128,9 @@ function PostsPage() {
       <Col className="py-2 p-0 p-lg-2" lg={3}>
         {hasLoaded && posts.length > 0 && (
           <Container>
+            <div className="mb-3">
+              <Button className={styles.followedButtons}>Follosed user posts</Button>
+            </div>
             <div style={{ textAlign: "center" }}>
               {selectedUser && (
                 <div className={styles.selectedFilter}>
