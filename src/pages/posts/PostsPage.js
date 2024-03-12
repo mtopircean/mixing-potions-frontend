@@ -73,6 +73,20 @@ function PostsPage() {
       }));
   };
 
+  const filterPosts = (post) => {
+    const { title, description, owner, products, conditions } = post;
+    const searchQuery = filterState.toLowerCase().trim();
+
+    return (
+      title.toLowerCase().includes(searchQuery) ||
+      description.toLowerCase().includes(searchQuery) ||
+      owner.toLowerCase().includes(searchQuery) ||
+      products.some((product) =>
+        product.name.toLowerCase().includes(searchQuery)
+      )
+    );
+  };
+
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={3}>
@@ -108,7 +122,9 @@ function PostsPage() {
                         )
                       : true;
 
-                  return userMatch && bodySystemMatch;
+                  const searchMatch = filterState ? filterPosts(post) : true;
+
+                  return userMatch && bodySystemMatch && searchMatch;
                 })
                 .map((post) => (
                   <Post key={post.id} {...post} setPosts={setPosts} />
@@ -129,7 +145,9 @@ function PostsPage() {
         {hasLoaded && posts.length > 0 && (
           <Container>
             <div className="mb-3">
-              <Button className={styles.followedButtons}>Follosed user posts</Button>
+              <Button className={styles.followedButtons}>
+                Follosed user posts
+              </Button>
             </div>
             <div style={{ textAlign: "center" }}>
               {selectedUser && (
