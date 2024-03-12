@@ -8,9 +8,8 @@ import { FaThumbsUp } from "react-icons/fa";
 import styles from "../../styles/PostsPage.module.css";
 import { MdClear } from "react-icons/md";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons"; 
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
@@ -93,12 +92,6 @@ function PostsPage() {
     );
   };
 
-  const handleFollowedUsersClick = () => {
-    setShowUnfollowButton(!showUnfollowButton);
-    const followedUserPosts = posts.filter((post) => post.owner === currentUser.username);
-    setPosts(followedUserPosts);
-  }
-
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={3}>
@@ -156,17 +149,6 @@ function PostsPage() {
       <Col className="py-2 p-0 p-lg-2" lg={3}>
         {hasLoaded && posts.length > 0 && (
           <Container>
-            <div className="mb-3">
-            {currentUser && (
-              <div>
-              <Button className={styles.followedButtons} onClick={handleFollowedUsersClick}>
-                All followed users <FontAwesomeIcon icon={faStar} />
-                {showUnfollowButton && <MdClear color="red" />}
-              </Button>
-              <hr />
-              </div>
-            )}
-            </div>
             <div style={{ textAlign: "center" }}>
               {selectedUser && (
                 <div className={styles.selectedFilter}>
