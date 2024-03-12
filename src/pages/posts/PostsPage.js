@@ -7,6 +7,10 @@ import BodySystemPanel from "../../components/BodySystemPanel";
 import { FaThumbsUp } from "react-icons/fa";
 import styles from "../../styles/PostsPage.module.css";
 import { MdClear } from "react-icons/md";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons"; 
+import { useCurrentUser } from "../../contexts/CurrentUserContext";
+
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
@@ -15,6 +19,7 @@ function PostsPage() {
   const [filterState, setFilter] = useState("");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [showClearButton, setShowClearButton] = useState(false);
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -145,9 +150,14 @@ function PostsPage() {
         {hasLoaded && posts.length > 0 && (
           <Container>
             <div className="mb-3">
+            {currentUser && (
+              <div>
               <Button className={styles.followedButtons}>
-                Follosed user posts
+                All followed users <FontAwesomeIcon icon={faStar} />
               </Button>
+              <hr />
+              </div>
+            )}
             </div>
             <div style={{ textAlign: "center" }}>
               {selectedUser && (
