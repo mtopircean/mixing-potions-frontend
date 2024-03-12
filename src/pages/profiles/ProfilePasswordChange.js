@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Form, Row, Button } from "react-bootstrap";
+import { Col, Form, Row, Button, Alert } from "react-bootstrap";
 import {
   useHistory,
   useParams,
@@ -59,6 +59,9 @@ const ProfilePasswordChange = () => {
                 name="new_password1"
                 placeholder="Enter new password"
               />
+              {errors?.new_password1 && (
+                <Alert variant="danger">{errors.new_password1}</Alert>
+              )}
             </Form.Group>
             <Form.Group controlId="confirmPassword">
               <Form.Label>Confirm New Password:</Form.Label>
@@ -69,6 +72,9 @@ const ProfilePasswordChange = () => {
                 name="new_password2"
                 placeholder="Confirm new password"
               />
+              {errors?.new_password2 && (
+                <Alert variant="danger">{errors.new_password2}</Alert>
+              )}
             </Form.Group>
             <Col md={8}>
               <Button variant="primary" type="submit">
