@@ -19,6 +19,7 @@ function PostsPage() {
   const [filterState, setFilter] = useState("");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [showClearButton, setShowClearButton] = useState(false);
+  const [showUnfollowButton, setShowUnfollowButton] = useState(false);
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -92,6 +93,12 @@ function PostsPage() {
     );
   };
 
+  const handleFollowedUsersClick = () => {
+    setShowUnfollowButton(!showUnfollowButton);
+    const followedUserPosts = posts.filter((post) => post.owner === currentUser.username);
+    setPosts(followedUserPosts);
+  }
+
   return (
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2" lg={3}>
@@ -152,8 +159,9 @@ function PostsPage() {
             <div className="mb-3">
             {currentUser && (
               <div>
-              <Button className={styles.followedButtons}>
+              <Button className={styles.followedButtons} onClick={handleFollowedUsersClick}>
                 All followed users <FontAwesomeIcon icon={faStar} />
+                {showUnfollowButton && <MdClear color="red" />}
               </Button>
               <hr />
               </div>
