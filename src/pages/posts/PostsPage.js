@@ -52,8 +52,7 @@ function PostsPage() {
   };
 
   const handleUserClick = (username) => {
-    console.log("Clicked username:", username); 
-    history.push(`/profile-page/${username}`);
+    setSelectedUser(username);
   };
 
   const toggleBodySystem = (system) => {
@@ -175,16 +174,17 @@ function PostsPage() {
             </div>
             {sortByLikes().map((user) => (
               <div key={user.owner}>
-              <p>
-                <a href="#" onClick={(e) => {
-                  e.preventDefault();
-                  console.log("Clicked user:", user);
-                }}>
-                  <strong>{user.owner}</strong>
-                </a>{" "}
-                has {user.like_count} likes
-              </p>
-            </div>
+                <p
+                  className={
+                    selectedUser === user.owner ? styles.selectedUser : ""
+                  }
+                >
+                  <a href="#" onClick={() => handleUserClick(user.owner)}>
+                    <strong>{user.owner} </strong>
+                  </a>
+                  has {user.like_count} likes
+                </p>
+              </div>
             ))}
           </Container>
         )}

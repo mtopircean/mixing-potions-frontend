@@ -106,10 +106,10 @@ const Post = (props) => {
     <Card className={`${styles.Post} mb-3`}>
       <Card.Body>
         <Media className="align-items-center justify-content-between">
-        <Link to={`/profile/${profile_id}`} className={styles.usernameLink}>
+          <Link to={`/profile/${owner_id}`} className={styles.usernameLink} >
             <Avatar src={ownerProfileImage} className={styles.avatarImage} />
             {owner}
-            </Link>
+          </Link>
 
           <div className="d-flex align-items-center">
             <span>{created_at}</span>
@@ -132,8 +132,8 @@ const Post = (props) => {
           <>
             {isFollowing ? (
               <Link to="/profile" className={styles.following}>
-              Following...
-            </Link>
+                Following...
+              </Link>
             ) : (
               <Button
                 onClick={handleFollowUser}

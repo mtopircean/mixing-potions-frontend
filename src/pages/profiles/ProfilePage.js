@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/ProfilePage.module.css";
-import { Link } from "react-router-dom";
+import { Link,  useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenToSquare,
@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const currentUser = useCurrentUser();
-  const { pk } = currentUser;
+  const { id } = useParams();
 
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -29,13 +29,13 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfileAndPosts = async () => {
       try {
-        const { data: pageProfile } = await axiosReq.get(`/profiles/${pk}/`);
+        const { data: pageProfile } = await axiosReq.get(`/profiles/${id}/`);
         setProfile(pageProfile);
         setLoading(false);
 
         const { data: postData } = await axiosReq.get(`/posts`);
         const userPostsData = postData.results.filter(
-          (post) => post.owner === currentUser.username
+          (post) => post.owner === pageProfile.username
         );
         setUserPosts(userPostsData);
 
@@ -56,7 +56,7 @@ const ProfilePage = () => {
     };
 
     fetchProfileAndPosts();
-  }, [pk, currentUser.username]);
+  }, [id]);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -106,6 +106,7 @@ const ProfilePage = () => {
           <Col md={6} className={styles["name-header"]}>
             <div>
               <h2>{profile.username}</h2>
+              {currentUser && currentUser.username === profile.username && (
               <div className={styles["edit-delete-buttons"]}>
                 <NavLink
                   to={`/profiles/${profile.id}/edit`}
@@ -120,13 +121,14 @@ const ProfilePage = () => {
                 >
                   Delete <FontAwesomeIcon icon={faTrashCan} />
                 </button>
-                
-              </div><Link
+                <Link
                   to={`/profiles/:id/password-change`}
                   className={`${styles["password-button"]} mt-3`}
                 >
                   Change password <FontAwesomeIcon icon={faKey} />
                 </Link>
+                </div>
+              )}
             </div>
             <button
               onClick={toggleExpanded}

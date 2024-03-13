@@ -12,6 +12,7 @@ import {
 import axios from "axios";
 import Avatar from "./Avatar";
 
+
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
@@ -52,7 +53,7 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div>
-            <NavLink to="/profile" className="user-link-menu">
+          <NavLink to={`/profiles/${currentUser?.profile_id}`} className="user-link-menu">
               Profile
             </NavLink>
           </div>

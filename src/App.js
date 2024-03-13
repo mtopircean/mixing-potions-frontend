@@ -12,15 +12,12 @@ import PostPage from "./pages/posts/PostPage";
 import PostsPage from "./pages/posts/PostsPage";
 import PostCreator from "./components/PostCreator";
 import PostEditForm from "./pages/posts/PostEditForm";
-import { useCurrentUser } from "./contexts/CurrentUserContext";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import ProfilePasswordChange from "./pages/profiles/ProfilePasswordChange";
-import Profile from "./pages/profiles/Profile";
 
 function App() {
-const currentUser = useCurrentUser();
 
   return (
     <div className="App">
@@ -36,14 +33,13 @@ const currentUser = useCurrentUser();
           />
           <Route exact path="/login" render={() => <LoginForm />} />
           <Route exact path="/register" render={() => <RegisterForm />} />
-          <Route exact path="/profile" render={() => <ProfilePage />} />
+          <Route exact path="/profile/:id" render={() => <ProfilePage />} />
           <Route path="/profiles/:id/edit" component={ProfileEditForm} />
           <Route path="/profiles/:id/password-change" component={ProfilePasswordChange} />
           <Route exact path="/gdpr" render={() => <h1></h1>} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route path="/edit/:id" component={PostEditForm} />
-          <Route path="/profile-page" render={() => <Profile />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
         <PostCreator />
