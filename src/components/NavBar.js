@@ -53,7 +53,7 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div>
-          <NavLink to={`/profiles/${currentUser?.profile_id}`} className="user-link-menu">
+          <NavLink to={`/profile/${currentUser?.profile_id}`} className="user-link-menu">
               Profile
             </NavLink>
           </div>
