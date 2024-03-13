@@ -17,6 +17,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import ProfilePasswordChange from "./pages/profiles/ProfilePasswordChange";
+import Profile from "./pages/profiles/Profile";
 
 function App() {
 const currentUser = useCurrentUser();
@@ -42,6 +43,7 @@ const currentUser = useCurrentUser();
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route path="/edit/:id" component={PostEditForm} />
+          <Route path="/profile-page" render={() => <Profile />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
         <PostCreator />

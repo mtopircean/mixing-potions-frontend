@@ -49,7 +49,6 @@ const Post = (props) => {
     const fetchOwnerProfileImage = async () => {
       try {
         const response = await axios.get(`/posts/${owner_id}/`);
-        console.log("Response from profile API:", response.data);
         setOwnerProfileImage(response.data.owner_image);
       } catch (error) {
         console.error("Error fetching owner image:", error);
@@ -64,14 +63,12 @@ const Post = (props) => {
   };
 
   const handleCommentSubmitted = (newComment) => {
-    console.log("New comment:", newComment);
     setComments([newComment, ...comments]);
     setEditMode(false);
     setEditComment(null);
   };
 
   const handleEditComment = (comment) => {
-    console.log("Editing comment:", comment);
     setEditMode(true);
     setEditComment(comment);
   };

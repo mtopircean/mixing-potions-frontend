@@ -10,6 +10,8 @@ import { MdClear } from "react-icons/md";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
@@ -20,6 +22,7 @@ function PostsPage() {
   const [showClearButton, setShowClearButton] = useState(false);
   const [showUnfollowButton, setShowUnfollowButton] = useState(false);
   const currentUser = useCurrentUser();
+  const history = useHistory();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -49,7 +52,8 @@ function PostsPage() {
   };
 
   const handleUserClick = (username) => {
-    setSelectedUser(username);
+    console.log("Clicked username:", username); 
+    history.push(`/profile-page/${username}`);
   };
 
   const toggleBodySystem = (system) => {
@@ -131,9 +135,14 @@ function PostsPage() {
 
                   return userMatch && bodySystemMatch && searchMatch;
                 })
-                .map((post) => (
-                  <Post key={post.id} {...post} setPosts={setPosts} />
-                ))
+                .map((post) => {
+                  try {
+                    return <Post key={post.id} {...post} setPosts={setPosts} />;
+                  } catch (error) {
+                    console.error("Error rendering post:", error);
+                    return null; // Skip the post if an error occurs
+                  }
+                })
             ) : (
               <Container>
                 <h5>No result</h5>
@@ -166,17 +175,16 @@ function PostsPage() {
             </div>
             {sortByLikes().map((user) => (
               <div key={user.owner}>
-                <p
-                  className={
-                    selectedUser === user.owner ? styles.selectedUser : ""
-                  }
-                >
-                  <a href="#" onClick={() => handleUserClick(user.owner)}>
-                    <strong>{user.owner} </strong>
-                  </a>
-                  has {user.like_count} likes
-                </p>
-              </div>
+              <p>
+                <a href="#" onClick={(e) => {
+                  e.preventDefault();
+                  console.log("Clicked user:", user);
+                }}>
+                  <strong>{user.owner}</strong>
+                </a>{" "}
+                has {user.like_count} likes
+              </p>
+            </div>
             ))}
           </Container>
         )}
