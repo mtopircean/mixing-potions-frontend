@@ -136,11 +136,14 @@ function PostEditForm({ post }) {
     }
   };
 
+  
+
   useEffect(() => {
     if (!currentUser) {
       history.push("/");
     }
   }, [currentUser, history]);
+  
 
   return (
     <Container>

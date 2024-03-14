@@ -144,8 +144,19 @@ const PostPage = () => {
         </Col>
         <Col md={6}>
           <div className={styles.CommentsAreaWrapper}>
+            {post.products.map((product, index) => (
+              <div key={index}>
+                <p className="card-text">
+                <span>Condition:  </span>{product.condition.join(", ")}
+                </p>
+                <p className="card-text">
+                  <span>Body Systems: </span>{product.body_systems.join(", ")}
+                </p>
+              </div>
+            ))}
             <h5 className={styles["post-description-detail"]}>Description</h5>
             <p>{post.description}</p>
+            
           </div>
           <div>
             <div className={styles.CommentsAreaWrapper}>
@@ -224,6 +235,7 @@ const PostPage = () => {
                 {post.products.map((product, index) => (
                   <div key={index} className="col-md-4 mb-4">
                     <div className="card">
+                      {console.log("Product data:", product)}
                       <img
                         src={product.image}
                         className="card-img-top"
