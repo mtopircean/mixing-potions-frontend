@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Like from "../../components/Like";
 
 import {
   FaThumbsUp,
@@ -44,6 +45,8 @@ const Post = (props) => {
   const currentUser = useCurrentUser();
   const [ownerProfileImage, setOwnerProfileImage] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(like_count);
 
   useEffect(() => {
     const fetchOwnerProfileImage = async () => {
@@ -106,7 +109,7 @@ const Post = (props) => {
     <Card className={`${styles.Post} mb-3`}>
       <Card.Body>
         <Media className="align-items-center justify-content-between">
-          <Link to={`/profile/${owner_id}`} className={styles.usernameLink} >
+          <Link to={`/profile/${owner_id}`} className={styles.usernameLink}>
             <Avatar src={ownerProfileImage} className={styles.avatarImage} />
             {owner}
           </Link>
@@ -125,8 +128,7 @@ const Post = (props) => {
       </Card.Body>
       <Card.Footer className={styles.PostFooter}>
         <div className={styles.LikesSection}>
-          <FaThumbsUp />
-          <span>{like_count}</span>
+          <Like postId={id} isLiked={isLiked} likeCount={likeCount} />
         </div>
         {currentUser && currentUser.username !== owner && (
           <>
