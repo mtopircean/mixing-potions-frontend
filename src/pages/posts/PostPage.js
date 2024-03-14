@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../../styles/PostPage.module.css";
-import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPenSquare,
+  faTrashAlt,
+  faCirclePlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { FaThumbsUp } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams, useHistory } from "react-router-dom";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Card } from "react-bootstrap";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import CreateComment from "../../components/CreateComment";
 import { toast } from "react-toastify";
@@ -24,6 +29,7 @@ const PostPage = () => {
   const [likeCount, setLikeCount] = useState(0);
   const isCurrentUserOwner =
     currentUser && post && post.owner === currentUser.username;
+  const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -34,7 +40,9 @@ const PostPage = () => {
         setPost(postData);
         setLikeCount(postData.like_count);
         if (currentUser) {
-          setIsLiked(postData.likes.some(like => like.owner_id === currentUser.id));
+          setIsLiked(
+            postData.likes.some((like) => like.owner_id === currentUser.id)
+          );
         }
       } catch (error) {
         console.error("Error fetching post:", error);
@@ -43,6 +51,43 @@ const PostPage = () => {
     console.log("ID:", id);
     fetchPost();
   }, [id]);
+
+  useEffect(() => {
+    const checkFollowing = async () => {
+      try {
+        const response = await axios.get(`/followers/${post.owner_id}/check`);
+        setIsFollowing(response.data.following);
+      } catch (error) {
+        console.error("Error checking follow status:", error);
+      }
+    };
+
+    if (currentUser && post) {
+      checkFollowing();
+    }
+  }, [currentUser, post]);
+
+  const handleFollowUser = async () => {
+    try {
+      const response = await axios.post("/followers/", {
+        followed: post.owner_id,
+      });
+      setIsFollowing(true);
+      toast.success(`You are now following ${post.owner}`);
+    } catch (error) {
+      console.error("Error following user:", error);
+    }
+  };
+
+  const handleUnfollowUser = async () => {
+    try {
+      const response = await axios.delete(`/followers/${post.owner_id}`);
+      setIsFollowing(false);
+      toast.success(`You have unfollowed ${post.owner}`);
+    } catch (error) {
+      console.error("Error unfollowing user:", error);
+    }
+  };
 
   const handleLike = async () => {
     try {
@@ -59,7 +104,7 @@ const PostPage = () => {
     try {
       const response = await axios.delete(`/posts/${id}/like`);
       setIsLiked(false);
-      setLikeCount(likeCount - 1); 
+      setLikeCount(likeCount - 1);
       toast.success("You unliked this post!");
     } catch (error) {
       console.error("Error unliking post:", error);
@@ -141,6 +186,12 @@ const PostPage = () => {
     <div>
       <Row>
         <Col md={6}>
+          <Link
+            to={`/profile/${post.owner_id}`}
+            className={styles.usernameLink}
+          >
+            {post.owner}
+          </Link>
           <div className="arrow-button">
             {isCurrentUserOwner && (
               <Button
@@ -169,10 +220,28 @@ const PostPage = () => {
                 style={{ width: "100%", maxHeight: "100%" }}
               />
             )}
-            <div className={styles.LikesSection}>
-            <FaThumbsUp />
-            <span>{likeCount}</span>
-          </div>
+            <Row>
+              <Col md={6}>
+                <div className={styles.LikesSection}>
+                  <FaThumbsUp />
+                  <span>{likeCount}</span>
+                </div>
+              </Col>
+              <Col md={6} className="d-flex justify-content-end">
+                {isFollowing ? (
+                  <Link to="/profile" className={styles.following}>
+                    Following...
+                  </Link>
+                ) : (
+                  <Button
+                    onClick={handleFollowUser}
+                    className={styles.followButton}
+                  >
+                    Follow <FontAwesomeIcon icon={faCirclePlus} />
+                  </Button>
+                )}
+              </Col>
+            </Row>
           </div>
         </Col>
         <Col md={6}>
@@ -180,16 +249,17 @@ const PostPage = () => {
             {post.products.map((product, index) => (
               <div key={index}>
                 <p className="card-text">
-                <span>Condition:  </span>{product.condition.join(", ")}
+                  <span>Condition: </span>
+                  {product.condition.join(", ")}
                 </p>
                 <p className="card-text">
-                  <span>Body Systems: </span>{product.body_systems.join(", ")}
+                  <span>Body Systems: </span>
+                  {product.body_systems.join(", ")}
                 </p>
               </div>
             ))}
             <h5 className={styles["post-description-detail"]}>Description</h5>
             <p>{post.description}</p>
-            
           </div>
           <div>
             <div className={styles.CommentsAreaWrapper}>

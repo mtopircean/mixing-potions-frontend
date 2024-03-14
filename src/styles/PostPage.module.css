@@ -116,4 +116,21 @@
   .LikesSection span {
     margin-left: 5px;
   }
+
+  .followButton {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color:#023e85;
+  }
   
+  .followButton:hover {
+    background-color: #023e85;
+    color:#ffff;
+  }
+  
+  .usernameLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
