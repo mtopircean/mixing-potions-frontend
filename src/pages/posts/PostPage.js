@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../../styles/PostPage.module.css";
 import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { FaThumbsUp } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
@@ -19,6 +20,8 @@ const PostPage = () => {
   const [editComment, setEditComment] = useState(null);
   const currentUser = useCurrentUser();
   const history = useHistory();
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
   const isCurrentUserOwner =
     currentUser && post && post.owner === currentUser.username;
 
@@ -29,6 +32,10 @@ const PostPage = () => {
         const postData = response.data;
         console.log("Fetched post data:", postData);
         setPost(postData);
+        setLikeCount(postData.like_count);
+        if (currentUser) {
+          setIsLiked(postData.likes.some(like => like.owner_id === currentUser.id));
+        }
       } catch (error) {
         console.error("Error fetching post:", error);
       }
@@ -36,6 +43,28 @@ const PostPage = () => {
     console.log("ID:", id);
     fetchPost();
   }, [id]);
+
+  const handleLike = async () => {
+    try {
+      const response = await axios.post(`/posts/${id}/like`);
+      setIsLiked(true);
+      setLikeCount(likeCount + 1); // Increment like count
+      toast.success("You liked this post!");
+    } catch (error) {
+      console.error("Error liking post:", error);
+    }
+  };
+
+  const handleUnlike = async () => {
+    try {
+      const response = await axios.delete(`/posts/${id}/like`);
+      setIsLiked(false);
+      setLikeCount(likeCount - 1); 
+      toast.success("You unliked this post!");
+    } catch (error) {
+      console.error("Error unliking post:", error);
+    }
+  };
 
   const handleEdit = () => {
     history.push(`/edit/${id}`);
@@ -140,6 +169,10 @@ const PostPage = () => {
                 style={{ width: "100%", maxHeight: "100%" }}
               />
             )}
+            <div className={styles.LikesSection}>
+            <FaThumbsUp />
+            <span>{likeCount}</span>
+          </div>
           </div>
         </Col>
         <Col md={6}>

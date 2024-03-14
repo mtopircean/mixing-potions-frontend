@@ -105,4 +105,15 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .LikesSection {
+    display: flex;
+    align-items: center; 
+    color:#1877F2;
+    font-size: large;
+  }
+
+  .LikesSection span {
+    margin-left: 5px;
+  }
   

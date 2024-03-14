@@ -83,6 +83,7 @@ function PostCreateForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("Image state:", image);
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
