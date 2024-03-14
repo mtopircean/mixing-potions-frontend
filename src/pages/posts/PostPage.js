@@ -6,16 +6,16 @@ import {
   faTrashAlt,
   faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { FaThumbsUp } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams, useHistory } from "react-router-dom";
-import { Row, Col, Button, Card } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import CreateComment from "../../components/CreateComment";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Like from "../../components/Like";
 
 const PostPage = () => {
   const [post, setPost] = useState(null);
@@ -25,11 +25,11 @@ const PostPage = () => {
   const [editComment, setEditComment] = useState(null);
   const currentUser = useCurrentUser();
   const history = useHistory();
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
   const isCurrentUserOwner =
     currentUser && post && post.owner === currentUser.username;
   const [isFollowing, setIsFollowing] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -86,28 +86,6 @@ const PostPage = () => {
       toast.success(`You have unfollowed ${post.owner}`);
     } catch (error) {
       console.error("Error unfollowing user:", error);
-    }
-  };
-
-  const handleLike = async () => {
-    try {
-      const response = await axios.post(`/posts/${id}/like`);
-      setIsLiked(true);
-      setLikeCount(likeCount + 1); // Increment like count
-      toast.success("You liked this post!");
-    } catch (error) {
-      console.error("Error liking post:", error);
-    }
-  };
-
-  const handleUnlike = async () => {
-    try {
-      const response = await axios.delete(`/posts/${id}/like`);
-      setIsLiked(false);
-      setLikeCount(likeCount - 1);
-      toast.success("You unliked this post!");
-    } catch (error) {
-      console.error("Error unliking post:", error);
     }
   };
 
@@ -223,8 +201,7 @@ const PostPage = () => {
             <Row>
               <Col md={6}>
                 <div className={styles.LikesSection}>
-                  <FaThumbsUp />
-                  <span>{likeCount}</span>
+                <Like postId={id} isLiked={isLiked} likeCount={likeCount} />
                 </div>
               </Col>
               <Col md={6} className="d-flex justify-content-end">
