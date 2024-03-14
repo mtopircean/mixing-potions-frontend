@@ -89,7 +89,7 @@ function PostCreateForm() {
     formData.append("image", image);
     console.log("Form Data:", formData);
     selectedProducts.forEach((product) => {
-      formData.append("products[]", product.id);
+      formData.append("products", product.id);
     });
 
     try {
@@ -120,7 +120,7 @@ function PostCreateForm() {
               onSubmit={handleSubmit}
               action="/posts/"
               method="post"
-              enctype="multipart/form-data"
+              encType="multipart/form-data"
             >
               {(selectedImage || customImage) && (
                 <Image
