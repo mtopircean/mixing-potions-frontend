@@ -8,13 +8,13 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import {
   faPenSquare,
   faTrashAlt,
-  faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Like from "../../components/Like";
+import Follow from "../../components/Follow";
 
 import {
   FaThumbsUp,
@@ -94,16 +94,6 @@ const Post = (props) => {
     }
   };
 
-  const handleFollowUser = async () => {
-    try {
-      const response = await axios.post("/followers/", { followed: owner_id });
-      setIsFollowing(true);
-      toast.success(`You are now following ${owner}`);
-    } catch (error) {
-      console.error("Error following user:", error);
-    }
-  };
-
   return (
     <Card className={`${styles.Post} mb-3`}>
       <Card.Body>
@@ -129,22 +119,7 @@ const Post = (props) => {
         <div className={styles.LikesSection}>
           <Like postId={id} isLiked={isLiked} likeCount={likeCount} />
         </div>
-        {currentUser && currentUser.username !== owner && (
-          <>
-            {isFollowing ? (
-              <Link to="/profile" className={styles.following}>
-                Following...
-              </Link>
-            ) : (
-              <Button
-                onClick={handleFollowUser}
-                className={styles.followButton}
-              >
-                Follow <FontAwesomeIcon icon={faCirclePlus} />
-              </Button>
-            )}
-          </>
-        )}
+        <Follow ownerId={owner_id} />
         <div className={styles.CommentsSection}>
           <span>{comment_count}</span>
           <FaComment />
