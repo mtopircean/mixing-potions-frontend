@@ -26,32 +26,30 @@ function CreateComment(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     try {
       if (editMode && editCommentId) {
-        console.log("Inside handleSubmit");
-        console.log("Data to be sent in PUT request:", {
-          comment_text: commentText
-        });
-        await axiosRes.put(`/comments/${editCommentId}/`, {
+        const response = await axiosRes.put(`/comments/${editCommentId}/`, {
           post: props.postId,
           comment_text: commentText
-      });
-      toast.success("Comment updated successfully!");
-      props.onCommentSubmitted({ id: editCommentId, comment_text: commentText });
-      setEditMode(false);
-      setEditCommentId(null);
-    } else {
-      console.log("Adding new comment");
-      const { data } = await axiosRes.post("/comments/", {
-        post: props.postId,
-        comment_text: commentText
-      });
-      toast.success("Comment added successfully!");
-      props.onCommentSubmitted(data);
-    }
+        });
+        const updatedComment = response.data;
+        toast.success("Comment updated successfully!");
+        props.onCommentSubmitted(updatedComment);
+        setEditMode(false);
+        setEditCommentId(null);
+      } else {
+        const response = await axiosRes.post("/comments/", {
+          post: props.postId,
+          comment_text: commentText
+        });
+        const newComment = response.data;
+        toast.success("Comment added successfully!");
+        props.onCommentSubmitted(newComment);
+      }
+      setCommentText("");
     } catch (error) {
-      console.error("Error submitting post:", error);
+      console.error("Error submitting comment:", error);
     }
   };
 
