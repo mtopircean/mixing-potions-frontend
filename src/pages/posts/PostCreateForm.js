@@ -58,37 +58,20 @@ function PostCreateForm() {
     );
   };
 
-  const handleCheckboxChange = (product) => {
-    const productImage = product.image;
-    console.log("Product Image URL:", productImage);
-    if (selectedImage === productImage) {
-      setSelectedImage(null);
-    } else {
-      setSelectedImage(productImage);
-    }
-  };
-
   const handleCustomImageChange = (event) => {
     if (event.target.files.length) {
       const selectedFile = event.target.files[0];
-      console.log("Selected file:", selectedFile);
-      console.log("Image Data before setting:", image);
-      URL.revokeObjectURL(selectedImage);
-      setSelectedImage(null);
       setCustomImage(URL.createObjectURL(selectedFile));
       setImage(selectedFile);
-      console.log("Image Data after setting:", image);
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Image state:", image);
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
     formData.append("image", image);
-    console.log("Form Data:", formData);
     selectedProducts.forEach((product) => {
       formData.append("products", product.id);
     });
@@ -158,12 +141,6 @@ function PostCreateForm() {
                         >
                           <BsX />
                         </Button>
-                        <Form.Check
-                          type="checkbox"
-                          className={styles["form-check-label"]}
-                          label="Post image"
-                          onChange={() => handleCheckboxChange(product)}
-                        />
                       </div>
                     </Col>
                   ))}

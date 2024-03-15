@@ -34,7 +34,6 @@ const Post = (props) => {
     created_at,
     like_count,
     comment_count,
-    profile_id,
     comments: initialComments,
   } = props;
 
