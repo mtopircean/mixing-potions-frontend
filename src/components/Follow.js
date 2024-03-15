@@ -13,7 +13,8 @@ const FollowButton = ({ ownerId }) => {
   const currentUser = useCurrentUser();
 
   const handleFollowUser = async () => {
-    if (!isFollowing) {
+    dsadsada
+    if (!isFollowing) {dsa
       try {
         const response = await axios.post("/followers/", { followed: ownerId });
         setIsFollowing(true);
