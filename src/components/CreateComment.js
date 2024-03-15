@@ -38,6 +38,7 @@ function CreateComment(props) {
         props.onCommentSubmitted(updatedComment);
         setEditMode(false);
         setEditCommentId(null);
+        window.location.reload();
       } else {
         const response = await axiosRes.post("/comments/", {
           post: props.postId,
