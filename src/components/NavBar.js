@@ -12,7 +12,6 @@ import {
 import axios from "axios";
 import Avatar from "./Avatar";
 
-
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
@@ -46,14 +45,17 @@ const NavBar = () => {
           )
         }
       >
-        <NavDropdown.Item>
+        <NavDropdown.Item className="user-menu">
           <div>
             <NavLink to="/" className="user-link-menu" onClick={handleLogout}>
               Logout
             </NavLink>
           </div>
           <div>
-          <NavLink to={`/profile/${currentUser?.profile_id}`} className="user-link-menu">
+            <NavLink
+              to={`/profile/${currentUser?.profile_id}`}
+              className="user-link-menu"
+            >
               Profile
             </NavLink>
           </div>
@@ -94,12 +96,22 @@ const NavBar = () => {
                   </NavLink>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
-                  <a href="https://beta-doterra.myvoffice.com/cosminatopircean/#/joinTeam" className="nav-link-menu" target="_blank">
+                  <a
+                    href="https://beta-doterra.myvoffice.com/cosminatopircean/#/joinTeam"
+                    className="nav-link-menu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Join our team
                   </a>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
-                  <a href="https://beta-doterra.myvoffice.com/cosminatopircean/#/contactUs" className="nav-link-menu" target="_blank">
+                  <a
+                    href="https://beta-doterra.myvoffice.com/cosminatopircean/#/contactUs"
+                    className="nav-link-menu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Contact
                   </a>
                 </NavDropdown.Item>

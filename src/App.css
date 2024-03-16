@@ -32,6 +32,26 @@ body {
   border-bottom: #8375ac1e 0.5px solid;
 }
 
+a.user-link-menu.active {
+  background: transparent;
+  color: #54547c;
+}
+
+a.user-link-menu {
+  background: transparent;
+  color: #54547c;
+  text-decoration: none;
+}
+
+a.user-link-menu:hover{
+  color: #06063f;
+}
+
+
+a.user-menu.dropdown-item:hover {
+  background-color: transparent;
+}
+
 .nav-link {
   text-align: right;
   font-size: large;
