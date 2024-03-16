@@ -22,7 +22,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .name-header {
@@ -33,13 +32,8 @@
     margin-bottom: 20px;
     margin-top: 60px;
     align-items: flex-start;
+    text-align: center;
 }
-
-@media (max-width: 767px) {
-    .name-header {
-        margin-top: 20px;
-    }
-  }
 
 .profile-detail {
     display: flex;
@@ -65,24 +59,38 @@
 }
 
 .unfollowUser {
-    margin-left: 5px;
     background-color: rgba(0, 0, 0, 0);
     border: none;
-    color:#e33720;
+    color: #e33720;
     display: flex;
-  align-items: center;
+    align-items: center;
 }
 
 .unfollowUser:hover {
-    background-color:#e33720 ;
-    color:#ffff;
+    background-color: #e33720;
+    color: #ffff;
 }
 
 .unfollowUser span {
     margin-right: 0.5rem;
     line-height: 1;
-  }
+}
 
-  .password-button {
-    color:#295d3b;
-  }
+.password-button {
+    color: #295d3b;
+}
+
+.user-posts-container {
+    flex-direction: row;
+}
+
+p.no-followed {
+    color: grey;
+}
+
+@media (max-width: 767px) {
+
+    .followed-users {
+        margin-bottom: 20px;
+    }
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/ProfilePage.module.css";
-import { Link,  useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenToSquare,
@@ -107,26 +107,27 @@ const ProfilePage = () => {
             <div>
               <h2>{profile.username}</h2>
               {currentUser && currentUser.username === profile.username && (
-              <div className={styles["edit-delete-buttons"]}>
-                <NavLink
-                  to={`/profiles/${profile.id}/edit`}
-                  className={styles["edit-button"]}
-                  activeClassName={styles["active"]}
-                >
-                  Edit <FontAwesomeIcon icon={faPenToSquare} />
-                </NavLink>
-                <button
-                  className={styles["delete-button"]}
-                  onClick={handleDelete}
-                >
-                  Delete <FontAwesomeIcon icon={faTrashCan} />
-                </button>
-                <Link
-                  to={`/profiles/:id/password-change`}
-                  className={`${styles["password-button"]} mt-3`}
-                >
-                  Change password <FontAwesomeIcon icon={faKey} />
-                </Link>
+                <div className={styles["edit-delete-buttons"]}>
+                  <NavLink
+                    to={`/profiles/${profile.id}/edit`}
+                    className={styles["edit-button"]}
+                    activeClassName={styles["active"]}
+                  >
+                    Edit <FontAwesomeIcon icon={faPenToSquare} />
+                  </NavLink>
+                  <button
+                    className={styles["delete-button"]}
+                    onClick={handleDelete}
+                  >
+                    Delete <FontAwesomeIcon icon={faTrashCan} />
+                  </button>
+                  <br />
+                  <Link
+                    to={`/profiles/:id/password-change`}
+                    className={`${styles["password-button"]} mt-3`}
+                  >
+                    Change password <FontAwesomeIcon icon={faKey} />
+                  </Link>
                 </div>
               )}
             </div>
@@ -174,21 +175,13 @@ const ProfilePage = () => {
       ) : (
         <div>Error: Profile not found</div>
       )}
-      <hr></hr>
+      <hr />
 
       {userPosts && userPosts.length > 0 && (
         <Row>
-          <Col xs={12} md={6} className="justify-content-center">
-            <h4>My Posts:</h4>
-            <Row>
-              {userPosts.map((post) => (
-                <Col xs={12} md={6} key={post.id} className="post-size mb-3">
-                  <Post {...post} />
-                </Col>
-              ))}
-            </Row>
-          </Col>
+          
           <Col xs={12} md={6}>
+            {followedUsers && followedUsers.length > 0 ? (
             <div
               className={`${styles["followed-users"]} d-flex flex-column justify-content-center`}
             >
@@ -212,6 +205,21 @@ const ProfilePage = () => {
                 ))}
               </div>
             </div>
+            ) : (
+              <div className="text-center">
+                <h4 className="text-center">Followed Users:</h4>
+                <p className="no-followed">No followed users</p></div>
+            )}
+          </Col>
+          <Col xs={12} md={6} className="justify-content-center text-center mb-3">
+            <h4>My Posts:</h4>
+            <Row>
+              {userPosts.map((post) => (
+                <Col xs={12} md={12} key={post.id} className="post-size mb-3">
+                  <Post {...post} />
+                </Col>
+              ))}
+            </Row>
           </Col>
         </Row>
       )}
