@@ -50,7 +50,9 @@ const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
           </Button>
         ))}
       </div>
+      <div>
       <h5 className="text-center">Select by Body Systems:</h5>
+      </div>
       <hr></hr>
       <div className={styles["systems-button-container"]}>
         {uniqueSystems.map((system, index) => (

@@ -1,9 +1,5 @@
 .system-panel {
-  background-color: #ffff;
-  border: 2px solid #d9d2e9;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 .system-panel h5 {
@@ -16,22 +12,26 @@
 }
 
 .systems-button-container > div {
-  margin-right: 10px;
-  margin-bottom: 10px;
 }
 
 .systems-button {
-  background-color: #d9d2e9;
+  background-color: transparent;
   color: #54547c;
-  border: 2px solid #d9d2e9;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  border: none;
+  font-size: medium;
 }
+
+@media (max-width: 768px) {
+  .systems-button {
+    font-size: small;
+  }
+}
+
 
 .systems-button:hover {
   background-color: #54547c;
   color: #d9d2e9;
   border: 2px solid #54547c;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
 .selected-filter {
