@@ -96,9 +96,6 @@ function LoginForm() {
           md={6}
           className="d-flex justify-content-center align-items-center flex-column"
         >
-          <div className="d-none d-md-block text-center">
-            <img src={registerImage} alt="Register" style={{ maxWidth: '70%', marginTop: '5px', marginBottom: '20px'  }} />
-          </div>
           <h5 id="register-login">Don`t have an account yet.</h5>
           <NavLink to="/register" className={styles["register-link"]}>REGISTER</NavLink>
         </Col>
