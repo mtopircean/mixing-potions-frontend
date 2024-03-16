@@ -6,10 +6,13 @@ import { useParams } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 
 const ProfileEditForm = () => {
   const { id } = useParams();
   const currentUser = useCurrentUser();
+  console.log("currentUser.id:", currentUser.id);
+  console.log("id:", id);
   const history = useHistory();
   const [formData, setFormData] = useState(
     {
@@ -27,7 +30,6 @@ const fetchProfileData = async () => {
   try {
     const response = await axios.get(`/profiles/${id}/`);
     const profileData = response.data;
-    console.log("Profile Data:", profileData);
     setFormData(profileData);
   } catch (error) {
     console.error("Error fetching profile data:", error);
@@ -56,6 +58,10 @@ const handleInputChange = (event) => {
   const {name, value } = event.target;
   setFormData({ ...formData, [name]: value });
 };
+
+if (!currentUser) {
+  return <Redirect to="/" />;
+}
 
 const handleCancel = () => {
   history.push("/profile");
