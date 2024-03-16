@@ -26,6 +26,7 @@
 
 .comments-detail {
     margin-top: 5px;
+    font-weight: bold;
 }
 
 .arrow-button {
@@ -44,6 +45,8 @@
     max-height: 200px;
     overflow-y: auto;
     padding-right: 10px;
+    margin-top: 30px;
+    margin-bottom: 40px;
   }
   
   
@@ -129,4 +132,14 @@
 
   .post-title-detail {
     margin-bottom: -10px;
+}
+
+.post-description-detail {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.listedSpecs {
+  margin-left: 5px;
+  font-size: small;
 }

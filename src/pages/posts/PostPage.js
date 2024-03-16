@@ -160,6 +160,13 @@ const PostPage = () => {
     return <div>Loading...</div>;
   }
 
+  const uniqueBodySystems = Array.from(
+    new Set(post.products.flatMap((product) => product.body_systems))
+  );
+  const uniqueConditions = Array.from(
+    new Set(post.products.flatMap((product) => product.condition))
+  );
+
   return (
     <div>
       <Row>
@@ -183,20 +190,18 @@ const PostPage = () => {
             )}
           </div>
           <div>
-          <div className="text-center">
-          <div>
-    <h4 className={styles["post-title-detail"]}>
-      {post.title}
-    </h4>
-    <br />
-    <span className={styles["by-title"]}> by.........</span>
-    <Link
-      to={`/profile/${post.owner_id}`}
-      className={styles.usernameLink}
-    >
-      {post.owner}
-    </Link>
-  </div>
+            <div className="text-center">
+              <div>
+                <h4 className={styles["post-title-detail"]}>{post.title}</h4>
+                <br />
+                <span className={styles["by-title"]}> by.........</span>
+                <Link
+                  to={`/profile/${post.owner_id}`}
+                  className={styles.usernameLink}
+                >
+                  {post.owner}
+                </Link>
+              </div>
             </div>
             {post.image && (
               <img
@@ -230,22 +235,24 @@ const PostPage = () => {
           </div>
         </Col>
         <Col md={6}>
+          <div className={styles.descriptionPost}>
+            <h5 className={styles["post-description-detail"]}>Description</h5>
+            <p>{post.description}</p>
+          </div>
           <div className={styles.CommentsAreaWrapper}>
             {post.products.map((product, index) => (
               <div key={index}>
                 <p className="card-text">
-                  <span>Condition: </span>
-                  {product.condition.join(", ")}
+                  <h6>Condition: <span className={styles.listedSpecs}>{product.condition.join(", ")}</span></h6>
                 </p>
                 <p className="card-text">
-                  <span>Body Systems: </span>
-                  {product.body_systems.join(", ")}
+                  <h6>Body Systems: <span className={styles.listedSpecs}>{product.body_systems.join(", ")}</span></h6>
+                  
                 </p>
               </div>
             ))}
-            <h5 className={styles["post-description-detail"]}>Description</h5>
-            <p>{post.description}</p>
           </div>
+          <hr />
           <div>
             <div className={styles.CommentsAreaWrapper}>
               <h5
@@ -257,7 +264,8 @@ const PostPage = () => {
                 post.comments.map((comment, index) => (
                   <div key={index} className={styles.Comment}>
                     <div className={styles.CommentOwner}>
-                      <p> {comment.owner}</p>
+                    <Link to={`/profile/${comment.owner_profile.id}`}>{comment.owner}</Link>
+                    {console.log("Owner ID:", comment.owner_id)}
                       {currentUser &&
                         currentUser.username === comment.owner && (
                           <span className={styles.CommentBubble}>
@@ -281,7 +289,6 @@ const PostPage = () => {
                   </div>
                 ))}
             </div>
-            <hr />
             <div className={styles.AddComment}>
               <CreateComment
                 postId={id}
