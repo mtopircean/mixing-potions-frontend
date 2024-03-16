@@ -4,6 +4,7 @@ import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 import registerImage from '../../assets/register.jpg';
+import styles from "../../styles/LoginRegisterPage.module.css"
 
 function LoginForm() {
   const setCurrentUser = useSetCurrentUser();
@@ -36,10 +37,10 @@ function LoginForm() {
   };
 
   return (
-    <div className="login-register login-container">
+    <div className={`${styles["login-register"]} ${styles["login-container"]}`}>
       <Row>
         <Col md={6} className="d-flex flex-column">
-          <Card className="login-card">
+          <Card className={styles["login-card"]}>
             <Card.Body>
               <Card.Title className="text-center">Login:</Card.Title>
               <Form onSubmit={handleSubmit}>
@@ -78,7 +79,7 @@ function LoginForm() {
                 <Button
                   variant="primary"
                   type="submit"
-                  className="login-button"
+                  className={styles["login-button"]}
                 >
                   Login
                 </Button>
@@ -99,7 +100,7 @@ function LoginForm() {
             <img src={registerImage} alt="Register" style={{ maxWidth: '70%', marginTop: '5px', marginBottom: '20px'  }} />
           </div>
           <h5 id="register-login">Don`t have an account yet.</h5>
-          <NavLink to="/register" className="register-link">REGISTER</NavLink>
+          <NavLink to="/register" className={styles["register-link"]}>REGISTER</NavLink>
         </Col>
       </Row>
     </div>

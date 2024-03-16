@@ -1,0 +1,98 @@
+.login-register {
+  margin-top: 2rem;
+}
+
+.register-button {
+  width: 50%;
+  background-color: #599960;
+  border: none;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.register-button.login-card {
+  color: #599960;
+  background-color: #ffff;
+}
+
+.login-button {
+  width: 80%;
+  background-color: #8375ac;
+  border: none;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.login-button:hover {
+  color: #8375ac;
+  background-color: #ffff;
+}
+
+.login-card {
+  background-color: transparent;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+}
+
+
+.login-card input {
+  border: 1px solid #8375ac;
+}
+
+.register-link {
+  color: #8375ac;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link:hover {
+  color: purple !important;
+}
+
+
+.d-flex {
+  display: -ms-flexbox !important;
+  display: flex !important;
+  align-items: center;
+}
+
+.full-width {
+  width: 50%;
+}
+
+.register-card {
+  background-color: transparent;
+  margin-bottom: 80px;
+  margin-top: 30px;
+  border: none;
+}
+
+.register-card input {
+  border: 1px solid #599960;
+}
+
+.register-card textarea {
+  border: 1px solid #599960;
+}
+
+@media (max-width: 767px) {
+  .register-card {
+    margin-top: 20px;
+    margin-bottom: 60px;
+  }
+
+  .login-card {
+    margin-top: 0px;
+  }
+
+  #register-login {
+    margin-top: 40px;
+  }
+
+  .full-width {
+    width: 90%;
+  }
+}

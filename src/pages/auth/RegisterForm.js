@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import axios from "axios";
 import joinUsImage from "../../assets/join-us.jpg";
+import styles from "../../styles/LoginRegisterPage.module.css"
 
 const RegisterForm = () => {
   const history = useHistory();
@@ -35,8 +36,8 @@ const RegisterForm = () => {
 
   return (
     <Row className="align-items-center register-container">
-      <Col sm={6} className="d-flex justify-content-center">
-        <Card className="register-card">
+      <Col sm={12} className="d-flex justify-content-center">
+      <Card className={`${styles["register-card"]} ${styles["full-width"]}`}>
           <Card.Body>
             <Card.Title className="text-center">Register:</Card.Title>
             <Form onSubmit={handleSubmit}>
@@ -102,7 +103,7 @@ const RegisterForm = () => {
               <Button
                 variant="primary"
                 type="submit"
-                className="register-button"
+                className={styles["register-button"]}
               >
                 Register
               </Button>
@@ -118,15 +119,6 @@ const RegisterForm = () => {
             </Form>
           </Card.Body>
         </Card>
-      </Col>
-      <Col sm={6} className="d-flex justify-content-center">
-        <div className="d-none d-md-block text-center">
-          <img
-            src={joinUsImage}
-            alt="Join Us"
-            style={{ height: "400px", width: "550px" }}
-          />
-        </div>
       </Col>
     </Row>
   );
