@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Form, Row, Button, Alert } from "react-bootstrap";
+import { Col, Form, Row, Button, Alert, Container } from "react-bootstrap";
 import {
   useHistory,
   useParams,
@@ -8,6 +8,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import styles from "../../styles/ProfilePasswordChange.module.css"
+import { Redirect } from 'react-router-dom';
 
 const ProfilePasswordChange = () => {
   const history = useHistory();
@@ -45,8 +46,12 @@ const ProfilePasswordChange = () => {
     }
   };
 
+  if (!currentUser) {
+    return <Redirect to="/" />;
+  }
+
   return (
-    <>
+    <Container>
       <Row className="justify-content-center">
         
         <Col md={8}>
@@ -89,7 +94,8 @@ const ProfilePasswordChange = () => {
           </Form>
         </Col>
       </Row>
-    </>
+
+    </Container>
   );
 };
 
