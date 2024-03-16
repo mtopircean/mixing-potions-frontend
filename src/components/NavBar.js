@@ -3,7 +3,7 @@ import { Container, NavDropdown } from "react-bootstrap";
 import { Navbar, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faBars, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import {
   useCurrentUser,
@@ -11,6 +11,7 @@ import {
 } from "../contexts/CurrentUserContext";
 import axios from "axios";
 import Avatar from "./Avatar";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
@@ -96,24 +97,13 @@ const NavBar = () => {
                   </NavLink>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
-                  <a
-                    href="https://beta-doterra.myvoffice.com/cosminatopircean/#/joinTeam"
+                  <Link
+                    to={currentUser ? "/posts/create" : "/login"}
                     className="nav-link-menu"
-                    target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Join our team
-                  </a>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <a
-                    href="https://beta-doterra.myvoffice.com/cosminatopircean/#/contactUs"
-                    className="nav-link-menu"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Contact
-                  </a>
+                    Create Post <FontAwesomeIcon icon={faSquarePlus} />
+                  </Link>
                 </NavDropdown.Item>
               </div>
             </NavDropdown>

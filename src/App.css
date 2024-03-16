@@ -65,7 +65,7 @@ a.user-menu.dropdown-item:hover {
 }
 
 .nav-link-menu:hover {
-  color: #ffff !important;
+  color: #272c4f !important;
 }
 
 #basic-nav-dropdown {
@@ -86,8 +86,8 @@ a.user-menu.dropdown-item:hover {
 }
 
 .dropdown-item:hover {
-  background-color: #7b70a6;
-  color: #ffff;
+  background-color: transparent;
+  color: #272c4f;
 }
 
 .nav-link:hover {
