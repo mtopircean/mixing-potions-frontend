@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Col, Form, Row, Button } from "react-bootstrap";
+import { Col, Form, Row, Button, Container } from "react-bootstrap";
 import styles from "../../styles/ProfileEditForm.module.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -62,13 +62,13 @@ const handleCancel = () => {
 }
 
   return (
-    <>
+    <Container>
       <Row className="justify-content-center">
-        <h4 className="mb-4 mt-4">Modify my account details/password:</h4>
+        <h4 className="mb-4 mt-4 text-center">Modify my account details/password:</h4>
         <Col md={8}>
           <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="username">
-              <Form.Label>Username: {formData.username || "Data was not submitted. Populate your profile."}</Form.Label>
+            <Form.Label><span className={styles.editFormLabel}>Username:</span> {formData.username || "Data was not submitted. Populate your profile."}</Form.Label>
               <Form.Control
                 type="text"
                 name="username"
@@ -78,7 +78,7 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group controlId="nickname">
-              <Form.Label>Nickname: {formData.nickname || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label><span className={styles.editFormLabel}>Nickname:  </span>{formData.nickname || "Data was not submitted. Populate your profile."}</Form.Label>
               <Form.Control
                 type="text"
                 name="nickname"
@@ -87,7 +87,7 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group controlId="firstName">
-              <Form.Label>First Name: {formData.first_name || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label><span className={styles.editFormLabel}>First Name:  </span>{formData.first_name || "Data was not submitted. Populate your profile."}</Form.Label>
               <Form.Control
                 type="text"
                 name="first_name"
@@ -97,7 +97,7 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group controlId="lastName">
-              <Form.Label>Last Name: {formData.last_name || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label><span className={styles.editFormLabel}>Last Name:  </span>{formData.last_name || "Data was not submitted. Populate your profile."}</Form.Label>
               <Form.Control
                 type="text"
                 name="last_name"
@@ -107,7 +107,7 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group controlId="age">
-              <Form.Label>Age: {formData.age || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label><span className={styles.editFormLabel}>Age:  </span>{formData.age || "Data was not submitted. Populate your profile."}</Form.Label>
               <Form.Control
                 type="number"
                 name="age"
@@ -117,7 +117,7 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group controlId="phoneNumber">
-              <Form.Label>Phone Number: {formData.phone_number || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label><span className={styles.editFormLabel}>Phone Number: </span>{formData.phone_number || "Data was not submitted. Populate your profile."}</Form.Label>
               <Form.Control
                 type="text"
                 name="phone_number"
@@ -127,7 +127,7 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>About me:</Form.Label>
+              <Form.Label><span className={styles.editFormLabel}>About me: </span></Form.Label>
               <Form.Control
                 as="textarea"
                 name="about"
@@ -147,7 +147,7 @@ const handleCancel = () => {
         </Col>
       </Row>
         
-    </>
+    </Container>
   );
 };
 

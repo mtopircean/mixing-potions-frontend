@@ -29,4 +29,15 @@
     border: #A60E37 1px solid;
   }
 
+  .editFormLabel {
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .profileSave,
+    .profileCancel {
+      width: 40%;
+    }
+  }
+
 
