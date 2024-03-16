@@ -16,6 +16,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import ProfilePasswordChange from "./pages/profiles/ProfilePasswordChange";
+import GDPR from "./pages/other/GDPR";
 
 function App() {
 
@@ -36,7 +37,7 @@ function App() {
           <Route exact path="/profile/:id" render={() => <ProfilePage />} />
           <Route path="/profiles/:id/edit" component={ProfileEditForm} />
           <Route path="/profiles/:id/password-change" component={ProfilePasswordChange} />
-          <Route exact path="/gdpr" render={() => <h1></h1>} />
+          <Route exact path="/gdpr" render={() => <GDPR />} />
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route path="/edit/:id" component={PostEditForm} />
