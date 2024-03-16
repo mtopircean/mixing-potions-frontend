@@ -189,6 +189,7 @@ function PostCreateForm() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
+              <div style={{ display: "flex", justifyContent: "center" }}>
               <Button
                 variant="primary"
                 type="submit"
@@ -196,6 +197,7 @@ function PostCreateForm() {
               >
                 Create Post
               </Button>
+              </div>
             </Form>
           </div>
         </Col>

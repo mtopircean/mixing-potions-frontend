@@ -29,6 +29,8 @@ const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
     new Set(products.flatMap((product) => product.body_systems))
   );
 
+  uniqueSystems.sort((a, b) => a.localeCompare(b));
+
   const handleRemoveFilter = (system) => {
     setSelectedFilters((prevFilters) =>
     prevFilters.filter((filter) => filter !== system)

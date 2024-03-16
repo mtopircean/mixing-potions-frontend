@@ -164,12 +164,6 @@ const PostPage = () => {
     <div>
       <Row>
         <Col md={6}>
-          <Link
-            to={`/profile/${post.owner_id}`}
-            className={styles.usernameLink}
-          >
-            {post.owner}
-          </Link>
           <div className="arrow-button">
             {isCurrentUserOwner && (
               <Button
@@ -189,7 +183,21 @@ const PostPage = () => {
             )}
           </div>
           <div>
-            <h4 className={styles["post-title-detail"]}>{post.title}</h4>
+          <div className="text-center">
+          <div>
+    <h4 className={styles["post-title-detail"]}>
+      {post.title}
+    </h4>
+    <br />
+    <span className={styles["by-title"]}> by.........</span>
+    <Link
+      to={`/profile/${post.owner_id}`}
+      className={styles.usernameLink}
+    >
+      {post.owner}
+    </Link>
+  </div>
+            </div>
             {post.image && (
               <img
                 src={post.image}
@@ -201,7 +209,7 @@ const PostPage = () => {
             <Row>
               <Col md={6}>
                 <div className={styles.LikesSection}>
-                <Like postId={id} isLiked={isLiked} likeCount={likeCount} />
+                  <Like postId={id} isLiked={isLiked} likeCount={likeCount} />
                 </div>
               </Col>
               <Col md={6} className="d-flex justify-content-end">

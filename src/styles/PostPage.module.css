@@ -118,8 +118,15 @@
   }
   
   .usernameLink {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    margin-top: -10px;
   }
+
+  .by-title {
+    font-size: small;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .post-title-detail {
+    margin-bottom: -10px;
+}
