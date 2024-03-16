@@ -6,75 +6,83 @@ import { useParams } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 const ProfileEditForm = () => {
   const { id } = useParams();
   const currentUser = useCurrentUser();
-  console.log("currentUser.id:", currentUser.id);
-  console.log("id:", id);
   const history = useHistory();
-  const [formData, setFormData] = useState(
-    {
-      username: "",
-      nickname: "",
-      first_name: "",
-      last_name: "",
-      age: "",
-      phone_number: "",
-      about: "",
-    });
+  const [formData, setFormData] = useState({
+    username: "",
+    nickname: "",
+    first_name: "",
+    last_name: "",
+    age: "",
+    phone_number: "",
+    about: "",
+  });
 
-    useEffect(() => {
-const fetchProfileData = async () => {
-  try {
-    const response = await axios.get(`/profiles/${id}/`);
-    const profileData = response.data;
-    setFormData(profileData);
-  } catch (error) {
-    console.error("Error fetching profile data:", error);
-  }
-};
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await axios.get(`/profiles/${id}/`);
+        const profileData = response.data;
+        setFormData(profileData);
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+      }
+    };
 
-fetchProfileData();
-
+    fetchProfileData();
   }, [id]);
 
-const handleFormSubmit = async (event) => {
-  event.preventDefault();
+  useEffect(() => {
+    if (currentUser?.profile_id?.toString() !== id) {
+      history.push("/");
+    }
+  }, [currentUser, history, id]);
 
-  const { image, ...formDataWithoutImage } = formData;
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
-  try {
-    await axios.put(`/profiles/${id}/`, formDataWithoutImage);
-    toast.success("Profile data was updated");
+    const { image, ...formDataWithoutImage } = formData;
+
+    try {
+      await axios.put(`/profiles/${id}/`, formDataWithoutImage);
+      toast.success("Profile data was updated");
+      history.push("/profile");
+    } catch (error) {
+      console.error("Error updating profile data:", error);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleCancel = () => {
     history.push("/profile");
-  } catch (error) {
-    console.error("Error updating profile data:", error);
+  };
+
+  if (!currentUser) {
+    return <Redirect to="/" />;
   }
-};
-
-const handleInputChange = (event) => {
-  const {name, value } = event.target;
-  setFormData({ ...formData, [name]: value });
-};
-
-if (!currentUser) {
-  return <Redirect to="/" />;
-}
-
-const handleCancel = () => {
-  history.push("/profile");
-}
 
   return (
     <Container>
       <Row className="justify-content-center">
-        <h4 className="mb-4 mt-4 text-center">Modify my account details/password:</h4>
+        <h4 className="mb-4 mt-4 text-center">
+          Modify my account details/password:
+        </h4>
         <Col md={8}>
           <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="username">
-            <Form.Label><span className={styles.editFormLabel}>Username:</span> {formData.username || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label>
+                <span className={styles.editFormLabel}>Username:</span>{" "}
+                {formData.username ||
+                  "Data was not submitted. Populate your profile."}
+              </Form.Label>
               <Form.Control
                 type="text"
                 name="username"
@@ -84,7 +92,11 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group controlId="nickname">
-              <Form.Label><span className={styles.editFormLabel}>Nickname:  </span>{formData.nickname || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label>
+                <span className={styles.editFormLabel}>Nickname: </span>
+                {formData.nickname ||
+                  "Data was not submitted. Populate your profile."}
+              </Form.Label>
               <Form.Control
                 type="text"
                 name="nickname"
@@ -93,7 +105,11 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group controlId="firstName">
-              <Form.Label><span className={styles.editFormLabel}>First Name:  </span>{formData.first_name || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label>
+                <span className={styles.editFormLabel}>First Name: </span>
+                {formData.first_name ||
+                  "Data was not submitted. Populate your profile."}
+              </Form.Label>
               <Form.Control
                 type="text"
                 name="first_name"
@@ -103,7 +119,11 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group controlId="lastName">
-              <Form.Label><span className={styles.editFormLabel}>Last Name:  </span>{formData.last_name || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label>
+                <span className={styles.editFormLabel}>Last Name: </span>
+                {formData.last_name ||
+                  "Data was not submitted. Populate your profile."}
+              </Form.Label>
               <Form.Control
                 type="text"
                 name="last_name"
@@ -113,7 +133,11 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group controlId="age">
-              <Form.Label><span className={styles.editFormLabel}>Age:  </span>{formData.age || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label>
+                <span className={styles.editFormLabel}>Age: </span>
+                {formData.age ||
+                  "Data was not submitted. Populate your profile."}
+              </Form.Label>
               <Form.Control
                 type="number"
                 name="age"
@@ -123,7 +147,11 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group controlId="phoneNumber">
-              <Form.Label><span className={styles.editFormLabel}>Phone Number: </span>{formData.phone_number || "Data was not submitted. Populate your profile."}</Form.Label>
+              <Form.Label>
+                <span className={styles.editFormLabel}>Phone Number: </span>
+                {formData.phone_number ||
+                  "Data was not submitted. Populate your profile."}
+              </Form.Label>
               <Form.Control
                 type="text"
                 name="phone_number"
@@ -133,26 +161,40 @@ const handleCancel = () => {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label><span className={styles.editFormLabel}>About me: </span></Form.Label>
+              <Form.Label>
+                <span className={styles.editFormLabel}>About me: </span>
+              </Form.Label>
               <Form.Control
                 as="textarea"
                 name="about"
                 value={formData.about}
                 onChange={handleInputChange}
                 rows={6}
-                placeholder={formData.about || "Data was not submitted. Populate your profile."}
+                placeholder={
+                  formData.about ||
+                  "Data was not submitted. Populate your profile."
+                }
               />
             </Form.Group>
             <Col md={12} className={styles.profileFormButtons}>
-          <Button variant="primary" type="submit" className={styles.profileSave}>
-            Save
-          </Button>
-          <Button variant="secondary" className={styles.profileCancel} onClick={handleCancel}>Cancel</Button>
-        </Col>
+              <Button
+                variant="primary"
+                type="submit"
+                className={styles.profileSave}
+              >
+                Save
+              </Button>
+              <Button
+                variant="secondary"
+                className={styles.profileCancel}
+                onClick={handleCancel}
+              >
+                Cancel
+              </Button>
+            </Col>
           </Form>
         </Col>
       </Row>
-        
     </Container>
   );
 };
