@@ -7,11 +7,6 @@ import BodySystemPanel from "../../components/BodySystemPanel";
 import { FaThumbsUp } from "react-icons/fa";
 import styles from "../../styles/PostsPage.module.css";
 import { MdClear } from "react-icons/md";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
@@ -19,10 +14,6 @@ function PostsPage() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [filterState, setFilter] = useState("");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
-  const [showClearButton, setShowClearButton] = useState(false);
-  const [showUnfollowButton, setShowUnfollowButton] = useState(false);
-  const currentUser = useCurrentUser();
-  const history = useHistory();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -61,7 +52,6 @@ function PostsPage() {
         ? prevSystems.filter((s) => s !== system)
         : [...prevSystems, system]
     );
-    setShowClearButton(true);
   };
 
   const sortByLikes = () => {
@@ -97,102 +87,100 @@ function PostsPage() {
 
   return (
     <Container>
-    <Row className="h-100">
-      
-      <Col className="py-2 p-0 p-lg-2" lg={3}>
-        <div className="mb-3">
-          <Form.Control
-            className="search-bar"
-            type="text"
-            placeholder="Search posts..."
-            value={filterState}
-            onChange={(e) => setFilter(e.target.value)}
+      <Row className="h-100">
+        <Col className="py-2 p-0 p-lg-2" lg={3}>
+          <div className="mb-3">
+            <Form.Control
+              className="search-bar"
+              type="text"
+              placeholder="Search posts..."
+              value={filterState}
+              onChange={(e) => setFilter(e.target.value)}
+            />
+          </div>
+          <BodySystemPanel
+            selectedBodySystems={selectedBodySystems}
+            toggleBodySystem={toggleBodySystem}
           />
-        </div>
-        <BodySystemPanel
-          selectedBodySystems={selectedBodySystems}
-          toggleBodySystem={toggleBodySystem}
-        />
-      </Col>
-      <Col className="py-2 p-0 p-lg-2" lg={6}>
-        {hasLoaded ? (
-          <>
-            {posts.length ? (
-              posts
-                .filter((post) => {
-                  const userMatch = selectedUser
-                    ? post.owner === selectedUser
-                    : true;
-                  const bodySystemMatch =
-                    selectedBodySystems.length > 0
-                      ? post.products.some((product) =>
-                          product.body_systems.some((system) =>
-                            selectedBodySystems.includes(system)
-                          )
-                        )
+        </Col>
+        <Col className="py-2 p-0 p-lg-2" lg={6}>
+          {hasLoaded ? (
+            <>
+              {posts.length ? (
+                posts
+                  .filter((post) => {
+                    const userMatch = selectedUser
+                      ? post.owner === selectedUser
                       : true;
+                    const bodySystemMatch =
+                      selectedBodySystems.length > 0
+                        ? post.products.some((product) =>
+                            product.body_systems.some((system) =>
+                              selectedBodySystems.includes(system)
+                            )
+                          )
+                        : true;
 
-                  const searchMatch = filterState ? filterPosts(post) : true;
+                    const searchMatch = filterState ? filterPosts(post) : true;
 
-                  return userMatch && bodySystemMatch && searchMatch;
-                })
-                .map((post) => {
-                  try {
-                    return <Post key={post.id} {...post} setPosts={setPosts} />;
-                  } catch (error) {
-                    console.error("Error rendering post:", error);
-                    return null; // Skip the post if an error occurs
-                  }
-                })
-            ) : (
-              <Container>
-                <h5>No result</h5>
-              </Container>
-            )}
-          </>
-        ) : (
-          <Container className="text-center">
-            <Asset spinner />
-          </Container>
-        )}
-      </Col>
-      <Col className="py-2 p-0 p-lg-2" lg={3}>
-        {hasLoaded && posts.length > 0 && (
-          <Container>
-            <div style={{ textAlign: "center" }}>
-              {selectedUser && (
-                <div className={styles.selectedFilter}>
-                  <span>{selectedUser}</span>
-                  <Button variant="light" onClick={() => clearFilter("user")}>
-                    <MdClear color="red" />
-                  </Button>
-                </div>
+                    return userMatch && bodySystemMatch && searchMatch;
+                  })
+                  .map((post) => {
+                    try {
+                      return (
+                        <Post key={post.id} {...post} setPosts={setPosts} />
+                      );
+                    } catch (error) {
+                      console.error("Error rendering post:", error);
+                      return null; 
+                    }
+                  })
+              ) : (
+                  <h5>No result</h5>
               )}
-              <h5 className={styles["liked-header"]}>
-                <FaThumbsUp className={styles["like-user-icon"]} /> Most liked
-                users:
-              </h5>
-              <hr />
-            </div>
-            {sortByLikes().map((user) => (
-              <div key={user.owner}>
-                <p
-                  className={
-                    selectedUser === user.owner ? styles.selectedUser : ""
-                  }
-                >
-                  <a href="#" onClick={() => handleUserClick(user.owner)}>
-                    <strong>{user.owner} </strong>
-                  </a>
-                  has {user.like_count} likes
-                </p>
+            </>
+          ) : (
+            <Container className="text-center">
+              <Asset spinner />
+            </Container>
+          )}
+        </Col>
+        <Col className="py-2 p-0 p-lg-2" lg={3}>
+          {hasLoaded && posts.length > 0 && (
+            <Container>
+              <div style={{ textAlign: "center" }}>
+                {selectedUser && (
+                  <div className={styles.selectedFilter}>
+                    <span>{selectedUser}</span>
+                    <Button variant="light">
+                      <MdClear color="red" />
+                    </Button>
+                  </div>
+                )}
+                <h5 className={styles["liked-header"]}>
+                  <FaThumbsUp className={styles["like-user-icon"]} /> Most liked
+                  users:
+                </h5>
+                <hr />
               </div>
-            ))}
-          </Container>
-        )}
-      </Col>
-      
-    </Row>
+              {sortByLikes().map((user) => (
+                <div key={user.owner}>
+                  <p
+                    className={
+                      selectedUser === user.owner ? styles.selectedUser : ""
+                    }
+                  >
+                    <a href="#" onClick={() => handleUserClick(user.owner)}>
+                      <strong>{user.owner} </strong>
+                    </a>
+                    has {user.like_count} likes
+                  </p>
+                </div>
+              ))}
+            </Container>
+          )}
+        </Col>
+      </Row>
     </Container>
   );
 }
