@@ -96,9 +96,9 @@ function PostsPage() {
   };
 
   return (
-    
+    <Container>
     <Row className="h-100">
-      <Container>
+      
       <Col className="py-2 p-0 p-lg-2" lg={3}>
         <div className="mb-3">
           <Form.Control
@@ -191,8 +191,9 @@ function PostsPage() {
           </Container>
         )}
       </Col>
-      </Container>
+      
     </Row>
+    </Container>
   );
 }
 
