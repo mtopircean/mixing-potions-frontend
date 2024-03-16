@@ -32,6 +32,7 @@ const ProfilePasswordChange = () => {
 
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
+      history.push("/");
     }
   }, [currentUser, history, id]);
 

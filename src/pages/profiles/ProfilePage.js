@@ -123,7 +123,7 @@ const ProfilePage = () => {
                   </button>
                   <br />
                   <Link
-                    to={`/profiles/:id/password-change`}
+                    to={`/profiles/${profile.id}/password-change`}
                     className={`${styles["password-button"]} mt-3`}
                   >
                     Change password <FontAwesomeIcon icon={faKey} />
