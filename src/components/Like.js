@@ -25,6 +25,10 @@ const Like = ({
 
   const handleLike = async () => {
     if (!isLiked) {
+      if (!currentUser) {
+        toast.error("You need to be authenticated to like a post!");
+        return;
+      }
       try {
         console.log("postId:", postId);
         const response = await axios.post(`/likes/`, { post: postId });
