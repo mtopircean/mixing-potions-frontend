@@ -14,6 +14,20 @@ const FollowButton = ({ ownerId }) => {
   const currentUser = useCurrentUser();
 
   useEffect(() => {
+    const checkFollowing = async () => {
+      try {
+        const response = await axios.get(`/followers/?followed=${ownerId}`);
+        const followers = response.data.results;
+        const isAlreadyFollowing = followers.some(follower => follower.owner === currentUser.username);
+        setIsFollowing(isAlreadyFollowing);
+      } catch (error) {
+        console.error("Error checking follow status:", error);
+      }
+    };
+  
+    if (currentUser) {
+      checkFollowing();
+    }
   }, [currentUser, ownerId]);
 
   const handleFollowUser = async () => {

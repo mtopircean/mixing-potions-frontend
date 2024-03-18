@@ -16,6 +16,7 @@ import CreateComment from "../../components/CreateComment";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Like from "../../components/Like";
+import Follow from "../../components/Follow";
 
 const PostPage = () => {
   const [post, setPost] = useState(null);
@@ -30,6 +31,7 @@ const PostPage = () => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
+  const [likeId, setLikeId] = useState(null);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -214,23 +216,23 @@ const PostPage = () => {
             <Row>
               <Col md={6}>
                 <div className={styles.LikesSection}>
-                  <Like postId={id} isLiked={isLiked} likeCount={likeCount} />
+                <Like
+                  postId={id}
+                  isLiked={isLiked}
+                  likeCount={likeCount}
+                  likeId={likeId}
+                />
                 </div>
               </Col>
-              <Col md={6} className="d-flex justify-content-end">
-                {isFollowing ? (
-                  <Link to="/profile" className={styles.following}>
-                    Following...
-                  </Link>
-                ) : (
-                  <Button
-                    onClick={handleFollowUser}
-                    className={styles.followButton}
-                  >
-                    Follow <FontAwesomeIcon icon={faCirclePlus} />
-                  </Button>
-                )}
-              </Col>
+              <div className="col-md-6 d-flex justify-content-end">
+              {isFollowing ? (
+                <Link to="/profile" className={styles.following}>
+                  Following...
+                </Link>
+              ) : (
+                <Follow ownerId={post.owner_id} />
+              )}
+            </div>
             </Row>
           </div>
         </Col>
