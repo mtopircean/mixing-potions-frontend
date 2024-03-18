@@ -179,8 +179,8 @@ const ProfilePage = () => {
 
       {userPosts && userPosts.length > 0 && (
         <Row>
-          
-          <Col xs={12} md={6}>
+          {currentUser && currentUser.username === profile.username && userPosts && userPosts.length > 0 && (
+          <Col xs={12} md={12} className="text-center">
             {followedUsers && followedUsers.length > 0 ? (
             <div
               className={`${styles["followed-users"]} d-flex flex-column justify-content-center`}
@@ -210,12 +210,14 @@ const ProfilePage = () => {
                 <h4 className="text-center">Followed Users:</h4>
                 <p className="no-followed">No followed users</p></div>
             )}
-          </Col>
-          <Col xs={12} md={6} className="justify-content-center text-center mb-3">
-            <h4>My Posts:</h4>
+           <hr/> 
+          </Col>)}
+          
+          <Col xs={12} md={12} className="justify-content-center text-center mb-3">
+            <h4 className="mb-3">User Posts:</h4>
             <Row>
               {userPosts.map((post) => (
-                <Col xs={12} md={12} key={post.id} className="post-size mb-3">
+                <Col xs={12} md={6} key={post.id} className="post-size mb-3">
                   <Post {...post} />
                 </Col>
               ))}
