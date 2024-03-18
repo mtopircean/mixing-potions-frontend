@@ -12,10 +12,11 @@ const Like = ({
   postId,
   isLiked: initialIsLiked,
   likeCount: initialLikeCount,
-  likeId,
+  likeId: initialLikeId,
 }) => {
   const [isLiked, setIsLiked] = useState(initialIsLiked);
   const [likeCount, setLikeCount] = useState(initialLikeCount);
+  const [likeId, setLikeId] = useState(initialLikeId);
   const currentUser = useCurrentUser();
 
   useEffect(() => {
@@ -27,18 +28,24 @@ const Like = ({
       try {
         console.log("postId:", postId);
         const response = await axios.post(`/likes/`, { post: postId });
+        const newLikeId = response.data.id; //
         setIsLiked(true);
         setLikeCount((prevCount) => prevCount + 1);
+        setLikeId(newLikeId);
         toast.success("You liked this post!");
         console.log("Response data:", response.data);
+        console.log("New likeId:", newLikeId);
       } catch (error) {
-        console.error("Error liking post:", error);
+        if (error.response && error.response.data.non_field_errors) {
+          toast.error(error.response.data.non_field_errors[0]);
+        } else {
+          console.error("Error liking post:", error);
+        }
       }
     } else {
       toast.info("You've already liked this post.");
     }
   };
-  
 
   const handleUnlike = async () => {
     if (isLiked) {
@@ -49,10 +56,13 @@ const Like = ({
         setLikeCount((prevCount) => prevCount - 1);
         toast.success("You unliked this post!");
       } catch (error) {
-        console.error("Error unliking post:", error.response ? error.response.data : error);
+        console.error(
+          "Error unliking post:",
+          error.response ? error.response.data : error
+        );
       }
     }
-};
+  };
 
   return (
     <div className={styles.LikesSection}>

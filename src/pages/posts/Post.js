@@ -35,6 +35,7 @@ const Post = (props) => {
     like_count,
     comment_count,
     comments: initialComments,
+    like_id,
   } = props;
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -44,7 +45,7 @@ const Post = (props) => {
   const currentUser = useCurrentUser();
   const [ownerProfileImage, setOwnerProfileImage] = useState(null);
   const [isFollowing, setIsFollowing] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(like_id !== null);
   const [likeCount, setLikeCount] = useState(like_count);
 
   useEffect(() => {
@@ -117,7 +118,7 @@ const Post = (props) => {
       </Card.Body>
       <Card.Footer className={styles.PostFooter}>
         <div className={styles.LikesSection}>
-          <Like postId={id} isLiked={isLiked} likeCount={likeCount} />
+        <Like postId={id} isLiked={isLiked} likeCount={likeCount} likeId={like_id} />
         </div>
         <Follow ownerId={owner_id} />
         <div className={styles.CommentsSection}>
