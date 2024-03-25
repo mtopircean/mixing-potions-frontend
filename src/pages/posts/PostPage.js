@@ -41,10 +41,16 @@ const PostPage = () => {
         console.log("Fetched post data:", postData);
         setPost(postData);
         setLikeCount(postData.like_count);
-        if (currentUser) {
-          setIsLiked(
-            postData.likes.some((like) => like.owner_id === currentUser.id)
-          );
+        const liked =
+          currentUser &&
+          postData.likes.some((like) => like.owner_id === currentUser.id);
+        setIsLiked(liked);
+
+        if (liked) {
+          const likeId = postData.likes.find(
+            (like) => like.owner_id === currentUser.id
+          ).like_id;
+          setLikeId(likeId);
         }
       } catch (error) {
         console.error("Error fetching post:", error);
@@ -52,7 +58,7 @@ const PostPage = () => {
     };
     console.log("ID:", id);
     fetchPost();
-  }, [id]);
+  }, [id, currentUser]);
 
   useEffect(() => {
     const checkFollowing = async () => {
@@ -216,23 +222,23 @@ const PostPage = () => {
             <Row>
               <Col md={6}>
                 <div className={styles.LikesSection}>
-                <Like
-                  postId={id}
-                  isLiked={isLiked}
-                  likeCount={likeCount}
-                  likeId={likeId}
-                />
+                  <Like
+                    postId={id}
+                    isLiked={isLiked}
+                    likeCount={likeCount}
+                    likeId={likeId}
+                  />
                 </div>
               </Col>
               <div className="col-md-6 d-flex justify-content-end">
-              {isFollowing ? (
-                <Link to="/profile" className={styles.following}>
-                  Following...
-                </Link>
-              ) : (
-                <Follow ownerId={post.owner_id} />
-              )}
-            </div>
+                {isFollowing ? (
+                  <Link to="/profile" className={styles.following}>
+                    Following...
+                  </Link>
+                ) : (
+                  <Follow ownerId={post.owner_id} />
+                )}
+              </div>
             </Row>
           </div>
         </Col>
@@ -245,11 +251,20 @@ const PostPage = () => {
             {post.products.map((product, index) => (
               <div key={index}>
                 <p className="card-text">
-                  <h6>Condition: <span className={styles.listedSpecs}>{product.condition.join(", ")}</span></h6>
+                  <h6>
+                    Condition:{" "}
+                    <span className={styles.listedSpecs}>
+                      {product.condition.join(", ")}
+                    </span>
+                  </h6>
                 </p>
                 <p className="card-text">
-                  <h6>Body Systems: <span className={styles.listedSpecs}>{product.body_systems.join(", ")}</span></h6>
-                  
+                  <h6>
+                    Body Systems:{" "}
+                    <span className={styles.listedSpecs}>
+                      {product.body_systems.join(", ")}
+                    </span>
+                  </h6>
                 </p>
               </div>
             ))}
@@ -266,8 +281,10 @@ const PostPage = () => {
                 post.comments.map((comment, index) => (
                   <div key={index} className={styles.Comment}>
                     <div className={styles.CommentOwner}>
-                    <Link to={`/profile/${comment.owner_profile.id}`}>{comment.owner}</Link>
-                    {console.log("Owner ID:", comment.owner_id)}
+                      <Link to={`/profile/${comment.owner_profile.id}`}>
+                        {comment.owner}
+                      </Link>
+                      {console.log("Owner ID:", comment.owner_id)}
                       {currentUser &&
                         currentUser.username === comment.owner && (
                           <span className={styles.CommentBubble}>

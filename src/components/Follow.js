@@ -48,7 +48,9 @@ const FollowButton = ({ ownerId }) => {
     return null;
   }
 
-  console.log("currentUser:", currentUser);
+  if (currentUser.pk === ownerId) {
+    return null;
+  }
 
 
   return (
