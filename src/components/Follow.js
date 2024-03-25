@@ -18,7 +18,7 @@ const FollowButton = ({ ownerId }) => {
       try {
         const response = await axios.get(`/followers/?followed=${ownerId}`);
         const followers = response.data.results;
-        const isAlreadyFollowing = followers.some(follower => follower.owner === currentUser.username);
+        const isAlreadyFollowing = followers.some(follower => follower.owner === currentUser.username && follower.followed === ownerId);
         setIsFollowing(isAlreadyFollowing);
       } catch (error) {
         console.error("Error checking follow status:", error);

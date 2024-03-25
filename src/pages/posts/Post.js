@@ -54,7 +54,6 @@ const Post = (props) => {
         console.error("Owner ID is not provided.");
         return;
       }
-      console.log("Owner ID:", owner_id);
       try {
         const response = await axios.get(`/posts/${owner_id}/`);
         setOwnerProfileImage(response.data.owner_image);
