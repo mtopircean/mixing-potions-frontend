@@ -54,6 +54,7 @@ const Post = (props) => {
         console.error("Owner ID is not provided.");
         return;
       }
+      console.log("Owner ID:", owner_id);
       try {
         const response = await axios.get(`/posts/${owner_id}/`);
         setOwnerProfileImage(response.data.owner_image);
@@ -113,9 +114,11 @@ const Post = (props) => {
           </div>
         </Media>
       </Card.Body>
-      <Link to={`/posts/${id}`}>
-        <Card.Img src={image} alt={title} />
-      </Link>
+      <div className={styles.imageContainer}>
+    <Link to={`/posts/${id}`}>
+      <Card.Img src={image} alt={title} className={styles.postImage} />
+    </Link>
+  </div>
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}

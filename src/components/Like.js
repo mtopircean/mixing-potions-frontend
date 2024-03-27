@@ -52,9 +52,8 @@ const Like = ({
   };
 
   const handleUnlike = async () => {
-    if (isLiked) {
+    if (likeId) {
       try {
-        console.log("Like ID:", likeId);
         const response = await axiosReq.delete(`/likes/${likeId}/`);
         setIsLiked(false);
         setLikeCount((prevCount) => prevCount - 1);
@@ -65,6 +64,8 @@ const Like = ({
           error.response ? error.response.data : error
         );
       }
+    } else {
+      console.error("Cannot unlike post: likeId is undefined");
     }
   };
 

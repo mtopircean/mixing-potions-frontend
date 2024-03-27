@@ -18,7 +18,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Like from "../../components/Like";
 import Follow from "../../components/Follow";
 
-const PostPage = () => {
+const PostPage = (props) => {
+  const { like_count, likeId:like_id } = props;
   const [post, setPost] = useState(null);
   const { id } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,9 +30,9 @@ const PostPage = () => {
   const isCurrentUserOwner =
     currentUser && post && post.owner === currentUser.username;
   const [isFollowing, setIsFollowing] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
-  const [likeId, setLikeId] = useState(null);
+  const [isLiked, setIsLiked] = useState(like_id);
+  const [likeCount, setLikeCount] = useState(like_count);
+  const [likeId, setLikeId] = useState(like_id);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -41,21 +42,13 @@ const PostPage = () => {
         console.log("Fetched post data:", postData);
         setPost(postData);
         setLikeCount(postData.like_count);
-        const liked =
-          currentUser &&
-          postData.likes.some((like) => like.owner_id === currentUser.id);
-        setIsLiked(liked);
-
-        if (liked) {
-          const likeId = postData.likes.find(
-            (like) => like.owner_id === currentUser.id
-          ).like_id;
-          setLikeId(likeId);
-        }
+        setLikeId(postData.like_id);
+        setIsLiked(postData.like_id !== null);
       } catch (error) {
         console.error("Error fetching post:", error);
       }
     };
+
     console.log("ID:", id);
     fetchPost();
   }, [id, currentUser]);
@@ -74,28 +67,6 @@ const PostPage = () => {
       checkFollowing();
     }
   }, [currentUser, post]);
-
-  const handleFollowUser = async () => {
-    try {
-      const response = await axios.post("/followers/", {
-        followed: post.owner_id,
-      });
-      setIsFollowing(true);
-      toast.success(`You are now following ${post.owner}`);
-    } catch (error) {
-      console.error("Error following user:", error);
-    }
-  };
-
-  const handleUnfollowUser = async () => {
-    try {
-      const response = await axios.delete(`/followers/${post.owner_id}`);
-      setIsFollowing(false);
-      toast.success(`You have unfollowed ${post.owner}`);
-    } catch (error) {
-      console.error("Error unfollowing user:", error);
-    }
-  };
 
   const handleEdit = () => {
     history.push(`/edit/${id}`);
@@ -222,11 +193,17 @@ const PostPage = () => {
             <Row>
               <Col md={6}>
                 <div className={styles.LikesSection}>
+                  {console.log("Props passed to Like component:", {
+                    postId: id,
+                    isLiked,
+                    likeCount,
+                    likeId,
+                  })}
                   <Like
                     postId={id}
                     isLiked={isLiked}
                     likeCount={likeCount}
-                    likeId={likeId}
+                    likeId={like_id}
                   />
                 </div>
               </Col>
@@ -284,7 +261,6 @@ const PostPage = () => {
                       <Link to={`/profile/${comment.owner_profile.id}`}>
                         {comment.owner}
                       </Link>
-                      {console.log("Owner ID:", comment.owner_id)}
                       {currentUser &&
                         currentUser.username === comment.owner && (
                           <span className={styles.CommentBubble}>
