@@ -182,13 +182,16 @@ const PostPage = (props) => {
                 </Link>
               </div>
             </div>
+            
             {post.image && (
+            <div className={styles.imageContainer}>
               <img
                 src={post.image}
                 alt="Post Image"
                 className="img-fluid"
                 style={{ width: "100%", maxHeight: "100%" }}
               />
+              </div>
             )}
             <Row>
               <Col md={6}>
@@ -325,10 +328,10 @@ const PostPage = (props) => {
                 {post.products.map((product, index) => (
                   <div key={index} className="col-md-4 mb-4">
                     <div className="card">
-                      {console.log("Product data:", product)}
+                    
                       <img
                         src={product.image}
-                        className="card-img-top"
+                        className={`card-img-top ${styles.postImage}`}
                         alt={product.name}
                       />
                       <div className="card-body">
