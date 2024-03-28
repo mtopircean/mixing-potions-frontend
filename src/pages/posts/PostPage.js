@@ -132,12 +132,16 @@ const PostPage = (props) => {
     return <div>Loading...</div>;
   }
 
-  const uniqueBodySystems = Array.from(
-    new Set(post.products.flatMap((product) => product.body_systems))
+  const allBodySystems = post.products.flatMap(
+    (product) => product.body_systems
   );
-  const uniqueConditions = Array.from(
-    new Set(post.products.flatMap((product) => product.condition))
+  const uniqueBodySystems = Array.from(new Set(allBodySystems));
+
+  const allConditions = post.products.flatMap(
+    (product) => product.condition
   );
+
+  const uniqueConditions = Array.from(new Set(allConditions));
 
   return (
     <div>
@@ -215,22 +219,26 @@ const PostPage = (props) => {
           <div className={styles.CommentsAreaWrapper}>
             {post.products.map((product, index) => (
               <div key={index}>
+                {index === 0 && (
                 <p className="card-text">
                   <h6>
                     Condition:{" "}
                     <span className={styles.listedSpecs}>
-                      {product.condition.join(", ")}
+                    {uniqueConditions.join(", ")}
                     </span>
                   </h6>
                 </p>
+                )}
+                {index === 0 && (
                 <p className="card-text">
                   <h6>
                     Body Systems:{" "}
                     <span className={styles.listedSpecs}>
-                      {product.body_systems.join(", ")}
+                    {uniqueBodySystems.join(", ")}
                     </span>
                   </h6>
                 </p>
+                )}
               </div>
             ))}
           </div>
