@@ -20,6 +20,7 @@ const Like = ({
   const currentUser = useCurrentUser();
 
   useEffect(() => {
+    console.log("isLiked:", isLiked);
     setLikeCount(initialLikeCount);
   }, [initialLikeCount]);
 
@@ -58,6 +59,7 @@ const Like = ({
         setIsLiked(false);
         setLikeCount((prevCount) => prevCount - 1);
         toast.success("You unliked this post!");
+        console.log("Response data:", response.data);
       } catch (error) {
         console.error(
           "Error unliking post:",

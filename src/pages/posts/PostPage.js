@@ -19,7 +19,6 @@ import Like from "../../components/Like";
 import Follow from "../../components/Follow";
 
 const PostPage = (props) => {
-  const { like_count, likeId:like_id } = props;
   const [post, setPost] = useState(null);
   const { id } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,9 +29,6 @@ const PostPage = (props) => {
   const isCurrentUserOwner =
     currentUser && post && post.owner === currentUser.username;
   const [isFollowing, setIsFollowing] = useState(false);
-  const [isLiked, setIsLiked] = useState(like_id);
-  const [likeCount, setLikeCount] = useState(like_count);
-  const [likeId, setLikeId] = useState(like_id);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -41,9 +37,6 @@ const PostPage = (props) => {
         const postData = response.data;
         console.log("Fetched post data:", postData);
         setPost(postData);
-        setLikeCount(postData.like_count);
-        setLikeId(postData.like_id);
-        setIsLiked(postData.like_id !== null);
       } catch (error) {
         console.error("Error fetching post:", error);
       }
@@ -182,33 +175,25 @@ const PostPage = (props) => {
                 </Link>
               </div>
             </div>
-            
+
             {post.image && (
-            <div className={styles.imageContainer}>
-              <img
-                src={post.image}
-                alt="Post Image"
-                className="img-fluid"
-                style={{ width: "100%", maxHeight: "100%" }}
-              />
+              <div className={styles.imageContainer}>
+                <img
+                  src={post.image}
+                  alt="Post Image"
+                  className="img-fluid"
+                  style={{ width: "100%", maxHeight: "100%" }}
+                />
               </div>
             )}
             <Row>
               <Col md={6}>
-                <div className={styles.LikesSection}>
-                  {console.log("Props passed to Like component:", {
-                    postId: id,
-                    isLiked,
-                    likeCount,
-                    likeId,
-                  })}
-                  <Like
-                    postId={id}
-                    isLiked={isLiked}
-                    likeCount={likeCount}
-                    likeId={like_id}
-                  />
-                </div>
+                <Like
+                  postId={id}
+                  isLiked={post.like_id !== null}
+                  likeCount={post.like_count}
+                  likeId={post.like_id}
+                />
               </Col>
               <div className="col-md-6 d-flex justify-content-end">
                 {isFollowing ? (
@@ -328,7 +313,6 @@ const PostPage = (props) => {
                 {post.products.map((product, index) => (
                   <div key={index} className="col-md-4 mb-4">
                     <div className="card">
-                    
                       <img
                         src={product.image}
                         className={`card-img-top ${styles.postImage}`}
