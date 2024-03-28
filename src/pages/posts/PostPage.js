@@ -175,7 +175,7 @@ const PostPage = (props) => {
                   to={`/profile/${post.owner_id}`}
                   className={styles.usernameLink}
                 >
-                  {post.owner}
+                  <strong>{post.owner}</strong>
                 </Link>
               </div>
             </div>
@@ -255,7 +255,7 @@ const PostPage = (props) => {
                   <div key={index} className={styles.Comment}>
                     <div className={styles.CommentOwner}>
                       <Link to={`/profile/${comment.owner_profile.id}`}>
-                        {comment.owner}
+                        <strong>{comment.owner}</strong>
                       </Link>
                       {currentUser &&
                         currentUser.username === comment.owner && (

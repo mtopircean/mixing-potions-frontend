@@ -5,10 +5,7 @@ import Avatar from "../../components/Avatar";
 import styles from "../../styles/Post.module.css";
 import CreateComment from "../../components/CreateComment";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import {
-  faPenSquare,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -115,17 +112,22 @@ const Post = (props) => {
         </Media>
       </Card.Body>
       <div className={styles.imageContainer}>
-    <Link to={`/posts/${id}`}>
-      <Card.Img src={image} alt={title} className={styles.postImage} />
-    </Link>
-  </div>
+        <Link to={`/posts/${id}`}>
+          <Card.Img src={image} alt={title} className={styles.postImage} />
+        </Link>
+      </div>
       <Card.Body>
         {title && <Card.Title className="text-center">{title}</Card.Title>}
         {content && <Card.Text>{content}</Card.Text>}
       </Card.Body>
       <Card.Footer className={styles.PostFooter}>
         <div className={styles.LikesSection}>
-        <Like postId={id} isLiked={isLiked} likeCount={likeCount} likeId={like_id} />
+          <Like
+            postId={id}
+            isLiked={isLiked}
+            likeCount={likeCount}
+            likeId={like_id}
+          />
         </div>
         <Follow ownerId={owner_id} />
         <div className={styles.CommentsSection}>
@@ -153,7 +155,9 @@ const Post = (props) => {
               .map((comment, index) => (
                 <div key={index} className={styles.CommentsArea}>
                   <h6 className={styles.CommentOwner}>
-                    <strong>{comment.owner}</strong>
+                    <Link to={`/profile/${comment.owner_profile.id}`}>
+                      <strong>{comment.owner}</strong>
+                    </Link>
                     {currentUser && currentUser.username === comment.owner && (
                       <span className={styles.CommentBubble}>
                         <Button
