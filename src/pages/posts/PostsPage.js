@@ -30,7 +30,10 @@ function PostsPage() {
       }
 
       const { data } = await axiosReq.get(query);
-      setPosts((prevPosts) => [...prevPosts, ...data.results]);
+      const newPosts = data.results.filter(newPost => 
+        !posts.some(existingPost => existingPost.id === newPost.id)
+      );
+      setPosts(prevPosts => [...prevPosts, ...newPosts]);
       setHasLoaded(true);
       setHasMore(!!data.next);
     } catch (err) {
