@@ -107,12 +107,14 @@ function PostCreateForm() {
               encType="multipart/form-data"
             >
               {(selectedImage || customImage) && (
+                <div className="text-center">
                 <Image
                   src={customImage || selectedImage}
                   alt="Selected product image"
-                  className="mb-3"
+                  className={`mb-3 ${styles["preview-image"]}`}
                   fluid
                 />
+                </div>
               )}
 
               <Row className="align-items-center justify-content-center">

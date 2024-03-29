@@ -72,3 +72,7 @@
 .upload-button:hover {
  color: #b1cebb;
 }
+
+.preview-image {
+  max-height: 500px;
+}
