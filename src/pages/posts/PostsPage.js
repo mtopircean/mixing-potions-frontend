@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
-import Asset from "../../components/Asset";
 import BodySystemPanel from "../../components/BodySystemPanel";
 import { FaThumbsUp } from "react-icons/fa";
 import styles from "../../styles/PostsPage.module.css";
 import { MdClear } from "react-icons/md";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
@@ -14,27 +14,29 @@ function PostsPage() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [filterState, setFilter] = useState("");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        let query = "/posts";
-        if (selectedBodySystems.length > 0) {
-          const systemsQuery = selectedBodySystems.join(",");
-          query += `?body_systems=${systemsQuery}`;
-        }
-
-        const { data } = await axiosReq.get(query);
-        setPosts(data.results);
-        setHasLoaded(true);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    setHasLoaded(false);
     fetchPosts();
-  }, [selectedBodySystems]);
+  }, [selectedBodySystems, currentPage]);
+
+  const fetchPosts = async () => {
+    try {
+      let query = "/posts?page=" + currentPage;
+      if (selectedBodySystems.length > 0) {
+        const systemsQuery = selectedBodySystems.join(",");
+        query += `&body_systems=${systemsQuery}`;
+      }
+
+      const { data } = await axiosReq.get(query);
+      setPosts((prevPosts) => [...prevPosts, ...data.results]);
+      setHasLoaded(true);
+      setHasMore(!!data.next);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const clearFilter = () => {
     setSelectedUser(null);
@@ -104,46 +106,40 @@ function PostsPage() {
           />
         </Col>
         <Col className="py-2 p-0 p-lg-2" lg={6}>
-          {hasLoaded ? (
-            <>
-              {posts.length ? (
-                posts
-                  .filter((post) => {
-                    const userMatch = selectedUser
-                      ? post.owner === selectedUser
-                      : true;
-                    const bodySystemMatch =
-                      selectedBodySystems.length > 0
-                        ? post.products.some((product) =>
-                            product.body_systems.some((system) =>
-                              selectedBodySystems.includes(system)
-                            )
-                          )
-                        : true;
+          <InfiniteScroll
+            dataLength={posts.length}
+            next={() => setCurrentPage(currentPage + 1)}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+            endMessage={<h4>No more posts</h4>}
+          >
+            {posts
+              .filter((post) => {
+                const userMatch = selectedUser
+                  ? post.owner === selectedUser
+                  : true;
+                const bodySystemMatch =
+                  selectedBodySystems.length > 0
+                    ? post.products.some((product) =>
+                        product.body_systems.some((system) =>
+                          selectedBodySystems.includes(system)
+                        )
+                      )
+                    : true;
 
-                    const searchMatch = filterState ? filterPosts(post) : true;
+                const searchMatch = filterState ? filterPosts(post) : true;
 
-                    return userMatch && bodySystemMatch && searchMatch;
-                  })
-                  .map((post) => {
-                    try {
-                      return (
-                        <Post key={post.id} {...post} setPosts={setPosts} />
-                      );
-                    } catch (error) {
-                      console.error("Error rendering post:", error);
-                      return null; 
-                    }
-                  })
-              ) : (
-                  <h5>No result</h5>
-              )}
-            </>
-          ) : (
-            <Container className="text-center">
-              <Asset spinner />
-            </Container>
-          )}
+                return userMatch && bodySystemMatch && searchMatch;
+              })
+              .map((post) => {
+                try {
+                  return <Post key={post.id} {...post} setPosts={setPosts} />;
+                } catch (error) {
+                  console.error("Error rendering post:", error);
+                  return null;
+                }
+              })}
+          </InfiniteScroll>
         </Col>
         <Col className="py-2 p-0 p-lg-2" lg={3}>
           {hasLoaded && posts.length > 0 && (
@@ -152,7 +148,7 @@ function PostsPage() {
                 {selectedUser && (
                   <div className={styles.selectedFilter}>
                     <span>{selectedUser}</span>
-                    <Button variant="light">
+                    <Button variant="light" onClick={clearFilter}>
                       <MdClear color="red" />
                     </Button>
                   </div>
