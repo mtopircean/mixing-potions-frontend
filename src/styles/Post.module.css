@@ -140,3 +140,7 @@
   object-fit: contain;
   
 }
+
+.Post {
+  height: 500px;
+}

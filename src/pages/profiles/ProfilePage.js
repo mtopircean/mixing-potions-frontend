@@ -216,12 +216,14 @@ const ProfilePage = () => {
           <Col xs={12} md={12} className="justify-content-center text-center mb-3">
             <h4 className="mb-3">User Posts:</h4>
             <Row>
-              {userPosts.map((post) => (
-                <Col xs={12} md={6} key={post.id} className="post-size mb-3">
-                  <Post {...post} />
-                </Col>
-              ))}
-            </Row>
+  {userPosts.map((post) => (
+    <Col xs={12} md={6} key={post.id} className="post-col mb-3">
+      <div className="post-wrapper">
+        <Post {...post} />
+      </div>
+    </Col>
+  ))}
+</Row>
           </Col>
         </Row>
       )}
