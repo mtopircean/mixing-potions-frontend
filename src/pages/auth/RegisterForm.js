@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import axios from "axios";
-import joinUsImage from "../../assets/join-us.jpg";
-import styles from "../../styles/LoginRegisterPage.module.css"
+import styles from "../../styles/LoginRegisterPage.module.css";
 
 const RegisterForm = () => {
   const history = useHistory();
+
+  /* State for form data and errors */
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -17,6 +18,7 @@ const RegisterForm = () => {
 
   const [errors, setErrors] = useState({});
 
+  /* Function to handle input change */
   const handleChange = (event) => {
     setFormData({
       ...formData,
@@ -24,6 +26,7 @@ const RegisterForm = () => {
     });
   };
 
+  /* Function to handle form submission */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -37,7 +40,7 @@ const RegisterForm = () => {
   return (
     <Row className="align-items-center register-container">
       <Col sm={12} className="d-flex justify-content-center">
-      <Card className={`${styles["register-card"]} ${styles["full-width"]}`}>
+        <Card className={`${styles["register-card"]} ${styles["full-width"]}`}>
           <Card.Body>
             <Card.Title className="text-center">Register:</Card.Title>
             <Form onSubmit={handleSubmit}>
