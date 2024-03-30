@@ -76,7 +76,7 @@ function PostEditForm({ post }) {
     }
   };
 
-   /* Remove a product from selected products */
+  /* Remove a product from selected products */
   const handleRemoveProduct = (productId) => {
     setSelectedProducts((prevProducts) =>
       prevProducts.filter((product) => product.id !== productId)

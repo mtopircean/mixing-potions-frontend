@@ -17,10 +17,12 @@ function PostsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
+  /* Effect for fetching posts when selected body systems or current page change */
   useEffect(() => {
     fetchPosts();
   }, [selectedBodySystems, currentPage]);
 
+  /* Function to fetch posts from the server */
   const fetchPosts = async () => {
     try {
       let query = "/posts?page=" + currentPage;
@@ -30,10 +32,11 @@ function PostsPage() {
       }
 
       const { data } = await axiosReq.get(query);
-      const newPosts = data.results.filter(newPost => 
-        !posts.some(existingPost => existingPost.id === newPost.id)
+      const newPosts = data.results.filter(
+        (newPost) =>
+          !posts.some((existingPost) => existingPost.id === newPost.id)
       );
-      setPosts(prevPosts => [...prevPosts, ...newPosts]);
+      setPosts((prevPosts) => [...prevPosts, ...newPosts]);
       setHasLoaded(true);
       setHasMore(!!data.next);
     } catch (err) {
@@ -41,16 +44,19 @@ function PostsPage() {
     }
   };
 
+  /* Function to clear all filters */
   const clearFilter = () => {
     setSelectedUser(null);
     setSelectedBodySystems([]);
     setFilter("");
   };
 
+  /* Function to handle user click for filtering */
   const handleUserClick = (username) => {
     setSelectedUser(username);
   };
 
+  /* Function to toggle body systems for filtering */
   const toggleBodySystem = (system) => {
     setSelectedBodySystems((prevSystems) =>
       prevSystems.includes(system)
@@ -59,6 +65,7 @@ function PostsPage() {
     );
   };
 
+  /* Function to sort users by likes */
   const sortByLikes = () => {
     const userLikesCount = posts.reduce((acc, post) => {
       const { owner, like_count } = post;
@@ -76,6 +83,7 @@ function PostsPage() {
       }));
   };
 
+  /* Function to filter posts based on search query */
   const filterPosts = (post) => {
     const { title, description, owner, products, conditions } = post;
     const searchQuery = filterState.toLowerCase().trim();
@@ -103,12 +111,14 @@ function PostsPage() {
               onChange={(e) => setFilter(e.target.value)}
             />
           </div>
+          {/* Body System Panel for Filtering */}
           <BodySystemPanel
             selectedBodySystems={selectedBodySystems}
             toggleBodySystem={toggleBodySystem}
           />
         </Col>
         <Col className="py-2 p-0 p-lg-2" lg={6}>
+          {/* Infinite Scroll for Posts */}
           <InfiniteScroll
             dataLength={posts.length}
             next={() => setCurrentPage(currentPage + 1)}
@@ -145,6 +155,7 @@ function PostsPage() {
           </InfiniteScroll>
         </Col>
         <Col className="py-2 p-0 p-lg-2" lg={3}>
+          {/* Display most liked users */}
           {hasLoaded && posts.length > 0 && (
             <Container>
               <div style={{ textAlign: "center" }}>

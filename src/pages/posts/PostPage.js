@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../../styles/PostPage.module.css";
-import {
-  faPenSquare,
-  faTrashAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
@@ -46,7 +43,7 @@ const PostPage = (props) => {
     fetchPost();
   }, [id, currentUser]);
 
-   /* Checking if current user is following post owner */
+  /* Checking if current user is following post owner */
   useEffect(() => {
     const checkFollowing = async () => {
       try {
@@ -90,7 +87,7 @@ const PostPage = (props) => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
-/* Handling next button click */
+  /* Handling next button click */
   const handleNextClick = () => {
     if (post && post.products) {
       setCurrentIndex((prevIndex) =>
@@ -148,9 +145,7 @@ const PostPage = (props) => {
   );
   const uniqueBodySystems = Array.from(new Set(allBodySystems));
 
-  const allConditions = post.products.flatMap(
-    (product) => product.condition
-  );
+  const allConditions = post.products.flatMap((product) => product.condition);
 
   const uniqueConditions = Array.from(new Set(allConditions));
 
@@ -231,24 +226,24 @@ const PostPage = (props) => {
             {post.products.map((product, index) => (
               <div key={index}>
                 {index === 0 && (
-                <p className="card-text">
-                  <h6>
-                    Condition:{" "}
-                    <span className={styles.listedSpecs}>
-                    {uniqueConditions.join(", ")}
-                    </span>
-                  </h6>
-                </p>
+                  <p className="card-text">
+                    <h6>
+                      Condition:{" "}
+                      <span className={styles.listedSpecs}>
+                        {uniqueConditions.join(", ")}
+                      </span>
+                    </h6>
+                  </p>
                 )}
                 {index === 0 && (
-                <p className="card-text">
-                  <h6>
-                    Body Systems:{" "}
-                    <span className={styles.listedSpecs}>
-                    {uniqueBodySystems.join(", ")}
-                    </span>
-                  </h6>
-                </p>
+                  <p className="card-text">
+                    <h6>
+                      Body Systems:{" "}
+                      <span className={styles.listedSpecs}>
+                        {uniqueBodySystems.join(", ")}
+                      </span>
+                    </h6>
+                  </p>
                 )}
               </div>
             ))}
