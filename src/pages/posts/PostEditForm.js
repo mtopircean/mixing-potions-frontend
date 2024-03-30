@@ -11,7 +11,7 @@ import ProductsPanel from "../../components/ProductsPanel";
 import BodySystemPanel from "../../components/BodySystemPanel";
 import styles from "../../styles/PostCreateForm.module.css";
 import { useParams } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 function PostEditForm({ post }) {
   const currentUser = useCurrentUser();
@@ -27,6 +27,7 @@ function PostEditForm({ post }) {
   const history = useHistory();
   const { id } = useParams();
 
+  /* Fetch post data on component mount */
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -44,6 +45,7 @@ function PostEditForm({ post }) {
     fetchPost();
   }, [id]);
 
+  /* Update state with post data when received */
   useEffect(() => {
     if (!currentUser) {
       history.push("/");
@@ -55,6 +57,7 @@ function PostEditForm({ post }) {
     }
   }, [currentUser, history, post]);
 
+  /* Toggle selection of body system */
   const toggleBodySystem = (system) => {
     if (selectedBodySystems.includes(system)) {
       setSelectedBodySystems((prevSystems) =>
@@ -65,6 +68,7 @@ function PostEditForm({ post }) {
     }
   };
 
+  /* Add a product to selected products for the post */
   const handleAddProduct = (product) => {
     const isProductExists = selectedProducts.some((p) => p.id === product.id);
     if (!isProductExists) {
@@ -72,30 +76,26 @@ function PostEditForm({ post }) {
     }
   };
 
+   /* Remove a product from selected products */
   const handleRemoveProduct = (productId) => {
     setSelectedProducts((prevProducts) =>
       prevProducts.filter((product) => product.id !== productId)
     );
   };
 
+  /* Move to previous product in the selected product post area. It is a scroll area. */
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
+  /* Move to next product in the selected product post area. It is a scroll area. */
   const handleNextClick = () => {
     setCurrentIndex((prevIndex) =>
       Math.min(prevIndex + 1, selectedProducts.length - 2)
     );
   };
 
-  const handleCheckboxChange = (product) => {
-    if (selectedImage === product.image) {
-      setSelectedImage(null);
-    } else {
-      setSelectedImage(product.image);
-    }
-  };
-
+  /* Handle custom image selection(user uploaded image) */
   const handleCustomImageChange = (event) => {
     if (event.target.files.length) {
       const selectedFile = event.target.files[0];
@@ -106,6 +106,7 @@ function PostEditForm({ post }) {
     }
   };
 
+  /* Handle form submission */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -136,18 +137,17 @@ function PostEditForm({ post }) {
     }
   };
 
-  
-
+  /* Redirect to login if user is not authenticated */
   useEffect(() => {
     if (!currentUser) {
       history.push("/");
     }
   }, [currentUser, history]);
-  
 
   return (
     <Container>
       <Row>
+        {/* Form for editing the post */}
         <Col sm={6}>
           <div className={styles["center-div"]}>
             <Form
@@ -191,12 +191,6 @@ function PostEditForm({ post }) {
                         >
                           <BsX />
                         </Button>
-                        <Form.Check
-                          type="checkbox"
-                          className={styles["form-check-label"]}
-                          label="Post image"
-                          onChange={() => handleCheckboxChange(product)}
-                        />
                       </div>
                     </Col>
                   ))}
@@ -254,6 +248,7 @@ function PostEditForm({ post }) {
             </Form>
           </div>
         </Col>
+        {/* Panels for selecting body systems and products to be added to post */}
         <Col sm={6}>
           <div className={styles["center-div"]}>
             <BodySystemPanel
