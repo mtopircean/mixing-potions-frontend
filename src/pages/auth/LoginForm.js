@@ -3,12 +3,12 @@ import { NavLink, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
-import registerImage from '../../assets/register.jpg';
-import styles from "../../styles/LoginRegisterPage.module.css"
+import styles from "../../styles/LoginRegisterPage.module.css";
 
 function LoginForm() {
   const setCurrentUser = useSetCurrentUser();
 
+  /* State for login data and errors */
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -18,6 +18,8 @@ function LoginForm() {
   const [errors, setErrors] = useState({});
 
   const history = useHistory();
+
+  /* Function to handle form submission */
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -29,6 +31,7 @@ function LoginForm() {
     }
   };
 
+  /* Function to handle input change */
   const handleChange = (event) => {
     setLoginData({
       ...loginData,
@@ -39,6 +42,7 @@ function LoginForm() {
   return (
     <div className={`${styles["login-register"]} ${styles["login-container"]}`}>
       <Row>
+        {/* Login Form */}
         <Col md={6} className="d-flex flex-column">
           <Card className={styles["login-card"]}>
             <Card.Body>
@@ -92,12 +96,15 @@ function LoginForm() {
             </Card.Body>
           </Card>
         </Col>
+        {/* Registration link */}
         <Col
           md={6}
           className="d-flex justify-content-center align-items-center flex-column"
         >
           <h5 id="register-login">Don`t have an account yet.</h5>
-          <NavLink to="/register" className={styles["register-link"]}>REGISTER</NavLink>
+          <NavLink to="/register" className={styles["register-link"]}>
+            REGISTER
+          </NavLink>
         </Col>
       </Row>
     </div>
