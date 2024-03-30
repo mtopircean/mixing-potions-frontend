@@ -4,7 +4,6 @@ import styles from "../../styles/PostPage.module.css";
 import {
   faPenSquare,
   faTrashAlt,
-  faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams, useHistory } from "react-router-dom";
@@ -30,6 +29,7 @@ const PostPage = (props) => {
     currentUser && post && post.owner === currentUser.username;
   const [isFollowing, setIsFollowing] = useState(false);
 
+  /* Fetching post data */
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -46,6 +46,7 @@ const PostPage = (props) => {
     fetchPost();
   }, [id, currentUser]);
 
+   /* Checking if current user is following post owner */
   useEffect(() => {
     const checkFollowing = async () => {
       try {
@@ -61,10 +62,12 @@ const PostPage = (props) => {
     }
   }, [currentUser, post]);
 
+  /* Edit post function */
   const handleEdit = () => {
     history.push(`/edit/${id}`);
   };
 
+  /* Delete post function */
   const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${id}/`);
@@ -75,16 +78,19 @@ const PostPage = (props) => {
     }
   };
 
+  /* Confirming post deletion */
   const confirmDelete = () => {
     if (window.confirm("Are you sure you want to delete?")) {
       handleDelete();
     }
   };
 
+  /* Handling previous button click */
   const handlePrevClick = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
+/* Handling next button click */
   const handleNextClick = () => {
     if (post && post.products) {
       setCurrentIndex((prevIndex) =>
@@ -93,6 +99,7 @@ const PostPage = (props) => {
     }
   };
 
+  /* Handling comment submission */
   const handleCommentSubmitted = (newComment) => {
     setPost((prevPost) => ({
       ...prevPost,
@@ -100,12 +107,14 @@ const PostPage = (props) => {
     }));
   };
 
+  /* Handling edit comment */
   const handleEditComment = (comment) => {
     console.log("Editing comment:", comment);
     setEditMode(true);
     setEditComment(comment);
   };
 
+  /* Handling comment deletion */
   const handleCommentDelete = async (commentId) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this comment?"
@@ -128,10 +137,12 @@ const PostPage = (props) => {
     }
   };
 
+  /* Loading state */
   if (!post) {
     return <div>Loading...</div>;
   }
 
+  /* Extracting unique body systems and conditions */
   const allBodySystems = post.products.flatMap(
     (product) => product.body_systems
   );
