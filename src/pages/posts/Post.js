@@ -13,12 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Like from "../../components/Like";
 import Follow from "../../components/Follow";
 
-import {
-  FaThumbsUp,
-  FaComment,
-  FaChevronDown,
-  FaChevronUp,
-} from "react-icons/fa";
+import { FaComment, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const Post = (props) => {
   const {
@@ -41,20 +36,19 @@ const Post = (props) => {
   const [editComment, setEditComment] = useState(null);
   const currentUser = useCurrentUser();
   const [ownerProfileImage, setOwnerProfileImage] = useState(null);
-  const [isFollowing, setIsFollowing] = useState(false);
   const [isLiked, setIsLiked] = useState(like_id !== null);
   const [likeCount, setLikeCount] = useState(like_count);
 
+  /* Fetch owner's profile image when owner_id changes */
   useEffect(() => {
     const fetchOwnerProfileImage = async () => {
       if (!owner_id) {
-        console.error("Owner ID is not provided.");
         return;
       }
-      console.log("Owner ID:", owner_id);
       try {
         const response = await axios.get(`/posts/${owner_id}/`);
         setOwnerProfileImage(response.data.owner_image);
+        console.log("Owner image data:", response.data.owner_image);
       } catch (error) {
         console.error("Error fetching owner image:", error);
       }
@@ -63,21 +57,25 @@ const Post = (props) => {
     fetchOwnerProfileImage();
   }, [owner_id]);
 
+  /* Toggle comments expansion */
   const toggleComments = () => {
     setIsExpanded(!isExpanded);
   };
 
+  /* Handle new comment submission */
   const handleCommentSubmitted = (newComment) => {
     setComments([newComment, ...comments]);
     setEditMode(false);
     setEditComment(null);
   };
 
+  /* Handle editing a comment */
   const handleEditComment = (comment) => {
     setEditMode(true);
     setEditComment(comment);
   };
 
+  /* Handle deleting a comment */
   const handleCommentDelete = async (commentId) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this comment?"
