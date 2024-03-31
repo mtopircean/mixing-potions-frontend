@@ -16,11 +16,16 @@ function PostsPage() {
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [likeCounts, setLikeCounts] = useState({});
 
   /* Effect for fetching posts when selected body systems or current page change */
   useEffect(() => {
     fetchPosts();
   }, [selectedBodySystems, currentPage]);
+
+  useEffect(() => {
+    fetchLikeCounts();
+  }, []);
 
   /* Function to fetch posts from the server */
   const fetchPosts = async () => {
@@ -39,6 +44,39 @@ function PostsPage() {
       setPosts((prevPosts) => [...prevPosts, ...newPosts]);
       setHasLoaded(true);
       setHasMore(!!data.next);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  /*
+  Responsible for fetching the like counts for each user across all posts.
+  It iterates through all pages of posts, accumulates the like counts for each user, 
+  and updates the state with the total like counts.
+*/
+  const fetchLikeCounts = async () => {
+    try {
+      const likeCounts = {};
+      let currentPage = 1;
+      while (true) {
+        const { data } = await axiosReq.get(`/posts/?page=${currentPage}`);
+        data.results.forEach((post) => {
+          const owner = post.owner;
+          const likeCount = post.like_count;
+          if (likeCounts[owner]) {
+            likeCounts[owner] += likeCount;
+          } else {
+            likeCounts[owner] = likeCount;
+          }
+        });
+        if (!data.next) {
+          break;
+        }
+        currentPage++;
+      }
+  
+      console.log("Like Counts:", likeCounts);
+      setLikeCounts(likeCounts);
     } catch (err) {
       console.log(err);
     }
@@ -67,19 +105,13 @@ function PostsPage() {
 
   /* Function to sort users by likes */
   const sortByLikes = () => {
-    const userLikesCount = posts.reduce((acc, post) => {
-      const { owner, like_count } = post;
-      acc[owner] = (acc[owner] || 0) + (like_count || 0);
-      return acc;
-    }, {});
-
-    return Object.keys(userLikesCount)
-      .filter((user) => userLikesCount[user] > 0)
-      .sort((a, b) => userLikesCount[b] - userLikesCount[a])
+    return Object.keys(likeCounts)
+      .filter((user) => likeCounts[user] > 0)
+      .sort((a, b) => likeCounts[b] - likeCounts[a])
       .map((user, index) => ({
         id: index,
         owner: user,
-        like_count: userLikesCount[user],
+        like_count: likeCounts[user],
       }));
   };
 

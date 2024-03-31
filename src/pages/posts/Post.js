@@ -46,7 +46,7 @@ const Post = (props) => {
         return;
       }
       try {
-        const response = await axios.get(`/posts/${owner_id}/`);
+        const response = await axios.get(`/posts/${id}/`);
         setOwnerProfileImage(response.data.owner_image);
         console.log("Owner image data:", response.data.owner_image);
       } catch (error) {
@@ -75,7 +75,6 @@ const Post = (props) => {
     setEditComment(comment);
   };
 
-  /* Handle deleting a comment */
   const handleCommentDelete = async (commentId) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this comment?"
