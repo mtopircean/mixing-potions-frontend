@@ -25,6 +25,7 @@ const PostPage = (props) => {
   const isCurrentUserOwner =
     currentUser && post && post.owner === currentUser.username;
   const [isFollowing, setIsFollowing] = useState(false);
+  const [error, setError] = useState(null);
 
   /* Fetching post data */
   useEffect(() => {
@@ -36,6 +37,7 @@ const PostPage = (props) => {
         setPost(postData);
       } catch (error) {
         console.error("Error fetching post:", error);
+        setError(error);
       }
     };
 
@@ -50,13 +52,18 @@ const PostPage = (props) => {
         const response = await axios.get(`/followers/${post.owner_id}/check`);
         setIsFollowing(response.data.following);
       } catch (error) {
-        console.error("Error checking follow status:", error);
+        if (error.response && error.response.status === 404) {
+          console.error("Error checking follow status:", error);
+          setIsFollowing(false);
+        } else {
+          console.error("Error checking follow status:", error);
+        }
+      }
+
+      if (currentUser && post) {
+        checkFollowing();
       }
     };
-
-    if (currentUser && post) {
-      checkFollowing();
-    }
   }, [currentUser, post]);
 
   /* Edit post function */
@@ -226,24 +233,24 @@ const PostPage = (props) => {
             {post.products.map((product, index) => (
               <div key={index}>
                 {index === 0 && (
-                  <p className="card-text">
+                  <div className="card-text">
                     <h6>
                       Condition:{" "}
                       <span className={styles.listedSpecs}>
                         {uniqueConditions.join(", ")}
                       </span>
                     </h6>
-                  </p>
+                  </div>
                 )}
                 {index === 0 && (
-                  <p className="card-text">
+                  <div className="card-text">
                     <h6>
                       Body Systems:{" "}
                       <span className={styles.listedSpecs}>
                         {uniqueBodySystems.join(", ")}
                       </span>
                     </h6>
-                  </p>
+                  </div>
                 )}
               </div>
             ))}

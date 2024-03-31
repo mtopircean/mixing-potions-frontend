@@ -28,7 +28,7 @@ function PostsPage() {
   }, []);
 
   /* Function to fetch posts from the server */
-  const fetchPosts = async () => {
+   const fetchPosts = async () => {
     try {
       let query = "/posts?page=" + currentPage;
       if (selectedBodySystems.length > 0) {
@@ -74,7 +74,7 @@ function PostsPage() {
         }
         currentPage++;
       }
-  
+
       console.log("Like Counts:", likeCounts);
       setLikeCounts(likeCounts);
     } catch (err) {
@@ -149,7 +149,7 @@ function PostsPage() {
             toggleBodySystem={toggleBodySystem}
           />
         </Col>
-        <Col className="py-2 p-0 p-lg-2" lg={6}>
+        <Col className="py-2 p-0 p-lg-2" lg={6} id="postsContainer">
           {/* Infinite Scroll for Posts */}
           <InfiniteScroll
             dataLength={posts.length}
