@@ -1,137 +1,137 @@
 .post-delete-button {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    color: #A60E37;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #A60E37;
 }
 
 .post-edit-button {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    color: #023e85;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #023e85;
 }
 
 .post-title-detail {
-    font-weight: 600;
-    margin-top: 10px;
-    text-align: center;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .post-description-detail {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .product-used-detail {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .comments-detail {
-    margin-top: 5px;
-    font-weight: bold;
+  margin-top: 5px;
+  font-weight: bold;
 }
 
 .arrow-button {
-    border: #b1cebb 1px solid;
-    background-color: transparent;
-    color: #b1cebb;
-    font-weight: bold;
-  }
+  border: #b1cebb 1px solid;
+  background-color: transparent;
+  color: #b1cebb;
+  font-weight: bold;
+}
 
-  .arrow-button:hover {
-    background-color: #b1cebb;
-    color: white;
-  }
+.arrow-button:hover {
+  background-color: #b1cebb;
+  color: white;
+}
 
-  .CommentsAreaWrapper {
-    max-height: 200px;
-    overflow-y: auto;
-    padding-right: 10px;
-    margin-top: 30px;
-    margin-bottom: 40px;
-  }
-  
-  
-  .CommentsAreaWrapper::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  .CommentsAreaWrapper::-webkit-scrollbar-thumb {
-    background-color: #629d778b;
-    border-radius: 0px;
-  }
-  
-  .CommentsAreaWrapper::-webkit-scrollbar-track {
-    background-color: #629d772c;
-  }
+.CommentsAreaWrapper {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
 
-  .AddComment {
-    padding-right: 10px;
-  }
 
-  .CommentOwner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .CommentBubble {
-    flex-shrink: 0;
-  }
-  
-  .CommentBubble:hover {
-    color: #629d77;
-  }
-  
-  .delete-button {
-    background-color:  rgba(0, 0, 0, 0);
-    border: none;
-    color: #A60E37;
-  }
-  
-  .edit-button {
-    background-color:  rgba(0, 0, 0, 0);
-    border: none;
-    color: #023e85;
-  }
-  
-  .delete-button:hover {
-    background-color: #A60E37;
-    color: #ffff;
-  }
-  
-  .edit-button:hover {
-    background-color: #023e85;
-    color: #ffff;
-  }
+.CommentsAreaWrapper::-webkit-scrollbar {
+  width: 10px;
+}
 
-  .CommentOwner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.CommentsAreaWrapper::-webkit-scrollbar-thumb {
+  background-color: #629d778b;
+  border-radius: 0px;
+}
 
-  .followButton {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    color:#023e85;
-  }
-  
-  .followButton:hover {
-    background-color: #023e85;
-    color:#ffff;
-  }
-  
-  .usernameLink {
-    margin-top: -10px;
-  }
+.CommentsAreaWrapper::-webkit-scrollbar-track {
+  background-color: #629d772c;
+}
 
-  .by-title {
-    font-size: small;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
+.AddComment {
+  padding-right: 10px;
+}
 
-  .post-title-detail {
-    margin-bottom: -10px;
+.CommentOwner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.CommentBubble {
+  flex-shrink: 0;
+}
+
+.CommentBubble:hover {
+  color: #629d77;
+}
+
+.delete-button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #A60E37;
+}
+
+.edit-button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #023e85;
+}
+
+.delete-button:hover {
+  background-color: #A60E37;
+  color: #ffff;
+}
+
+.edit-button:hover {
+  background-color: #023e85;
+  color: #ffff;
+}
+
+.CommentOwner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.followButton {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #023e85;
+}
+
+.followButton:hover {
+  background-color: #023e85;
+  color: #ffff;
+}
+
+.usernameLink {
+  margin-top: -10px;
+}
+
+.by-title {
+  font-size: small;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.post-title-detail {
+  margin-bottom: -10px;
 }
 
 .post-description-detail {
@@ -146,17 +146,47 @@
 
 .imageContainer {
   max-width: 400px;
-  max-height: 600px;
+  max-height: 700px;
   margin: 0 auto;
   overflow: hidden;
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .postImage {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+.descriptionPost {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.descriptionPost::-webkit-scrollbar {
+  width: 10px;
+}
+
+.descriptionPost::-webkit-scrollbar-thumb {
+  background-color: #629d778b;
+  border-radius: 0px;
+}
+
+.descriptionPost::-webkit-scrollbar-track {
+  background-color: #629d772c;
+}
+
+.systemCondition {
+  max-height: 100px;
+  overflow-y: auto;
+  padding-right: 10px;
 }

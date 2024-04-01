@@ -43,7 +43,8 @@ function PostsPage() {
   /* Effect for fetching posts when selected body systems or current page change */
   useEffect(() => {
     fetchPosts();
-  }, [fetchPosts, selectedBodySystems, currentPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedBodySystems, currentPage]);
 
   useEffect(() => {
     fetchLikeCounts();
@@ -75,7 +76,6 @@ function PostsPage() {
         currentPage++;
       }
 
-      console.log("Like Counts:", likeCounts);
       setLikeCounts(likeCounts);
     } catch (err) {
       console.log(err);

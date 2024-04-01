@@ -46,7 +46,6 @@ const PostPage = (props) => {
   }, [id, currentUser, setError]);
 
   /* Checking if current user is following post owner */
-  
 
   /* Edit post function */
   const handleEdit = () => {
@@ -90,7 +89,7 @@ const PostPage = (props) => {
     setPost((prevPost) => ({
       ...prevPost,
       comments: [newComment, ...prevPost.comments],
-      comment_count: prevPost.comment_count + 1
+      comment_count: prevPost.comment_count + 1,
     }));
   };
 
@@ -118,7 +117,7 @@ const PostPage = (props) => {
       setPost((prevPost) => ({
         ...prevPost,
         comments: updatedComments,
-        comment_count: prevPost.comment_count - 1
+        comment_count: prevPost.comment_count - 1,
       }));
     } catch (error) {
       console.error("Error deleting comment:", error);
@@ -209,17 +208,18 @@ const PostPage = (props) => {
           </div>
         </Col>
         <Col md={6}>
+          <h5 className={styles["post-description-detail"]}>Description</h5>
           <div className={styles.descriptionPost}>
-            <h5 className={styles["post-description-detail"]}>Description</h5>
             <p>{post.description}</p>
           </div>
+          <hr />
           <div className={styles.CommentsAreaWrapper}>
             {post.products.map((product, index) => (
               <div key={index}>
                 {index === 0 && (
-                  <div className="card-text">
+                  <div className={"card-text " + styles.systemCondition}>
                     <h6>
-                      Condition:{" "}
+                      <strong>Condition: </strong>
                       <span className={styles.listedSpecs}>
                         {uniqueConditions.join(", ")}
                       </span>
@@ -227,9 +227,9 @@ const PostPage = (props) => {
                   </div>
                 )}
                 {index === 0 && (
-                  <div className="card-text">
+                  <div className={"card-text " + styles.systemCondition}>
                     <h6>
-                      Body Systems:{" "}
+                      <strong>Body Systems: </strong>
                       <span className={styles.listedSpecs}>
                         {uniqueBodySystems.join(", ")}
                       </span>
@@ -241,12 +241,12 @@ const PostPage = (props) => {
           </div>
           <hr />
           <div>
+            <h5
+              className={`${styles["comments-detail"]} ${styles["CommentOwner"]}`}
+            >
+              Comments
+            </h5>
             <div className={styles.CommentsAreaWrapper}>
-              <h5
-                className={`${styles["comments-detail"]} ${styles["CommentOwner"]}`}
-              >
-                Comments
-              </h5>
               {post.comments &&
                 post.comments.map((comment, index) => (
                   <div key={index} className={styles.Comment}>

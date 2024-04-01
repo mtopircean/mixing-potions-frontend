@@ -50,7 +50,6 @@ const Post = (props) => {
       try {
         const response = await axios.get(`/posts/${id}/`);
         setOwnerProfileImage(response.data.owner_image);
-        console.log("Owner image data:", response.data.owner_image);
       } catch (error) {
         console.error("Error fetching owner image:", error);
       }
