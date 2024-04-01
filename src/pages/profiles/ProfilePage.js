@@ -114,24 +114,29 @@ const ProfilePage = () => {
                     activeClassName={styles["active"]}
                   >
                     Edit <FontAwesomeIcon icon={faPenToSquare} />
+                    <br />
+                    Click edit and tell people more about you....
                   </NavLink>
-                  <br />
+                  <br className="mt-3 mb-3" />
                   <Link
                     to={`/profiles/${profile.id}/password-change`}
                     className={`${styles["password-button"]} mt-3`}
                   >
+                    <br />
                     Change password <FontAwesomeIcon icon={faKey} />
                   </Link>
                 </div>
               )}
             </div>
-            <button
-              onClick={toggleExpanded}
-              className={styles["profile-button"]}
-            >
-              {expanded ? "▲" : "▼"}
-            </button>
           </Col>
+          <div className={`d-flex justify-content-center ${styles.seeMore}`} md={12}>
+          <button
+            onClick={toggleExpanded}
+            className={`${styles["profile-button"]} d-flex justify-content-center align-items-center`}
+          >
+            {expanded ? "▲" : "▼"} <span>see more profile details...</span>
+          </button>
+          </div>
           <hr></hr>
           {expanded && (
             <Col xs={12}>
