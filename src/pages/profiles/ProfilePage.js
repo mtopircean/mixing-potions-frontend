@@ -31,6 +31,8 @@ const ProfilePage = () => {
         setProfile(pageProfile);
         setLoading(false);
 
+        console.log("Profile data:", pageProfile); // Log profile data
+
         const { data: postData } = await axiosReq.get(`/posts`);
         const userPostsData = postData.results.filter(
           (post) => post.owner === pageProfile.username
@@ -39,7 +41,13 @@ const ProfilePage = () => {
 
         const response = await axios.get(`/followers`);
         if (response.status === 200) {
-          setFollowedUsers(response.data.results);
+          const followedUsersData = response.data.results;
+          setFollowedUsers(followedUsersData);
+
+          console.log(
+            "Followed user IDs:",
+            followedUsersData.map((user) => user.id)
+          ); // Log followed user IDs
         } else {
           throw new Error("Failed to fetch followed users");
         }
@@ -179,7 +187,16 @@ const ProfilePage = () => {
                       {followedUsers.map((user) => (
                         <Row key={user.id} className="align-items-center">
                           <Col xs={8}>
-                            <p key={user.id}>{user.followed_name}</p>
+                            {user.followed_profile_id ? (
+                              <Link
+                                to={`/profile/${user.followed_profile_id}`}
+                                className={styles.usernameLink}
+                              >
+                                {user.followed_name}
+                              </Link>
+                            ) : (
+                              <span>{user.followed_name}</span>
+                            )}
                           </Col>
                           <Col xs={4}>
                             <Button
