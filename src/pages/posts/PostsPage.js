@@ -162,7 +162,7 @@ function PostsPage() {
             next={() => setCurrentPage(currentPage + 1)}
             hasMore={hasMore}
             loader={<h4>Loading...</h4>}
-            endMessage={<h4>No more posts</h4>}
+            endMessage={<h4 className="text-center">No more posts</h4>}
           >
             {posts
               .filter((post) => {

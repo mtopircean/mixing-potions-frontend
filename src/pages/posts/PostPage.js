@@ -269,7 +269,7 @@ const PostPage = (props) => {
                 post.comments.map((comment, index) => (
                   <div key={index} className={styles.Comment}>
                     <div className={styles.CommentOwner}>
-                      <Link to={`/profile/${comment.owner_profile.id}`}>
+                      <Link to={`/profile/${comment.owner_profile?.id}`}>
                         <strong>{comment.owner}</strong>
                       </Link>
                       {currentUser &&
@@ -300,6 +300,7 @@ const PostPage = (props) => {
                 postId={id}
                 editMode={editMode}
                 editComment={editComment}
+                onCommentSubmitted={handleCommentSubmitted}
               />
             </div>
           </div>

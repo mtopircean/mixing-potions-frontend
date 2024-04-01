@@ -147,6 +147,7 @@ const Post = (props) => {
             comments={comments}
             editMode={editMode}
             editComment={editComment}
+            onCommentSubmitted={handleCommentSubmitted}
           />
           <div className={styles.CommentsAreaWrapper}>
             {comments
@@ -155,7 +156,7 @@ const Post = (props) => {
               .map((comment, index) => (
                 <div key={index} className={styles.CommentsArea}>
                   <h6 className={styles.CommentOwner}>
-                    <Link to={`/profile/${comment.owner_profile.id}`}>
+                    <Link to={`/profile/${comment.owner_profile?.id}`}>
                       <strong>{comment.owner}</strong>
                     </Link>
                     {currentUser && currentUser.username === comment.owner && (
