@@ -50,7 +50,7 @@ const ProfileEditForm = () => {
     try {
       await axios.put(`/profiles/${id}/`, formDataWithoutImage);
       toast.success("Profile data was updated");
-      history.push("/profile");
+      history.push(`/profiles/${id}/`);
     } catch (error) {
       console.error("Error updating profile data:", error);
     }

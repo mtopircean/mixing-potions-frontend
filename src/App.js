@@ -34,7 +34,7 @@ function App() {
           />
           <Route exact path="/login" render={() => <LoginForm />} />
           <Route exact path="/register" render={() => <RegisterForm />} />
-          <Route exact path="/profile/:id" render={() => <ProfilePage />} />
+          <Route exact path="/profile/:id" render={(props) => <ProfilePage {...props} />} />
           <Route path="/profiles/:id/edit" component={ProfileEditForm} />
           <Route path="/profiles/:id/password-change" component={ProfilePasswordChange} />
           <Route exact path="/gdpr" render={() => <GDPR />} />

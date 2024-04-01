@@ -4,7 +4,6 @@ import { Navbar, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBars, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
-import { NavLink } from "react-router-dom";
 import {
   useCurrentUser,
   useSetCurrentUser,
@@ -48,17 +47,17 @@ const NavBar = () => {
       >
         <NavDropdown.Item className="user-menu">
           <div>
-            <NavLink to="/" className="user-link-menu" onClick={handleLogout}>
+            <Link to="/" className="user-link-menu" onClick={handleLogout}>
               Logout
-            </NavLink>
+            </Link>
           </div>
           <div>
-            <NavLink
+            <Link
               to={`/profile/${currentUser?.profile_id}`}
               className="user-link-menu"
             >
               Profile
-            </NavLink>
+            </Link>
           </div>
         </NavDropdown.Item>
       </NavDropdown>
@@ -67,9 +66,9 @@ const NavBar = () => {
 
   const loggedOutIcons = (
     <>
-      <NavLink to="/login" className="nav-link">
+      <Link to="/login" className="nav-link">
         Join/Login <FontAwesomeIcon icon={faUser} />
-      </NavLink>
+      </Link>
     </>
   );
 
@@ -77,11 +76,11 @@ const NavBar = () => {
     <Container>
       <Navbar fixed="top" className="navbar-container">
         <Navbar.Brand>
-          <NavLink to="/">
+          <Link to="/">
             <div className="logo-container">
               <img src={logo} alt="logo" height="120" />
             </div>
-          </NavLink>
+          </Link>
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
@@ -92,9 +91,9 @@ const NavBar = () => {
             >
               <div id="menu-items">
                 <NavDropdown.Item>
-                  <NavLink to="/" className="nav-link-menu">
+                  <Link to="/" className="nav-link-menu">
                     Home
-                  </NavLink>
+                  </Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item>
                   <Link

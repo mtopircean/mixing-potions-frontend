@@ -33,7 +33,11 @@ const RegisterForm = () => {
       await axios.post("/dj-rest-auth/registration/", formData);
       history.push("/");
     } catch (err) {
-      setErrors(err.response?.data);
+      if (err.response?.data?.email) {
+        setErrors({ email: ["Email already exists."] });
+      } else {
+        setErrors(err.response?.data);
+      }
     }
   };
 
@@ -69,6 +73,9 @@ const RegisterForm = () => {
                   value={email}
                   onChange={handleChange}
                 />
+                {errors.email && (
+                  <Alert variant="warning">{errors.email[0]}</Alert>
+                )}
               </Form.Group>
               {errors.password1?.map((message, idx) => (
                 <Alert variant="warning" key={idx}>

@@ -15,11 +15,12 @@ import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
 import Post from "../../pages/posts/Post";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 const ProfilePage = () => {
   const currentUser = useCurrentUser();
   const { id } = useParams();
-
+  const history = useHistory();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
@@ -66,9 +67,19 @@ const ProfilePage = () => {
     return <div>Loading data.......</div>;
   }
 
-  const handleDelete = () => {
-    if (window.confirm("Please confirm deletion of your profile!")) {
-      console.log("Deleting profile");
+  const handleDelete = async () => {
+    try {
+      if (window.confirm("Please confirm deletion of your profile!")) {
+        await axiosReq.delete(`/profiles/${id}/`);
+        await axios.post("/dj-rest-auth/logout/");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        history.push("/login");
+        toast.success("Profile deleted successfully and logged out!");
+      }
+    } catch (error) {
+      console.error("Error deleting profile:", error);
+      toast.error("Failed to delete profile. Please try again later.");
     }
   };
 
@@ -179,51 +190,60 @@ const ProfilePage = () => {
 
       {userPosts && userPosts.length > 0 && (
         <Row>
-          {currentUser && currentUser.username === profile.username && userPosts && userPosts.length > 0 && (
-          <Col xs={12} md={12} className="text-center">
-            {followedUsers && followedUsers.length > 0 ? (
-            <div
-              className={`${styles["followed-users"]} d-flex flex-column justify-content-center`}
-            >
-              <h4 className="text-center">Followed Users:</h4>
-              <div>
-                {followedUsers.map((user) => (
-                  <Row key={user.id} className="align-items-center">
-                    <Col xs={8}>
-                      <p key={user.id}>{user.followed_name}</p>
-                    </Col>
-                    <Col xs={4}>
-                      <Button
-                        onClick={() => unfollowUser(user.id)}
-                        className={styles.unfollowUser}
-                      >
-                        <span>Unfollow</span>{" "}
-                        <FontAwesomeIcon icon={faCircleMinus} />
-                      </Button>
-                    </Col>
-                  </Row>
-                ))}
-              </div>
-            </div>
-            ) : (
-              <div className="text-center">
-                <h4 className="text-center">Followed Users:</h4>
-                <p className="no-followed">No followed users</p></div>
+          {currentUser &&
+            currentUser.username === profile.username &&
+            userPosts &&
+            userPosts.length > 0 && (
+              <Col xs={12} md={12} className="text-center">
+                {followedUsers && followedUsers.length > 0 ? (
+                  <div
+                    className={`${styles["followed-users"]} d-flex flex-column justify-content-center`}
+                  >
+                    <h4 className="text-center">Followed Users:</h4>
+                    <div>
+                      {followedUsers.map((user) => (
+                        <Row key={user.id} className="align-items-center">
+                          <Col xs={8}>
+                            <p key={user.id}>{user.followed_name}</p>
+                          </Col>
+                          <Col xs={4}>
+                            <Button
+                              onClick={() => unfollowUser(user.id)}
+                              className={styles.unfollowUser}
+                            >
+                              <span>Unfollow</span>{" "}
+                              <FontAwesomeIcon icon={faCircleMinus} />
+                            </Button>
+                          </Col>
+                        </Row>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <h4 className="text-center">Followed Users:</h4>
+                    <p className="no-followed">No followed users</p>
+                  </div>
+                )}
+                <hr />
+              </Col>
             )}
-           <hr/> 
-          </Col>)}
-          
-          <Col xs={12} md={12} className="justify-content-center text-center mb-3">
+
+          <Col
+            xs={12}
+            md={12}
+            className="justify-content-center text-center mb-3"
+          >
             <h4 className="mb-3">User Posts:</h4>
             <Row>
-  {userPosts.map((post) => (
-    <Col xs={12} md={6} key={post.id} className="post-col mb-3">
-      <div className="post-wrapper">
-        <Post {...post} />
-      </div>
-    </Col>
-  ))}
-</Row>
+              {userPosts.map((post) => (
+                <Col xs={12} md={6} key={post.id} className="post-col mb-3">
+                  <div className="post-wrapper">
+                    <Post {...post} />
+                  </div>
+                </Col>
+              ))}
+            </Row>
           </Col>
         </Row>
       )}
