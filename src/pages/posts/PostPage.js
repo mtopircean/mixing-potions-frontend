@@ -311,25 +311,25 @@ const PostPage = (props) => {
                 </Button>
               )}
           </Col>
-          <div>
+          <div className={styles["products-used-detail"]}>
             <h5 className={styles["products-used-detail"]}>Products Used</h5>
             {post && post.products && post.products.length > 0 ? (
               <div className="row">
                 {post.products.map((product, index) => (
                   <div key={index} className="col-md-4 mb-4">
-                    <div className="card">
+                    <div className={"card " + styles["products-used"]}>
                       <img
                         src={product.image}
                         className={`card-img-top ${styles.postImage}`}
                         alt={product.name}
                       />
                       <div className="card-body">
-                        <h5 className="card-title">{product.name}</h5>
+                        <h5 className="card-title"><strong>{product.name}</strong></h5>
                         <p className="card-text">
-                          Condition: {product.condition.join(", ")}
+                          <strong>Condition: </strong>{product.condition.join(", ")}
                         </p>
                         <p className="card-text">
-                          Body Systems: {product.body_systems.join(", ")}
+                        <strong>Body Systems: </strong>{product.body_systems.join(", ")}
                         </p>
                       </div>
                     </div>
