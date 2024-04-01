@@ -60,3 +60,16 @@
     border: #54547c 1px solid;
     color: #54547c;
 }
+
+.products-panel::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .products-panel::-webkit-scrollbar-thumb {
+    background-color: #54547c;
+    border-radius: 0px;
+  }
+  
+  .products-panel::-webkit-scrollbar-track {
+    background-color: #54547c4b;
+  }
