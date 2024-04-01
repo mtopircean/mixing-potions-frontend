@@ -3,7 +3,7 @@ import Post from "./Post";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 import BodySystemPanel from "../../components/BodySystemPanel";
-import { FaThumbsUp } from "react-icons/fa";
+import { FaThumbsUp, FaSyncAlt } from "react-icons/fa";
 import styles from "../../styles/PostsPage.module.css";
 import { MdClear } from "react-icons/md";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -130,6 +130,12 @@ function PostsPage() {
     );
   };
 
+
+  /* Function to refresh the number of likes on the most liked */
+  const handleRefreshLikes = () => {
+    fetchLikeCounts();
+  };
+
   return (
     <Container>
       <Row className="h-100">
@@ -201,7 +207,10 @@ function PostsPage() {
                 )}
                 <h5 className={styles["liked-header"]}>
                   <FaThumbsUp className={styles["like-user-icon"]} /> Most liked
-                  users:
+                  users: 
+                  <Button variant="link" onClick={handleRefreshLikes}>
+                    <FaSyncAlt />
+                  </Button>
                 </h5>
                 <hr />
               </div>

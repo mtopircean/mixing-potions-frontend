@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenToSquare,
-  faTrashCan,
   faCircleMinus,
   faKey,
 } from "@fortawesome/free-solid-svg-icons";
@@ -15,12 +14,10 @@ import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
 import Post from "../../pages/posts/Post";
 import { toast } from "react-toastify";
-import { useHistory } from "react-router-dom";
 
 const ProfilePage = () => {
   const currentUser = useCurrentUser();
   const { id } = useParams();
-  const history = useHistory();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
@@ -67,22 +64,6 @@ const ProfilePage = () => {
     return <div>Loading data.......</div>;
   }
 
-  const handleDelete = async () => {
-    try {
-      if (window.confirm("Please confirm deletion of your profile!")) {
-        await axiosReq.delete(`/profiles/${id}/`);
-        await axios.post("/dj-rest-auth/logout/");
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        history.push("/login");
-        toast.success("Profile deleted successfully and logged out!");
-      }
-    } catch (error) {
-      console.error("Error deleting profile:", error);
-      toast.error("Failed to delete profile. Please try again later.");
-    }
-  };
-
   const unfollowUser = async (followedUserId) => {
     try {
       await axios.delete(`/followers/${followedUserId}`);
@@ -126,12 +107,6 @@ const ProfilePage = () => {
                   >
                     Edit <FontAwesomeIcon icon={faPenToSquare} />
                   </NavLink>
-                  <button
-                    className={styles["delete-button"]}
-                    onClick={handleDelete}
-                  >
-                    Delete <FontAwesomeIcon icon={faTrashCan} />
-                  </button>
                   <br />
                   <Link
                     to={`/profiles/${profile.id}/password-change`}

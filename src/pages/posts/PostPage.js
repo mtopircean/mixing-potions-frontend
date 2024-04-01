@@ -108,6 +108,7 @@ const PostPage = (props) => {
     setPost((prevPost) => ({
       ...prevPost,
       comments: [newComment, ...prevPost.comments],
+      comment_count: prevPost.comment_count + 1
     }));
   };
 
@@ -135,6 +136,7 @@ const PostPage = (props) => {
       setPost((prevPost) => ({
         ...prevPost,
         comments: updatedComments,
+        comment_count: prevPost.comment_count - 1
       }));
     } catch (error) {
       console.error("Error deleting comment:", error);
