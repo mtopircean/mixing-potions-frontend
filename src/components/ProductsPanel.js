@@ -30,13 +30,13 @@ const ProductsPanel = ({ selectedBodySystems, onAddProduct }) => {
 
   const handleAddToPost = (product) => {
     onAddProduct(product);
-  }
+  };
 
   return (
     <Container className={styles["products-panel"]}>
       <h3 className="text-center">Add product</h3>
       <Row>
-        {filteredProducts.slice(0, 4).map((product) => (
+        {filteredProducts.map((product) => (
           <Col key={product.id} sm={6}>
             <div key={product.id} className={styles["product-card"]}>
               <img
@@ -47,12 +47,19 @@ const ProductsPanel = ({ selectedBodySystems, onAddProduct }) => {
               <h5 className={styles["product-span"]}>{product.name}</h5>
               <p>
                 <span className={styles["product-span"]}>Condition:</span>{" "}
-                {product.condition}
+                {product.condition.map((condition, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && ", "}
+                    {condition}
+                  </React.Fragment>
+                ))}
               </p>
-              <Button 
-              className={styles["add-post-button"]}
-              onClick={() => handleAddToPost(product)}
-              >Add to post</Button>
+              <Button
+                className={styles["add-post-button"]}
+                onClick={() => handleAddToPost(product)}
+              >
+                Add to post
+              </Button>
             </div>
           </Col>
         ))}

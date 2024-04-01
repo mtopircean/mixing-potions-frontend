@@ -1,5 +1,5 @@
 .system-panel {
-    padding: 20px;
+    padding: 10px;
 }
 
 .system-panel h5 {
@@ -8,10 +8,7 @@
 
 .systems-button-container {
   display: flex;
-  flex-wrap: wrap;
-}
-
-.systems-button-container > div {
+  flex-direction: column;
 }
 
 .systems-button {
@@ -19,6 +16,8 @@
   color: #54547c;
   border: none;
   font-size: medium;
+  text-align: left;
+  margin-top: 5px;
 }
 
 @media (max-width: 768px) {
