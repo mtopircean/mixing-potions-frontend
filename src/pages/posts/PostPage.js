@@ -46,25 +46,7 @@ const PostPage = (props) => {
   }, [id, currentUser]);
 
   /* Checking if current user is following post owner */
-  useEffect(() => {
-    const checkFollowing = async () => {
-      try {
-        const response = await axios.get(`/followers/${post.owner_id}/check`);
-        setIsFollowing(response.data.following);
-      } catch (error) {
-        if (error.response && error.response.status === 404) {
-          console.error("Error checking follow status:", error);
-          setIsFollowing(false);
-        } else {
-          console.error("Error checking follow status:", error);
-        }
-      }
-
-      if (currentUser && post) {
-        checkFollowing();
-      }
-    };
-  }, [currentUser, post]);
+  
 
   /* Edit post function */
   const handleEdit = () => {

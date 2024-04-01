@@ -25,7 +25,6 @@ const Post = (props) => {
     image,
     created_at,
     like_count,
-    comment_count,
     comments: initialComments,
     like_id,
   } = props;
@@ -36,7 +35,9 @@ const Post = (props) => {
   const [editComment, setEditComment] = useState(null);
   const currentUser = useCurrentUser();
   const [ownerProfileImage, setOwnerProfileImage] = useState(null);
+  /* Used to determine if the post is liked by the current user */
   const [isLiked, setIsLiked] = useState(like_id !== null);
+   /* Used to keep track of the number of likes on the post */
   const [likeCount, setLikeCount] = useState(like_count);
   const noComments = comments.length === 0;
 
@@ -56,7 +57,7 @@ const Post = (props) => {
     };
 
     fetchOwnerProfileImage();
-  }, [owner_id]);
+  }, [owner_id, id]);
 
   /* Toggle comments expansion */
   const toggleComments = () => {

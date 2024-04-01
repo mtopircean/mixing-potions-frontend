@@ -20,7 +20,6 @@ const Like = ({
   const currentUser = useCurrentUser();
 
   useEffect(() => {
-    console.log("isLiked:", isLiked);
     setLikeCount(initialLikeCount);
   }, [initialLikeCount]);
 

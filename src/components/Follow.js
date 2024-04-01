@@ -18,13 +18,17 @@ const FollowButton = ({ ownerId }) => {
       try {
         const response = await axios.get(`/followers/?followed=${ownerId}`);
         const followers = response.data.results;
-        const isAlreadyFollowing = followers.some(follower => follower.owner === currentUser.username && follower.followed === ownerId);
+        const isAlreadyFollowing = followers.some(
+          (follower) =>
+            follower.owner === currentUser.username &&
+            follower.followed === ownerId
+        );
         setIsFollowing(isAlreadyFollowing);
       } catch (error) {
         console.error("Error checking follow status:", error);
       }
     };
-  
+
     if (currentUser) {
       checkFollowing();
     }
@@ -33,7 +37,7 @@ const FollowButton = ({ ownerId }) => {
   const handleFollowUser = async () => {
     if (!isFollowing) {
       try {
-        const response = await axios.post("/followers/", { followed: ownerId });
+        await axios.post("/followers/", { followed: ownerId });
         setIsFollowing(true);
         toast.success(`You are now following this user!`);
       } catch (error) {
@@ -52,13 +56,12 @@ const FollowButton = ({ ownerId }) => {
     return null;
   }
 
-
   return (
     <>
       {isFollowing ? (
-         <Link to={`/profile/${currentUser.pk}`} className={styles.following}>
-         Following...
-       </Link>
+        <Link to={`/profile/${currentUser.pk}`} className={styles.following}>
+          Following...
+        </Link>
       ) : (
         <Button
           variant="primary"

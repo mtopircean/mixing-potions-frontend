@@ -23,6 +23,7 @@ function App() {
               <a
                 href="https://beta-doterra.myvoffice.com/cosminatopircean/#/contactUs"
                 target="blank"
+                rel="noreferrer"
               >
                 Join Us <FontAwesomeIcon icon={faPlus} />
               </a>
@@ -30,18 +31,24 @@ function App() {
           </Col>
           <Col xs={4} className="text-right">
             <div className="social">
-              <a href="https://wa.me/+353876403084" target="_blank">
+              <a
+                href="https://wa.me/+353876403084"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <FontAwesomeIcon icon={faWhatsapp} />
               </a>
               <a
                 href="https://www.facebook.com/gherasim.cosmina"
                 target="_blank"
+                rel="noreferrer"
               >
                 <FontAwesomeIcon icon={faFacebook} />
               </a>
               <a
                 href="https://www.instagram.com/cosminatopircean/?utm_source=ig_web_button_share_sheet&igshid=OGQ5ZDc2ODk2ZA%3D%3D"
                 target="_blank"
+                rel="noreferrer"
               >
                 <FontAwesomeIcon icon={faInstagram} />
               </a>
