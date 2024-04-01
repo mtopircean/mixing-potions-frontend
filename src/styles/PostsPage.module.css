@@ -17,6 +17,15 @@ h5.liked-header {
 }
 
 .followedButtons:hover {
-    background-color:#54547c;
+    background-color: #54547c;
     color: #ffff;
+}
+
+.mostLikedButton {
+    border: none;
+    background: none;
+    color: #54547c;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 3px;
 }

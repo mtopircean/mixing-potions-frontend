@@ -17,10 +17,10 @@ function PostCreateForm() {
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage] = useState(null);
   const [customImage, setCustomImage] = useState(null);
   const [image, setImage] = useState(null);
-  const [errors, setErrors] = useState({});
+  const [setErrors] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 

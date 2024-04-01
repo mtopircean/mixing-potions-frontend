@@ -24,8 +24,8 @@ const PostPage = (props) => {
   const history = useHistory();
   const isCurrentUserOwner =
     currentUser && post && post.owner === currentUser.username;
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [error, setError] = useState(null);
+  const [isFollowing] = useState(false);
+  const [setError] = useState(null);
 
   /* Fetching post data */
   useEffect(() => {
@@ -43,7 +43,7 @@ const PostPage = (props) => {
 
     console.log("ID:", id);
     fetchPost();
-  }, [id, currentUser]);
+  }, [id, currentUser, setError]);
 
   /* Checking if current user is following post owner */
   
@@ -181,7 +181,7 @@ const PostPage = (props) => {
               <div className={styles.imageContainer}>
                 <img
                   src={post.image}
-                  alt="Post Image"
+                  alt="Post"
                   className="img-fluid"
                   style={{ width: "100%", maxHeight: "100%" }}
                 />

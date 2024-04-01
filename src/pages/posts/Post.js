@@ -36,9 +36,9 @@ const Post = (props) => {
   const currentUser = useCurrentUser();
   const [ownerProfileImage, setOwnerProfileImage] = useState(null);
   /* Used to determine if the post is liked by the current user */
-  const [isLiked, setIsLiked] = useState(like_id !== null);
+  const [isLiked] = useState(like_id !== null);
    /* Used to keep track of the number of likes on the post */
-  const [likeCount, setLikeCount] = useState(like_count);
+  const [likeCount] = useState(like_count);
   const noComments = comments.length === 0;
 
   /* Fetch owner's profile image when owner_id changes */

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Post from "./Post";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
@@ -18,17 +18,8 @@ function PostsPage() {
   const [hasMore, setHasMore] = useState(true);
   const [likeCounts, setLikeCounts] = useState({});
 
-  /* Effect for fetching posts when selected body systems or current page change */
-  useEffect(() => {
-    fetchPosts();
-  }, [selectedBodySystems, currentPage]);
-
-  useEffect(() => {
-    fetchLikeCounts();
-  }, []);
-
   /* Function to fetch posts from the server */
-   const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
       let query = "/posts?page=" + currentPage;
       if (selectedBodySystems.length > 0) {
@@ -47,7 +38,16 @@ function PostsPage() {
     } catch (err) {
       console.log(err);
     }
-  };
+  }, [currentPage, selectedBodySystems, posts]);
+
+  /* Effect for fetching posts when selected body systems or current page change */
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts, selectedBodySystems, currentPage]);
+
+  useEffect(() => {
+    fetchLikeCounts();
+  }, []);
 
   /*
   Responsible for fetching the like counts for each user across all posts.
@@ -117,7 +117,7 @@ function PostsPage() {
 
   /* Function to filter posts based on search query */
   const filterPosts = (post) => {
-    const { title, description, owner, products, conditions } = post;
+    const { title, description, owner, products } = post;
     const searchQuery = filterState.toLowerCase().trim();
 
     return (
@@ -129,7 +129,6 @@ function PostsPage() {
       )
     );
   };
-
 
   /* Function to refresh the number of likes on the most liked */
   const handleRefreshLikes = () => {
@@ -207,7 +206,7 @@ function PostsPage() {
                 )}
                 <h5 className={styles["liked-header"]}>
                   <FaThumbsUp className={styles["like-user-icon"]} /> Most liked
-                  users: 
+                  users:
                   <Button variant="link" onClick={handleRefreshLikes}>
                     <FaSyncAlt />
                   </Button>
@@ -216,16 +215,16 @@ function PostsPage() {
               </div>
               {sortByLikes().map((user) => (
                 <div key={user.owner}>
-                  <p
+                  <div
                     className={
                       selectedUser === user.owner ? styles.selectedUser : ""
                     }
                   >
-                    <a href="#" onClick={() => handleUserClick(user.owner)}>
-                      <strong>{user.owner} </strong>
-                    </a>
+                    <button onClick={() => handleUserClick(user.owner)} className={`${styles.mostLikedButton}`}>
+                      <strong>{user.owner}</strong>
+                    </button>
                     has {user.like_count} likes
-                  </p>
+                  </div>
                 </div>
               ))}
             </Container>
