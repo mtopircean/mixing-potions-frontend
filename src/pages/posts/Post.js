@@ -38,6 +38,7 @@ const Post = (props) => {
   const [ownerProfileImage, setOwnerProfileImage] = useState(null);
   const [isLiked, setIsLiked] = useState(like_id !== null);
   const [likeCount, setLikeCount] = useState(like_count);
+  const noComments = comments.length === 0;
 
   /* Fetch owner's profile image when owner_id changes */
   useEffect(() => {
@@ -128,8 +129,11 @@ const Post = (props) => {
         </div>
         <Follow ownerId={owner_id} />
         <div className={styles.CommentsSection}>
-          <span>{comment_count}</span>
-          <FaComment />
+        {noComments ? (
+            <FaComment style={{ color: "grey" }} />
+          ) : (
+            <FaComment />
+          )}
           <button onClick={toggleComments}>
             {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
           </button>
