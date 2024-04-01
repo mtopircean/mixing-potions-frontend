@@ -147,7 +147,6 @@ const Post = (props) => {
             comments={comments}
             editMode={editMode}
             editComment={editComment}
-            onCommentSubmitted={handleCommentSubmitted}
           />
           <div className={styles.CommentsAreaWrapper}>
             {comments

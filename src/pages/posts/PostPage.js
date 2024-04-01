@@ -298,7 +298,6 @@ const PostPage = (props) => {
             <div className={styles.AddComment}>
               <CreateComment
                 postId={id}
-                onCommentSubmitted={handleCommentSubmitted}
                 editMode={editMode}
                 editComment={editComment}
               />
