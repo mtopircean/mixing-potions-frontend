@@ -22,23 +22,39 @@ function PostsPage({ filter = "" }) {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const { data } = await axiosReq.get(`/posts/?${filter}search=${query}`);
-        setPosts(data);
+        // Construct query parameters based on filter, query, and selectedBodySystems
+        const queryParams = {
+          ...(filter && { filter }),
+          ...(query && { search: query }),
+          ...(selectedBodySystems.length > 0 && { body_systems: selectedBodySystems.join(',') })
+        };
+  
+        const { data } = await axiosReq.get('/posts/', { params: queryParams });
+
+        // Filter posts based on selectedBodySystems
+        const filteredPosts = selectedBodySystems.length > 0 ? data.results.filter(post => {
+          return post.products.some(product => {
+            return selectedBodySystems.some(system => product.body_systems.includes(system));
+          });
+        }) : data.results;
+  
+        setPosts({ ...data, results: filteredPosts });
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
       }
     };
-
+  
     setHasLoaded(false);
     const timer = setTimeout(() => {
       fetchPosts();
     }, 1000);
-
+  
+    // Cleanup function to clear the timer when component unmounts or dependencies change
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, query, pathname]);
+  }, [filter, query, selectedBodySystems, pathname]);
 
   useEffect(() => {
     fetchLikeCounts();
