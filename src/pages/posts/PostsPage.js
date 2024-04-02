@@ -124,9 +124,20 @@ function PostsPage() {
       title.toLowerCase().includes(searchQuery) ||
       description.toLowerCase().includes(searchQuery) ||
       owner.toLowerCase().includes(searchQuery) ||
-      products.some((product) =>
-        product.name.toLowerCase().includes(searchQuery)
-      )
+      products.some((product) => {
+        const productBodySystems = product.body_systems.map((system) =>
+          system.toLowerCase()
+        );
+        const productConditions = product.condition.map((condition) =>
+          condition.toLowerCase()
+        );
+
+        return (
+          product.name.toLowerCase().includes(searchQuery) ||
+          productBodySystems.some((system) => system.includes(searchQuery)) ||
+          productConditions.some((condition) => condition.includes(searchQuery))
+        );
+      })
     );
   };
 
@@ -220,7 +231,10 @@ function PostsPage() {
                       selectedUser === user.owner ? styles.selectedUser : ""
                     }
                   >
-                    <button onClick={() => handleUserClick(user.owner)} className={`${styles.mostLikedButton}`}>
+                    <button
+                      onClick={() => handleUserClick(user.owner)}
+                      className={`${styles.mostLikedButton}`}
+                    >
                       <strong>{user.owner}</strong>
                     </button>
                     has {user.like_count} likes
