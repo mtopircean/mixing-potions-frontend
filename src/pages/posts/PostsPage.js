@@ -1,50 +1,44 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Post from "./Post";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Button, Form, Spinner } from "react-bootstrap";
 import { axiosReq } from "../../api/axiosDefaults";
 import BodySystemPanel from "../../components/BodySystemPanel";
 import { FaThumbsUp, FaSyncAlt } from "react-icons/fa";
 import styles from "../../styles/PostsPage.module.css";
 import { MdClear } from "react-icons/md";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useLocation } from "react-router";
 
-function PostsPage() {
-  const [posts, setPosts] = useState([]);
-  const [hasLoaded, setHasLoaded] = useState(false);
+function PostsPage({ filter = "" }) {
   const [selectedUser, setSelectedUser] = useState(null);
   const [filterState, setFilter] = useState("");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
   const [likeCounts, setLikeCounts] = useState({});
+  const [posts, setPosts] = useState({ results: [] });
+  const [hasLoaded, setHasLoaded] = useState(true);
+  const { pathname } = useLocation();
+  const [query, setQuery] = useState("");
 
-  /* Function to fetch posts from the server */
-  const fetchPosts = useCallback(async () => {
-    try {
-      let query = "/posts?page=" + currentPage;
-      if (selectedBodySystems.length > 0) {
-        const systemsQuery = selectedBodySystems.join(",");
-        query += `&body_systems=${systemsQuery}`;
-      }
-
-      const { data } = await axiosReq.get(query);
-      const newPosts = data.results.filter(
-        (newPost) =>
-          !posts.some((existingPost) => existingPost.id === newPost.id)
-      );
-      setPosts((prevPosts) => [...prevPosts, ...newPosts]);
-      setHasLoaded(true);
-      setHasMore(!!data.next);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [currentPage, selectedBodySystems, posts]);
-
-  /* Effect for fetching posts when selected body systems or current page change */
   useEffect(() => {
-    fetchPosts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedBodySystems, currentPage]);
+    const fetchPosts = async () => {
+      try {
+        const { data } = await axiosReq.get(`/posts/?${filter}search=${query}`);
+        setPosts(data);
+        setHasLoaded(true);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    setHasLoaded(false);
+    const timer = setTimeout(() => {
+      fetchPosts();
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [filter, query, pathname]);
 
   useEffect(() => {
     fetchLikeCounts();
@@ -116,29 +110,16 @@ function PostsPage() {
   };
 
   /* Function to filter posts based on search query */
-  const filterPosts = (post) => {
-    const { title, description, owner, products } = post;
-    const searchQuery = filterState.toLowerCase().trim();
-
-    return (
-      title.toLowerCase().includes(searchQuery) ||
-      description.toLowerCase().includes(searchQuery) ||
-      owner.toLowerCase().includes(searchQuery) ||
-      products.some((product) => {
-        const productBodySystems = product.body_systems.map((system) =>
-          system.toLowerCase()
-        );
-        const productConditions = product.condition.map((condition) =>
-          condition.toLowerCase()
-        );
-
-        return (
-          product.name.toLowerCase().includes(searchQuery) ||
-          productBodySystems.some((system) => system.includes(searchQuery)) ||
-          productConditions.some((condition) => condition.includes(searchQuery))
-        );
-      })
-    );
+  const fetchMoreData = async (currentPosts, setPosts) => {
+    try {
+      const { data } = await axiosReq.get(currentPosts.next);
+      setPosts((prevPosts) => ({
+        results: [...prevPosts.results, ...data.results],
+        next: data.next,
+      }));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   /* Function to refresh the number of likes on the most liked */
@@ -153,10 +134,10 @@ function PostsPage() {
           <div className="mb-3">
             <Form.Control
               className="search-bar"
+              onChange={(event) => setQuery(event.target.value)}
               type="text"
               placeholder="Search posts..."
-              value={filterState}
-              onChange={(e) => setFilter(e.target.value)}
+              value={query}
             />
           </div>
           {/* Body System Panel for Filtering */}
@@ -166,45 +147,33 @@ function PostsPage() {
           />
         </Col>
         <Col className="py-2 p-0 p-lg-2" lg={6} id="postsContainer">
-          {/* Infinite Scroll for Posts */}
-          <InfiniteScroll
-            dataLength={posts.length}
-            next={() => setCurrentPage(currentPage + 1)}
-            hasMore={hasMore}
-            loader={<h4>Loading...</h4>}
-            endMessage={<h4 className="text-center">No more posts</h4>}
-          >
-            {posts
-              .filter((post) => {
-                const userMatch = selectedUser
-                  ? post.owner === selectedUser
-                  : true;
-                const bodySystemMatch =
-                  selectedBodySystems.length > 0
-                    ? post.products.some((product) =>
-                        product.body_systems.some((system) =>
-                          selectedBodySystems.includes(system)
-                        )
-                      )
-                    : true;
-
-                const searchMatch = filterState ? filterPosts(post) : true;
-
-                return userMatch && bodySystemMatch && searchMatch;
-              })
-              .map((post) => {
-                try {
-                  return <Post key={post.id} {...post} setPosts={setPosts} />;
-                } catch (error) {
-                  console.error("Error rendering post:", error);
-                  return null;
-                }
-              })}
-          </InfiniteScroll>
+          {hasLoaded ? (
+            posts.results.length ? (
+              <InfiniteScroll
+                children={posts.results.map((post) => (
+                  <Post key={post.id} {...post} setPosts={setPosts} />
+                ))}
+                dataLength={posts.results.length}
+                loader="Loading"
+                hasMore={!!posts.next}
+                next={() => fetchMoreData(posts, setPosts)}
+              />
+            ) : (
+              <Container className="text-center">
+                <p>No results</p>
+              </Container>
+            )
+          ) : (
+            <Container className="text-center">
+              <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            </Container>
+          )}
         </Col>
         <Col className="py-2 p-0 p-lg-2" lg={3}>
           {/* Display most liked users */}
-          {hasLoaded && posts.length > 0 && (
+          {posts.results.length > 0 && (
             <Container>
               <div style={{ textAlign: "center" }}>
                 {selectedUser && (
