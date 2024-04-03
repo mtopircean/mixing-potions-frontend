@@ -4,6 +4,7 @@ import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 import styles from "../../styles/LoginRegisterPage.module.css";
+import { setTokenTimestamp } from "../../utils/utils";
 
 function LoginForm() {
   const setCurrentUser = useSetCurrentUser();
@@ -25,7 +26,8 @@ function LoginForm() {
     try {
       const { data } = await axios.post("/dj-rest-auth/login/", loginData);
       setCurrentUser(data.user);
-      history.push("/");
+      setTokenTimestamp(data);
+      history.goBack();
     } catch (err) {
       setErrors(err.response?.data);
     }

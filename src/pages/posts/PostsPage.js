@@ -11,7 +11,7 @@ import { useLocation } from "react-router";
 
 function PostsPage({ filter = "" }) {
   const [selectedUser, setSelectedUser] = useState(null);
-  const [filterState, setFilter] = useState("");
+  const [setFilter] = useState("");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
   const [posts, setPosts] = useState({ results: [] });
