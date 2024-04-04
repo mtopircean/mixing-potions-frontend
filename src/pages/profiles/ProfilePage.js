@@ -6,6 +6,7 @@ import {
   faPenToSquare,
   faCircleMinus,
   faKey,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
@@ -31,8 +32,6 @@ const ProfilePage = () => {
         setProfile(pageProfile);
         setLoading(false);
 
-        console.log("Profile data:", pageProfile); // Log profile data
-
         const { data: postData } = await axiosReq.get(`/posts`);
         const userPostsData = postData.results.filter(
           (post) => post.owner === pageProfile.username
@@ -47,7 +46,7 @@ const ProfilePage = () => {
           console.log(
             "Followed user IDs:",
             followedUsersData.map((user) => user.id)
-          ); // Log followed user IDs
+          );
         } else {
           throw new Error("Failed to fetch followed users");
         }
@@ -117,7 +116,18 @@ const ProfilePage = () => {
                     <br />
                     Click edit and tell people more about you....
                   </NavLink>
+                  <br className="mt-3 mb-3"/>
+                  
+                  
                   <br className="mt-3 mb-3" />
+                  <NavLink
+                    to={`/profiles/${profile.id}/change-username`}
+                    className={styles["edit-button"]}
+                    activeClassName={styles["active"]}
+                  >
+                    Change Username <FontAwesomeIcon icon={faUser} />
+                    <br />
+                  </NavLink>
                   <Link
                     to={`/profiles/${profile.id}/password-change`}
                     className={`${styles["password-button"]} mt-3`}

@@ -38,7 +38,7 @@ const ProfileEditForm = () => {
 
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
-      history.push(`/`);
+      history.push("/");
     }
   }, [currentUser, history, id]);
 
@@ -50,7 +50,7 @@ const ProfileEditForm = () => {
     try {
       await axios.put(`/profiles/${id}/`, formDataWithoutImage);
       toast.success("Profile data was updated");
-      history.push(`/profile/${id}/`);
+      history.push(`/profiles/${id}/`);
     } catch (error) {
       console.error("Error updating profile data:", error);
     }
@@ -62,11 +62,11 @@ const ProfileEditForm = () => {
   };
 
   const handleCancel = () => {
-    history.push(`/profile/${id}/`);
+    history.push("/profile");
   };
 
   if (!currentUser) {
-    return <Redirect to="/login/" />;
+    return <Redirect to="/" />;
   }
 
   return (
@@ -77,20 +77,6 @@ const ProfileEditForm = () => {
         </h4>
         <Col md={8}>
           <Form onSubmit={handleFormSubmit}>
-            <Form.Group controlId="username">
-              <Form.Label>
-                <span className={styles.editFormLabel}>Username:</span>{" "}
-                {formData.username ||
-                  "Data was not submitted. Populate your profile."}
-              </Form.Label>
-              <Form.Control
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleInputChange}
-                placeholder="Type updated details..."
-              />
-            </Form.Group>
             <Form.Group controlId="nickname">
               <Form.Label>
                 <span className={styles.editFormLabel}>Nickname: </span>
