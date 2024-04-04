@@ -165,7 +165,6 @@ const Post = (props) => {
                         <Button
                           className={styles["edit-button"]}
                           onClick={() => handleEditComment(comment)}
-                          activeClassName={styles["active"]}
                         >
                           Edit <FontAwesomeIcon icon={faPenSquare} />
                         </Button>
