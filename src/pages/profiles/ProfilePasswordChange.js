@@ -59,7 +59,7 @@ const ProfilePasswordChange = () => {
           <h4 className="mb-4 mt-4">Change your password</h4>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="newPassword">
-              <Form.Label>Password:</Form.Label>
+              <Form.Label>New Password:</Form.Label>
               <Form.Control
                 type="password"
                 value={new_password1}

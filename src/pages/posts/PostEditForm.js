@@ -154,7 +154,7 @@ function PostEditForm({ post }) {
               onSubmit={handleSubmit}
               action={`/posts/${id}/`}
               method="put"
-              enctype="multipart/form-data"
+              encType="multipart/form-data"
             >
               {(selectedImage || customImage) && (
                 <Image

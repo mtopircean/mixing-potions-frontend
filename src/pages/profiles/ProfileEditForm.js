@@ -50,7 +50,7 @@ const ProfileEditForm = () => {
     try {
       await axios.put(`/profiles/${id}/`, formDataWithoutImage);
       toast.success("Profile data was updated");
-      history.push(`/profiles/${id}/`);
+      history.push(`/profile/${id}/`);
     } catch (error) {
       console.error("Error updating profile data:", error);
     }
@@ -62,7 +62,7 @@ const ProfileEditForm = () => {
   };
 
   const handleCancel = () => {
-    history.push("/profile");
+    history.push(`/profiles/${id}/`);
   };
 
   if (!currentUser) {
@@ -86,6 +86,7 @@ const ProfileEditForm = () => {
               <Form.Control
                 type="text"
                 name="nickname"
+                value={formData.nickname || ""}
                 onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
@@ -99,7 +100,7 @@ const ProfileEditForm = () => {
               <Form.Control
                 type="text"
                 name="first_name"
-                value={formData.first_name}
+                value={formData.first_name || ""}
                 onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
@@ -113,7 +114,7 @@ const ProfileEditForm = () => {
               <Form.Control
                 type="text"
                 name="last_name"
-                value={formData.last_name}
+                value={formData.last_name || ""}
                 onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
@@ -127,7 +128,7 @@ const ProfileEditForm = () => {
               <Form.Control
                 type="number"
                 name="age"
-                value={formData.age}
+                value={formData.age || ""}
                 onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
@@ -141,7 +142,7 @@ const ProfileEditForm = () => {
               <Form.Control
                 type="text"
                 name="phone_number"
-                value={formData.phone_number}
+                value={formData.phone_number || ""}
                 onChange={handleInputChange}
                 placeholder="Type updated details..."
               />
