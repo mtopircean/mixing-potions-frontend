@@ -11,7 +11,6 @@ import { useLocation } from "react-router";
 
 function PostsPage({ filter = "" }) {
   const [selectedUser, setSelectedUser] = useState(null);
-  const [setFilter] = useState("");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [likeCounts, setLikeCounts] = useState({});
   const [posts, setPosts] = useState({ results: [] });
@@ -26,35 +25,43 @@ function PostsPage({ filter = "" }) {
         const queryParams = {
           ...(filter && { filter }),
           ...(query && { search: query }),
-          ...(selectedBodySystems.length > 0 && { body_systems: selectedBodySystems.join(',') })
+          ...(selectedBodySystems.length > 0 && {
+            body_systems: selectedBodySystems.join(","),
+          }),
+          ...(selectedUser && { owner: selectedUser }),
         };
-  
-        const { data } = await axiosReq.get('/posts/', { params: queryParams });
+
+        const { data } = await axiosReq.get("/posts/", { params: queryParams });
 
         // Filter posts based on selectedBodySystems
-        const filteredPosts = selectedBodySystems.length > 0 ? data.results.filter(post => {
-          return post.products.some(product => {
-            return selectedBodySystems.some(system => product.body_systems.includes(system));
-          });
-        }) : data.results;
-  
+        const filteredPosts =
+          selectedBodySystems.length > 0
+            ? data.results.filter((post) => {
+                return post.products.some((product) => {
+                  return selectedBodySystems.some((system) =>
+                    product.body_systems.includes(system)
+                  );
+                });
+              })
+            : data.results;
+
         setPosts({ ...data, results: filteredPosts });
         setHasLoaded(true);
       } catch (err) {
         console.log(err);
       }
     };
-  
+
     setHasLoaded(false);
     const timer = setTimeout(() => {
       fetchPosts();
     }, 1000);
-  
+
     // Cleanup function to clear the timer when component unmounts or dependencies change
     return () => {
       clearTimeout(timer);
     };
-  }, [filter, query, selectedBodySystems, pathname]);
+  }, [filter, query, selectedBodySystems, selectedUser, pathname]);
 
   useEffect(() => {
     fetchLikeCounts();
@@ -96,7 +103,6 @@ function PostsPage({ filter = "" }) {
   const clearFilter = () => {
     setSelectedUser(null);
     setSelectedBodySystems([]);
-    setFilter("");
   };
 
   /* Function to handle user click for filtering */
@@ -164,21 +170,34 @@ function PostsPage({ filter = "" }) {
         </Col>
         <Col className="py-2 p-0 p-lg-2" lg={6} id="postsContainer">
           {hasLoaded ? (
-            posts.results.length ? (
-              <InfiniteScroll
-                children={posts.results.map((post) => (
-                  <Post key={post.id} {...post} setPosts={setPosts} />
-                ))}
-                dataLength={posts.results.length}
-                loader="Loading"
-                hasMore={!!posts.next}
-                next={() => fetchMoreData(posts, setPosts)}
-              />
-            ) : (
-              <Container className="text-center">
-                <p>No results</p>
-              </Container>
-            )
+            <React.Fragment>
+              {posts.results.length ? (
+                <InfiniteScroll
+                  children={posts.results
+                    .filter(
+                      (post) =>
+                        (!selectedUser || post.owner === selectedUser) &&
+                        (!selectedBodySystems.length ||
+                          post.products.some((product) =>
+                            selectedBodySystems.some((system) =>
+                              product.body_systems.includes(system)
+                            )
+                          ))
+                    )
+                    .map((post) => (
+                      <Post key={post.id} {...post} setPosts={setPosts} />
+                    ))}
+                  dataLength={posts.results.length}
+                  loader="Loading"
+                  hasMore={!!posts.next}
+                  next={() => fetchMoreData(posts, setPosts)}
+                />
+              ) : (
+                <Container className="text-center">
+                  <p>No results</p>
+                </Container>
+              )}
+            </React.Fragment>
           ) : (
             <Container className="text-center">
               <Spinner animation="border" role="status">
@@ -189,7 +208,6 @@ function PostsPage({ filter = "" }) {
         </Col>
         <Col className="py-2 p-0 p-lg-2" lg={3}>
           {/* Display most liked users */}
-          {posts.results.length > 0 && (
             <Container>
               <div style={{ textAlign: "center" }}>
                 {selectedUser && (
@@ -227,7 +245,6 @@ function PostsPage({ filter = "" }) {
                 </div>
               ))}
             </Container>
-          )}
         </Col>
       </Row>
     </Container>
