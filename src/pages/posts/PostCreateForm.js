@@ -76,6 +76,11 @@ function PostCreateForm() {
   /* Handle form submission */
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!image) {
+      toast.error("Please upload an image before submitting.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);

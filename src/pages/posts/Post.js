@@ -44,19 +44,20 @@ const Post = (props) => {
   /* Fetch owner's profile image when owner_id changes */
   useEffect(() => {
     const fetchOwnerProfileImage = async () => {
-      if (!owner_id) {
-        return;
-      }
-      try {
-        const response = await axios.get(`/posts/${id}/`);
-        setOwnerProfileImage(response.data.owner_image);
-      } catch (error) {
-        console.error("Error fetching owner image:", error);
-      }
+        if (!owner_id) {
+            return;
+        }
+        try {
+            const response = await axios.get(`/posts/${id}/`);
+            const ownerProfileImage = response.data.owner_image;
+            setOwnerProfileImage(ownerProfileImage);
+        } catch (error) {
+            console.error("Error fetching owner image:", error);
+        }
     };
 
     fetchOwnerProfileImage();
-  }, [owner_id, id]);
+}, [owner_id, id]);
 
   /* Toggle comments expansion */
   const toggleComments = () => {
