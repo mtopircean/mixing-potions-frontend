@@ -38,7 +38,7 @@ const ProfileEditForm = () => {
 
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
-      history.push("/");
+      history.push(`/`);
     }
   }, [currentUser, history, id]);
 
@@ -50,7 +50,7 @@ const ProfileEditForm = () => {
     try {
       await axios.put(`/profiles/${id}/`, formDataWithoutImage);
       toast.success("Profile data was updated");
-      history.push(`/profiles/${id}/`);
+      history.push(`/profile/${id}/`);
     } catch (error) {
       console.error("Error updating profile data:", error);
     }
@@ -62,11 +62,11 @@ const ProfileEditForm = () => {
   };
 
   const handleCancel = () => {
-    history.push("/profile");
+    history.push(`/profile/${id}/`);
   };
 
   if (!currentUser) {
-    return <Redirect to="/" />;
+    return <Redirect to="/login/" />;
   }
 
   return (
