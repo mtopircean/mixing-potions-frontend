@@ -3,7 +3,11 @@ import { Container, NavDropdown } from "react-bootstrap";
 import { Navbar, Nav } from "react-bootstrap";
 import logo from "../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faBars, faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faBars,
+  faSquarePlus,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   useCurrentUser,
   useSetCurrentUser,
@@ -47,20 +51,20 @@ const NavBar = () => {
           )
         }
       >
-        <NavDropdown.Item className="user-menu">
-          <div>
-            <Link to="/" className="user-link-menu" onClick={handleLogout}>
-              Logout
-            </Link>
-          </div>
-          <div>
-            <Link
-              to={`/profile/${currentUser?.profile_id}`}
-              className="user-link-menu"
-            >
-              Profile
-            </Link>
-          </div>
+        <NavDropdown.Item
+          as="a"
+          href="/"
+          className="user-link-menu"
+          onClick={handleLogout}
+        >
+          Logout
+        </NavDropdown.Item>
+        <NavDropdown.Item
+          as={Link}
+          to={`/profile/${currentUser?.profile_id}`}
+          className="user-link-menu"
+        >
+          Profile
         </NavDropdown.Item>
       </NavDropdown>
     </>
@@ -77,12 +81,10 @@ const NavBar = () => {
   return (
     <Container>
       <Navbar fixed="top" className="navbar-container">
-        <Navbar.Brand>
-          <Link to="/">
-            <div className="logo-container">
-              <img src={logo} alt="logo" height="120" />
-            </div>
-          </Link>
+        <Navbar.Brand as={Link} to="/">
+          <div className="logo-container">
+            <img src={logo} alt="logo" height="120" />
+          </div>
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
@@ -92,19 +94,16 @@ const NavBar = () => {
               id="basic-nav-dropdown"
             >
               <div id="menu-items">
-                <NavDropdown.Item>
-                  <Link to="/" className="nav-link-menu">
-                    Home
-                  </Link>
+                <NavDropdown.Item as="a" href="/" className="nav-link-menu">
+                  Home
                 </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link
-                    to={currentUser ? "/posts/create" : "/login"}
-                    className="nav-link-menu"
-                    rel="noopener noreferrer"
-                  >
-                    Create Post <FontAwesomeIcon icon={faSquarePlus} />
-                  </Link>
+                <NavDropdown.Item
+                  as={Link}
+                  to={currentUser ? "/posts/create" : "/login"}
+                  className="nav-link-menu"
+                  rel="noopener noreferrer"
+                >
+                  Create Post <FontAwesomeIcon icon={faSquarePlus} />
                 </NavDropdown.Item>
               </div>
             </NavDropdown>
