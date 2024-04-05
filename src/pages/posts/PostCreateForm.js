@@ -20,7 +20,6 @@ function PostCreateForm() {
   const [selectedImage] = useState(null);
   const [customImage, setCustomImage] = useState(null);
   const [image, setImage] = useState(null);
-  const [setErrors] = useState({});
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -99,8 +98,19 @@ function PostCreateForm() {
       history.push(`/posts/${response.data.id}`);
       toast.success("Post created successfully!");
     } catch (err) {
+      console.error("Error response from server:", err.response.data);
       if (err.response?.status !== 401) {
-        setErrors(err.response?.data);
+        if (err.response?.data?.image) {
+          toast.error(err.response.data.image.join("\n"));
+        } else if (err.response?.data?.includes('height')) {
+          toast.error("Image height exceeds the maximum allowed limit of 4096px.");
+        } else if (err.response?.data?.includes('width')) {
+          toast.error("Image width exceeds the maximum allowed limit of 4096px.");
+        } else if (err.response?.data?.includes('size')) {
+          toast.error("Image size exceeds the maximum allowed limit of 2MB.");
+        } else {
+          toast.error("An error occurred while creating the post.");
+        }
       }
     }
   };
@@ -110,6 +120,9 @@ function PostCreateForm() {
     if (!currentUser) {
       history.push("/");
     }
+
+    return () => {
+    };
   }, [currentUser, history]);
 
   return (
