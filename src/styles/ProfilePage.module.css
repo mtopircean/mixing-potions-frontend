@@ -93,6 +93,11 @@ p.no-followed {
     width: 100%;
 }
 
+#container-followed-users {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
 @media (max-width: 767px) {
 
     .followed-users {

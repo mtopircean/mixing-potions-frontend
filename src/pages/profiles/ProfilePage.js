@@ -116,9 +116,8 @@ const ProfilePage = () => {
                     <br />
                     Click edit and tell people more about you....
                   </NavLink>
-                  <br className="mt-3 mb-3"/>
-                  
-                  
+                  <br className="mt-3 mb-3" />
+
                   <br className="mt-3 mb-3" />
                   <NavLink
                     to={`/profiles/${profile.id}/change-username`}
@@ -139,13 +138,16 @@ const ProfilePage = () => {
               )}
             </div>
           </Col>
-          <div className={`d-flex justify-content-center ${styles.seeMore}`} md={12}>
-          <button
-            onClick={toggleExpanded}
-            className={`${styles["profile-button"]} d-flex justify-content-center align-items-center`}
+          <div
+            className={`d-flex justify-content-center ${styles.seeMore}`}
+            md={12}
           >
-            {expanded ? "▲" : "▼"} <span>see more profile details...</span>
-          </button>
+            <button
+              onClick={toggleExpanded}
+              className={`${styles["profile-button"]} d-flex justify-content-center align-items-center`}
+            >
+              {expanded ? "▲" : "▼"} <span>see more profile details...</span>
+            </button>
           </div>
           <hr></hr>
           {expanded && (
@@ -194,14 +196,12 @@ const ProfilePage = () => {
             userPosts.length > 0 && (
               <Col xs={12} md={12} className="text-center">
                 {followedUsers && followedUsers.length > 0 ? (
-                  <div
-                    className={`${styles["followed-users"]} d-flex flex-column justify-content-center`}
-                  >
+                 <>
                     <h4 className="text-center">Followed Users:</h4>
-                    <div>
+                    <div className="d-flex align-items-center justify-content-center" id="container-followed-users">
                       {followedUsers.map((user) => (
-                        <Row key={user.id} className="align-items-center">
-                          <Col xs={8}>
+                        <div className="d-flex align-items-center justify-content-center" key={user.id}>
+                          <div>
                             {user.followed_profile_id ? (
                               <Link
                                 to={`/profile/${user.followed_profile_id}`}
@@ -212,20 +212,20 @@ const ProfilePage = () => {
                             ) : (
                               <span>{user.followed_name}</span>
                             )}
-                          </Col>
-                          <Col xs={4}>
+                          </div>
+                          <div>
                             <Button
                               onClick={() => unfollowUser(user.id)}
-                              className={styles.unfollowUser}
+                              className={`${styles.unfollowUser}`}
                             >
                               <span>Unfollow</span>{" "}
                               <FontAwesomeIcon icon={faCircleMinus} />
                             </Button>
-                          </Col>
-                        </Row>
+                          </div>
+                        </div>
                       ))}
                     </div>
-                  </div>
+                  </>
                 ) : (
                   <div className="text-center">
                     <h4 className="text-center">Followed Users:</h4>
