@@ -12,8 +12,10 @@ import BodySystemPanel from "../../components/BodySystemPanel";
 import styles from "../../styles/PostCreateForm.module.css";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useRedirect } from "../../contexts/useRedirect";
 
 function PostEditForm({ post }) {
+  useRedirect("loggedOut");
   const currentUser = useCurrentUser();
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -136,13 +138,6 @@ function PostEditForm({ post }) {
       }
     }
   };
-
-  /* Redirect to login if user is not authenticated */
-  useEffect(() => {
-    if (!currentUser) {
-      history.push("/");
-    }
-  }, [currentUser, history]);
 
   return (
     <Container>

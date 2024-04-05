@@ -6,9 +6,10 @@ import { useParams } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import { useRedirect } from "../../contexts/useRedirect";
 
 const ProfileEditForm = () => {
+  useRedirect("loggedOut");
   const { id } = useParams();
   const currentUser = useCurrentUser();
   const history = useHistory();
@@ -73,10 +74,7 @@ const ProfileEditForm = () => {
     history.push(`/profiles/${id}/`);
   };
 
-  if (!currentUser) {
-    return <Redirect to="/" />;
-  }
-
+  
   return (
     <Container>
       <Row className="justify-content-center">

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Col, Form, Row, Button, Container } from "react-bootstrap";
 import styles from "../../styles/ProfileEditForm.module.css";
-import { useParams, useHistory, Redirect } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useCurrentUser, useSetCurrentUser } from "../../contexts/CurrentUserContext";
 import { toast } from "react-toastify";
 import { axiosRes } from "../../api/axiosDefaults";
+import { useRedirect } from "../../contexts/useRedirect";
 
 const ChangeUsername = () => {
+  useRedirect("loggedOut");
   const { id } = useParams();
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
@@ -44,10 +46,6 @@ const ChangeUsername = () => {
   const handleCancel = () => {
     history.push(`/profile/${id}/`);
   };
-
-  if (!currentUser) {
-    return <Redirect to="/login/" />;
-  }
 
   return (
     <Container>

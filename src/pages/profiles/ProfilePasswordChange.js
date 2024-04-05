@@ -8,9 +8,10 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import styles from "../../styles/ProfilePasswordChange.module.css"
-import { Redirect } from 'react-router-dom';
+import { useRedirect } from "../../contexts/useRedirect";
 
 const ProfilePasswordChange = () => {
+  useRedirect("loggedOut");
   const history = useHistory();
   const { id } = useParams();
   const currentUser = useCurrentUser();
@@ -46,10 +47,6 @@ const ProfilePasswordChange = () => {
       setErrors(err.response?.data);
     }
   };
-
-  if (!currentUser) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <Container>

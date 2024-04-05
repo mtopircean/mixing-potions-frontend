@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ProductsPanel from "../../components/ProductsPanel";
 import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
 import { BsX } from "react-icons/bs";
@@ -8,12 +8,12 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useRedirect } from "../../contexts/useRedirect";
 
 function PostCreateForm() {
-  const currentUser = useCurrentUser();
+  useRedirect("loggedOut");
   const [selectedBodySystems, setSelectedBodySystems] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,8 +22,8 @@ function PostCreateForm() {
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
   const history = useHistory();
+  
 
   /* Toggle selection of body system */
   const toggleBodySystem = (system) => {
@@ -123,15 +123,6 @@ function PostCreateForm() {
       }
     }
   };
-
-  /* Redirect to login if user is not authenticated */
-  useEffect(() => {
-    if (!currentUser) {
-      history.push("/");
-    }
-
-    return () => {};
-  }, [currentUser, history]);
 
   return (
     <Container>
