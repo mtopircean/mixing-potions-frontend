@@ -71,10 +71,10 @@ const ProfileEditForm = () => {
   };
 
   const handleCancel = () => {
-    history.push(`/profiles/${id}/`);
+    history.push(`/profile/${id}/`);
   };
 
-  
+
   return (
     <Container>
       <Row className="justify-content-center">
