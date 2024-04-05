@@ -23,17 +23,25 @@ const ProfileEditForm = () => {
   });
 
   useEffect(() => {
+    let isMounted = true;
     const fetchProfileData = async () => {
       try {
         const response = await axios.get(`/profiles/${id}/`);
         const profileData = response.data;
-        setFormData(profileData);
+        if (isMounted) {
+          
+          setFormData(profileData);
+        }
       } catch (error) {
         console.error("Error fetching profile data:", error);
       }
     };
 
     fetchProfileData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [id]);
 
   useEffect(() => {
