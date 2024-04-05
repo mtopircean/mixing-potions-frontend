@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ProductsPanel from "../../components/ProductsPanel";
-import { Container, Row, Col, Form, Button, Image } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { BsX } from "react-icons/bs";
 import BodySystemPanel from "../../components/BodySystemPanel";
 import styles from "../../styles/PostCreateForm.module.css";
@@ -8,7 +9,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+import axios from "axios"; 
 import { toast } from "react-toastify";
 import { useRedirect } from "../../contexts/useRedirect";
 
@@ -23,7 +24,6 @@ function PostCreateForm() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const history = useHistory();
-  
 
   /* Toggle selection of body system */
   const toggleBodySystem = (system) => {
@@ -49,7 +49,9 @@ function PostCreateForm() {
 
   /* Remove a product from selected products */
   const handleRemoveProduct = (productId) => {
-    const removedProduct = selectedProducts.find((product) => product.id === productId);
+    const removedProduct = selectedProducts.find(
+      (product) => product.id === productId
+    );
     setSelectedProducts((prevProducts) =>
       prevProducts.filter((product) => product.id !== productId)
     );
@@ -69,11 +71,35 @@ function PostCreateForm() {
   };
 
   /* Handle change in custom image input by uploading user image choice */
+  const MAX_IMAGE_SIZE_MB = 2;
+  const MAX_IMAGE_WIDTH = 4096;
+  const MAX_IMAGE_HEIGHT = 4096;
   const handleCustomImageChange = (event) => {
     if (event.target.files.length) {
       const selectedFile = event.target.files[0];
-      setCustomImage(URL.createObjectURL(selectedFile));
-      setImage(selectedFile);
+      const fileSizeMB = selectedFile.size / (1024 * 1024);
+      if (fileSizeMB > MAX_IMAGE_SIZE_MB) {
+        toast.error("Image size exceeds the maximum allowed limit of 2MB.");
+        return;
+      }
+      const img = document.createElement("img");
+      img.onload = function () {
+        if (this.width > MAX_IMAGE_WIDTH) {
+          toast.error(
+            "Image width exceeds the maximum allowed limit of 4096px."
+          );
+          return;
+        }
+        if (this.height > MAX_IMAGE_HEIGHT) {
+          toast.error(
+            "Image height exceeds the maximum allowed limit of 4096px."
+          );
+          return;
+        }
+        setCustomImage(URL.createObjectURL(selectedFile));
+        setImage(selectedFile);
+      };
+      img.src = URL.createObjectURL(selectedFile);
     }
   };
 
@@ -104,23 +130,6 @@ function PostCreateForm() {
       toast.success("Post created successfully!");
     } catch (err) {
       console.error("Error response from server:", err.response.data);
-      if (err.response?.status !== 401) {
-        if (err.response?.data?.image) {
-          toast.error(err.response.data.image.join("\n"));
-        } else if (err.response?.data?.includes("height")) {
-          toast.error(
-            "Image height exceeds the maximum allowed limit of 4096px."
-          );
-        } else if (err.response?.data?.includes("width")) {
-          toast.error(
-            "Image width exceeds the maximum allowed limit of 4096px."
-          );
-        } else if (err.response?.data?.includes("size")) {
-          toast.error("Image size exceeds the maximum allowed limit of 2MB.");
-        } else {
-          toast.error("An error occurred while creating the post.");
-        }
-      }
     }
   };
 
