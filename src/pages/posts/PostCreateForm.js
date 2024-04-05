@@ -41,14 +41,19 @@ function PostCreateForm() {
     const isProductExists = selectedProducts.some((p) => p.id === product.id);
     if (!isProductExists) {
       setSelectedProducts((prevProducts) => [...prevProducts, product]);
+      toast.success(`${product.name} added successfully!`);
+    } else {
+      toast.warn(`Product "${product.name}" is already added!`);
     }
   };
 
   /* Remove a product from selected products */
   const handleRemoveProduct = (productId) => {
+    const removedProduct = selectedProducts.find((product) => product.id === productId);
     setSelectedProducts((prevProducts) =>
       prevProducts.filter((product) => product.id !== productId)
     );
+    toast.success(`${removedProduct.name} removed successfully!`);
   };
 
   /* Move to previous product in the selected product post area */
@@ -102,11 +107,15 @@ function PostCreateForm() {
       if (err.response?.status !== 401) {
         if (err.response?.data?.image) {
           toast.error(err.response.data.image.join("\n"));
-        } else if (err.response?.data?.includes('height')) {
-          toast.error("Image height exceeds the maximum allowed limit of 4096px.");
-        } else if (err.response?.data?.includes('width')) {
-          toast.error("Image width exceeds the maximum allowed limit of 4096px.");
-        } else if (err.response?.data?.includes('size')) {
+        } else if (err.response?.data?.includes("height")) {
+          toast.error(
+            "Image height exceeds the maximum allowed limit of 4096px."
+          );
+        } else if (err.response?.data?.includes("width")) {
+          toast.error(
+            "Image width exceeds the maximum allowed limit of 4096px."
+          );
+        } else if (err.response?.data?.includes("size")) {
           toast.error("Image size exceeds the maximum allowed limit of 2MB.");
         } else {
           toast.error("An error occurred while creating the post.");
@@ -121,8 +130,7 @@ function PostCreateForm() {
       history.push("/");
     }
 
-    return () => {
-    };
+    return () => {};
   }, [currentUser, history]);
 
   return (
@@ -148,7 +156,7 @@ function PostCreateForm() {
                 </div>
               )}
 
-              <Row className="align-items-center justify-content-center">
+              <Row className="align-items-center justify-content-center  d-none d-lg-flex">
                 {selectedProducts.length > 2 && currentIndex > 0 && (
                   <Button
                     onClick={handlePrevClick}
@@ -187,6 +195,25 @@ function PostCreateForm() {
                       <FaChevronRight />
                     </Button>
                   )}
+              </Row>
+              <div className="d-sm-none text-center mb-3">
+                <h6>Selected Products:</h6>
+              </div>
+              <Row className="d-sm-none">
+                {selectedProducts.map((product) => (
+                  <Col key={product.id} xs={12} className="mb-3">
+                    <div className={styles["product-container-post"]}>
+                      <span>{product.name}</span>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleRemoveProduct(product.id)}
+                        className={`remove-product-small ${styles["remove-button"]}`}
+                      >
+                        <BsX />
+                      </Button>
+                    </div>
+                  </Col>
+                ))}
               </Row>
 
               <Form.Group controlId="customImage">

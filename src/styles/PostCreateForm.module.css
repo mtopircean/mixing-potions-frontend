@@ -76,3 +76,15 @@
 .preview-image {
   max-height: 500px;
 }
+
+.remove-product-small {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+}
+
+.product-container-post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
