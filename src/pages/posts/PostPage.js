@@ -5,7 +5,6 @@ import { faPenSquare, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col, Button } from "react-bootstrap";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import CreateComment from "../../components/CreateComment";
@@ -17,7 +16,6 @@ import Follow from "../../components/Follow";
 const PostPage = (props) => {
   const [post, setPost] = useState(null);
   const { id } = useParams();
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [editMode, setEditMode] = useState(false);
   const [editComment, setEditComment] = useState(null);
   const currentUser = useCurrentUser();
@@ -67,20 +65,6 @@ const PostPage = (props) => {
   const confirmDelete = () => {
     if (window.confirm("Are you sure you want to delete?")) {
       handleDelete();
-    }
-  };
-
-  /* Handling previous button click */
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  /* Handling next button click */
-  const handleNextClick = () => {
-    if (post && post.products) {
-      setCurrentIndex((prevIndex) =>
-        Math.min(prevIndex + 1, post.products.length - 1)
-      );
     }
   };
 
@@ -186,8 +170,8 @@ const PostPage = (props) => {
                 />
               </div>
             )}
-            <Row>
-              <Col md={6}>
+            <Row className="d-flex align-items-center justify-content-center">
+              <Col className="text-center">
                 <Like
                   postId={id}
                   isLiked={post.like_id !== null}
@@ -195,7 +179,7 @@ const PostPage = (props) => {
                   likeId={post.like_id}
                 />
               </Col>
-              <div className="col-md-6 d-flex justify-content-end">
+              <Col className="text-center">
                 {isFollowing ? (
                   <Link to="/profile" className={styles.following}>
                     Following...
@@ -203,7 +187,7 @@ const PostPage = (props) => {
                 ) : (
                   <Follow ownerId={post.owner_id} />
                 )}
-              </div>
+              </Col>
             </Row>
           </div>
         </Col>
@@ -291,26 +275,6 @@ const PostPage = (props) => {
       <hr></hr>
       <Row>
         <Col md={12}>
-          <Col className="d-flex justify-content-between mb-3">
-            {post && post.products.length > 2 && (
-              <Button
-                onClick={handlePrevClick}
-                className={`${styles["arrow-button"]} ${styles["left-arrow"]}`}
-              >
-                <FaChevronLeft />
-              </Button>
-            )}
-            {post &&
-              post.products.length > 2 &&
-              currentIndex + 2 < post.products.length && (
-                <Button
-                  onClick={handleNextClick}
-                  className={`${styles["arrow-button"]} ${styles["right-arrow"]}`}
-                >
-                  <FaChevronRight />
-                </Button>
-              )}
-          </Col>
           <div className={styles["products-used-detail"]}>
             <h5 className={styles["products-used-detail"]}>Products Used</h5>
             {post && post.products && post.products.length > 0 ? (
@@ -324,12 +288,16 @@ const PostPage = (props) => {
                         alt={product.name}
                       />
                       <div className="card-body">
-                        <h5 className="card-title"><strong>{product.name}</strong></h5>
+                        <h5 className="card-title">
+                          <strong>{product.name}</strong>
+                        </h5>
                         <p className="card-text">
-                          <strong>Condition: </strong>{product.condition.join(", ")}
+                          <strong>Condition: </strong>
+                          {product.condition.join(", ")}
                         </p>
                         <p className="card-text">
-                        <strong>Body Systems: </strong>{product.body_systems.join(", ")}
+                          <strong>Body Systems: </strong>
+                          {product.body_systems.join(", ")}
                         </p>
                       </div>
                     </div>
