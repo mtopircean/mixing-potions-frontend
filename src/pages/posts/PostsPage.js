@@ -208,43 +208,43 @@ function PostsPage({ filter = "" }) {
         </Col>
         <Col className="py-2 p-0 p-lg-2" lg={3}>
           {/* Display most liked users */}
-            <Container>
-              <div style={{ textAlign: "center" }}>
-                {selectedUser && (
-                  <div className={styles.selectedFilter}>
-                    <span>{selectedUser}</span>
-                    <Button variant="light" onClick={clearFilter}>
-                      <MdClear color="red" />
-                    </Button>
-                  </div>
-                )}
-                <h5 className={styles["liked-header"]}>
-                  <FaThumbsUp className={styles["like-user-icon"]} /> Most liked
-                  users:
-                  <Button variant="link" onClick={handleRefreshLikes}>
-                    <FaSyncAlt />
+          <Container>
+            <div style={{ textAlign: "center" }}>
+              {selectedUser && (
+                <div className={styles.selectedFilter}>
+                  <span>{selectedUser}</span>
+                  <Button variant="light" onClick={clearFilter}>
+                    <MdClear color="red" />
                   </Button>
-                </h5>
-                <hr />
-              </div>
-              {sortByLikes().map((user) => (
-                <div key={user.owner}>
-                  <div
-                    className={
-                      selectedUser === user.owner ? styles.selectedUser : ""
-                    }
-                  >
-                    <button
-                      onClick={() => handleUserClick(user.owner)}
-                      className={`${styles.mostLikedButton}`}
-                    >
-                      <strong>{user.owner}</strong>
-                    </button>
-                    has {user.like_count} likes
-                  </div>
                 </div>
-              ))}
-            </Container>
+              )}
+              <h5 className={styles["liked-header"]} id="most-liked-users">
+                <FaThumbsUp className={styles["like-user-icon"]} /> Most liked
+                users:
+                <Button variant="link" onClick={handleRefreshLikes}>
+                  <FaSyncAlt />
+                </Button>
+              </h5>
+              <hr />
+            </div>
+            {sortByLikes().map((user) => (
+              <div key={user.owner}>
+                <div
+                  className={
+                    selectedUser === user.owner ? styles.selectedUser : ""
+                  }
+                >
+                  <button
+                    onClick={() => handleUserClick(user.owner)}
+                    className={`${styles.mostLikedButton}`}
+                  >
+                    <strong>{user.owner}</strong>
+                  </button>
+                  has {user.like_count} likes
+                </div>
+              </div>
+            ))}
+          </Container>
         </Col>
       </Row>
     </Container>
