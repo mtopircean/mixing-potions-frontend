@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { Form, Button, Row, Col, Card, Alert } from "react-bootstrap";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
@@ -20,6 +20,11 @@ function LoginForm() {
 
   const history = useHistory();
 
+  useEffect(() => {
+    return () => {
+    };
+  }, []);
+
   /* Function to handle form submission */
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,7 +32,7 @@ function LoginForm() {
       const { data } = await axios.post("/dj-rest-auth/login/", loginData);
       setCurrentUser(data.user);
       setTokenTimestamp(data);
-      history.goBack();
+      history.push('/');
     } catch (err) {
       setErrors(err.response?.data);
     }
