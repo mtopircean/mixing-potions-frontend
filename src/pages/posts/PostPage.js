@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Like from "../../components/Like";
 import Follow from "../../components/Follow";
 
-const PostPage = (props) => {
+const PostPage = () => {
   const [post, setPost] = useState(null);
   const { id } = useParams();
   const [editMode, setEditMode] = useState(false);

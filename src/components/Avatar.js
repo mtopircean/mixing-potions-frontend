@@ -3,7 +3,6 @@ import React from "react";
 const Avatar = ({
   src,
   height = 45,
-  width = 45,
   alt = "avatar",
   className,
 }) => (

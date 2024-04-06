@@ -138,7 +138,7 @@ const ProfilePage = () => {
               )}
             </div>
           </Col>
-          <div
+          <Col
             className={`d-flex justify-content-center ${styles.seeMore}`}
             md={12}
           >
@@ -148,7 +148,7 @@ const ProfilePage = () => {
             >
               {expanded ? "▲" : "▼"} <span>see more profile details...</span>
             </button>
-          </div>
+          </Col>
           <hr></hr>
           {expanded && (
             <Col xs={12}>

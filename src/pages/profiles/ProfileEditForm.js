@@ -53,7 +53,7 @@ const ProfileEditForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const { image, ...formDataWithoutImage } = formData;
+    const { ...formDataWithoutImage } = formData;
 
     try {
       await axios.put(`/profiles/${id}/`, formDataWithoutImage);
