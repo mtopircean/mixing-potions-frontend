@@ -10,7 +10,7 @@ const renderLoginForm = () => {
   );
 };
 
-test("Submitting the login form with valid credentials redirects to the dashboard", async () => {
+test("Submitting the login form with valid credentials redirects to designated page", async () => {
   renderLoginForm();
 
   fireEvent.change(screen.getByLabelText(/Username/i), {
