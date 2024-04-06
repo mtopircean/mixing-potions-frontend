@@ -88,3 +88,14 @@
   justify-content: space-between;
   align-items: center;
 }
+
+@media (max-width: 991px) {
+  .d-md-none-custom {
+    display: block !important;
+  }
+}
+@media (min-width: 992px) {
+  .d-md-none-custom {
+    display: none;
+  }
+}

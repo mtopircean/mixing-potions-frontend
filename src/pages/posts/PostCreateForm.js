@@ -9,7 +9,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
-import axios from "axios"; 
+import axios from "axios";
 import { toast } from "react-toastify";
 import { useRedirect } from "../../contexts/useRedirect";
 
@@ -137,7 +137,7 @@ function PostCreateForm() {
     <Container>
       <Row>
         {/* Form for Creating a Post */}
-        <Col sm={6}>
+        <Col lg={6}>
           <div className={styles["center-div"]}>
             <Form
               onSubmit={handleSubmit}
@@ -149,12 +149,28 @@ function PostCreateForm() {
                 <div className="text-center">
                   <Image
                     src={customImage || selectedImage}
-                    alt="Selected product image"
+                    alt="Post image"
                     className={`mb-3 ${styles["preview-image"]}`}
                     fluid
                   />
                 </div>
               )}
+
+              <Form.Group controlId="customImage">
+                <Form.Label></Form.Label>
+                <Form.File
+                  accept="image/*"
+                  onChange={handleCustomImageChange}
+                  custom
+                  style={{ display: "none" }}
+                />
+                <label
+                  htmlFor="customImage"
+                  className={styles["upload-button"]}
+                >
+                  <FontAwesomeIcon icon={faUpload} /> Upload an Image for our Post
+                </label>
+              </Form.Group>
 
               <Row className="align-items-center justify-content-center  d-none d-lg-flex">
                 {selectedProducts.length > 2 && currentIndex > 0 && (
@@ -196,10 +212,10 @@ function PostCreateForm() {
                     </Button>
                   )}
               </Row>
-              <div className="d-sm-none text-center mb-3">
+              <div className="d-md-none-custom text-center mb-3">
                 <h6>Selected Products:</h6>
               </div>
-              <Row className="d-sm-none">
+              <Row className="d-md-none-custom d-lg-none">
                 {selectedProducts.map((product) => (
                   <Col key={product.id} xs={12} className="mb-3">
                     <div className={styles["product-container-post"]}>
@@ -215,23 +231,6 @@ function PostCreateForm() {
                   </Col>
                 ))}
               </Row>
-
-              <Form.Group controlId="customImage">
-                <Form.Label></Form.Label>
-                <Form.File
-                  accept="image/*"
-                  onChange={handleCustomImageChange}
-                  custom
-                  style={{ display: "none" }}
-                />
-                <label
-                  htmlFor="customImage"
-                  className={styles["upload-button"]}
-                >
-                  <FontAwesomeIcon icon={faUpload} /> Upload Image or select a
-                  product and use it`s image
-                </label>
-              </Form.Group>
 
               <Form.Control
                 type="text"
@@ -262,7 +261,7 @@ function PostCreateForm() {
           </div>
         </Col>
         {/* Panels for Selecting Body Systems and Products */}
-        <Col sm={6}>
+        <Col lg={6}>
           <div className={styles["center-div"]}>
             <BodySystemPanel
               selectedBodySystems={selectedBodySystems}
