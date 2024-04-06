@@ -71,7 +71,7 @@ function PostCreateForm() {
   };
 
   /* Handle change in custom image input by uploading user image choice */
-  const MAX_IMAGE_SIZE_MB = 2;
+  const MAX_IMAGE_SIZE_MB = 4;
   const MAX_IMAGE_WIDTH = 4096;
   const MAX_IMAGE_HEIGHT = 4096;
   const handleCustomImageChange = (event) => {
