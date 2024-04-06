@@ -10,6 +10,8 @@ const renderLoginForm = () => {
   );
 };
 
+/* Testing Submission of a login form with valid credentials */
+
 test("Submitting the login form with valid credentials redirects to designated page", async () => {
   renderLoginForm();
 

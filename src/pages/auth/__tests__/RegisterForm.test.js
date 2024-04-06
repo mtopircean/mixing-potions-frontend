@@ -16,6 +16,7 @@ describe("RegisterForm", () => {
     expect(screen.getByText(/Register:/i)).toBeInTheDocument();
   });
 
+  /* Testing submission of a registration form */
   test("submits the registration form with valid data", async () => {
     render(
       <BrowserRouter>

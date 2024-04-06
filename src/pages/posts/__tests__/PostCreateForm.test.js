@@ -5,6 +5,7 @@ import PostCreateForm from "../PostCreateForm";
 
 jest.mock("axios");
 
+/* Testing render of essential input forms */
 describe("PostCreateForm", () => {
   test("renders form elements", async () => {
     render(<PostCreateForm />);
