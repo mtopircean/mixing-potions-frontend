@@ -43,12 +43,17 @@ const Post = (props) => {
 
   /* Fetch owner's profile image when owner_id changes */
   useEffect(() => {
+    let isMounted = true;
     const fetchOwnerProfileImage = async () => {
         if (!owner_id) {
             return;
         }
         try {
             const response = await axios.get(`/posts/${id}/`);
+            if (isMounted) {
+              const ownerProfileImage = response.data.owner_image;
+              setOwnerProfileImage(ownerProfileImage);
+            }
             const ownerProfileImage = response.data.owner_image;
             setOwnerProfileImage(ownerProfileImage);
         } catch (error) {
@@ -57,6 +62,10 @@ const Post = (props) => {
     };
 
     fetchOwnerProfileImage();
+
+    return () => {
+      isMounted = false;
+    };
 }, [owner_id, id]);
 
   /* Toggle comments expansion */
