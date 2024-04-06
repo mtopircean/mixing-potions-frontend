@@ -31,7 +31,7 @@ const RegisterForm = () => {
     event.preventDefault();
     try {
       await axios.post("/dj-rest-auth/registration/", formData);
-      history.push("/");
+      history.push("/login");
     } catch (err) {
       if (err.response?.data?.email) {
         setErrors({ email: ["Email already exists."] });

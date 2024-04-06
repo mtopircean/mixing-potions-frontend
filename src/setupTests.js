@@ -4,6 +4,21 @@ import { handlers } from "./mocks/handlers";
 
 const server = setupServer(...handlers);
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+beforeAll(async () => {
+  try {
+    await server.listen();
+    console.log("Mock server listening...");
+  } catch (error) {
+    console.error("Error setting up mock server:", error);
+    process.exit(1);
+  }
+});
+
+afterEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(async () => {
+  await server.close();
+  console.log("Mock server closed.");
+});
