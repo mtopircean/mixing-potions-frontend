@@ -188,54 +188,58 @@ const ProfilePage = () => {
       )}
       <hr />
 
+      {currentUser && currentUser.username === profile.username && (
+        <Row>
+          <Col xs={12} md={12} className="text-center">
+            {followedUsers && followedUsers.length > 0 ? (
+              <>
+                <h4 className="text-center">Followed Users:</h4>
+                <div
+                  className="d-flex flex-column  align-items-center justify-content-center"
+                  id="container-followed-users"
+                >
+                  {followedUsers.map((user) => (
+                    <div
+                      className="d-flex align-items-center justify-content-center"
+                      key={user.id}
+                    >
+                      <div>
+                        {user.followed_profile_id ? (
+                          <Link
+                            to={`/profile/${user.followed_profile_id}`}
+                            className={styles.usernameLink}
+                          >
+                            {user.followed_name}
+                          </Link>
+                        ) : (
+                          <span>{user.followed_name}</span>
+                        )}
+                      </div>
+                      <div>
+                        <Button
+                          onClick={() => unfollowUser(user.id)}
+                          className={`${styles.unfollowUser}`}
+                        >
+                          <span>Unfollow</span>{" "}
+                          <FontAwesomeIcon icon={faCircleMinus} />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="text-center">
+                <h4 className="text-center">Followed Users:</h4>
+                <p className="no-followed">No followed users</p>
+              </div>
+            )}
+            <hr />
+          </Col>
+        </Row>
+      )}
       {userPosts && userPosts.length > 0 && (
         <Row>
-          {currentUser &&
-            currentUser.username === profile.username &&
-            userPosts &&
-            userPosts.length > 0 && (
-              <Col xs={12} md={12} className="text-center">
-                {followedUsers && followedUsers.length > 0 ? (
-                 <>
-                    <h4 className="text-center">Followed Users:</h4>
-                    <div className="d-flex align-items-center justify-content-center" id="container-followed-users">
-                      {followedUsers.map((user) => (
-                        <div className="d-flex align-items-center justify-content-center" key={user.id}>
-                          <div>
-                            {user.followed_profile_id ? (
-                              <Link
-                                to={`/profile/${user.followed_profile_id}`}
-                                className={styles.usernameLink}
-                              >
-                                {user.followed_name}
-                              </Link>
-                            ) : (
-                              <span>{user.followed_name}</span>
-                            )}
-                          </div>
-                          <div>
-                            <Button
-                              onClick={() => unfollowUser(user.id)}
-                              className={`${styles.unfollowUser}`}
-                            >
-                              <span>Unfollow</span>{" "}
-                              <FontAwesomeIcon icon={faCircleMinus} />
-                            </Button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  <div className="text-center">
-                    <h4 className="text-center">Followed Users:</h4>
-                    <p className="no-followed">No followed users</p>
-                  </div>
-                )}
-                <hr />
-              </Col>
-            )}
-
           <Col
             xs={12}
             md={12}
