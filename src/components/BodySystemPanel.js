@@ -10,11 +10,11 @@ const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
 
   useEffect(() => {
     let source = axios.CancelToken.source();
-  
+
     const fetchProducts = async () => {
       try {
         const response = await axios.get("products", {
-          cancelToken: source.token
+          cancelToken: source.token,
         });
         setProducts(response.data.results);
       } catch (error) {
@@ -23,9 +23,9 @@ const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
         }
       }
     };
-  
+
     fetchProducts();
-  
+
     return () => {
       source.cancel("Operation canceled by cleanup");
     };
@@ -33,7 +33,7 @@ const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
 
   useEffect(() => {
     setSelectedFilters(selectedBodySystems);
-  }, [selectedBodySystems])
+  }, [selectedBodySystems]);
 
   const uniqueSystems = Array.from(
     new Set(products.flatMap((product) => product.body_systems))
@@ -43,7 +43,7 @@ const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
 
   const handleRemoveFilter = (system) => {
     setSelectedFilters((prevFilters) =>
-    prevFilters.filter((filter) => filter !== system)
+      prevFilters.filter((filter) => filter !== system)
     );
     toggleBodySystem(system);
   };
@@ -53,17 +53,17 @@ const BodySystemPanel = ({ selectedBodySystems, toggleBodySystem }) => {
       <div className={styles["selected-filters-container"]}>
         {selectedFilters.map((filter, index) => (
           <Button
-          key={index}
-          variant="outline-secondary"
-          className={styles["selected-filter"]}
-          onClick={() => handleRemoveFilter(filter)}
-        >
-          {filter} <MdClear color="red" />
+            key={index}
+            variant="outline-secondary"
+            className={styles["selected-filter"]}
+            onClick={() => handleRemoveFilter(filter)}
+          >
+            {filter} <MdClear color="red" />
           </Button>
         ))}
       </div>
       <div>
-      <h5 className="text-center">Select by Body Systems:</h5>
+        <h5 className="text-center">Select by Body Systems:</h5>
       </div>
       <hr></hr>
       <div className={styles["systems-button-container"]}>

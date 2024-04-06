@@ -11,10 +11,10 @@ const PostCreator = () => {
 
   return (
     <div className={styles["post-creator-container"]}>
-    <NavLink to="/posts/create" className={styles["post-creator-button"]}>
-      <span>Add post</span>
-      <FontAwesomeIcon icon={faSquarePlus} />
-    </NavLink>
+      <NavLink to="/posts/create" className={styles["post-creator-button"]}>
+        <span>Add post</span>
+        <FontAwesomeIcon icon={faSquarePlus} />
+      </NavLink>
     </div>
   );
 };

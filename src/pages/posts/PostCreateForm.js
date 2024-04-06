@@ -168,7 +168,8 @@ function PostCreateForm() {
                   htmlFor="customImage"
                   className={styles["upload-button"]}
                 >
-                  <FontAwesomeIcon icon={faUpload} /> Upload an Image for our Post
+                  <FontAwesomeIcon icon={faUpload} /> Upload an Image for our
+                  Post
                 </label>
               </Form.Group>
 

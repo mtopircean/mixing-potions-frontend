@@ -30,7 +30,6 @@ const ProfileEditForm = () => {
         const response = await axios.get(`/profiles/${id}/`);
         const profileData = response.data;
         if (isMounted) {
-          
           setFormData(profileData);
         }
       } catch (error) {
@@ -73,7 +72,6 @@ const ProfileEditForm = () => {
   const handleCancel = () => {
     history.push(`/profile/${id}/`);
   };
-
 
   return (
     <Container>

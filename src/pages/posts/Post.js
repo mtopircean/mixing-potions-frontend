@@ -37,7 +37,7 @@ const Post = (props) => {
   const [ownerProfileImage, setOwnerProfileImage] = useState(null);
   /* Used to determine if the post is liked by the current user */
   const [isLiked] = useState(like_id !== null);
-   /* Used to keep track of the number of likes on the post */
+  /* Used to keep track of the number of likes on the post */
   const [likeCount] = useState(like_count);
   const noComments = comments.length === 0;
 
@@ -45,20 +45,20 @@ const Post = (props) => {
   useEffect(() => {
     let isMounted = true;
     const fetchOwnerProfileImage = async () => {
-        if (!owner_id) {
-            return;
+      if (!owner_id) {
+        return;
+      }
+      try {
+        const response = await axios.get(`/posts/${id}/`);
+        if (isMounted) {
+          const ownerProfileImage = response.data.owner_image;
+          setOwnerProfileImage(ownerProfileImage);
         }
-        try {
-            const response = await axios.get(`/posts/${id}/`);
-            if (isMounted) {
-              const ownerProfileImage = response.data.owner_image;
-              setOwnerProfileImage(ownerProfileImage);
-            }
-            const ownerProfileImage = response.data.owner_image;
-            setOwnerProfileImage(ownerProfileImage);
-        } catch (error) {
-            console.error("Error fetching owner image:", error);
-        }
+        const ownerProfileImage = response.data.owner_image;
+        setOwnerProfileImage(ownerProfileImage);
+      } catch (error) {
+        console.error("Error fetching owner image:", error);
+      }
     };
 
     fetchOwnerProfileImage();
@@ -66,7 +66,7 @@ const Post = (props) => {
     return () => {
       isMounted = false;
     };
-}, [owner_id, id]);
+  }, [owner_id, id]);
 
   /* Toggle comments expansion */
   const toggleComments = () => {
@@ -139,11 +139,7 @@ const Post = (props) => {
         </div>
         <Follow ownerId={owner_id} />
         <div className={styles.CommentsSection}>
-        {noComments ? (
-            <FaComment style={{ color: "grey" }} />
-          ) : (
-            <FaComment />
-          )}
+          {noComments ? <FaComment style={{ color: "grey" }} /> : <FaComment />}
           <button onClick={toggleComments}>
             {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
           </button>

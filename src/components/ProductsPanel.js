@@ -7,11 +7,11 @@ const ProductsPanel = ({ selectedBodySystems, onAddProduct }) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     let source = axios.CancelToken.source();
-  
+
     const fetchProducts = async () => {
       try {
         const response = await axios.get("products", {
-          cancelToken: source.token
+          cancelToken: source.token,
         });
         setProducts(response.data.results);
       } catch (error) {
@@ -20,7 +20,7 @@ const ProductsPanel = ({ selectedBodySystems, onAddProduct }) => {
         }
       }
     };
-  
+
     fetchProducts();
     return () => {
       source.cancel("Operation canceled by cleanup");

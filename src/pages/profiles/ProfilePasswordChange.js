@@ -7,7 +7,7 @@ import {
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
-import styles from "../../styles/ProfilePasswordChange.module.css"
+import styles from "../../styles/ProfilePasswordChange.module.css";
 import { useRedirect } from "../../contexts/useRedirect";
 
 const ProfilePasswordChange = () => {
@@ -51,7 +51,6 @@ const ProfilePasswordChange = () => {
   return (
     <Container>
       <Row className="justify-content-center">
-        
         <Col md={8}>
           <h4 className="mb-4 mt-4">Change your password</h4>
           <Form onSubmit={handleSubmit}>
@@ -81,18 +80,25 @@ const ProfilePasswordChange = () => {
                 <Alert variant="danger">{errors.new_password2}</Alert>
               )}
             </Form.Group>
-            <Col  md={12} className={styles.profileFormButtons}>
-              <Button variant="primary" type="submit" className={styles.passwordSave}>
+            <Col md={12} className={styles.profileFormButtons}>
+              <Button
+                variant="primary"
+                type="submit"
+                className={styles.passwordSave}
+              >
                 Save
               </Button>
-              <Button variant="secondary" onClick={() => history.goBack()} className={styles.passwordCancel}>
+              <Button
+                variant="secondary"
+                onClick={() => history.goBack()}
+                className={styles.passwordCancel}
+              >
                 Cancel
               </Button>
             </Col>
           </Form>
         </Col>
       </Row>
-
     </Container>
   );
 };

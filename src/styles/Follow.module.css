@@ -1,16 +1,16 @@
 .followButton {
-    background-color: rgba(0, 0, 0, 0);
-    border: none;
-    color:#023e85;
-  }
-  
-  .followButton:hover {
-    background-color: #023e85;
-    color:#ffff;
-  }
-  
-  .following {
-    color:#e33720;
-    background-color: transparent;
-    border: none;
-  }
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: #023e85;
+}
+
+.followButton:hover {
+  background-color: #023e85;
+  color: #ffff;
+}
+
+.following {
+  color: #e33720;
+  background-color: transparent;
+  border: none;
+}

@@ -1,43 +1,42 @@
 .profileFormButtons {
-    display: flex;
-    justify-content: space-evenly;
-  }
+  display: flex;
+  justify-content: space-evenly;
+}
 
-  .profileSave {
-    background-color: #629d77;
-    color: #ffff;
-    border: none;
-    width: 20%;
-  }
+.profileSave {
+  background-color: #629d77;
+  color: #ffff;
+  border: none;
+  width: 20%;
+}
 
-  .profileSave:hover {
-    background-color: #ffff;
-    color: #629d77;
-    border: #629d77 1px solid;
-  }
+.profileSave:hover {
+  background-color: #ffff;
+  color: #629d77;
+  border: #629d77 1px solid;
+}
 
+.profileCancel {
+  background-color: #A60E37;
+  color: #ffff;
+  border: none;
+  width: 20%;
+}
+
+.profileCancel:hover {
+  background-color: #ffff;
+  color: #A60E37;
+  border: #A60E37 1px solid;
+}
+
+.editFormLabel {
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+
+  .profileSave,
   .profileCancel {
-    background-color: #A60E37;
-    color: #ffff;
-    border: none;
-    width: 20%;
+    width: 40%;
   }
-
-  .profileCancel:hover {
-    background-color:#ffff ;
-    color: #A60E37;
-    border: #A60E37 1px solid;
-  }
-
-  .editFormLabel {
-    font-weight: bold;
-  }
-
-  @media (max-width: 768px) {
-    .profileSave,
-    .profileCancel {
-      width: 40%;
-    }
-  }
-
-
+}

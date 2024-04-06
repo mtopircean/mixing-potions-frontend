@@ -1,39 +1,39 @@
 .post-create-button {
-    background-color: #629d77;
-    color: #ffff;
-    border: 2px solid #629d77;
-  }
-  
-  .post-create-button:hover {
-    background-color: #ffff;
-    color: #629d77;
-    border: 2px solid #629d77;
-    margin-bottom: 20px;
-  }
-  
+  background-color: #629d77;
+  color: #ffff;
+  border: 2px solid #629d77;
+}
+
+.post-create-button:hover {
+  background-color: #ffff;
+  color: #629d77;
+  border: 2px solid #629d77;
+  margin-bottom: 20px;
+}
+
 .input-border {
-    border-color: #b1cebb;
-  }
-  
-  .input-border:focus {
-    border-color: #b1cebb;
-    box-shadow: 0 0 0 0.2rem rgba(177, 206, 187, 0.5);
-  }
+  border-color: #b1cebb;
+}
 
-  .input-border::placeholder {
-    color: #295d3b;
-  }
+.input-border:focus {
+  border-color: #b1cebb;
+  box-shadow: 0 0 0 0.2rem rgba(177, 206, 187, 0.5);
+}
 
-  .product-post-card {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    background-color: #ffff;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #b1cebb;
+.input-border::placeholder {
+  color: #295d3b;
+}
+
+.product-post-card {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #b1cebb;
 }
 
 .remove-button {
@@ -64,13 +64,13 @@
   display: inline-block;
   margin-top: 10px;
   padding: 10px 15px;
-  color:#295d3b;
+  color: #295d3b;
   text-align: center;
   width: 100%;
 }
 
 .upload-button:hover {
- color: #b1cebb;
+  color: #b1cebb;
 }
 
 .preview-image {
@@ -94,6 +94,7 @@
     display: block !important;
   }
 }
+
 @media (min-width: 992px) {
   .d-md-none-custom {
     display: none;

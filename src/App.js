@@ -41,7 +41,10 @@ function App() {
           <Route exact path="/posts/create" render={() => <PostCreateForm />} />
           <Route exact path="/posts/:id" render={() => <PostPage />} />
           <Route path="/edit/:id" component={PostEditForm} />
-          <Route path="/profiles/:id/change-username" component={ChangePassword} />
+          <Route
+            path="/profiles/:id/change-username"
+            component={ChangePassword}
+          />
           <Route
             exact
             path="/"

@@ -1,5 +1,5 @@
 .products-panel {
-    background-color: #7b70a69e;
+  background-color: #7b70a69e;
   border: 2px solid #d9d2e9;
   border-radius: 10px;
   padding: 15px;
@@ -10,70 +10,70 @@
 }
 
 .products-panel h3 {
-    color: #ffff;
-    padding: 10px;
-    font-size: medium;
-    text-transform: uppercase;
+  color: #ffff;
+  padding: 10px;
+  font-size: medium;
+  text-transform: uppercase;
 }
 
 .products-panel p {
-    font-size: small;
+  font-size: small;
 }
 
 .product-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #ffff;
-    border-radius: 10px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 2px solid #d9d2e9;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #d9d2e9;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  height: 100%;
 }
 
 .product-span {
-    font-weight: bold;
-    font-size: small;
+  font-weight: bold;
+  font-size: small;
 }
 
 .product-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-bottom: 10px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
 
 .add-post-button {
-    background-color: #54547c;
-    border: #54547c 1px solid;
-    color: #ffff;
-    margin-top: 10px;
-    margin-top: auto;
-    width: 80%;
+  background-color: #54547c;
+  border: #54547c 1px solid;
+  color: #ffff;
+  margin-top: 10px;
+  margin-top: auto;
+  width: 80%;
 }
 
 .add-post-button:hover,
 .add-post-button:active {
-    background-color: #ffff;
-    border: #54547c 1px solid;
-    color: #54547c;
+  background-color: #ffff;
+  border: #54547c 1px solid;
+  color: #54547c;
 }
 
 .products-panel::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  .products-panel::-webkit-scrollbar-thumb {
-    background-color: #54547c;
-    border-radius: 0px;
-  }
-  
-  .products-panel::-webkit-scrollbar-track {
-    background-color: #54547c4b;
-  }
+  width: 10px;
+}
 
-  .product-area {
-    margin-bottom: 20px;
-  }
+.products-panel::-webkit-scrollbar-thumb {
+  background-color: #54547c;
+  border-radius: 0px;
+}
+
+.products-panel::-webkit-scrollbar-track {
+  background-color: #54547c4b;
+}
+
+.product-area {
+  margin-bottom: 20px;
+}

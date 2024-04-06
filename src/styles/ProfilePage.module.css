@@ -88,7 +88,7 @@ p.no-followed {
     color: grey;
 }
 
-.seeMore{
+.seeMore {
     margin-top: 10px;
     width: 100%;
 }
@@ -96,7 +96,7 @@ p.no-followed {
 #container-followed-users {
     display: flex !important;
     justify-content: center !important;
-  }
+}
 
 @media (max-width: 767px) {
 
