@@ -65,7 +65,6 @@ function LoginForm() {
                     {message}
                   </Alert>
                 ))}
-
                 <Form.Group controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control

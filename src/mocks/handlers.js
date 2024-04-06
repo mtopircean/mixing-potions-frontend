@@ -26,4 +26,4 @@ const logoutEndpointHandler = rest.post(
   }
 );
 
-export const handlers = [userEndpointHandler, logoutEndpointHandler];
+export const handlers = [userEndpointHandler, logoutEndpointHandler]
