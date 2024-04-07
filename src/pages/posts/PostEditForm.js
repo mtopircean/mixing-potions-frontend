@@ -98,7 +98,7 @@ function PostEditForm({ post }) {
   };
 
   /* Handle custom image selection(user uploaded image) */
-  const MAX_IMAGE_SIZE_MB = 2;
+  const MAX_IMAGE_SIZE_MB = 4;
   const MAX_IMAGE_WIDTH = 4096;
   const MAX_IMAGE_HEIGHT = 4096;
   const handleCustomImageChange = (event) => {
@@ -106,7 +106,7 @@ function PostEditForm({ post }) {
       const selectedFile = event.target.files[0];
       const fileSizeMB = selectedFile.size / (1024 * 1024);
       if (fileSizeMB > MAX_IMAGE_SIZE_MB) {
-        toast.error("Image size exceeds the maximum allowed limit of 2MB.");
+        toast.error("Image size exceeds the maximum allowed limit of 4MB.");
         return;
       }
       const img = document.createElement("img");

@@ -79,7 +79,7 @@ function PostCreateForm() {
       const selectedFile = event.target.files[0];
       const fileSizeMB = selectedFile.size / (1024 * 1024);
       if (fileSizeMB > MAX_IMAGE_SIZE_MB) {
-        toast.error("Image size exceeds the maximum allowed limit of 2MB.");
+        toast.error("Image size exceeds the maximum allowed limit of 4MB.");
         return;
       }
       const img = document.createElement("img");
