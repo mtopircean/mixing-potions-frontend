@@ -14,7 +14,9 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { axiosReq } from "../../api/axiosDefaults";
 import axios from "axios";
 import Post from "../../pages/posts/Post";
+import Follow from "../../components/Follow";
 import { toast } from "react-toastify";
+
 
 const ProfilePage = () => {
   const currentUser = useCurrentUser();
@@ -24,6 +26,7 @@ const ProfilePage = () => {
   const [expanded, setExpanded] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
   const [followedUsers, setFollowedUsers] = useState([]);
+  const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
     const fetchProfileAndPosts = async () => {
@@ -47,6 +50,7 @@ const ProfilePage = () => {
             "Followed user IDs:",
             followedUsersData.map((user) => user.id)
           );
+          setIsFollowing(followedUsersData.some(user => user.followed_profile_id === id));
         } else {
           throw new Error("Failed to fetch followed users");
         }
@@ -100,6 +104,16 @@ const ProfilePage = () => {
                   {profile.user_status}
                 </span>
               </h4>
+              <br/>
+              <Col className="text-center">
+                {isFollowing ? (
+                  <Link to="/profile" className={styles.following}>
+                    Following...
+                  </Link>
+                ) : (
+                  <Follow ownerId={profile.id} />
+                )}
+              </Col>
             </div>
           </Col>
           <Col md={6} className={styles["name-header"]}>

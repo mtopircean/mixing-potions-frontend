@@ -11,7 +11,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Like from "../../components/Like";
-import Follow from "../../components/Follow";
 
 import { FaComment, FaChevronDown, FaChevronUp } from "react-icons/fa";
 
@@ -137,7 +136,6 @@ const Post = (props) => {
             likeId={like_id}
           />
         </div>
-        <Follow ownerId={owner_id} />
         <div className={styles.CommentsSection}>
           {noComments ? <FaComment style={{ color: "grey" }} /> : <FaComment />}
           <button onClick={toggleComments}>

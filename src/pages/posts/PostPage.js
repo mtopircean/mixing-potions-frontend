@@ -43,8 +43,6 @@ const PostPage = () => {
     fetchPost();
   }, [id, currentUser, setError]);
 
-  /* Checking if current user is following post owner */
-
   /* Edit post function */
   const handleEdit = () => {
     history.push(`/edit/${id}`);
