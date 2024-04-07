@@ -182,7 +182,24 @@ function PostEditForm({ post }) {
                 />
               )}
 
-              <Row className="align-items-center justify-content-center">
+<Form.Group controlId="customImage">
+                <Form.Label></Form.Label>
+                <Form.File
+                  accept="image/*"
+                  onChange={handleCustomImageChange}
+                  custom
+                  style={{ display: "none" }}
+                />
+                <label
+                  htmlFor="customImage"
+                  className={styles["upload-button"]}
+                >
+                  <FontAwesomeIcon icon={faUpload} /> Upload an Image for our
+                  Post
+                </label>
+              </Form.Group>
+
+              <Row className="align-items-center justify-content-center  d-none d-lg-flex">
                 {selectedProducts.length > 2 && currentIndex > 0 && (
                   <Button
                     onClick={handlePrevClick}
@@ -222,23 +239,25 @@ function PostEditForm({ post }) {
                     </Button>
                   )}
               </Row>
-
-              <Form.Group controlId="customImage">
-                <Form.Label></Form.Label>
-                <Form.File
-                  accept="image/*"
-                  onChange={handleCustomImageChange}
-                  custom
-                  style={{ display: "none" }}
-                />
-                <label
-                  htmlFor="customImage"
-                  className={styles["upload-button"]}
-                >
-                  <FontAwesomeIcon icon={faUpload} /> Upload Image or select a
-                  product and use it`s image
-                </label>
-              </Form.Group>
+              <div className="d-md-none-custom text-center mb-3">
+                <h6>Selected Products:</h6>
+              </div>
+              <Row className="d-md-none-custom d-lg-none">
+                {selectedProducts.map((product) => (
+                  <Col key={product.id} xs={12} className="mb-3">
+                    <div className={styles["product-container-post"]}>
+                      <span>{product.name}</span>
+                      <Button
+                        variant="danger"
+                        onClick={() => handleRemoveProduct(product.id)}
+                        className={`remove-product-small ${styles["remove-button"]}`}
+                      >
+                        <BsX />
+                      </Button>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
 
               <Form.Control
                 type="text"
