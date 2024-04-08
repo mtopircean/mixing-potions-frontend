@@ -20,12 +20,14 @@ import { removeTokenTimestamp } from "../utils/utils";
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  
 
   const handleLogout = async () => {
     try {
       await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
+      window.location.href = "/";
     } catch (error) {
       console.error("Logout error:", error);
     }
