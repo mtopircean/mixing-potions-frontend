@@ -22,12 +22,12 @@ const NavBar = () => {
   const setCurrentUser = useSetCurrentUser();
   
 
-  const handleLogout = async () => {
+  const handleLogout = async (event) => {
+    event.preventDefault();
     try {
       await axios.post("/dj-rest-auth/logout/");
       setCurrentUser(null);
       removeTokenTimestamp();
-      window.location.href = "/";
     } catch (error) {
       console.error("Logout error:", error);
     }
