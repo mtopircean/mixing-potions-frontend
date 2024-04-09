@@ -52,18 +52,20 @@ const ProfileEditForm = () => {
     }, [currentUser, history, id]);
 
     const handleFormSubmit = async (event) => {
-        event.preventDefault();
+      event.preventDefault();
+  
+      try {
 
-        const { ...formDataWithoutImage } = formData;
-
-        try {
-            await axios.put(`/profiles/${id}/`, formDataWithoutImage);
-            toast.success('Profile data was updated');
-            history.push(`/profile/${id}/`);
-        } catch (error) {
-            setErrors(error.response?.data);
-        }
-    };
+          const { username, nickname, first_name, last_name, age, phone_number, about } = formData;
+          const updatedData = { username, nickname, first_name, last_name, age, phone_number, about };
+  
+          await axios.put(`/profiles/${id}/`, updatedData);
+          toast.success('Profile data was updated');
+          history.push(`/profile/${id}/`);
+      } catch (error) {
+          setErrors(error.response?.data);
+      }
+  };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
