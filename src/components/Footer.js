@@ -15,7 +15,7 @@ function App() {
         <Row>
           <Col xs={4} className="text-left">
             <div className="gdpr">
-              <NavLink to="gdpr">GDPR</NavLink>
+              <NavLink to="/gdpr">GDPR</NavLink>
             </div>
           </Col>
           <Col xs={4} className="text-center">
