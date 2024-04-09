@@ -30,6 +30,11 @@ const ChangeUsername = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    if (username.length > 30) {
+      setErrors({ username: ["Username must be 30 characters or less"] });
+      return;
+    }
+
     try {
       await axiosRes.put("/dj-rest-auth/user/", { username });
       const response = await axiosRes.get("/dj-rest-auth/user/");
