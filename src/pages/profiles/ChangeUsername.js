@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Col, Form, Row, Button, Container } from "react-bootstrap";
+import { Col, Form, Row, Button, Container, Alert  } from "react-bootstrap";
 import styles from "../../styles/ProfileEditForm.module.css";
 import { useParams, useHistory } from "react-router-dom";
 import {
@@ -17,6 +17,7 @@ const ChangeUsername = () => {
   const setCurrentUser = useSetCurrentUser();
   const history = useHistory();
   const [username, setUsername] = useState("");
+  const [errors, setErrors] = useState(null);
 
   useEffect(() => {
     if (currentUser?.profile_id?.toString() !== id) {
@@ -37,14 +38,7 @@ const ChangeUsername = () => {
       toast.success("Username was updated");
       history.push(`/profile/${id}/`);
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        toast.error(
-          "Username is already taken or the same as the current one. Please choose a different one."
-        );
-      } else {
-        console.error("Error updating username:", error);
-        toast.error("An error occurred while updating the username.");
-      }
+      setErrors(error.response?.data);
     }
   };
 
@@ -70,6 +64,11 @@ const ChangeUsername = () => {
                 placeholder="Type updated username..."
               />
             </Form.Group>
+            {errors?.username?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
             <Col md={12} className={styles.profileFormButtons}>
               <Button
                 variant="primary"
