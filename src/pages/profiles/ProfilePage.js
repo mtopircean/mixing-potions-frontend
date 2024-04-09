@@ -36,12 +36,18 @@ const ProfilePage = () => {
                 setProfile(pageProfile);
                 setLoading(false);
 
-                const { data: postData } = await axiosReq.get(`/posts`);
-                const userPostsData = postData.results.filter(
-                    (post) => post.owner === pageProfile.username
-                );
-                setUserPosts(userPostsData);
-                console.log('User Posts:', userPostsData);
+                let allUserPosts = [];
+                let nextPage = '/posts';
+
+                while (nextPage) {
+                    const { data: postData } = await axiosReq.get(nextPage);
+                    const userPostsData = postData.results.filter(
+                        (post) => post.owner === pageProfile.username
+                    );
+                    allUserPosts = [...allUserPosts, ...userPostsData];
+                    nextPage = postData.next;
+                }
+                setUserPosts(allUserPosts);
 
                 const response = await axios.get(`/followers`);
                 if (response.status === 200) {

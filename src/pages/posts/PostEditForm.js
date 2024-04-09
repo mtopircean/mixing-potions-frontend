@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Image } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Image, Alert  } from 'react-bootstrap';
 import { BsX } from 'react-icons/bs';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,11 +23,11 @@ function PostEditForm({ post }) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [customImage, setCustomImage] = useState(null);
     const [image, setImage] = useState(null);
-    const [setErrors] = useState({});
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const history = useHistory();
     const { id } = useParams();
+    const [errors, setErrors] = useState(null);
 
     /* Fetch post data on component mount */
     useEffect(() => {
@@ -158,10 +158,8 @@ function PostEditForm({ post }) {
             toast.success('Post updated successfully!');
 
             history.push(`/posts/${response.data.id}`);
-        } catch (err) {
-            if (err.response?.status !== 401) {
-                setErrors(err.response?.data);
-            }
+        } catch (error) {
+            setErrors(error.response?.data);
         }
     };
 
@@ -296,6 +294,11 @@ function PostEditForm({ post }) {
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                             />
+                            {errors?.title?.map((message, idx) => (
+                                <Alert key={idx} variant="warning">
+                                    {message}
+                                </Alert>
+                            ))}
                             <Form.Control
                                 as="textarea"
                                 rows={6}
