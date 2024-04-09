@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProductsPanel from '../../components/ProductsPanel';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { Image } from 'react-bootstrap';
 import { BsX } from 'react-icons/bs';
 import BodySystemPanel from '../../components/BodySystemPanel';
@@ -24,6 +24,7 @@ function PostCreateForm() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const history = useHistory();
+    const [errors, setErrors] = useState(null);
 
     /* Toggle selection of body system */
     const toggleBodySystem = (system) => {
@@ -132,8 +133,8 @@ function PostCreateForm() {
             /* Redirect to the newly created post */
             history.push(`/posts/${response.data.id}`);
             toast.success('Post created successfully!');
-        } catch (err) {
-            console.error('Error response from server:', err.response.data);
+        } catch (error) {
+            setErrors(error.response?.data);
         }
     };
 
@@ -271,6 +272,11 @@ function PostCreateForm() {
                                 onChange={(e) => setTitle(e.target.value)}
                                 required
                             />
+                            {errors?.title?.map((message, idx) => (
+                                <Alert key={idx} variant="warning">
+                                    {message}
+                                </Alert>
+                            ))}
                             <Form.Control
                                 as="textarea"
                                 rows={6}
@@ -279,6 +285,11 @@ function PostCreateForm() {
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             />
+                            {errors?.description?.map((message, idx) => (
+                                <Alert key={idx} variant="warning">
+                                    {message}
+                                </Alert>
+                            ))}
                             <div
                                 style={{
                                     display: 'flex',

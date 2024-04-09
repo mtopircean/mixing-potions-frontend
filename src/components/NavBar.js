@@ -33,6 +33,14 @@ const NavBar = () => {
     }
   };
 
+  const handleLogoClick = () => {
+    if (location.pathname === "/") {
+      window.location.reload();
+    } else {
+      history.push("/");
+    }
+  };
+
   const loggedInIcons = (
     <>
       <NavDropdown
@@ -83,7 +91,7 @@ const NavBar = () => {
   return (
     <Container>
       <Navbar fixed="top" className="navbar-container">
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/" onClick={handleLogoClick}>
           <div className="logo-container">
             <img src={logo} alt="logo" height="120" />
           </div>
