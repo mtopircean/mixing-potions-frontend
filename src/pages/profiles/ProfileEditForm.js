@@ -56,8 +56,15 @@ const ProfileEditForm = () => {
   
       try {
 
-          const { username, nickname, first_name, last_name, age, phone_number, about } = formData;
-          const updatedData = { username, nickname, first_name, last_name, age, phone_number, about };
+        const updatedData = {
+          username: formData.username || null,
+          nickname: formData.nickname || null,
+          first_name: formData.first_name || null,
+          last_name: formData.last_name || null,
+          age: formData.age || null,
+          phone_number: formData.phone_number || null,
+          about: formData.about || null
+      };
   
           await axios.put(`/profiles/${id}/`, updatedData);
           toast.success('Profile data was updated');
