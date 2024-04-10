@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useCurrentUser } from '../../contexts/CurrentUserContext';
 import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
-import { useRedirect } from '../../contexts/useRedirect';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const ProfileEditForm = () => {
     useRedirect('loggedOut');

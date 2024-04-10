@@ -8,7 +8,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import styles from "../../styles/ProfilePasswordChange.module.css";
-import { useRedirect } from "../../contexts/useRedirect";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const ProfilePasswordChange = () => {
   useRedirect("loggedOut");

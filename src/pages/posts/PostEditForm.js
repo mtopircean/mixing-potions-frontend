@@ -12,7 +12,7 @@ import BodySystemPanel from '../../components/BodySystemPanel';
 import styles from '../../styles/PostCreateForm.module.css';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useRedirect } from '../../contexts/useRedirect';
+import { useRedirect } from '../../hooks/useRedirect';
 
 function PostEditForm({ post }) {
     useRedirect('loggedOut');

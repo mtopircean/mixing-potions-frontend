@@ -11,7 +11,7 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useRedirect } from '../../contexts/useRedirect';
+import { useRedirect } from '../../hooks/useRedirect';
 
 function PostCreateForm() {
     useRedirect('loggedOut');

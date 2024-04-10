@@ -8,7 +8,7 @@ import {
 } from "../../contexts/CurrentUserContext";
 import { toast } from "react-toastify";
 import { axiosRes } from "../../api/axiosDefaults";
-import { useRedirect } from "../../contexts/useRedirect";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const ChangeUsername = () => {
   useRedirect("loggedOut");
