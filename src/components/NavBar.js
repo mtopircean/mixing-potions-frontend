@@ -16,10 +16,12 @@ import axios from "axios";
 import Avatar from "./Avatar";
 import { Link } from "react-router-dom";
 import { removeTokenTimestamp } from "../utils/utils";
+import { useHistory } from "react-router-dom";
 
 const NavBar = () => {
   const currentUser = useCurrentUser();
   const setCurrentUser = useSetCurrentUser();
+  const history = useHistory();
   
 
   const handleLogout = async (event) => {

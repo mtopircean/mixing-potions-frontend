@@ -77,7 +77,6 @@ const PostPage = () => {
 
   /* Handling edit comment */
   const handleEditComment = (comment) => {
-    console.log("Editing comment:", comment);
     setEditMode(true);
     setEditComment(comment);
   };
