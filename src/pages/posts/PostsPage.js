@@ -157,6 +157,19 @@ function PostsPage({ filter = '' }) {
 
     return (
         <Container>
+            <div className="ranking-bar">
+                <p>
+                    <span className="ranking-title">
+                        Accumulate likes to impove your ranking:
+                    </span>
+                    <br />
+                    <span className="ranking-title">Basic</span> - 0 likes,{' '}
+                    <span className="ranking-title">Apprentice</span>- 10 likes,{' '}
+                    <span className="ranking-title">Experienced</span> - 50
+                    likes, <span className="ranking-title">Master</span> - 100
+                    likes
+                </p>
+            </div>
             <Row className="h-100">
                 <Col className="py-2 p-0 p-lg-2" lg={3}>
                     <div className="mb-3">

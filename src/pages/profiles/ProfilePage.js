@@ -105,6 +105,19 @@ const ProfilePage = () => {
 
     return (
         <Container>
+            <div className="ranking-bar">
+                <p>
+                    <span className="ranking-title">
+                        Accumulate likes to impove your ranking:
+                    </span>
+                    <br />
+                    <span className="ranking-title">Basic</span> - 0 likes,{' '}
+                    <span className="ranking-title">Apprentice</span>- 10 likes,{' '}
+                    <span className="ranking-title">Experienced</span> - 50
+                    likes, <span className="ranking-title">Master</span> - 100
+                    likes
+                </p>
+            </div>
             {profile ? (
                 <Row>
                     <Col md={6} className={styles['profile-header']}>

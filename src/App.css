@@ -23,6 +23,18 @@ body {
   overflow-y: auto;
 }
 
+.ranking-bar {
+  text-align: center;
+  margin-top: 5px;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+}
+
+.ranking-title {
+  color: #54547c;
+  font-weight: 600;
+}
+
 /* Navbar */
 
 .navbar-container {
