@@ -198,7 +198,7 @@ const PostPage = () => {
             {post.products.map((product, index) => (
               <div key={index}>
                 {index === 0 && (
-                  <div className={"card-text " + styles.systemCondition}>
+                  <div className={"card-text " + styles.systemCondition + styles.ConditionSystemAreaWrapper}>
                     <h6>
                       <strong>Condition: </strong>
                       <span className={styles.listedSpecs}>
@@ -208,7 +208,7 @@ const PostPage = () => {
                   </div>
                 )}
                 {index === 0 && (
-                  <div className={"card-text " + styles.systemCondition}>
+                  <div className={"card-text " + styles.systemCondition + styles.ConditionSystemAreaWrapper}>
                     <h6>
                       <strong>Body Systems: </strong>
                       <span className={styles.listedSpecs}>

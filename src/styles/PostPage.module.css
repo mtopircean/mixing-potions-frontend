@@ -194,3 +194,25 @@
 .products-used {
   height: 100%
 }
+
+.ConditionAreaWrapper {
+  max-height: 10px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+
+.ConditionAreaWrapper::-webkit-scrollbar {
+  width: 10px;
+}
+
+.ConditionAreaWrapper::-webkit-scrollbar-thumb {
+  background-color: #629d778b;
+  border-radius: 0px;
+}
+
+.ConditionAreaWrapper::-webkit-scrollbar-track {
+  background-color: #629d772c;
+}
