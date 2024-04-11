@@ -16,3 +16,16 @@
     background-color: #629d77;
     color: #ffff;
 }
+
+.cancelButton {
+    background-color: rgba(0, 0, 0, 0);
+    color: #aa2626;
+    border: none;
+    align-self: flex-end;
+    margin-top: -5px;
+}
+
+.cancelButton:hover {
+    background-color: #aa2626;
+    color: #ffff;
+}

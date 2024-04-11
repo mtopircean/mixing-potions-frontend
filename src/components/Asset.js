@@ -2,7 +2,7 @@ import React from "react";
 import { Spinner } from "react-bootstrap";
 import styles from "../styles/Asset.module.css";
 
-const Asset = ({ spinner, src, message }) => {
+const Asset = ({ src, message }) => {
   return (
     <div>
       <Spinner

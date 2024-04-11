@@ -57,6 +57,15 @@ function CreateComment(props) {
     }
   };
 
+  const handleCancel = () => {
+    setCommentText("");
+    if (editMode) {
+      setCommentText("");
+      setEditMode("");
+      setEditCommentId(null);
+    }
+  };
+
   return (
     <div>
       {currentUser && (
@@ -73,6 +82,11 @@ function CreateComment(props) {
           <Button type="submit" className={style.commentButton}>
             {editMode ? "Update comment" : "Add comment"}
           </Button>
+          {editMode && (
+            <Button onClick={handleCancel} className={style.cancelButton}>
+              Cancel
+            </Button>
+          )}
         </Form>
       )}
     </div>

@@ -24,5 +24,10 @@
         "react/prop-types": "off",
 
         "no-unused-vars": ["warn", { "argsIgnorePattern": "req|res|next|__" }]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 }
