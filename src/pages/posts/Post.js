@@ -82,6 +82,7 @@ const Post = (props) => {
   /* Handle editing a comment */
   const handleEditComment = (comment) => {
     setEditMode(true);
+    console.log("Edit mode is on");
     setEditComment(comment);
   };
 
@@ -102,6 +103,10 @@ const Post = (props) => {
     } catch (error) {
       console.error("Error deleting comment:", error);
     }
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
   };
 
   return (
@@ -152,6 +157,7 @@ const Post = (props) => {
             editMode={editMode}
             editComment={editComment}
             onCommentSubmitted={handleCommentSubmitted}
+            onCancelEdit={handleCancelEdit}
           />
           <div className={styles.CommentsAreaWrapper}>
             {comments
