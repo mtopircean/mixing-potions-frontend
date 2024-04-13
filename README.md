@@ -358,7 +358,7 @@ Logged in
 
 * Register/Login Page
 
-![Alt text](../mixing-potions-frontend/docs/planes/wireframes//register_login_page.png)
+![Alt text](../mixing-potions-frontend/docs/planes/wireframes/register_login_page.png)
 
 
 
@@ -417,3 +417,78 @@ Non existent pages where handled through the Page Not Found route:
 ```
 <Route render={() => <p>Page not found!</p>} />
 ```
+
+
+## The Surface Plane
+### Theme
+When considering the website theme the general idea was to provide a clean, modern look, but maintain also a good level of elegance.
+This was achieved through a well though color selection, limitation on number of elements displayed, and a high use of bootstrap to allow proper alignment and element display in the page.
+General aim was for a clean design, easy to read, understand, with all elements easy to access and read.
+
+### Colour Selection
+Colours where selected in line with the theme, but also to offer a high level of accessibility and contrast. It has suffered several changes during the development process as I`ve tried to maintain data clear, easy to read and print. The choice was also due to the amount of features present on the website and the interest to create a separation, or a unique identifier to separate them visually.
+
+Generaly I`ve tried to use a consistent pallete of colors, suitable for the various areas of the website and message sent.
+List of the most colours used:
+
+![Alt text](../mixing-potions-frontend/docs/planes/design/pallete_1.png)
+![Alt text](../mixing-potions-frontend/docs/planes/design/pallete_2.png)
+
+
+### Font and text style
+Text and font used are consistent across the website with variances in regards of decoration and size. Font used was selected from Google Fonts:
+![Alt text](../mixing-potions-frontend/docs/planes/design/font.png)
+
+### Imagery
+Logo was designed using Canva website.
+Photos for website elements are taken from Pexels.
+Product and promotion photos are taken from doTerra database/representative tools.
+
+### Display size optimization
+The use of Bootstrap has limited significantly the level of manual intervention I had to do in order to adapt the layout to various screen sizes.
+My intervention was limited to an intervention on this two particular sizes, which managed to adapt to all screen variations under them:
+
+``` css
+@media (max-width: 768px)
+```
+``` css
+@media (max-width: 767px)
+```
+``` css
+@media (max-width: 991px)
+```
+``` css
+@media (min-width: 992px)
+```
+
+### Accessibility
+From an accessibility perspective, my goal was to create a clean website with data easy to read, positioned in a relevant manner for the user. I`ve achieved this by:
+
+Writing semantic HTML
+Correct selection of text size, font and style in order to contrast well with the other elements of the page.
+Highly visible and relevant logo.
+Use of alt attribute connected to the logo.
+Another area I was mindful of, was that all of the consideration above where not lost when using the website in smaller screen sizes.
+
+Display size optimization:
+![Alt text](../mixing-potions-frontend/docs/testing/images/amiresponsive.png)
+
+# Deployment
+## How to Deploy
+Deployment of the website was done using HEROKU, and can be accessed here [Mixing Potions](https://mixing-potions-d88ebb719d59.herokuapp.com/).
+
+## How to Fork
+To fork the repository:
+
+1. Log in (or sign up) to GitHub.
+2. Go to the repository for this project, [mtopircean/mixing-potions-frontend](https://github.com/mtopircean/mixing-potions-frontend)
+3. Click the Fork button in the top right corner.
+
+## How to Clone
+To clone the repository:
+
+1. Log in (or sign up) to GitHub.
+2. Go to the repository for this project, [mtopircean/mixing-potions-frontend](https://github.com/mtopircean/mixing-potions-frontend)
+3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
+4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
+5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
