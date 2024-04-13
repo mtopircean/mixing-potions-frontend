@@ -88,10 +88,8 @@ Status as of 13.04.2024:
 ![Alt text](docs/planes/planning/milestones_by_labels.png)
 
 
-
 ### Kanban Board
 Board was designed to cover all planning aspects and offer a structured process to tackle the activities and work on my project.
-
 
 #### Kanban overview
 Kanban board is structured around 4 Epics connected to different functionalities, modules and stages of the project. This Epics also related to Milestones.
@@ -138,7 +136,6 @@ All user stories where completed and closed, the only ones remaining would be th
 * Nice to do:
     * User Story 3.3: Sharing Content on Social Media
 
-
 Stories where then broken down into a structure that allowed for Acceptance criteria to be defined, as well as the story to be broken down in tasks in order to follow a systematic development, as well as a way to track progress.
 
 Please find bellow an example of a story:
@@ -167,7 +164,6 @@ Thirdly, milestones and sprints also played a crucial role in prioritizing my st
 Example of label allocation:
 
 ![Alt text](docs/planes/planning/label_allocation.png)
-
 
 #### Milestones
 4 Milestones where created and structured around key steps in the development process, and around a well balanced timing:
@@ -322,7 +318,6 @@ Toasts:
 
 ![Alt text](docs/features/notifications.png)
 
-
 Alerts:
 
 ![Alt text](docs/features/notifications_alerts.png)
@@ -348,7 +343,7 @@ Future features include:
 ## The Skeleton Plane
 ### Wireframes
 To support both the functionality and the design part of the website, following wireframes where created.
-Slight deviations have happened during the development process, but overall the main and maority of design direction has been kept.
+Slight deviations have happened during the development process, but overall the main and majority of design direction has been kept.
 
 * Account Page
 
@@ -377,9 +372,7 @@ Logged in
 ![Alt text](docs/planes/wireframes/register_login_page.png)
 
 
-
 * GDPR, Update Profile/Password/Username Page: basic simple design where wireframes where not needed as in general terms they followed the same logic as the others
-
 
 ### Databases
 
@@ -418,8 +411,7 @@ Similar used in PostPage:
           </div>
 ```
 
-
-Generally, the current user context was used accross the code to render or not specific content.
+Generally, the current user context was used across the code to render or not specific content.
 
 The useRedirect hook was used across the code to ensure users logged out where redirected from a specific page if they where not logged in. Ex in PostCreateForm:
 
@@ -434,22 +426,20 @@ Non existent pages where handled through the Page Not Found route:
 <Route render={() => <p>Page not found!</p>} />
 ```
 
-
 ## The Surface Plane
 ### Theme
 When considering the website theme the general idea was to provide a clean, modern look, but maintain also a good level of elegance.
-This was achieved through a well though color selection, limitation on number of elements displayed, and a high use of bootstrap to allow proper alignment and element display in the page.
+This was achieved through a well though colour selection, limitation on number of elements displayed, and a high use of bootstrap to allow proper alignment and element display in the page.
 General aim was for a clean design, easy to read, understand, with all elements easy to access and read.
 
 ### Colour Selection
 Colours where selected in line with the theme, but also to offer a high level of accessibility and contrast. It has suffered several changes during the development process as I`ve tried to maintain data clear, easy to read and print. The choice was also due to the amount of features present on the website and the interest to create a separation, or a unique identifier to separate them visually.
 
-Generaly I`ve tried to use a consistent pallete of colors, suitable for the various areas of the website and message sent.
+Generally I`ve tried to use a consistent palette of colours, suitable for the various areas of the website and message sent.
 List of the most colours used:
 
 ![Alt text](docs/planes/design/pallete_1.png)
 ![Alt text](docs/planes/design/pallete_2.png)
-
 
 ### Font and text style
 Text and font used are consistent across the website with variances in regards of decoration and size. Font used was selected from Google Fonts:
@@ -519,7 +509,7 @@ To clone the repository:
 
 ## Additional libraries
 - Axios: API requests
-- Bootstap and React Bootstrap: design layout
+- Bootstrap and React Bootstrap: design layout
 - React Router: routing
 - React Infinite Scroll Component: infinite scroll
 - JWT Decode: decoding JSON Web Tokens
@@ -527,7 +517,6 @@ To clone the repository:
 - js-cookie: handles browser cookies
 - react-icons: implement react specific icon libraries
 - react-toastify: Implement toast
-
 
 ## IDE
 1. GitHub: to store the source code.
@@ -547,7 +536,7 @@ To clone the repository:
 10. WAVE Web Accessibility Evaluation Tools: for accessibility evaluation.
 11. CSS Validation Service: for CSS code evaluation and troubleshooting.
 12. W3C Markup Validation Service: for HTML code evaluation and troubleshooting.
-14. Colors: to create palette of colours in README.
+14. Colours: to create palette of colours in README.
 15. Amiresponsive: to create a snapshot of the page responsiveness on different screen variations
 
 # Testing and Validation
@@ -556,7 +545,6 @@ To clone the repository:
 Index file tested through the W3C Validator.
 Warnings about trailing slashes are due to the structure of the index.html file generated by Create React App and can be ignored:
 ![Alt text](docs/testing/images/html.png)
-
 
 ## CSS
 
@@ -579,59 +567,70 @@ Code tested without any errors found:
 - ProfilePasswordChange.module
 ![Alt text](docs/testing/images/css.png)
 
-
 ## Lighthouse and Accessibility Test
-Accessibility and perfomance where tested with Lighthouse.
-Generally good results with lower perfomance in mobile version on specific pages.
+Accessibility and performance where tested with Lighthouse.
+Generally good results with lower performance in mobile version on specific pages.
 
 Test results:
 
 - Posts Page
 
 Desktop:
+
 ![Alt text](docs/testing/images/home.png)
 
 Mobile:
+
 ![Alt text](docs/testing/images/home-mobile.png)
 
 - Login Page:
 
 Desktop:
+
 ![Alt text](docs/testing/images/login.png)
 
 Mobile:
+
 ![Alt text](docs/testing/images/login-mobile.png)
 
 - Register Page:
 
 Desktop:
+
 ![Alt text](docs/testing/images/register.png)
 
 Mobile:
+
 ![Alt text](docs/testing/images/register-mobile.png)
 
 - Post Page:
 
 Desktop:
+
 ![Alt text](docs/testing/images/post.png)
 
 Mobile:
+
 ![Alt text](docs/testing/images/post-mobile.png)
 
 - Profile Page:
 
 Desktop:
+
 ![Alt text](docs/testing/images/profile.png)
 
 Mobile:
+
 ![Alt text](docs/testing/images/profile-mobile.png)
 
 - GDPR:
 
 Desktop:
+
 ![Alt text](docs/testing/images/gdpr.png)
 
 Mobile:
+
 ![Alt text](docs/testing/images/gdpr-mobile.png)
 
 ## Spellcheck:
@@ -642,7 +641,7 @@ Website run through W3C spellchecker. No errors found:
 ## ESLint:
 No Lint errors found in the code:
 RA has ESLint built in, and all errors coming up in the terminal where addressed.
-ESLint was installed separatley and no errors had to be addressed.
+ESLint was installed separately and no errors had to be addressed.
 ![Alt text](docs/testing/images/eslint.png)
 
 ## Automated Testing:
@@ -680,10 +679,11 @@ Basic automated testing put in place to test the following:
 
 1. Ensures that essential input forms, such as title, description, and buttons, are rendered within the PostCreateForm component.
 
-All test run successfull with pass as a result:
-![Alt text](docs/testing/images/a_test.png)
-![Alt text](docs/testing/images/a_test_result.png)
+All test run successful with pass as a result:
 
+![Alt text](docs/testing/images/a_test.png)
+
+![Alt text](docs/testing/images/a_test_result.png)
 
 ## Local functionality tests
 
@@ -766,15 +766,13 @@ const fetchAllProducts = async () => {
     };
 ```
 
-
 ## Open Bugs
 
 1. Refresh on create or edit post, or other forms does not maintain the changes made and in the case of create posts it redirects the user to homepage. It is not really an error, but more a limitation on my application that I intend to address in a future iteration.
 
 2. Menu shift when user logged in:
-Due to some scalling issue, when I loggin, the menu icon shifts slightly up
+Due to some scaling issue, when I login, the menu icon shifts slightly up
 ![Alt text](docs/bugs/menu_shift.png)
-
 
 3. 401 errors:
 Standard errors when opening the app without being logged in
@@ -787,7 +785,6 @@ If I refresh a page multiple times when logged in, in some cases, the error bell
 
 ![Alt text](docs/bugs/multiple_refresh_500.png)
 
-
 Discussing with the tutoring team seems to be an ElephantSQL issue.
 
 5. Error after page with form data stays idle for a few minutes:
@@ -798,7 +795,7 @@ POST https://mixing-potions-drf-api-0a8cbdf11dd2.herokuapp.com/posts/ net::ERR_C
 Discussing with the tutoring team seems to he a Heroku issue.
 
 6. Comment update submission:
-After updating a comment, user needs to refres the page to be able to edit the comment again.
+After updating a comment, user needs to refresh the page to be able to edit the comment again.
 This is a limitation that will be addressed in future iterations:
 ![Alt text](docs/bugs/comment_update.png)
 
@@ -836,3 +833,4 @@ Slack: Marius Topircean
 GitHub: mtopircean
 
 LinkedIn: [Marius Topircean](https://www.linkedin.com/in/marius-t-7b5592124)
+
