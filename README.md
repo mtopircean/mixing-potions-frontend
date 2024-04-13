@@ -9,7 +9,7 @@ Project is connected to the backend components created in the backend portion of
 
 [Mixing Potions Backend](https://github.com/mtopircean/mixing-potions-backend)
 
-![](../mixing-potions-frontend/docs/testing/images/amiresponsive.png)
+![Alt text](../mixing-potions-frontend/docs/testing/images/amiresponsive.png)
 
 ## Table of Contents
 
@@ -32,8 +32,6 @@ Project is connected to the backend components created in the backend portion of
         - [Wireframes](#wireframes)
         - [Databases](#databases)
         - [Security](#security)
-            - [Security User](#security-user)
-            - [Security Admin](#security-admin)
     - [The Surface Plane](#the-surface-plane)
         - [Theme](#theme)
         - [Colour Selection](#colour-selection)
@@ -59,14 +57,19 @@ Planning was done following an Agile methodology by creating 4 Sprints focused a
 Status as of 13.04.2024:
 
 * Milestone
+![Alt text](../mixing-potions-frontend/docs/planes/planning/milestones.png)
 
 * Labels
+![Alt text](../mixing-potions-frontend/docs/planes/planning/labels.png)
 
 * Status
+![Alt text](../mixing-potions-frontend/docs/planes/planning/status.png)
 
 * Milestone by status
+![Alt text](../mixing-potions-frontend/docs/planes/planning/milestones_by_status.png)
 
 * Milestone by labels
+![Alt text](../mixing-potions-frontend/docs/planes/planning/milestones_by_labels.png)
 
 
 
@@ -79,7 +82,10 @@ Kanban board is structured around 4 Epics connected to different functionalities
 
 Status as of 13.04.2024:
 
+![Alt text](../mixing-potions-frontend/docs/planes/planning/kanban_board.png)
+
 #### Epics
+
 In total we have 4 epics:
 * EPIC 1: Setup and Deployment- As a developer, I can install basic dependencies, create the document hierarchy/structure and deploy the application to Heroku so that the development environment is set up, and the application is accessible online for testing and use.
 
@@ -120,7 +126,7 @@ All user stories where completed and closed, the only ones remaining would be th
 Stories where then broken down into a structure that allowed for Acceptance criteria to be defined, as well as the story to be broken down in tasks in order to follow a systematic development, as well as a way to track progress.
 
 Please find bellow an example of a story:
-![Alt text](/static/readme/story-example.png)
+![Alt text](../mixing-potions-frontend/docs/planes/planning/story_example.png)
 
 #### Stories prioritization
 My goal in the development of the project was to deploy an Agile methodology, allocating importance on the strategic prioritization of user stories. This involved aligning tasks to optimize delivery, considering dependencies, user expectations, and business scope. 
@@ -144,12 +150,12 @@ Thirdly, milestones and sprints also played a crucial role in prioritizing my st
 
 Example of label allocation:
 
-![Alt text](/static/readme/story-example.png)
+![Alt text](../mixing-potions-frontend/docs/planes/planning/label_allocation.png)
 
 
 #### Milestones
 4 Milestones where created and structured around key steps in the development process, and around a well balanced timing:
-![Alt text](/static/readme/milestones.png)
+![Alt text](../mixing-potions-frontend/docs/planes/planning/milestones_planning.png)
 
 #### Sprints
 4 sprints where considered, also closely connected to the milestones, having the same logic behind their setup.
@@ -201,12 +207,12 @@ Logged out user:
 -   can access the login area through the Navbar
 -   user is redirected to the login area or registered
 
-![](../mixing-potions-frontend/docs/features/logged_out_user.png)
+![Alt text](../mixing-potions-frontend/docs/features/logged_out_user.png)
 
 Logged in user:
 -   Navbar status changes for the user where they have the option to logout
 
-![](../mixing-potions-frontend/docs/features/logged_in_user.png)
+![Alt text](../mixing-potions-frontend/docs/features/logged_in_user.png)
 
 #### Profiles
 
@@ -216,12 +222,12 @@ Profile allows him access to areas:
 -   Followed users area
 -   Own Posts area
 
-![](../mixing-potions-frontend/docs/features/own_profile.png)
+![Alt text](../mixing-potions-frontend/docs/features/own_profile.png)
 
 If user is not logged in, by clicking a username, the username persona details are visible but the restricted owner areas are not shown of accessible.
 User can also see the owner`s profile personal posts.
 
-![](../mixing-potions-frontend/docs/features/others_profile.png)
+![Alt text](../mixing-potions-frontend/docs/features/others_profile.png)
 
 #### Post creation & Edit Post
 
@@ -232,14 +238,14 @@ If a user wants to edit their own post, edit area is pre-populated with existing
 Alerts and Toasts are set to guide user on their actions/confirm or highlight issues or success.
 Post Creation is allowing a concatenating process of the Body Systems and Conditions of the products used in a post.
 
-![](../mixing-potions-frontend/docs/features/create_post.png)
+![Alt text](../mixing-potions-frontend/docs/features/create_post.png)
 
 #### Follow
 
 User can follow another user from their profile.
 They can unfollow a user by either going straight in their own profile, or clicking following from the followed users profile, which will redirect them to the unfollow area
 
-![](../mixing-potions-frontend/docs/features/own_profile.png)
+![Alt text](../mixing-potions-frontend/docs/features/own_profile.png)
 
 #### Like
 
@@ -249,11 +255,11 @@ Toasts will prompt each action.
 
 Like general:
 
-![](../mixing-potions-frontend/docs/features/like_general.png)
+![Alt text](../mixing-potions-frontend/docs/features/like_general.png)
 
 Like post page:
 
-![](../mixing-potions-frontend/docs/features/like_post_page.png)
+![Alt text](../mixing-potions-frontend/docs/features/like_post_page.png)
 
 #### Comment
 
@@ -263,32 +269,32 @@ Toasts will prompt the users on their actions
 
 Comment general:
 
-![](../mixing-potions-frontend/docs/features/comment_general.png)
+![Alt text](../mixing-potions-frontend/docs/features/comment_general.png)
 
 Comment post page:
 
-![](../mixing-potions-frontend/docs/features/comment_post_page.png)
+![Alt text](../mixing-potions-frontend/docs/features/comment_post_page.png)
 
 #### Search
 
 Users can use the search criteria in the main page in order to allow them to search posts by various filters like: username, products used, conditions and body systems, description and title.
 The refresh is done automatically when typing in the search criteria
 
-![](../mixing-potions-frontend/docs/features/search_liked.png)
+![Alt text](../mixing-potions-frontend/docs/features/search_liked.png)
 
 #### Most Liked
 
 Most Liked is currently using a manual refresh system due to it`s limitations.
 It is visible top in desktop mode and bottom of page in mobile. This is done as personal choice at this stage to keep a specific flow of the page.
 
-![](../mixing-potions-frontend/docs/features/search_liked.png)
+![Alt text](../mixing-potions-frontend/docs/features/search_liked.png)
 
 #### Filtering
 
 Filtering is done through the Body Systems area or by most liked users, in addition to the search bar.
 Multiple selections are available only for the Body Systems.
 
-![](../mixing-potions-frontend/docs/features/filtering.png)
+![Alt text](../mixing-potions-frontend/docs/features/filtering.png)
 
 #### Notification & Non-conforming content
 
@@ -298,19 +304,19 @@ Image upload conditions where set in the front page and response to user was giv
 
 Toasts:
 
-![](../mixing-potions-frontend/docs/features/notifications.png)
+![Alt text](../mixing-potions-frontend/docs/features/notifications.png)
 
 
 Alerts:
 
-![](../mixing-potions-frontend/docs/features/notifications_alerts.png)
+![Alt text](../mixing-potions-frontend/docs/features/notifications_alerts.png)
 
 #### Products panel
 
 A products panel was implemented to support the Post Creation action.
 This pulls the existing product database and allows a filtering system based on the body systems where the product is used.
 
-![](../mixing-potions-frontend/docs/features/products_panel.png)
+![Alt text](../mixing-potions-frontend/docs/features/products_panel.png)
 
 #### Future Features
 
@@ -322,3 +328,92 @@ Future features include:
 -   Most Liked will be able to refresh itself with each click of the Like/Unlike button
 -   Automated avatar and ranking change based on set specific logic: at the moment, it is done manual by the website administrator
 -   Posts maintain data when refreshed
+
+## The Skeleton Plane
+### Wireframes
+To support both the functionality and the design part of the website, following wireframes where created.
+Slight deviations have happened during the development process, but overall the main and maority of design direction has been kept.
+
+* Account Page
+
+![Alt text](../mixing-potions-frontend/docs/planes/wireframes/account_page.png)
+
+* Create/Update Post Page
+
+![Alt text](../mixing-potions-frontend/docs/planes/wireframes/create_update_post.png)
+
+* Post Page
+
+![Alt text](../mixing-potions-frontend/docs/planes/wireframes/post_page_logged_out.png)
+
+* Main Posts Page
+
+Logged out
+
+![Alt text](../mixing-potions-frontend/docs/planes/wireframes/homepage_logged_out.png)
+
+Logged in
+
+![Alt text](../mixing-potions-frontend/docs/planes/wireframes/homepage_logged_in.png)
+
+* Register/Login Page
+
+![Alt text](../mixing-potions-frontend/docs/planes/wireframes//register_login_page.png)
+
+
+
+* GDPR, Update Profile/Password/Username Page: basic simple design where wireframes where not needed as in general terms they followed the same logic as the others
+
+
+### Databases
+
+Database data is present as part of the backend readme.
+
+[Mixing Potions Backend](https://github.com/mtopircean/mixing-potions-backend)
+
+### Security
+
+Various conditional render processes where implemented through the project that restrict the user in seeing and accessing various data.
+For example, in the ProfilePage, access to pages that edit the profile data are not visible and can not be accessed by the users that do not own the profile:
+```
+  {currentUser &&
+                                currentUser.username === profile.username &&
+```
+
+Similar used in PostPage:
+```
+<div className="arrow-button">
+            {isCurrentUserOwner && (
+              <Button
+                onClick={handleEdit}
+                className={styles["post-edit-button"]}
+              >
+                Edit <FontAwesomeIcon icon={faPenSquare} />
+              </Button>
+            )}
+            {isCurrentUserOwner && (
+              <Button
+                onClick={confirmDelete}
+                className={styles["post-delete-button"]}
+              >
+                Delete <FontAwesomeIcon icon={faTrashAlt} />
+              </Button>
+            )}
+          </div>
+```
+
+
+Generally, the current user context was used accross the code to render or not specific content.
+
+The useRedirect hook was used across the code to ensure users logged out where redirected from a specific page if they where not logged in. Ex in PostCreateForm:
+
+```
+function PostCreateForm() {
+    useRedirect('loggedOut');
+```
+
+Non existent pages where handled through the Page Not Found route:
+
+```
+<Route render={() => <p>Page not found!</p>} />
+```
