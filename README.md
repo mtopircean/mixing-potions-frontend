@@ -517,6 +517,7 @@ To clone the repository:
 - js-cookie: handles browser cookies
 - react-icons: implement react specific icon libraries
 - react-toastify: Implement toast
+- Prettier: format code
 
 ## IDE
 1. GitHub: to store the source code.
