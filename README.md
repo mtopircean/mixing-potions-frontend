@@ -59,9 +59,9 @@ Project is connected to the backend components created in the backend portion of
     - [Fixed bugs](#fixed-bugs)
     - [Open bugs](#open-bugs)
 - [Credits](#credits)
-  - [Inspiration](#inspiration)
-  - [Sources](#sources)
-  - [Acknowledgements](#acknowledgements)
+    - [Code Used](#code-used)
+    - [Other Credits](#other-credits)
+- [About Author](#about-author)
 
 
 ### Planning
@@ -685,3 +685,149 @@ All test run successfull with pass as a result:
 ## Local functionality tests
 
 All local/manual tests can be found bellow:
+
+[TESTING.md](https://github.com/mtopircean/mixing-potions-frontend/blob/main/TESTING.md)
+
+## Fixed Bugs
+
+1. Logout functionality not working properly only after multiple attempts.
+Takes a few refreshes of the page to be able to logout.
+Traced to the order of events being triggered.
+
+Solution add in Navbar a prevent default item:
+```
+const handleLogout = async (event) => {
+        event.preventDefault();
+        try {
+            await axios.post('/dj-rest-auth/logout/');
+            setCurrentUser(null);
+            removeTokenTimestamp();
+        } catch (error) {
+            console.error('Logout error:', error);
+        }
+    };
+```
+2. Several issues due to pagination in PostsPage and in ProductPanel.
+
+Both solved in different manners:
+
+```
+const fetchLikeCounts = async () => {
+        try {
+            const likeCounts = {};
+            let currentPage = 1;
+            let hasNextPage = true;
+
+            while (hasNextPage) {
+                const { data } = await axiosReq.get(
+                    `/posts/?page=${currentPage}`
+                );
+                data.results.forEach((post) => {
+                    const owner = post.owner;
+                    const likeCount = post.like_count;
+                    if (likeCounts[owner]) {
+                        likeCounts[owner] += likeCount;
+                    } else {
+                        likeCounts[owner] = likeCount;
+                    }
+                });
+                if (!data.next) {
+                    hasNextPage = false;
+                }
+                currentPage++;
+            }
+
+            setLikeCounts(likeCounts);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+```
+
+```
+const fetchAllProducts = async () => {
+      let allProducts = [];
+      let nextPageUrl = "products";
+    
+      try {
+        while (nextPageUrl) {
+          const response = await axios.get(nextPageUrl);
+          allProducts = [...allProducts, ...response.data.results];
+          nextPageUrl = response.data.next;
+        }
+    
+        setProducts(allProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+```
+
+
+## Open Bugs
+
+1. Refresh on create or edit post, or other forms does not maintain the changes made and in the case of create posts it redirects the user to homepage. It is not really an error, but more a limitation on my application that I intend to address in a future iteration.
+
+2. Menu shift when user logged in:
+Due to some scalling issue, when I loggin, the menu icon shifts slightly up
+![Alt text](../mixing-potions-frontend/docs/bugs/menu_shift.png)
+
+
+3. 401 errors:
+Standard errors when opening the app without being logged in
+
+![Alt text](../mixing-potions-frontend/docs/bugs/401_errors.png)
+
+4. Multiple refresh:
+
+If I refresh a page multiple times when logged in, in some cases, the error bellow is received:
+
+![Alt text](../mixing-potions-frontend/docs/bugs/multiple_refresh_500.png)
+
+
+Discussing with the tutoring team seems to be an ElephantSQL issue.
+
+5. Error after page with form data stays idle for a few minutes:
+
+If I stay on a specific form, for ex. PostCreateForm for 3-5 minutes, when I try to submit I receive this error:
+POST https://mixing-potions-drf-api-0a8cbdf11dd2.herokuapp.com/posts/ net::ERR_CONNECTION_RESET
+
+Discussing with the tutoring team seems to he a Heroku issue.
+
+6. Comment update submission:
+After updating a comment, user needs to refres the page to be able to edit the comment again.
+This is a limitation that will be addressed in future iterations:
+![Alt text](../mixing-potions-frontend/docs/bugs/comment_update.png)
+
+## Code Used
+
+I`ve tried a lot during development to user alternative and creative ways deviating from the Moments Projects.
+In majority of cases my code is different, following various other routes.
+There are certain elements that are heavy reliant and similar to the Moments project like:
+- useRedirect.js
+- axiosDefault.js
+- CurrentUserContext.js
+- handlers.js
+- utils.js
+
+Certain others still use the Moments structure, but adapted to my project.
+
+## Other Credits
+* Inspiration on readme structure taken from kera-cudmore repo`s and following the article written by her on how to write a readme.
+* Thanks to Mo Shami, my mentor for all his support during the development of the project.
+* Thank you to the CI Tutor Team who supported in several instances by providing guidance on overcoming various challenges encountered during development. Great support as always :).
+
+# About Author
+Marius Topircean is an aspiring software-developer on a journey to develop and learn his place into the developer community.
+
+My contact details are:
+
+Email: mtopircean@yahoo.com
+
+Phone: +353857642212
+
+Slack: Marius Topircean
+
+GitHub: mtopircean
+
+LinkedIn: [Marius Topircean](https://www.linkedin.com/in/marius-t-7b5592124)
