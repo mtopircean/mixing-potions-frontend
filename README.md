@@ -9,7 +9,7 @@ Project is connected to the backend components created in the backend portion of
 
 [Mixing Potions Backend](https://github.com/mtopircean/mixing-potions-backend)
 
-![Alt text](../mixing-potions-frontend/docs/testing/images/amiresponsive.png)
+![Alt text](/docs/testing/images/amiresponsive.png)
 
 ## Table of Contents
 
@@ -63,6 +63,9 @@ Project is connected to the backend components created in the backend portion of
     - [Other Credits](#other-credits)
 - [About Author](#about-author)
 
+# The 5 Planes strategy
+
+## The Strategy Plane
 
 ### Planning
 Planning was done following an Agile methodology by creating 4 Sprints focused around 4 milestones. They where highly connected to each other following a natural logic in regards of timing and development steps.
@@ -798,6 +801,8 @@ Discussing with the tutoring team seems to he a Heroku issue.
 After updating a comment, user needs to refres the page to be able to edit the comment again.
 This is a limitation that will be addressed in future iterations:
 ![Alt text](../mixing-potions-frontend/docs/bugs/comment_update.png)
+
+# Credits
 
 ## Code Used
 
