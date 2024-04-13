@@ -39,12 +39,16 @@ Project is connected to the backend components created in the backend portion of
         - [Imagery](#imagery)
         - [Display size optimization](#display-size-optimization)
         - [Accessibility](#accessibility)
-- [Technologies Used](#technologies-used)
-  - [Frameworks and Languages](#frameworks-and-languages)
-  - [Additional JavaScript and React Libraries](#additional-javascript-and-react-libraries)
-  - [Other Software](#other-software)
-- [Testing](#testing)
 - [Deployment](#deployment)
+    - [How do Deploy](#how-to-deploy)
+    - [How to Fork](#how-to-fork)
+    - [How to Clone](#how-to-clone)
+- [Technologies](#technologies)
+    - [Programming Languages](#programming-languages)
+    - [Additional libraries](#additional-libraries)
+    - [IDE](#ide)
+    - [Other](#other)
+- [Testing](#testing)
 - [Credits](#credits)
   - [Inspiration](#inspiration)
   - [Sources](#sources)
@@ -492,3 +496,41 @@ To clone the repository:
 3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
 4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
 5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
+
+# Technologies
+## Programming Languages
+1. HTML
+2. CSS
+3. JavaScript
+4. JSX
+5. React
+
+## Additional libraries
+- Axios: API requests
+- Bootstap and React Bootstrap: design layout
+- React Router: routing
+- React Infinite Scroll Component: infinite scroll
+- JWT Decode: decoding JSON Web Tokens
+- Jest and React Testing Library: automated testing
+
+
+## IDE
+1. GitHub: to store the source code.
+2. GitPod: support to write majority of code, deploy via Heroku, and push data to store in GitHub. Gitpod was used also for debugging purposes.
+3. Git: Used to push code
+
+## Other
+1. HEROKU: to deploy application and act as the app interface
+2. ESLinter: to validate code format.
+3. Dalle: support with logo creation.
+4. Font Awesome: support with icon for various html pages
+5. Google Font: support with font style used for website text.
+6. Balsamiq: support with wireframe creation.
+7. Google DevTools: support with CSS styling, troubleshooting and responsive design development; support with testing function execution/js functionality.
+8. Lighthouse: performance testing .
+9. W3C Spell Checker: webpage spelling checks.
+10. WAVE Web Accessibility Evaluation Tools: for accessibility evaluation.
+11. CSS Validation Service: for CSS code evaluation and troubleshooting.
+12. W3C Markup Validation Service: for HTML code evaluation and troubleshooting.
+14. Colors: to create palette of colours in README.
+15. Amiresponsive: to create a snapshot of the page responsiveness on different screen variations
