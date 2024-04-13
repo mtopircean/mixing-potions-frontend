@@ -73,19 +73,19 @@ Planning was done following an Agile methodology by creating 4 Sprints focused a
 Status as of 13.04.2024:
 
 * Milestone
-![Alt text](../mixing-potions-frontend/docs/planes/planning/milestones.png)
+![Alt text](docs/planes/planning/milestones.png)
 
 * Labels
-![Alt text](../mixing-potions-frontend/docs/planes/planning/labels.png)
+![Alt text](docs/planes/planning/labels.png)
 
 * Status
-![Alt text](../mixing-potions-frontend/docs/planes/planning/status.png)
+![Alt text](docs/planes/planning/status.png)
 
 * Milestone by status
-![Alt text](../mixing-potions-frontend/docs/planes/planning/milestones_by_status.png)
+![Alt text](docs/planes/planning/milestones_by_status.png)
 
 * Milestone by labels
-![Alt text](../mixing-potions-frontend/docs/planes/planning/milestones_by_labels.png)
+![Alt text](docs/planes/planning/milestones_by_labels.png)
 
 
 
@@ -98,7 +98,7 @@ Kanban board is structured around 4 Epics connected to different functionalities
 
 Status as of 13.04.2024:
 
-![Alt text](../mixing-potions-frontend/docs/planes/planning/kanban_board.png)
+![Alt text](docs/planes/planning/kanban_board.png)
 
 #### Epics
 
@@ -142,7 +142,7 @@ All user stories where completed and closed, the only ones remaining would be th
 Stories where then broken down into a structure that allowed for Acceptance criteria to be defined, as well as the story to be broken down in tasks in order to follow a systematic development, as well as a way to track progress.
 
 Please find bellow an example of a story:
-![Alt text](../mixing-potions-frontend/docs/planes/planning/story_example.png)
+![Alt text](docs/planes/planning/story_example.png)
 
 #### Stories prioritization
 My goal in the development of the project was to deploy an Agile methodology, allocating importance on the strategic prioritization of user stories. This involved aligning tasks to optimize delivery, considering dependencies, user expectations, and business scope. 
@@ -166,12 +166,12 @@ Thirdly, milestones and sprints also played a crucial role in prioritizing my st
 
 Example of label allocation:
 
-![Alt text](../mixing-potions-frontend/docs/planes/planning/label_allocation.png)
+![Alt text](docs/planes/planning/label_allocation.png)
 
 
 #### Milestones
 4 Milestones where created and structured around key steps in the development process, and around a well balanced timing:
-![Alt text](../mixing-potions-frontend/docs/planes/planning/milestones_planning.png)
+![Alt text](docs/planes/planning/milestones_planning.png)
 
 #### Sprints
 4 sprints where considered, also closely connected to the milestones, having the same logic behind their setup.
@@ -223,12 +223,12 @@ Logged out user:
 -   can access the login area through the Navbar
 -   user is redirected to the login area or registered
 
-![Alt text](../mixing-potions-frontend/docs/features/logged_out_user.png)
+![Alt text](docs/features/logged_out_user.png)
 
 Logged in user:
 -   Navbar status changes for the user where they have the option to logout
 
-![Alt text](../mixing-potions-frontend/docs/features/logged_in_user.png)
+![Alt text](docs/features/logged_in_user.png)
 
 #### Profiles
 
@@ -238,12 +238,12 @@ Profile allows him access to areas:
 -   Followed users area
 -   Own Posts area
 
-![Alt text](../mixing-potions-frontend/docs/features/own_profile.png)
+![Alt text](docs/features/own_profile.png)
 
 If user is not logged in, by clicking a username, the username persona details are visible but the restricted owner areas are not shown of accessible.
 User can also see the owner`s profile personal posts.
 
-![Alt text](../mixing-potions-frontend/docs/features/others_profile.png)
+![Alt text](docs/features/others_profile.png)
 
 #### Post creation & Edit Post
 
@@ -254,14 +254,14 @@ If a user wants to edit their own post, edit area is pre-populated with existing
 Alerts and Toasts are set to guide user on their actions/confirm or highlight issues or success.
 Post Creation is allowing a concatenating process of the Body Systems and Conditions of the products used in a post.
 
-![Alt text](../mixing-potions-frontend/docs/features/create_post.png)
+![Alt text](docs/features/create_post.png)
 
 #### Follow
 
 User can follow another user from their profile.
 They can unfollow a user by either going straight in their own profile, or clicking following from the followed users profile, which will redirect them to the unfollow area
 
-![Alt text](../mixing-potions-frontend/docs/features/own_profile.png)
+![Alt text](docs/features/own_profile.png)
 
 #### Like
 
@@ -271,11 +271,11 @@ Toasts will prompt each action.
 
 Like general:
 
-![Alt text](../mixing-potions-frontend/docs/features/like_general.png)
+![Alt text](docs/features/like_general.png)
 
 Like post page:
 
-![Alt text](../mixing-potions-frontend/docs/features/like_post_page.png)
+![Alt text](docs/features/like_post_page.png)
 
 #### Comment
 
@@ -285,32 +285,32 @@ Toasts will prompt the users on their actions
 
 Comment general:
 
-![Alt text](../mixing-potions-frontend/docs/features/comment_general.png)
+![Alt text](docs/features/comment_general.png)
 
 Comment post page:
 
-![Alt text](../mixing-potions-frontend/docs/features/comment_post_page.png)
+![Alt text](docs/features/comment_post_page.png)
 
 #### Search
 
 Users can use the search criteria in the main page in order to allow them to search posts by various filters like: username, products used, conditions and body systems, description and title.
 The refresh is done automatically when typing in the search criteria
 
-![Alt text](../mixing-potions-frontend/docs/features/search_liked.png)
+![Alt text](docs/features/search_liked.png)
 
 #### Most Liked
 
 Most Liked is currently using a manual refresh system due to it`s limitations.
 It is visible top in desktop mode and bottom of page in mobile. This is done as personal choice at this stage to keep a specific flow of the page.
 
-![Alt text](../mixing-potions-frontend/docs/features/search_liked.png)
+![Alt text](docs/features/search_liked.png)
 
 #### Filtering
 
 Filtering is done through the Body Systems area or by most liked users, in addition to the search bar.
 Multiple selections are available only for the Body Systems.
 
-![Alt text](../mixing-potions-frontend/docs/features/filtering.png)
+![Alt text](docs/features/filtering.png)
 
 #### Notification & Non-conforming content
 
@@ -320,19 +320,19 @@ Image upload conditions where set in the front page and response to user was giv
 
 Toasts:
 
-![Alt text](../mixing-potions-frontend/docs/features/notifications.png)
+![Alt text](docs/features/notifications.png)
 
 
 Alerts:
 
-![Alt text](../mixing-potions-frontend/docs/features/notifications_alerts.png)
+![Alt text](docs/features/notifications_alerts.png)
 
 #### Products panel
 
 A products panel was implemented to support the Post Creation action.
 This pulls the existing product database and allows a filtering system based on the body systems where the product is used.
 
-![Alt text](../mixing-potions-frontend/docs/features/products_panel.png)
+![Alt text](docs/features/products_panel.png)
 
 #### Future Features
 
@@ -352,29 +352,29 @@ Slight deviations have happened during the development process, but overall the 
 
 * Account Page
 
-![Alt text](../mixing-potions-frontend/docs/planes/wireframes/account_page.png)
+![Alt text](docs/planes/wireframes/account_page.png)
 
 * Create/Update Post Page
 
-![Alt text](../mixing-potions-frontend/docs/planes/wireframes/create_update_post.png)
+![Alt text](docs/planes/wireframes/create_update_post.png)
 
 * Post Page
 
-![Alt text](../mixing-potions-frontend/docs/planes/wireframes/post_page_logged_out.png)
+![Alt text](docs/planes/wireframes/post_page_logged_out.png)
 
 * Main Posts Page
 
 Logged out
 
-![Alt text](../mixing-potions-frontend/docs/planes/wireframes/homepage_logged_out.png)
+![Alt text](docs/planes/wireframes/homepage_logged_out.png)
 
 Logged in
 
-![Alt text](../mixing-potions-frontend/docs/planes/wireframes/homepage_logged_in.png)
+![Alt text](docs/planes/wireframes/homepage_logged_in.png)
 
 * Register/Login Page
 
-![Alt text](../mixing-potions-frontend/docs/planes/wireframes/register_login_page.png)
+![Alt text](docs/planes/wireframes/register_login_page.png)
 
 
 
@@ -447,13 +447,13 @@ Colours where selected in line with the theme, but also to offer a high level of
 Generaly I`ve tried to use a consistent pallete of colors, suitable for the various areas of the website and message sent.
 List of the most colours used:
 
-![Alt text](../mixing-potions-frontend/docs/planes/design/pallete_1.png)
-![Alt text](../mixing-potions-frontend/docs/planes/design/pallete_2.png)
+![Alt text](docs/planes/design/pallete_1.png)
+![Alt text](docs/planes/design/pallete_2.png)
 
 
 ### Font and text style
 Text and font used are consistent across the website with variances in regards of decoration and size. Font used was selected from Google Fonts:
-![Alt text](../mixing-potions-frontend/docs/planes/design/font.png)
+![Alt text](docs/planes/design/font.png)
 
 ### Imagery
 Logo was designed using Canva website.
@@ -487,7 +487,7 @@ Use of alt attribute connected to the logo.
 Another area I was mindful of, was that all of the consideration above where not lost when using the website in smaller screen sizes.
 
 Display size optimization:
-![Alt text](../mixing-potions-frontend/docs/testing/images/amiresponsive.png)
+![Alt text](docs/testing/images/amiresponsive.png)
 
 # Deployment
 ## How to Deploy
@@ -555,7 +555,7 @@ To clone the repository:
 
 Index file tested through the W3C Validator.
 Warnings about trailing slashes are due to the structure of the index.html file generated by Create React App and can be ignored:
-![Alt text](../mixing-potions-frontend/docs/testing/images/html.png)
+![Alt text](docs/testing/images/html.png)
 
 
 ## CSS
@@ -577,7 +577,7 @@ Code tested without any errors found:
 - ProfileEditForm.module
 - ProfilePage.module
 - ProfilePasswordChange.module
-![Alt text](../mixing-potions-frontend/docs/testing/images/css.png)
+![Alt text](docs/testing/images/css.png)
 
 
 ## Lighthouse and Accessibility Test
@@ -589,61 +589,61 @@ Test results:
 - Posts Page
 
 Desktop:
-![Alt text](../mixing-potions-frontend/docs/testing/images/home.png)
+![Alt text](docs/testing/images/home.png)
 
 Mobile:
-![Alt text](../mixing-potions-frontend/docs/testing/images/home-mobile.png)
+![Alt text](docs/testing/images/home-mobile.png)
 
 - Login Page:
 
 Desktop:
-![Alt text](../mixing-potions-frontend/docs/testing/images/login.png)
+![Alt text](docs/testing/images/login.png)
 
 Mobile:
-![Alt text](../mixing-potions-frontend/docs/testing/images/login-mobile.png)
+![Alt text](docs/testing/images/login-mobile.png)
 
 - Register Page:
 
 Desktop:
-![Alt text](../mixing-potions-frontend/docs/testing/images/register.png)
+![Alt text](docs/testing/images/register.png)
 
 Mobile:
-![Alt text](../mixing-potions-frontend/docs/testing/images/register-mobile.png)
+![Alt text](docs/testing/images/register-mobile.png)
 
 - Post Page:
 
 Desktop:
-![Alt text](../mixing-potions-frontend/docs/testing/images/post.png)
+![Alt text](docs/testing/images/post.png)
 
 Mobile:
-![Alt text](../mixing-potions-frontend/docs/testing/images/post-mobile.png)
+![Alt text](docs/testing/images/post-mobile.png)
 
 - Profile Page:
 
 Desktop:
-![Alt text](../mixing-potions-frontend/docs/testing/images/profile.png)
+![Alt text](docs/testing/images/profile.png)
 
 Mobile:
-![Alt text](../mixing-potions-frontend/docs/testing/images/profile-mobile.png)
+![Alt text](docs/testing/images/profile-mobile.png)
 
 - GDPR:
 
 Desktop:
-![Alt text](../mixing-potions-frontend/docs/testing/images/gdpr.png)
+![Alt text](docs/testing/images/gdpr.png)
 
 Mobile:
-![Alt text](../mixing-potions-frontend/docs/testing/images/gdpr-mobile.png)
+![Alt text](docs/testing/images/gdpr-mobile.png)
 
 ## Spellcheck:
 Website run through W3C spellchecker. No errors found:
 
-![Alt text](../mixing-potions-frontend/docs/testing/images/spelling.png)
+![Alt text](docs/testing/images/spelling.png)
 
 ## ESLint:
 No Lint errors found in the code:
 RA has ESLint built in, and all errors coming up in the terminal where addressed.
 ESLint was installed separatley and no errors had to be addressed.
-![Alt text](../mixing-potions-frontend/docs/testing/images/eslint.png)
+![Alt text](docs/testing/images/eslint.png)
 
 ## Automated Testing:
 Basic automated testing put in place to test the following:
@@ -681,8 +681,8 @@ Basic automated testing put in place to test the following:
 1. Ensures that essential input forms, such as title, description, and buttons, are rendered within the PostCreateForm component.
 
 All test run successfull with pass as a result:
-![Alt text](../mixing-potions-frontend/docs/testing/images/a_test.png)
-![Alt text](../mixing-potions-frontend/docs/testing/images/a_test_result.png)
+![Alt text](docs/testing/images/a_test.png)
+![Alt text](docs/testing/images/a_test_result.png)
 
 
 ## Local functionality tests
@@ -773,19 +773,19 @@ const fetchAllProducts = async () => {
 
 2. Menu shift when user logged in:
 Due to some scalling issue, when I loggin, the menu icon shifts slightly up
-![Alt text](../mixing-potions-frontend/docs/bugs/menu_shift.png)
+![Alt text](docs/bugs/menu_shift.png)
 
 
 3. 401 errors:
 Standard errors when opening the app without being logged in
 
-![Alt text](../mixing-potions-frontend/docs/bugs/401_errors.png)
+![Alt text](docs/bugs/401_errors.png)
 
 4. Multiple refresh:
 
 If I refresh a page multiple times when logged in, in some cases, the error bellow is received:
 
-![Alt text](../mixing-potions-frontend/docs/bugs/multiple_refresh_500.png)
+![Alt text](docs/bugs/multiple_refresh_500.png)
 
 
 Discussing with the tutoring team seems to be an ElephantSQL issue.
@@ -800,7 +800,7 @@ Discussing with the tutoring team seems to he a Heroku issue.
 6. Comment update submission:
 After updating a comment, user needs to refres the page to be able to edit the comment again.
 This is a limitation that will be addressed in future iterations:
-![Alt text](../mixing-potions-frontend/docs/bugs/comment_update.png)
+![Alt text](docs/bugs/comment_update.png)
 
 # Credits
 
