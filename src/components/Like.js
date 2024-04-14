@@ -32,15 +32,12 @@ const Like = ({
                 return;
             }
             try {
-                console.log('postId:', postId);
                 const response = await axios.post(`/likes/`, { post: postId });
                 const newLikeId = response.data.id; //
                 setIsLiked(true);
                 setLikeCount((prevCount) => prevCount + 1);
                 setLikeId(newLikeId);
                 toast.success('You liked this post!');
-                console.log('Response data:', response.data);
-                console.log('New likeId:', newLikeId);
             } catch (error) {
                 if (error.response && error.response.data.non_field_errors) {
                     toast.error(error.response.data.non_field_errors[0]);
@@ -60,7 +57,6 @@ const Like = ({
                 setIsLiked(false);
                 setLikeCount((prevCount) => prevCount - 1);
                 toast.success('You unliked this post!');
-                console.log('Response data:', response.data);
             } catch (error) {
                 console.error(
                     'Error unliking post:',

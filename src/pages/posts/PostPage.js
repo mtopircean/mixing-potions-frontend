@@ -31,15 +31,12 @@ const PostPage = () => {
             try {
                 const response = await axios.get(`/posts/${id}`);
                 const postData = response.data;
-                console.log('Fetched post data:', postData);
                 setPost(postData);
             } catch (error) {
                 console.error('Error fetching post:', error);
                 setError(error);
             }
         };
-
-        console.log('ID:', id);
         fetchPost();
     }, [id, currentUser, setError]);
 

@@ -55,10 +55,6 @@ const ProfilePage = () => {
                     const followedUsersData = response.data.results;
                     setFollowedUsers(followedUsersData);
 
-                    console.log(
-                        'Followed user IDs:',
-                        followedUsersData.map((user) => user.id)
-                    );
                     setIsFollowing(
                         followedUsersData.some(
                             (user) => user.followed_profile_id === id

@@ -11,7 +11,6 @@ const server = setupServer(...handlers);
 beforeAll(async () => {
     try {
         await server.listen();
-        console.log('Mock server listening...');
     } catch (error) {
         console.error('Error setting up mock server:', error);
         process.exit(1);
@@ -24,5 +23,4 @@ afterEach(() => {
 
 afterAll(async () => {
     await server.close();
-    console.log('Mock server closed.');
 });

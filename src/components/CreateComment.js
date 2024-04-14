@@ -31,10 +31,6 @@ function CreateComment(props) {
 
         try {
             if (editMode && editCommentId) {
-                console.log('Inside handleSubmit');
-                console.log('Data to be sent in PUT request:', {
-                    comment_text: commentText,
-                });
                 await axiosRes.put(`/comments/${editCommentId}/`, {
                     post: props.postId,
                     comment_text: commentText,
@@ -56,7 +52,6 @@ function CreateComment(props) {
                 setEditMode(false);
                 setEditCommentId(null);
             } else {
-                console.log('Adding new comment');
                 const { data } = await axiosRes.post('/comments/', {
                     post: props.postId,
                     comment_text: commentText,
@@ -70,7 +65,6 @@ function CreateComment(props) {
     };
 
     const handleCancel = () => {
-        console.log('Cancel button clicked');
         setCommentText('');
         setEditMode(false);
         setEditCommentId(null);

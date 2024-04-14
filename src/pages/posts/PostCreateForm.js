@@ -89,7 +89,6 @@ function PostCreateForm() {
             }
             const img = document.createElement('img');
             img.onload = function () {
-                console.log('image onload firing');
                 if (this.width > MAX_IMAGE_WIDTH) {
                     toast.error(
                         'Image width exceeds the maximum allowed limit of 4096px.'

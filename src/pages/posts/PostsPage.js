@@ -50,7 +50,7 @@ function PostsPage({ filter = '' }) {
                 setPosts({ ...data, results: filteredPosts });
                 setHasLoaded(true);
             } catch (err) {
-                console.log(err);
+                // console.log(err);
             }
         };
 
@@ -99,7 +99,7 @@ function PostsPage({ filter = '' }) {
 
             setLikeCounts(likeCounts);
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 
@@ -144,7 +144,7 @@ function PostsPage({ filter = '' }) {
                 next: data.next,
             }));
         } catch (err) {
-            console.log(err);
+            // console.log(err);
         }
     };
 
