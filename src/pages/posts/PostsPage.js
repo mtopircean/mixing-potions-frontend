@@ -69,11 +69,9 @@ function PostsPage({ filter = '' }) {
         fetchLikeCounts();
     }, []);
 
-    /*
-  Responsible for fetching the like counts for each user across all posts.
-  It iterates through all pages of posts, accumulates the like counts for each user, 
-  and updates the state with the total like counts.
-*/
+    // Responsible for fetching the like counts for each user across all posts.
+    // It iterates through all pages of posts, accumulates the like counts for each user,
+    // and updates the state with the total like counts.
     const fetchLikeCounts = async () => {
         try {
             const likeCounts = {};
@@ -105,18 +103,18 @@ function PostsPage({ filter = '' }) {
         }
     };
 
-    /* Function to clear all filters */
+    // Function to clear all filters
     const clearFilter = () => {
         setSelectedUser(null);
         setSelectedBodySystems([]);
     };
 
-    /* Function to handle user click for filtering */
+    // Function to handle user click for filtering
     const handleUserClick = (username) => {
         setSelectedUser(username);
     };
 
-    /* Function to toggle body systems for filtering */
+    // Function to toggle body systems for filtering
     const toggleBodySystem = (system) => {
         setSelectedBodySystems((prevSystems) =>
             prevSystems.includes(system)
@@ -125,7 +123,7 @@ function PostsPage({ filter = '' }) {
         );
     };
 
-    /* Function to sort users by likes */
+    // Function to sort users by likes
     const sortByLikes = () => {
         return Object.keys(likeCounts)
             .filter((user) => likeCounts[user] > 0)
@@ -137,7 +135,7 @@ function PostsPage({ filter = '' }) {
             }));
     };
 
-    /* Function to filter posts based on search query */
+    // Function to filter posts based on search query
     const fetchMoreData = async (currentPosts, setPosts) => {
         try {
             const { data } = await axiosReq.get(currentPosts.next);
@@ -150,7 +148,7 @@ function PostsPage({ filter = '' }) {
         }
     };
 
-    /* Function to refresh the number of likes on the most liked */
+    // Function to refresh the number of likes on the most liked
     const handleRefreshLikes = () => {
         fetchLikeCounts();
     };

@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import { useRedirect } from '../../hooks/useRedirect';
 
+// Define ProfileEditForm component
 const ProfileEditForm = () => {
     useRedirect('loggedOut');
     const { id } = useParams();
@@ -52,27 +53,26 @@ const ProfileEditForm = () => {
     }, [currentUser, history, id]);
 
     const handleFormSubmit = async (event) => {
-      event.preventDefault();
-  
-      try {
+        event.preventDefault();
 
-        const updatedData = {
-          username: formData.username || null,
-          nickname: formData.nickname || null,
-          first_name: formData.first_name || null,
-          last_name: formData.last_name || null,
-          age: formData.age || null,
-          phone_number: formData.phone_number || null,
-          about: formData.about || null
-      };
-  
-          await axios.put(`/profiles/${id}/`, updatedData);
-          toast.success('Profile data was updated');
-          history.push(`/profile/${id}/`);
-      } catch (error) {
-          setErrors(error.response?.data);
-      }
-  };
+        try {
+            const updatedData = {
+                username: formData.username || null,
+                nickname: formData.nickname || null,
+                first_name: formData.first_name || null,
+                last_name: formData.last_name || null,
+                age: formData.age || null,
+                phone_number: formData.phone_number || null,
+                about: formData.about || null,
+            };
+
+            await axios.put(`/profiles/${id}/`, updatedData);
+            toast.success('Profile data was updated');
+            history.push(`/profile/${id}/`);
+        } catch (error) {
+            setErrors(error.response?.data);
+        }
+    };
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;

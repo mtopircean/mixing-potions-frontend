@@ -17,6 +17,7 @@ import Post from '../../pages/posts/Post';
 import Follow from '../../components/Follow';
 import { toast } from 'react-toastify';
 
+// Define ProfilePage component
 const ProfilePage = () => {
     const currentUser = useCurrentUser();
     const { id } = useParams();
@@ -83,6 +84,7 @@ const ProfilePage = () => {
         fetchProfileAndPosts();
     }, [id]);
 
+    // Toggle expanded profile details
     const toggleExpanded = () => {
         setExpanded(!expanded);
     };

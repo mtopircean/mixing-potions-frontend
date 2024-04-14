@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 import { removeTokenTimestamp } from '../utils/utils';
 import { useHistory } from 'react-router-dom';
 
+// NavBar component displaying navigation bar
 const NavBar = () => {
     const currentUser = useCurrentUser();
     const setCurrentUser = useSetCurrentUser();
@@ -42,6 +43,7 @@ const NavBar = () => {
         }
     };
 
+    // Render icons based on user authentication status
     const loggedInIcons = (
         <>
             <NavDropdown

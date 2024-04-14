@@ -582,7 +582,7 @@ Desktop:
 
 Mobile:
 
-![Alt text](docs/testing/images/home-mobile.png)
+![Alt text](docs/testing/images/home_mobile.png)
 
 - Login Page:
 
@@ -592,7 +592,7 @@ Desktop:
 
 Mobile:
 
-![Alt text](docs/testing/images/login-mobile.png)
+![Alt text](docs/testing/images/login_mobile.png)
 
 - Register Page:
 
@@ -602,7 +602,7 @@ Desktop:
 
 Mobile:
 
-![Alt text](docs/testing/images/register-mobile.png)
+![Alt text](docs/testing/images/register_mobile.png)
 
 - Post Page:
 
@@ -612,7 +612,7 @@ Desktop:
 
 Mobile:
 
-![Alt text](docs/testing/images/post-mobile.png)
+![Alt text](docs/testing/images/post_mobile.png)
 
 - Profile Page:
 
@@ -622,7 +622,7 @@ Desktop:
 
 Mobile:
 
-![Alt text](docs/testing/images/profile-mobile.png)
+![Alt text](docs/testing/images/profile_mobile.png)
 
 - GDPR:
 
@@ -632,7 +632,7 @@ Desktop:
 
 Mobile:
 
-![Alt text](docs/testing/images/gdpr-mobile.png)
+![Alt text](docs/testing/images/gdpr_mobile.png)
 
 ## Spellcheck:
 Website run through W3C spellchecker. No errors found:
@@ -799,6 +799,11 @@ Discussing with the tutoring team seems to he a Heroku issue.
 After updating a comment, user needs to refresh the page to be able to edit the comment again.
 This is a limitation that will be addressed in future iterations:
 ![Alt text](docs/bugs/comment_update.png)
+
+7. Although I have a very difficult time in replicating the error, on certain ocassions, even if I follow already a user, I can follow them again and are displayed twice in my followed list.
+I believe it has to do with the loading of the website....but it happens in very rare ocassions. Doesn`t affect functionality and I can unfollow the user, but it is just creating this duplication.
+
+8. Not really a BUG, but I have to run nvm install 16 before I can run a npm start to run a server. Something to do with version control, but could not fix it and tutoring recommandation was to do nvm install 16 so I can be able to start the server.
 
 # Credits
 

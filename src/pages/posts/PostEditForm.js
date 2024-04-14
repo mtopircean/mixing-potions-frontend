@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Image, Alert  } from 'react-bootstrap';
+import {
+    Container,
+    Row,
+    Col,
+    Form,
+    Button,
+    Image,
+    Alert,
+} from 'react-bootstrap';
 import { BsX } from 'react-icons/bs';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -29,7 +37,7 @@ function PostEditForm({ post }) {
     const { id } = useParams();
     const [errors, setErrors] = useState(null);
 
-    /* Fetch post data on component mount */
+    // Fetch post data on component mount
     useEffect(() => {
         const fetchPost = async () => {
             try {
@@ -47,7 +55,7 @@ function PostEditForm({ post }) {
         fetchPost();
     }, [id]);
 
-    /* Update state with post data when received */
+    // Update state with post data when received
     useEffect(() => {
         if (!currentUser) {
             history.push('/');
@@ -59,7 +67,7 @@ function PostEditForm({ post }) {
         }
     }, [currentUser, history, post]);
 
-    /* Toggle selection of body system */
+    // Toggle selection of body system
     const toggleBodySystem = (system) => {
         if (selectedBodySystems.includes(system)) {
             setSelectedBodySystems((prevSystems) =>
@@ -70,7 +78,7 @@ function PostEditForm({ post }) {
         }
     };
 
-    /* Add a product to selected products for the post */
+    // Add a product to selected products for the post
     const handleAddProduct = (product) => {
         const isProductExists = selectedProducts.some(
             (p) => p.id === product.id
@@ -80,26 +88,26 @@ function PostEditForm({ post }) {
         }
     };
 
-    /* Remove a product from selected products */
+    // Remove a product from selected products
     const handleRemoveProduct = (productId) => {
         setSelectedProducts((prevProducts) =>
             prevProducts.filter((product) => product.id !== productId)
         );
     };
 
-    /* Move to previous product in the selected product post area. It is a scroll area. */
+    // Move to previous product in the selected product post area. It is a scroll area.
     const handlePrevClick = () => {
         setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
     };
 
-    /* Move to next product in the selected product post area. It is a scroll area. */
+    // Move to next product in the selected product post area. It is a scroll area.
     const handleNextClick = () => {
         setCurrentIndex((prevIndex) =>
             Math.min(prevIndex + 1, selectedProducts.length - 2)
         );
     };
 
-    /* Handle custom image selection(user uploaded image) */
+    // Handle custom image selection(user uploaded image)
     const MAX_IMAGE_SIZE_MB = 4;
     const MAX_IMAGE_WIDTH = 4096;
     const MAX_IMAGE_HEIGHT = 4096;
@@ -134,7 +142,7 @@ function PostEditForm({ post }) {
         }
     };
 
-    /* Handle form submission */
+    // Handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {

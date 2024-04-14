@@ -26,7 +26,7 @@ function PostCreateForm() {
     const history = useHistory();
     const [errors, setErrors] = useState(null);
 
-    /* Toggle selection of body system */
+    // Toggle selection of body system
     const toggleBodySystem = (system) => {
         if (selectedBodySystems.includes(system)) {
             setSelectedBodySystems(
@@ -37,7 +37,7 @@ function PostCreateForm() {
         }
     };
 
-    /* Add a product to selected products for the post */
+    // Add a product to selected products for the post
     const handleAddProduct = (product) => {
         const isProductExists = selectedProducts.some(
             (p) => p.id === product.id
@@ -50,7 +50,7 @@ function PostCreateForm() {
         }
     };
 
-    /* Remove a product from selected products */
+    // Remove a product from selected products
     const handleRemoveProduct = (productId) => {
         const removedProduct = selectedProducts.find(
             (product) => product.id === productId
@@ -61,19 +61,19 @@ function PostCreateForm() {
         toast.success(`${removedProduct.name} removed successfully!`);
     };
 
-    /* Move to previous product in the selected product post area */
+    // Move to previous product in the selected product post area
     const handlePrevClick = () => {
         setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
     };
 
-    /* Move to previous product in the selected product post area */
+    // Move to previous product in the selected product post area
     const handleNextClick = () => {
         setCurrentIndex((prevIndex) =>
             Math.min(prevIndex + 1, selectedProducts.length - 2)
         );
     };
 
-    /* Handle change in custom image input by uploading user image choice */
+    // Handle change in custom image input by uploading user image choice
     const MAX_IMAGE_SIZE_MB = 4;
     const MAX_IMAGE_WIDTH = 4096;
     const MAX_IMAGE_HEIGHT = 4096;
@@ -89,7 +89,7 @@ function PostCreateForm() {
             }
             const img = document.createElement('img');
             img.onload = function () {
-                console.log('image onload firing')
+                console.log('image onload firing');
                 if (this.width > MAX_IMAGE_WIDTH) {
                     toast.error(
                         'Image width exceeds the maximum allowed limit of 4096px.'
@@ -109,7 +109,7 @@ function PostCreateForm() {
         }
     };
 
-    /* Handle form submission */
+    // Handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (!image) {
@@ -131,7 +131,7 @@ function PostCreateForm() {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            /* Redirect to the newly created post */
+            // Redirect to the newly created post
             history.push(`/posts/${response.data.id}`);
             toast.success('Post created successfully!');
         } catch (error) {

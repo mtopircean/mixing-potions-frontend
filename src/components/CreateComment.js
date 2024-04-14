@@ -5,6 +5,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { axiosRes } from '../api/axiosDefaults';
 import { toast } from 'react-toastify';
 
+// CreateComment component to handle comment creation and editing
 function CreateComment(props) {
     const [commentText, setCommentText] = useState('');
     const currentUser = useContext(CurrentUserContext);

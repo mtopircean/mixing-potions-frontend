@@ -3,6 +3,7 @@ import axios from 'axios';
 import styles from '../styles/ProductPanel.module.css';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
+// ProductsPanel component to display the panel of backend products
 const ProductsPanel = ({ selectedBodySystems, onAddProduct }) => {
     const [products, setProducts] = useState([]);
 
@@ -11,22 +12,23 @@ const ProductsPanel = ({ selectedBodySystems, onAddProduct }) => {
     }, []);
 
     const fetchAllProducts = async () => {
-      let allProducts = [];
-      let nextPageUrl = "products";
-    
-      try {
-        while (nextPageUrl) {
-          const response = await axios.get(nextPageUrl);
-          allProducts = [...allProducts, ...response.data.results];
-          nextPageUrl = response.data.next;
+        let allProducts = [];
+        let nextPageUrl = 'products';
+
+        try {
+            while (nextPageUrl) {
+                const response = await axios.get(nextPageUrl);
+                allProducts = [...allProducts, ...response.data.results];
+                nextPageUrl = response.data.next;
+            }
+
+            setProducts(allProducts);
+        } catch (error) {
+            console.error('Error fetching products:', error);
         }
-    
-        setProducts(allProducts);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
     };
 
+    // Filter products based on selected body systems
     const filteredProducts =
         selectedBodySystems && selectedBodySystems.length
             ? products.filter((product) =>
@@ -36,6 +38,7 @@ const ProductsPanel = ({ selectedBodySystems, onAddProduct }) => {
               )
             : products;
 
+    // Function to handle adding a product to post
     const handleAddToPost = (product) => {
         onAddProduct(product);
     };
