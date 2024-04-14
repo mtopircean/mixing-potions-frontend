@@ -53,7 +53,7 @@ const Like = ({
     const handleUnlike = async () => {
         if (likeId) {
             try {
-                const response = await axiosReq.delete(`/likes/${likeId}/`);
+                await axiosReq.delete(`/likes/${likeId}/`);
                 setIsLiked(false);
                 setLikeCount((prevCount) => prevCount - 1);
                 toast.success('You unliked this post!');

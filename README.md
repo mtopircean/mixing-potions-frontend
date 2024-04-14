@@ -58,6 +58,7 @@ Project is connected to the backend components created in the backend portion of
     - [Local functionality tests](#local-functionality-tests)
     - [Fixed bugs](#fixed-bugs)
     - [Open bugs](#open-bugs)
+    - [Other clarifications](#other-clarifications)
 - [Credits](#credits)
     - [Code Used](#code-used)
     - [Other Credits](#other-credits)
@@ -804,6 +805,13 @@ This is a limitation that will be addressed in future iterations:
 I believe it has to do with the loading of the website....but it happens in very rare ocassions. Doesn`t affect functionality and I can unfollow the user, but it is just creating this duplication.
 
 8. Not really a BUG, but I have to run nvm install 16 before I can run a npm start to run a server. Something to do with version control, but could not fix it and tutoring recommandation was to do nvm install 16 so I can be able to start the server.
+
+
+## Other clarifications
+
+- It has been a deliberate decission to keep the Navbar, Footer, Post Creator and Avatar CSS in the App.css file as they are general elements presented on all, or almost all pages.
+- Website was tested on various browser and mobile devices(Chrome, IE, Firefors, Edge, Android) and noticeable difference around various elements like scroll bar, etc....but nothing impating user experience or a deviation to the design statement.
+
 
 # Credits
 
