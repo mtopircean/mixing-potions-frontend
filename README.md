@@ -28,6 +28,7 @@ Project is connected to the backend components created in the backend portion of
         - [Features](#features)
             - [Existing Features](#existing-features)
             - [Future Features](#future-features)
+        - [Application reusable components](#application-reusable-components)
     - [The Skeleton Plane](#the-strategy-plane)
         - [Wireframes](#wireframes)
         - [Databases](#databases)
@@ -215,6 +216,9 @@ Structure and features of the website are organized around 2 concepts, concepts 
 
 #### Authentication
 
+
+**Related pages: LoginForm.js, RegisterForm.js**
+
 Registration
 Logged out user:
 -   can access the login area through the Navbar
@@ -229,6 +233,8 @@ Logged in user:
 
 #### Profiles
 
+**Related pages: ProfilePage.js, ProfilePage.js(used to edit and add further profile details), ChangeUsername.js, ProfilePasswordChange.js**
+
 User can access their profile page through the Navbar section and using the login form.
 Profile allows him access to areas:
 -   Personal details and data management areas
@@ -237,12 +243,17 @@ Profile allows him access to areas:
 
 ![Alt text](docs/features/own_profile.png)
 
-If user is not logged in, by clicking a username, the username persona details are visible but the restricted owner areas are not shown of accessible.
+If user is not logged in, by clicking a username, the username personal details are visible but the restricted owner areas are not shown of accessible.
 User can also see the owner`s profile personal posts.
 
 ![Alt text](docs/features/others_profile.png)
 
+When using the profile page users can change key profile elements: further share data on their profile, change username and password through the relevant pages.
+
 #### Post creation & Edit Post
+
+**Related pages: Post.js, PostCreateForm.js, PostEditForm.js, PostPage.js, PostsPage.js**
+
 
 Post creation and edit feature are available only when logged in.
 If user is not logged in, all restricted pages will be redirected to homepage.
@@ -255,12 +266,16 @@ Post Creation is allowing a concatenating process of the Body Systems and Condit
 
 #### Follow
 
+**Reusable component: Follow.js**
+
 User can follow another user from their profile.
 They can unfollow a user by either going straight in their own profile, or clicking following from the followed users profile, which will redirect them to the unfollow area
 
 ![Alt text](docs/features/own_profile.png)
 
 #### Like
+
+**Reusable component: Like.js**
 
 User can like a post either from the main posts page or from the individual post page.
 They will unlike through the same areas.
@@ -275,6 +290,8 @@ Like post page:
 ![Alt text](docs/features/like_post_page.png)
 
 #### Comment
+
+**Reusable component: CreateComment.js**
 
 User can comment the same, from the general post page or from individual post page.
 When logged out, users can only see the comment, but when logged in they can create, update, edit or delete.
@@ -325,6 +342,8 @@ Alerts:
 
 #### Products panel
 
+**Reusable component: ProductsPanel.js**
+
 A products panel was implemented to support the Post Creation action.
 This pulls the existing product database and allows a filtering system based on the body systems where the product is used.
 
@@ -340,6 +359,59 @@ Future features include:
 -   Most Liked will be able to refresh itself with each click of the Like/Unlike button
 -   Automated avatar and ranking change based on set specific logic: at the moment, it is done manual by the website administrator
 -   Posts maintain data when refreshed
+
+### Application reusable components
+
+- **Asset**
+The Asset component is crucial for displaying images with an optional loading spinner. It accepts src and message props to specify the image source URL and alternative text respectively. While the image is loading, a spinner from React Bootstrap is shown.
+
+![Alt text](docs/features/reusable/asset.png)
+
+- **Avatar**
+The Avatar component serves to display user avatars. It allows for customization with props such as src for the image source URL, height for setting the height of the avatar (default is 45 pixels), alt for alternative text, and className for additional styling.
+
+![Alt text](docs/features/reusable/avatar.png)
+
+- **BodySystemPanel**
+This component is essential for managing selected body systems and filters. It utilizes React hooks like useState and useEffect to handle state and side effects. It fetches product data from an API endpoint using Axios and allows users to select and remove filters based on body systems, displaying them in a container with clear buttons for removal. Additionally, it provides buttons for selecting body systems, dynamically rendering based on the fetched data.
+
+![Alt text](docs/features/reusable/bodysystem.png)
+
+
+- **CreateComment**
+The CreateComment component facilitates comment creation and editing within the application. It employs React hooks such as useState and useEffect to manage the state of the comment text, current user, and editing mode. This component communicates with the server using Axios to submit and update comments. It offers a form interface with a textarea for users to input their comments and handles submission, error handling, and validation for empty comments. Toast notifications provide user feedback, and it offers options to cancel editing with dynamic UI adjustments.
+
+![Alt text](docs/features/reusable/comment.png)
+
+- **Follow**
+The Follow component is used for managing the follow/unfollow functionality. Utilizing React hooks like useState and useEffect, it handles state and side effects, including fetching data from the server with Axios. This component dynamically determines whether the current user is already following the target user and adjusts the UI accordingly. It offers a button for users to follow or unfollow other users, accompanied by toast notifications for user feedback.
+
+![Alt text](docs/features/reusable/follow.png)
+
+- **Footer**
+The Footer component contains various links and icons for navigation and social media interaction. Using React Bootstrap's components, it structures the layout and includes links to the GDPR page, a "Join Us" link with a FontAwesome icon, and social media icons linked to their respective pages. These links open in new tabs and are styled appropriately for user interaction.
+
+![Alt text](docs/features/reusable/footer.png)
+
+- **Like**
+The Like component manages the liking and unliking functionality for posts. It utilizes React hooks like useState and useEffect to handle state and Axios for server communication. It provides feedback to users through toast notifications for actions such as liking, unliking, and authentication requirements.
+
+![Alt text](docs/features/reusable/like.png)
+
+- **Navbar**
+The Navbar component is the application's navigation bar, providing access to various functionalities and pages. It utilizes React Bootstrap components for structured navigation elements and includes a logo that either reloads the current page or navigates to the home page. Depending on the user's authentication status, it renders different icons and links, with a collapsible menu for additional navigation options.
+
+![Alt text](docs/features/reusable/navbar.png)
+
+- **PostCreator**
+The PostCreator component serves as a button for creating a post. It links to the post creation page with React Router's NavLink component. Conditionally rendered based on the authentication status, it ensures only authenticated users can access post creation functionality.
+
+![Alt text](docs/features/reusable/postcreator.png)
+
+- **ProductPanel**
+The ProductPanel component displays a panel of backend products. It fetches and filters products based on selected body systems, rendering each product as a card with options to add them to a post. It utilizes React Bootstrap components for layout and Axios for server communication.
+
+![Alt text](docs/features/reusable/productpanel.png)
 
 ## The Skeleton Plane
 ### Wireframes
