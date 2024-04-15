@@ -367,10 +367,14 @@ The Asset component is crucial for displaying images with an optional loading sp
 
 ![Alt text](docs/features/reusable/asset.png)
 
+Component is reaused across the application to provide the user guidance on page load.
+
 - **Avatar**
 The Avatar component serves to display user avatars. It allows for customization with props such as src for the image source URL, height for setting the height of the avatar (default is 45 pixels), alt for alternative text, and className for additional styling.
 
 ![Alt text](docs/features/reusable/avatar.png)
+
+Used across the application in several areas like NavBar, Post and ProfilePage to add the the Avatar image allocated based on user rating.
 
 - **BodySystemPanel**
 This component is essential for managing selected body systems and filters. It utilizes React hooks like useState and useEffect to handle state and side effects. It fetches product data from an API endpoint using Axios and allows users to select and remove filters based on body systems, displaying them in a container with clear buttons for removal. Additionally, it provides buttons for selecting body systems, dynamically rendering based on the fetched data.
@@ -378,40 +382,56 @@ This component is essential for managing selected body systems and filters. It u
 ![Alt text](docs/features/reusable/bodysystem.png)
 
 
+Component is used in 2 key areas of the application, within the PostsPage to allow filtering on posts and within the PostCreateForm/PostEditForm to allow products filtering for selection in post update/creation.
+
 - **CreateComment**
 The CreateComment component facilitates comment creation and editing within the application. It employs React hooks such as useState and useEffect to manage the state of the comment text, current user, and editing mode. This component communicates with the server using Axios to submit and update comments. It offers a form interface with a textarea for users to input their comments and handles submission, error handling, and validation for empty comments. Toast notifications provide user feedback, and it offers options to cancel editing with dynamic UI adjustments.
 
 ![Alt text](docs/features/reusable/comment.png)
+
+Connected to the Post page and other pages using the Post elements to render data.
 
 - **Follow**
 The Follow component is used for managing the follow/unfollow functionality. Utilizing React hooks like useState and useEffect, it handles state and side effects, including fetching data from the server with Axios. This component dynamically determines whether the current user is already following the target user and adjusts the UI accordingly. It offers a button for users to follow or unfollow other users, accompanied by toast notifications for user feedback.
 
 ![Alt text](docs/features/reusable/follow.png)
 
+Connected to the ProfilePage rendered specifically based on the CurrentUser context.
+
 - **Footer**
 The Footer component contains various links and icons for navigation and social media interaction. Using React Bootstrap's components, it structures the layout and includes links to the GDPR page, a "Join Us" link with a FontAwesome icon, and social media icons linked to their respective pages. These links open in new tabs and are styled appropriately for user interaction.
 
 ![Alt text](docs/features/reusable/footer.png)
+
+Displayed on all pages.
 
 - **Like**
 The Like component manages the liking and unliking functionality for posts. It utilizes React hooks like useState and useEffect to handle state and Axios for server communication. It provides feedback to users through toast notifications for actions such as liking, unliking, and authentication requirements.
 
 ![Alt text](docs/features/reusable/like.png)
 
+Connected to the Post page and other pages using the Post elements to render data.
+
 - **Navbar**
 The Navbar component is the application's navigation bar, providing access to various functionalities and pages. It utilizes React Bootstrap components for structured navigation elements and includes a logo that either reloads the current page or navigates to the home page. Depending on the user's authentication status, it renders different icons and links, with a collapsible menu for additional navigation options.
 
 ![Alt text](docs/features/reusable/navbar.png)
+
+Displayed on all pages.
 
 - **PostCreator**
 The PostCreator component serves as a button for creating a post. It links to the post creation page with React Router's NavLink component. Conditionally rendered based on the authentication status, it ensures only authenticated users can access post creation functionality.
 
 ![Alt text](docs/features/reusable/postcreator.png)
 
+Displayed on all pages based on the CurrentUser Context status.
+
 - **ProductPanel**
 The ProductPanel component displays a panel of backend products. It fetches and filters products based on selected body systems, rendering each product as a card with options to add them to a post. It utilizes React Bootstrap components for layout and Axios for server communication.
 
 ![Alt text](docs/features/reusable/productpanel.png)
+
+Used within the PostCreateForm and PostEditForm page to allow product selection for post creation.
 
 ## The Skeleton Plane
 ### Wireframes
