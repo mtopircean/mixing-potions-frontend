@@ -898,12 +898,9 @@ I believe it has to do with the loading of the website....but it happens in very
 
 8. Not really a BUG, but I have to run nvm install 16 before I can run a npm start to run a server. Something to do with version control, but could not fix it and tutoring recommandation was to do nvm install 16 so I can be able to start the server.
 
-9. Although not a Bug: It has been a deliberate decission to keep the Navbar and Avatar CSS in the App.css file as when trying to move the items, it created conflicts(they where not setup initialy in their own css space)
-
 
 ## Other clarifications
 
-- It has been a deliberate decission to keep the Navbar and Avatar CSS in the App.css file as when trying to move the items, it created conflicts(they where not setup initialy in their own css space)
 - Website was tested on various browser and mobile devices(Chrome, IE, Firefors, Edge, Android) and noticeable difference around various elements like scroll bar, etc....but nothing impating user experience or a deviation to the design statement.
 
 

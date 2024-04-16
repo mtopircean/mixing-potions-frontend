@@ -1,0 +1,100 @@
+.navbarContainer {
+  background-color: #ffff;
+  padding-bottom: 0px;
+  border-top: #8375ac 5px solid;
+  border-bottom: #8375ac1e 0.5px solid;
+}
+
+a.userLinkMenu.active {
+  background: transparent;
+  color: #54547c;
+}
+
+a.userLinkMenu {
+  background: transparent;
+  color: #54547c;
+  text-decoration: none;
+}
+
+a.userLinkMenuu:hover {
+  color: #06063f;
+}
+
+
+a.userMenu.dropdown-item:hover {
+  background-color: transparent;
+}
+
+.navLink {
+  text-align: right;
+  font-size: large;
+  color: #54547c !important;
+  font-weight: 400;
+}
+
+.navLinkMenu {
+  text-decoration: none !important;
+  color: #54547c !important;
+}
+
+.navLinkMenu:hover {
+  color: #272c4f !important;
+}
+
+.basicNavDropdown {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+.basicNavbarNav {
+  border: none;
+  font-size: medium;
+  font-size: large;
+}
+
+.menuItems {
+  color: #8375ac;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  background-color: #ffff;
+  border: #54547c25 0.5px solid;
+}
+
+.navLink:hover {
+  color: #272c4f !important;
+}
+
+.username {
+  color: #272c4f;
+  font-weight: 500;
+}
+
+
+@media (max-width: 768px) {
+  .logoContainer img {
+    height: 90px;
+  }
+
+  .navLink {
+    font-size: 1rem;
+  }
+
+}
+
+/*Avatar*/
+.avatarImage {
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+@media (max-width: 767px) {
+  .avatarImage {
+    display: none;
+  }
+}

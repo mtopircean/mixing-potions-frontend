@@ -17,6 +17,7 @@ import Avatar from './Avatar';
 import { Link } from 'react-router-dom';
 import { removeTokenTimestamp } from '../utils/utils';
 import { useHistory } from 'react-router-dom';
+import styles from '../styles/NavBar.module.css';
 
 // NavBar component displaying navigation bar
 const NavBar = () => {
@@ -55,10 +56,12 @@ const NavBar = () => {
                                 text="Profile"
                                 height={80}
                                 width={80}
-                                className="avatar-image"
+                                className={styles.avatarImage}
                                 aria-label="Avatar Image"
                             />
-                            {currentUser.username}
+                            <span className={styles.username}>
+                                {currentUser.username}
+                            </span>
                         </>
                     ) : (
                         currentUser?.username
@@ -68,7 +71,7 @@ const NavBar = () => {
                 <NavDropdown.Item
                     as="a"
                     href="/"
-                    className="user-link-menu"
+                    className={styles.userLinkMenu}
                     onClick={handleLogout}
                     aria-label="Logout"
                 >
@@ -77,7 +80,7 @@ const NavBar = () => {
                 <NavDropdown.Item
                     as={Link}
                     to={`/profile/${currentUser?.profile_id}`}
-                    className="user-link-menu"
+                    className={styles.userLinkMenu}
                     aria-label="Profile"
                 >
                     Profile
@@ -88,7 +91,7 @@ const NavBar = () => {
 
     const loggedOutIcons = (
         <>
-            <Link to="/login" className="nav-link" aria-label="Login">
+            <Link to="/login" className={styles.navLink} aria-label="Login">
                 Join/Login <FontAwesomeIcon icon={faUser} />
             </Link>
         </>
@@ -96,25 +99,25 @@ const NavBar = () => {
 
     return (
         <Container>
-            <Navbar fixed="top" className="navbar-container">
+            <Navbar fixed="top" className={styles.navbarContainer}>
                 <Navbar.Brand as={Link} to="/" onClick={handleLogoClick}>
-                    <div className="logo-container">
+                    <div className={styles.logoContainer}>
                         <img src={logo} alt="logo" height="120" />
                     </div>
                 </Navbar.Brand>
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse className={styles.basicNavbarNav}>
                     <Nav className="ml-auto">
                         {currentUser ? loggedInIcons : loggedOutIcons}
                         <NavDropdown
                             title={<FontAwesomeIcon icon={faBars} />}
-                            id="basic-nav-dropdown"
+                            className={styles.basicNavDropdown}
                             aria-label="Menu Arrow"
                         >
-                            <div id="menu-items">
+                            <div className={styles.menuItems}>
                                 <NavDropdown.Item
                                     as="a"
                                     href="/"
-                                    className="nav-link-menu"
+                                    className={styles.navLinkMenu}
                                     aria-label="Home"
                                 >
                                     Home
@@ -124,7 +127,7 @@ const NavBar = () => {
                                     to={
                                         currentUser ? '/posts/create' : '/login'
                                     }
-                                    className="nav-link-menu"
+                                    className={styles.navLinkMenu}
                                     rel="noopener noreferrer"
                                     aria-label="Create Post"
                                 >
@@ -133,6 +136,13 @@ const NavBar = () => {
                                 </NavDropdown.Item>
                             </div>
                         </NavDropdown>
+                        <style>
+                            {`
+                                .dropdown-menu.show {
+                                    border: none;
+                                }
+                            `}
+                        </style>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
