@@ -898,10 +898,43 @@ I believe it has to do with the loading of the website....but it happens in very
 
 8. Not really a BUG, but I have to run nvm install 16 before I can run a npm start to run a server. Something to do with version control, but could not fix it and tutoring recommandation was to do nvm install 16 so I can be able to start the server.
 
+9. Due to issues in styling elements of navbar, I had to leave 1 styling in App.css:
+```
+.dropdown-toggle::after {
+  color: #272c4f;
+}
+```
+and add some styling code in JSX in NavBar:
+```
+<style>
+    {`
+        .dropdown-menu.show {
+            border: none;
+        }
+    `}
+</style>
+```
+
 
 ## Other clarifications
 
 - Website was tested on various browser and mobile devices(Chrome, IE, Firefors, Edge, Android) and noticeable difference around various elements like scroll bar, etc....but nothing impating user experience or a deviation to the design statement.
+- Due to issues in styling elements of navbar, I had to leave 1 styling in App.css:
+```
+.dropdown-toggle::after {
+  color: #272c4f;
+}
+```
+and add some styling code in JSX in NavBar:
+```
+<style>
+    {`
+        .dropdown-menu.show {
+            border: none;
+        }
+    `}
+</style>
+```
 
 
 # Credits
