@@ -101,6 +101,12 @@ const PostPage = () => {
             console.error('Error deleting comment:', error);
         }
     };
+    
+    // Handling canceling edit mode
+    const handleCancelEdit = () => {
+        setEditMode(false);
+        setEditComment(null);
+    };
 
     // Loading state
     if (!post) {
@@ -117,10 +123,6 @@ const PostPage = () => {
 
     const uniqueConditions = Array.from(new Set(allConditions));
 
-    const handleCancelEdit = () => {
-        setEditMode(false);
-    };
-    
     return (
         <div>
             <Row>

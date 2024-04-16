@@ -104,8 +104,10 @@ const Post = (props) => {
         }
     };
 
+    // Handling canceling edit mode
     const handleCancelEdit = () => {
         setEditMode(false);
+        setEditComment(null);
     };
 
     return (
