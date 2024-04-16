@@ -34,3 +34,9 @@ body {
   color: #54547c;
   font-weight: 600;
 }
+
+/*Belongs to Navbar but due to styling restrictions, I had to add it here */
+
+.dropdown-toggle::after {
+  color: #272c4f;
+}

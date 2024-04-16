@@ -80,6 +80,10 @@ a.userMenu.dropdown-item:hover {
   font-weight: 500;
 }
 
+.customFontAwesomeIcon {
+    color: #272c4f;
+}
+
 
 @media (max-width: 768px) {
   .logoContainer img {

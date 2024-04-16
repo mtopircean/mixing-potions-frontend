@@ -109,7 +109,7 @@ const NavBar = () => {
                     <Nav className="ml-auto">
                         {currentUser ? loggedInIcons : loggedOutIcons}
                         <NavDropdown
-                            title={<FontAwesomeIcon icon={faBars} />}
+                            title={<FontAwesomeIcon icon={faBars} className={styles.customFontAwesomeIcon}/>}
                             className={`${styles.basicNavDropdown} ${currentUser ? styles.loggedInDropdown : ''}`}
                             aria-label="Menu Arrow"
                         >
