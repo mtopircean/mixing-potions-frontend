@@ -117,6 +117,10 @@ const PostPage = () => {
 
     const uniqueConditions = Array.from(new Set(allConditions));
 
+    const handleCancelEdit = () => {
+        setEditMode(false);
+    };
+    
     return (
         <div>
             <Row>
@@ -320,6 +324,7 @@ const PostPage = () => {
                                 editMode={editMode}
                                 editComment={editComment}
                                 onCommentSubmitted={handleCommentSubmitted}
+                                onCancelEdit={handleCancelEdit}
                             />
                         </div>
                     </div>

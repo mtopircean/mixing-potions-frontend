@@ -25,6 +25,7 @@ a.userMenu.dropdown-item:hover {
   background-color: transparent;
 }
 
+
 .navLink {
   text-align: right;
   font-size: large;
@@ -45,6 +46,10 @@ a.userMenu.dropdown-item:hover {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.loggedInDropdown {
+  margin-top: 35px;
 }
 
 
@@ -97,4 +102,9 @@ a.userMenu.dropdown-item:hover {
   .avatarImage {
     display: none;
   }
+
+  .loggedInDropdown {
+    margin-top: 0px;
+  }
+
 }
