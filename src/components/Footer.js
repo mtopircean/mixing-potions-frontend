@@ -7,20 +7,21 @@ import {
     faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 import { NavLink } from 'react-router-dom';
+import styles from "../styles/Footer.module.css"
 
 // Component rendering footer with links and icons
 function App() {
     return (
         <Container>
-            <footer className="footer">
+            <footer className={styles.footer}>
                 <Row>
-                    <Col xs={4} className="text-left">
-                        <div className="gdpr">
+                    <Col xs={4} className="(styles.[text-left]}">
+                        <div className={styles.gdpr}>
                             <NavLink to="/gdpr">GDPR</NavLink>
                         </div>
                     </Col>
                     <Col xs={4} className="text-center">
-                        <div className="join">
+                        <div className={styles.join}>
                             <a
                                 href="https://beta-doterra.myvoffice.com/cosminatopircean/#/contactUs"
                                 target="blank"
@@ -31,7 +32,7 @@ function App() {
                         </div>
                     </Col>
                     <Col xs={4} className="text-right">
-                        <div className="social">
+                        <div className={styles.social}>
                             <a
                                 href="https://wa.me/+353876403084"
                                 target="_blank"
