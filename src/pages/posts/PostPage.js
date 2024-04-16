@@ -70,6 +70,8 @@ const PostPage = () => {
             comments: [newComment, ...prevPost.comments],
             comment_count: prevPost.comment_count + 1,
         }));
+        setEditMode(false);
+        setEditComment(null);
     };
 
     // Handling edit comment
@@ -101,7 +103,7 @@ const PostPage = () => {
             console.error('Error deleting comment:', error);
         }
     };
-    
+
     // Handling canceling edit mode
     const handleCancelEdit = () => {
         setEditMode(false);
