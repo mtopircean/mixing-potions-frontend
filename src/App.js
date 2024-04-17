@@ -18,6 +18,7 @@ import ProfileEditForm from './pages/profiles/ProfileEditForm';
 import ProfilePasswordChange from './pages/profiles/ProfilePasswordChange';
 import ChangePassword from './pages/profiles/ChangeUsername';
 import GDPR from './pages/other/GDPR';
+import NotFound from './components/NotFound';
 
 function App() {
     return (
@@ -67,7 +68,7 @@ function App() {
                             <PostsPage message="No results found. Try another search keyword" />
                         )}
                     />
-                    <Route render={() => <p>Page not found!</p>} />
+                    <Route render={() => <NotFound />} />
                 </Switch>
                 <PostCreator />
             </Container>

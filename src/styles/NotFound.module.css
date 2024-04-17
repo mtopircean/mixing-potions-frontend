@@ -1,0 +1,14 @@
+.notFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.iconHeart {
+    font-size: 100px;
+    color: rgb(200, 57, 57);
+    margin-bottom: 30px;
+}
