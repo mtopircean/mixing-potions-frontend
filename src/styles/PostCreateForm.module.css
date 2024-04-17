@@ -62,15 +62,21 @@
 .upload-button {
   cursor: pointer;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 20px;
   padding: 10px 15px;
   color: #295d3b;
   text-align: center;
   width: 100%;
+  font-size: larger;
+  border: #295d3b 2px solid;
+  border-radius: 5px;
 }
 
 .upload-button:hover {
-  color: #b1cebb;
+  color: #ffff;
+  background-color: #295d3b;
+  border: none;
+
 }
 
 .preview-image {
