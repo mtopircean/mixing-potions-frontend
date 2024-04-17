@@ -168,9 +168,7 @@ const Post = (props) => {
             {isExpanded && (
                 <div className={styles.ExpandedComments}>
                     <CreateComment
-                        key={comments.length}
                         postId={id}
-                        comments={comments}
                         editMode={editMode}
                         editComment={editComment}
                         onCommentSubmitted={handleCommentSubmitted}
