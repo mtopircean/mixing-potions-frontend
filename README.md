@@ -44,6 +44,7 @@ Project is connected to the backend components created in the backend portion of
     - [How do Deploy](#how-to-deploy)
     - [How to Fork](#how-to-fork)
     - [How to Clone](#how-to-clone)
+    - [Heroku Deployment](#heroku-deployment)
 - [Technologies](#technologies)
     - [Programming Languages](#programming-languages)
     - [Additional libraries](#additional-libraries)
@@ -103,13 +104,13 @@ Status as of 13.04.2024:
 #### Epics
 
 In total we have 4 epics:
-* EPIC 1: Setup and Deployment- As a developer, I can install basic dependencies, create the document hierarchy/structure and deploy the application to Heroku so that the development environment is set up, and the application is accessible online for testing and use.
+* [EPIC 1: Setup and Deployment](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52211577)- As a developer, I can install basic dependencies, create the document hierarchy/structure and deploy the application to Heroku so that the development environment is set up, and the application is accessible online for testing and use.
 
-* EPIC 2: Basic Social Network Features - As a developer, I can implement user authentication, profile and post creation, so that users can create basic content on the social network.
+* [EPIC 2: Basic Social Network Features](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52215096) - As a developer, I can implement user authentication, profile and post creation, so that users can create basic content on the social network.
 
-* EPIC 3: Extended Features - As a developer, I can implement following system, liking and commenting functionality, and enable sharing content on social media, so that users can engage actively with the content and other users on the social network.
+* [EPIC 3: Extended Features](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52217119) - As a developer, I can implement following system, liking and commenting functionality, and enable sharing content on social media, so that users can engage actively with the content and other users on the social network.
 
-* EPIC 4: Create documentation - As a developer, I can create README documentation, develop tests and document them so that I can provide suitable information related to how the website was developed and tested to outside sources.
+* [EPIC 4: Create documentation](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52219838) - As a developer, I can create README documentation, develop tests and document them so that I can provide suitable information related to how the website was developed and tested to outside sources.
 
 #### Stories
 
@@ -129,14 +130,32 @@ Attached to the 4 epics I`ve created approximately 11 stories structured around 
     * Should do: If time allowed, still to be done
 * Epics:
     * Epic 1: 3 stories
+    - EPIC 1: Setup and Deployment- follows the needed steps to deploy the work enviorement and applicaiton
+        - **[User Story: 1.1 Install and Configure basic dependencies](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52213305)** - As a developer, I can install all the necessary dependencies for my application so that the software can run both in development and production environments.
+        - **[User Story: 1.2 Deploy to Heroku](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52213685)** - As a developer, I can deploy the application to Heroku so that it is accessible online for testing and live use.
+        - **[User Story 1.3: Create Document Hierarchy and Structure](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52214425)** - As a developer, I can create a document hierarchy and structure for the project well organized and structured.
+
     * Epic 2: 2 stories 
+    - Epic 2: Basic Social Network Features - focused on the essentials needed for a social network to function
+        - **[User Story 2.1: User Authentication and Profile Creation](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52215694)** - As a user, I can securely register, log in, and edit my profile so that can personalize my experience and manage my information on the platform.
+        - **[User Story 2.2: Post Creation](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52216237)** - As a user, I can create posts with titles, text descriptions, images, and select products so that I can express myself and showcase my product interests to the social network community.
+
     * Epic 3: 3 stories
+    - Epic 3: Extended Features - other features that will enhance the social network experience
+        - **[User Story 3.1: Following System](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52217833)** - As a user, I can follow and be followed by others so that I can personalize my feed with updates from users I'm interested in.
+        - **[User Story 3.2: Liking and Commenting on Posts](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52218260)** - As a user, I can like and comment on posts so that I can engage with content by appreciating and providing feedback.
+        - **[User Story 3.3: Sharing Content on Social Media](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52218826)** - As a user, I can share my posts on social media platforms so that my content can reach a larger audience connected to the major social networks. 
+
     * Epic 4: 3 stories
+    - Epic 4: Create documentation - documentation for the development process and application guidelines
+        - **[User Story 4.1: Create README File](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52220343)** - As a developer, I can create a README file so that administrators and developers have a clear understanding of the website's purpose, setup, development process and functionality.
+        - **[User Story 4.2: Create Testing Plan, Perform Testing](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52221401)** - As a developer, I can create a testing plan and perform testing so that all features work as expected under various situations and scenarios.
+        - **[User Story 4.3: Create TESTING Document](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52221813)** - As a developer, I can create a TESTING document so that detailed information on the testing plan, coverage, and outcomes is available for review.
 
 All user stories where completed and closed, the only ones remaining would be the stories allocated in the Nice to do.
 
 * Nice to do:
-    * User Story 3.3: Sharing Content on Social Media
+    * **[User Story 3.3: Sharing Content on Social Media](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52218826)**
 
 Stories where then broken down into a structure that allowed for Acceptance criteria to be defined, as well as the story to be broken down in tasks in order to follow a systematic development, as well as a way to track progress.
 
@@ -204,10 +223,20 @@ Structure and features of the website are organized around 2 concepts, concepts 
 #### Existing Features
 
 - **User authentication and profiles**: User can login, access their profile, update the profile with additional details not present in the current form, but which can provide more details to the community. Profile section also offers access to various data around followed users and own posts.
+**Addressed in [User Story: 2.1](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52215694)**
+
 - **Post creation with product integration**: Users can create posts by uploading their own picture, but within the post they can select to include products based on a filter criteria. Products information is used to define specific areas within a post by concatenating data
+**Addressed in [User Story: 2.2](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52216237)**
+
 - **Follow**: User can follow and unfollow other users, with follow status being pulled into own profile for better management system
+**Addressed in [User Story: 3.1](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52217833)**
+
 - **Like**: User can like or unlike posts from various areas of the website(post list and post page)
+**Addressed in [User Story: 3.2](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52218260)**
+
 - **Comment**: Users can comment, edit or delete a comment either from the front page, from the posts area or straight into each post
+**Addressed in [User Story: 3.2](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52218260)**
+
 - **Search section**: Users can search other posts in posts page by a multitude of criteria(condition, body system, username, description, title, etc.)
 - **Most Liked Users**: Using a refresh system, user can see the most liked users
 - **Posts filtering**: User can search posts by body systems in the main posts page
@@ -591,6 +620,36 @@ To clone the repository:
 3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
 4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
 5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
+
+### Heroku Deployment
+The project was deployed to [Heroku](https://heroku.com).
+Deployed site can be found [Here](https://mixing-potions-d88ebb719d59.herokuapp.com/).
+To deploy, follow this steps:
+
+1. Create an account at https://heroku.com and login. 
+![Alt](/docs/heroku/heroku_1.png)
+
+2. Create a new app from the [Heroku dashboard](https://dashboard.heroku.com) by clicking on `New` and then on `Create new app`.
+
+![Alt](/docs/heroku/heroku_2.png)
+3. Create a unique name for your app.
+
+![Alt](/docs/heroku/heroku_3_4.png)
+4. Choose your region (US or Europe).
+
+![Alt](/docs/heroku/heroku_3_4.png)
+
+5. Select the **Deploy** tab and connect the Heroku app to your GitHub repository.
+
+![Alt](/docs/heroku/heroku_5.png)
+6. Scroll down and choose the branch you want to deploy in the *Manual deploy* section. Click **Deploy Branch** for your first deployment.
+
+![Alt](/docs/heroku/heroku_6.png)
+7. Select **View** to open your deployed app.
+
+![Alt](/docs/heroku/heroku_7.png)
+8. If you encounter issues, use **More** and then **View logs** or check the **Activity** tab for debugging.
+
 
 # Technologies
 ## Programming Languages
