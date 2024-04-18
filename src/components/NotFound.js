@@ -11,7 +11,7 @@ const NotFound = () => {
             <FontAwesomeIcon icon={faHeartCrack} className={styles.iconHeart} />
 
             <h4>
-                Select <strong>Home</strong> from the menu area to return to the
+                Select Home from the menu area to return to the
                 main page
             </h4>
         </div>
