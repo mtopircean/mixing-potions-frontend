@@ -995,7 +995,12 @@ and add some styling code in JSX in NavBar:
 </style>
 ```
 
-
+- Bellow catch err line has kept inside a console.log that can be used to catch the error. This was my own decission in order not to leave the catch(err) empty for lint reasons
+```
+} catch (err) {
+    // You can handle error with console.log(err);
+}
+```
 # Credits
 
 ## Code Used
