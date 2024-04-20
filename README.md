@@ -974,6 +974,11 @@ and add some styling code in JSX in NavBar:
 </style>
 ```
 
+10. One error found which is visible on the deployed site in Chrome only. Same issue on backend, but on backend it dissapears in incognito. Here I can`t test incognito as I can`t loggin a user in incognito.
+Normal mode:
+
+![Alt](/docs/bugs/recaptcha.png)
+
 
 ## Other clarifications
 
