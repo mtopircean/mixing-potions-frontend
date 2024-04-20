@@ -41,7 +41,6 @@ Project is connected to the backend components created in the backend portion of
         - [Display size optimization](#display-size-optimization)
         - [Accessibility](#accessibility)
 - [Deployment](#deployment)
-    - [How do Deploy](#how-to-deploy)
     - [How to Fork](#how-to-fork)
     - [How to Clone](#how-to-clone)
     - [Heroku Deployment](#heroku-deployment)
@@ -611,7 +610,7 @@ Display size optimization:
 ![Alt text](docs/testing/images/amiresponsive.png)
 
 # Deployment
-## How to Deploy
+
 Deployment of the website was done using HEROKU, and can be accessed here [Mixing Potions](https://mixing-potions-d88ebb719d59.herokuapp.com/).
 
 ## How to Fork
