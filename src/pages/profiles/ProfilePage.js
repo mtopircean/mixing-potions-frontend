@@ -50,18 +50,20 @@ const ProfilePage = () => {
                 }
                 setUserPosts(allUserPosts);
 
-                const response = await axios.get(`/followers`);
-                if (response.status === 200) {
-                    const followedUsersData = response.data.results;
-                    setFollowedUsers(followedUsersData);
-
-                    setIsFollowing(
-                        followedUsersData.some(
-                            (user) => user.followed_profile_id === id
-                        )
-                    );
-                } else {
-                    throw new Error('Failed to fetch followed users');
+                if (currentUser) {
+                    const response = await axios.get(`/followers`);
+                    if (response.status === 200) {
+                        const followedUsersData = response.data.results;
+                        setFollowedUsers(followedUsersData);
+    
+                        setIsFollowing(
+                            followedUsersData.some(
+                                (user) => user.followed_profile_id === id
+                            )
+                        );
+                    } else {
+                        throw new Error('Failed to fetch followed users');
+                    }
                 }
             } catch (error) {
                 setLoading(false);
