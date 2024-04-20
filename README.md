@@ -967,6 +967,9 @@ This is a limitation that will be addressed in future iterations:
 I believe it has to do with the loading of the website....but it happens in very rare ocassions. Doesn`t affect functionality and I can unfollow the user, but it is just creating this duplication.
 
 8. Not really a BUG, but I have to run nvm install 16 before I can run a npm start to run a server. Something to do with version control, but could not fix it and tutoring recommandation was to do nvm install 16 so I can be able to start the server.
+Comment from Tutor:
+
+"it is an issue but not on your end, it is actually set correctly in the install files but for some reason it defaults back to the most recent, it is a bug on gitpods or the template end so it is all good"
 
 9. Due to issues in styling elements of navbar, I had to leave 1 styling in App.css:
 ```
