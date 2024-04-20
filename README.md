@@ -29,7 +29,7 @@ Project is connected to the backend components created in the backend portion of
             - [Existing Features](#existing-features)
             - [Future Features](#future-features)
         - [Application reusable components](#application-reusable-components)
-    - [The Skeleton Plane](#the-strategy-plane)
+    - [The Skeleton Plane](#the-skeleton-plane)
         - [Wireframes](#wireframes)
         - [Databases](#databases)
         - [Security](#security)
@@ -213,7 +213,7 @@ Structure and features of the website are organized around 2 concepts, concepts 
         - the reuse of different elements within pages(navbar, filter options, like, comment, follow, product panel)
 * User friendly
     * Easy to navigate 
-    * Key elements always on, like footer, WhatsApp contact
+    * Key elements always on, like navbar, add post
     * Easy to use filter section
     * Important information present in key areas of the pages, with elements easily identifiable and visible
     * Mobile friendly: taking advantage of the power of bootstrap
@@ -238,10 +238,19 @@ Structure and features of the website are organized around 2 concepts, concepts 
 **Addressed in [User Story: 3.2](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52218260)**
 
 - **Search section**: Users can search other posts in posts page by a multitude of criteria(condition, body system, username, description, title, etc.)
+**Addressed in [User Story: 2.2](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52216237)**
+
 - **Most Liked Users**: Using a refresh system, user can see the most liked users
+**Addressed in [User Story: 3.2](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52218260)**
+
 - **Posts filtering**: User can search posts by body systems in the main posts page
+**Addressed in [User Story: 2.2](https://github.com/users/mtopircean/projects/15?pane=issue&itemId=52216237)**
+
 - **Notifications**: Implemented toasts through the various areas of the website in order to highlight to the user effect of key actions
-- **Non-conforming content**: Alerts are set through specific areas of the project in order to highlight to the user where content is not conformant to the backend set conditions
+**Addressed as part of the general development touching on multiple stories as part of the user feedback response**
+
+- **Non-conforming content**: Alerts are set through specific areas of the project in order to highlight to the user where content is not conformant to the backend set conditions.
+**Addressed as part of the general development touching on multiple stories as part of the user feedback response**
 
 #### Authentication
 
@@ -568,13 +577,13 @@ Text and font used are consistent across the website with variances in regards o
 ![Alt text](docs/planes/design/font.png)
 
 ### Imagery
-Logo was designed using Canva website.
-Photos for website elements are taken from Pexels.
-Product and promotion photos are taken from doTerra database/representative tools.
+Logo was designed using DaVinci tool.
+Photos for website elements are taken from Pexels and other own photos
+Product photos are taken from doTerra database/representative tools.
 
 ### Display size optimization
 The use of Bootstrap has limited significantly the level of manual intervention I had to do in order to adapt the layout to various screen sizes.
-My intervention was limited to an intervention on this two particular sizes, which managed to adapt to all screen variations under them:
+My intervention was limited to an intervention on this 4 particular sizes, which managed to adapt to all screen variations under them:
 
 ``` css
 @media (max-width: 768px)
@@ -635,6 +644,7 @@ To deploy, follow this steps:
 3. Create a unique name for your app.
 
 ![Alt](/docs/heroku/heroku_3_4.png)
+
 4. Choose your region (US or Europe).
 
 ![Alt](/docs/heroku/heroku_3_4.png)
@@ -648,6 +658,7 @@ To deploy, follow this steps:
 7. Select **View** to open your deployed app.
 
 ![Alt](/docs/heroku/heroku_7.png)
+
 8. If you encounter issues, use **More** and then **View logs** or check the **Activity** tab for debugging.
 
 
@@ -670,6 +681,7 @@ To deploy, follow this steps:
 - react-icons: implement react specific icon libraries
 - react-toastify: Implement toast
 - Prettier: format code
+- Cloudinary: Used in link with backend to store images uploaded by users and used by the website
 
 ## IDE
 1. GitHub: to store the source code.
@@ -679,7 +691,7 @@ To deploy, follow this steps:
 ## Other
 1. HEROKU: to deploy application and act as the app interface
 2. ESLinter: to validate code format.
-3. Dalle: support with logo creation.
+3. DaVinci: support with logo creation.
 4. Font Awesome: support with icon for various html pages
 5. Google Font: support with font style used for website text.
 6. Balsamiq: support with wireframe creation.
